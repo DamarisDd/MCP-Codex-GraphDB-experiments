@@ -1,0 +1,81 @@
+# Find highest-cost tasks
+
+> Which tasks have the highest costs?
+
+> Worked for 47s
+
+<details><summary>2 previous messages</summary>
+
+> I’ll query the BPMN process repository and rank the task entities by their recorded costs.
+>
+> <details><summary>Called 4 tools</summary>
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "tasks with the highest costs, including task identifiers, labels, cost values, and process context"
+>     }
+>   ]
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"tasks with the highest costs, including task identifiers, labels, cost values, and process context\",\"results\":[{\"id\":\"http://www.omilab.org#Task_BPMN-58916-Schedule_interview_0\",\"text\":\"Task_BPMN-58916-Schedule_interview: - is named Schedule interview. - is a o_Task_BPMN. - has execution time 00:000:00:00:00. - has cost 7. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-58916-Schedule_interview\"},\"score\":0.88435066},{\"id\":\"http://www.omilab.org#Task_BPMN-59009-File_claim_with_Court_0\",\"text\":\"Task_BPMN-59009-File_claim_with_Court: - is named File claim with Court. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Marinette Cheng. - is inside Law firm. - has execution time 00:000:00:30:00. - has cost 14. - has task type Send. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59009-File_claim_with_Court\"},\"score\":0.8655454},{\"id\":\"http://www.omilab.org#Task_BPMN-59035-Schedule_hearing_0\",\"text\":\"Task_BPMN-59035-Schedule_hearing: - is named Schedule hearing. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Paul Mercer. - is inside Court. - has execution time 00:000:00:20:00. - has cost 8. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59035-Schedule_hearing\"},\"score\":0.8508799},{\"id\":\"http://www.omilab.org#Task_BPMN-49346-Request_documents_0\",\"text\":\"Task_BPMN-49346-Request_documents: - is named Request documents. - is a o_Task_BPMN. - is described in Collect documents and records. - is carried out by responsible Marinette Cheng. - has execution time 00:000:00:30:00. - has cost 14. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49346-Request_documents\"},\"score\":0.7821908},{\"id\":\"http://www.omilab.org#Task_BPMN-58958-Close_case_file_0\",\"text\":\"Task_BPMN-58958-Close_case_file: - is named Close case file. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Hanna Hastings. - is inside Court. - has execution time 00:000:00:30:00. - has cost 13. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-58958-Close_case_file\"},\"score\":0.7815356},{\"id\":\"http://www.omilab.org#Task_BPMN-59015-Register_claim_0\",\"text\":\"Task_BPMN-59015-Register_claim: - is named Register claim. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Court E-filing service. - is inside Court. - has execution time 00:000:00:05:00. - has cost 1. - has task type Service. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59015-Register_claim\"},\"score\":0.7729821},{\"id\":\"http://www.omilab.org#Task_BPMN-49409-Collect_missing_items_0\",\"text\":\"Task_BPMN-49409-Collect_missing_items: - is named Collect missing items. - is a o_Task_BPMN. - is described in Collect documents and records. - is carried out by responsible Marinette Cheng. - is carried out by responsible Bianca Hayes. - has execution time 00:000:02:00:00. - has cost 96. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49409-Collect_missing_items\"},\"score\":0.7682023},{\"id\":\"http://www.omilab.org#Task_BPMN-59040-Notify_claim_acceptance_and_hearing_details_0\",\"text\":\"Task_BPMN-59040-Notify_claim_acceptance_and_hearing_details: - is named Notify claim acceptance and hearing details. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Paul Mercer. - is inside Court. - has execution time 00:000:00:10:00. - has cost 4. - has task type Send. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59040-Notify_claim_acceptance_and_hearing_details\"},\"score\":0.7670458},{\"id\":\"http://www.omilab.org#Task_BPMN-58946-Issue_judicial_verdict_0\",\"text\":\"Task_BPMN-58946-Issue_judicial_verdict: - is named Issue judicial verdict. - is a o_Task_BPMN. - is inside Court. - has execution time 00:000:01:00:00. - has cost 60. - has task type Business rule. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-58946-Issue_judicial_verdict\"},\"score\":0.7644086},{\"id\":\"http://www.omilab.org#Task_BPMN-58961-Notify_judicial_verdict_0\",\"text\":\"Task_BPMN-58961-Notify_judicial_verdict: - is named Notify judicial verdict. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Paul Mercer. - is inside Court. - has execution time 00:000:00:20:00. - has cost 8. - has task type Send. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-58961-Notify_judicial_verdict\"},\"score\":0.75723404}]}]}"
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "SELECT ?p (COUNT(*) AS ?count) WHERE { ?s ?p ?o . FILTER(CONTAINS(LCASE(STR(?p)), \"cost\")) } GROUP BY ?p ORDER BY DESC(?count)"
+> }
+> ```
+>
+> ```text
+> "?p\t?count\n<http://bee-up.omilab.org/rdf/1_7#a_Costs>\t52"
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "SELECT ?p ?o WHERE {\n  <http://www.omilab.org#Task_BPMN-49409-Collect_missing_items> ?p ?o .\n} ORDER BY ?p"
+> }
+> ```
+>
+> ```text
+> "?p\t?o\n<http://bee-up.omilab.org/rdf/1_7#a_Costs>\t\"96\"\n<http://bee-up.omilab.org/rdf/1_7#a_Execution_interruptable>\t\"yes\"\n<http://bee-up.omilab.org/rdf/1_7#a_Execution_time>\t\"00:000:02:00:00\"\n<http://bee-up.omilab.org/rdf/1_7#a_For_compensation>\t\"No\"\n<http://bee-up.omilab.org/rdf/1_7#a_Loop_type>\t\"Not specified\"\n<http://bee-up.omilab.org/rdf/1_7#a_Name>\t\"Collect missing items\"\n<http://bee-up.omilab.org/rdf/1_7#a_Sequential_execution>\t\"No\"\n<http://bee-up.omilab.org/rdf/1_7#a_Task_type>\t\"User\"\n<http://bee-up.omilab.org/rdf/1_7#r_Responsible>\t<http://www.omilab.org#Performer-50687-Marinette_Cheng>\n<http://bee-up.omilab.org/rdf/1_7#r_Responsible>\t<http://www.omilab.org#Performer-49671-Bianca_Hayes>\n<http://www.comvantage.eu/mm#a_Name>\t\"Collect missing items\"\n<http://www.comvantage.eu/mm#described_in>\t<http://www.omilab.org#Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records>\n<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://www.w3.org/2000/01/rdf-schema#Resource>\n<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://www.w3.org/2002/07/owl#Thing>\n<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://bee-up.omilab.org/rdf/1_7#o_Task_BPMN>\n<http://www.w3.org/2000/01/rdf-schema#label>\t\"Collect missing items\"\n<http://www.w3.org/2002/07/owl#sameAs>\t<http://www.omilab.org#Task_BPMN-49409-Collect_missing_items>"
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "PREFIX bee: <http://bee-up.omilab.org/rdf/1_7#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nSELECT ?task ?label ?cost WHERE {\n  ?task a bee:o_Task_BPMN ;\n        bee:a_Costs ?cost ;\n        rdfs:label ?label .\n  {\n    SELECT (MAX(xsd:decimal(?c)) AS ?maxCost) WHERE {\n      ?t a bee:o_Task_BPMN ; bee:a_Costs ?c .\n    }\n  }\n  FILTER(xsd:decimal(?cost) = ?maxCost)\n}\nORDER BY ?task"
+> }
+> ```
+>
+> ```text
+> "?task\t?label\t?cost\n<http://www.omilab.org#Task_BPMN-59004-Prepare_claim_and_supporting_documents>\t\"Prepare claim and supporting documents\"\t\"431\""
+> ```
+>
+> </details>
+</details>
+
+{"answer_type":"ranking","status":"ok","results":[{"identifier":"http://www.omilab.org#Task_BPMN-59004-Prepare_claim_and_supporting_documents","label":"Prepare claim and supporting documents","element_type":"o_task_bpmn","rank":1,"attributes":[{"name":"cost","value":431,"unit":null}],"related_elements":[]}]}

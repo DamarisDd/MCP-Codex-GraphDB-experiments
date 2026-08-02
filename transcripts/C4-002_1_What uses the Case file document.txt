@@ -1,0 +1,66 @@
+# Find Case file document usage
+
+> What uses the Case file document?
+
+> Worked for 38s
+
+<details><summary>2 previous messages</summary>
+
+> I’m querying the `bpmn_judicial` process repository for elements that use the “Case file document.”
+>
+> <details><summary>Called 3 tools</summary>
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "Case file document uses used by input output data association BPMN"
+>     }
+>   ]
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"Case file document uses used by input output data association BPMN\",\"results\":[{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59623-Case_file-File_claim_with_Court_0\",\"text\":\"Data_Association_BPMN-59623-Case_file-File_claim_with_Court: - is a r_Data_Association_BPMN. - has source Case file. - has target File claim with Court.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59623-Case_file-File_claim_with_Court\"},\"score\":0.97810185},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-48772-Investigate_case-Case_file_0\",\"text\":\"Data_Association_BPMN-48772-Investigate_case-Case_file: - is a r_Data_Association_BPMN. - has source Investigate case. - has target Case file.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-48772-Investigate_case-Case_file\"},\"score\":0.97637767},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing_0\",\"text\":\"Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing: - is a r_Data_Association_BPMN. - has source Case file. - has target Represent client at hearing.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing\"},\"score\":0.8634542},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court_0\",\"text\":\"Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court: - is a r_Data_Association_BPMN. - has source Statement of claim. - has target File claim with Court.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court\"},\"score\":0.7268102},{\"id\":\"http://www.omilab.org#Data_Object_BPMN-48762-Case_file_0\",\"text\":\"Data_Object_BPMN-48762-Case_file: - is named Case file. - is a o_Data_Object_BPMN. - is inside Law firm. - has data type Data Object.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Object_BPMN-48762-Case_file\"},\"score\":0.72367823},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-50990-Collected_documents_and_records-Analyze_document_and_record_0\",\"text\":\"Data_Association_BPMN-50990-Collected_documents_and_records-Analyze_document_and_record: - is a r_Data_Association_BPMN. - has source Collected documents and records. - has target Analyze document and record.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-50990-Collected_documents_and_records-Analyze_document_and_record\"},\"score\":0.64048815},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-51160-Document_statements-Collected_statements_0\",\"text\":\"Data_Association_BPMN-51160-Document_statements-Collected_statements: - is a r_Data_Association_BPMN. - has source Document statements. - has target Collected statements.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-51160-Document_statements-Collected_statements\"},\"score\":0.6238236},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-49381-Collect_documents_and_records-Collected_documents_and_records_0\",\"text\":\"Data_Association_BPMN-49381-Collect_documents_and_records-Collected_documents_and_records: - is a r_Data_Association_BPMN. - has source Collect documents and records. - has target Collected documents and records.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-49381-Collect_documents_and_records-Collected_documents_and_records\"},\"score\":0.5544322},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59180-Prepare_claim_and_supporting_documents-Statement_of_claim_0\",\"text\":\"Data_Association_BPMN-59180-Prepare_claim_and_supporting_documents-Statement_of_claim: - is a r_Data_Association_BPMN. - has source Prepare claim and supporting documents. - has target Statement of claim.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59180-Prepare_claim_and_supporting_documents-Statement_of_claim\"},\"score\":0.54842526},{\"id\":\"http://www.omilab.org#Data_Object_BPMN-49378-Collected_documents_and_records_0\",\"text\":\"Data_Object_BPMN-49378-Collected_documents_and_records: - is named Collected documents and records. - is a o_Data_Object_BPMN. - is described in Investigate case. - has data type Data Object.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Object_BPMN-49378-Collected_documents_and_records\"},\"score\":0.45675087}]}]}"
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "SELECT ?s ?p ?o WHERE {\n    VALUES ?s {\n      <http://www.omilab.org#Data_Association_BPMN-59623-Case_file-File_claim_with_Court>\n      <http://www.omilab.org#Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing>\n      <http://www.omilab.org#Data_Object_BPMN-48762-Case_file>\n    }\n    ?s ?p ?o .\n  }"
+> }
+> ```
+>
+> ```text
+> "?s\t?p\t?o\n<http://www.omilab.org#Data_Association_BPMN-59623-Case_file-File_claim_with_Court>\t<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://www.w3.org/2000/01/rdf-schema#Resource>\n<http://www.omilab.org#Data_Association_BPMN-59623-Case_file-File_claim_with_Court>\t<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://www.w3.org/2002/07/owl#Thing>\n<http://www.omilab.org#Data_Association_BPMN-59623-Case_file-File_claim_with_Court>\t<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://bee-up.omilab.org/rdf/1_7#r_Data_Association_BPMN>\n<http://www.omilab.org#Data_Association_BPMN-59623-Case_file-File_claim_with_Court>\t<http://www.w3.org/2002/07/owl#sameAs>\t<http://www.omilab.org#Data_Association_BPMN-59623-Case_file-File_claim_with_Court>\n<http://www.omilab.org#Data_Association_BPMN-59623-Case_file-File_claim_with_Court>\t<http://www.comvantage.eu/mm#from>\t<http://www.omilab.org#Data_Object_BPMN-48762-Case_file>\n<http://www.omilab.org#Data_Association_BPMN-59623-Case_file-File_claim_with_Court>\t<http://www.comvantage.eu/mm#to>\t<http://www.omilab.org#Task_BPMN-59009-File_claim_with_Court>\n<http://www.omilab.org#Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing>\t<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://www.w3.org/2000/01/rdf-schema#Resource>\n<http://www.omilab.org#Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing>\t<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://www.w3.org/2002/07/owl#Thing>\n<http://www.omilab.org#Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing>\t<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://bee-up.omilab.org/rdf/1_7#r_Data_Association_BPMN>\n<http://www.omilab.org#Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing>\t<http://www.w3.org/2002/07/owl#sameAs>\t<http://www.omilab.org#Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing>\n<http://www.omilab.org#Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing>\t<http://www.comvantage.eu/mm#from>\t<http://www.omilab.org#Data_Object_BPMN-48762-Case_file>\n<http://www.omilab.org#Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing>\t<http://www.comvantage.eu/mm#to>\t<http://www.omilab.org#Task_BPMN-58996-Represent_client_at_hearing>\n<http://www.omilab.org#Data_Object_BPMN-48762-Case_file>\t<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://www.w3.org/2000/01/rdf-schema#Resource>\n<http://www.omilab.org#Data_Object_BPMN-48762-Case_file>\t<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://www.w3.org/2002/07/owl#Thing>\n<http://www.omilab.org#Data_Object_BPMN-48762-Case_file>\t<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://bee-up.omilab.org/rdf/1_7#o_Data_Object_BPMN>\n<http://www.omilab.org#Data_Object_BPMN-48762-Case_file>\t<http://www.w3.org/2002/07/owl#sameAs>\t<http://www.omilab.org#Data_Object_BPMN-48762-Case_file>\n<http://www.omilab.org#Data_Object_BPMN-48762-Case_file>\t<http://www.w3.org/2000/01/rdf-schema#label>\t\"Case file\"\n<http://www.omilab.org#Data_Object_BPMN-48762-Case_file>\t<http://www.comvantage.eu/mm#a_Name>\t\"Case file\"\n<http://www.omilab.org#Data_Object_BPMN-48762-Case_file>\t<http://bee-up.omilab.org/rdf/1_7#a_Data_type>\t\"Data Object\"\n<http://www.omilab.org#Data_Object_BPMN-48762-Case_file>\t<http://bee-up.omilab.org/rdf/1_7#a_Name>\t\"Case file\"\n<http://www.omilab.org#Data_Object_BPMN-48762-Case_file>\t<http://bee-up.omilab.org/rdf/1_7#r_Is_inside>\t<http://www.omilab.org#Pool_BPMN-58825-Law_firm>"
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "SELECT DISTINCT ?target ?label ?type WHERE {\n    ?association <http://www.comvantage.eu/mm#from> <http://www.omilab.org#Data_Object_BPMN-48762-Case_file> ;\n                 <http://www.comvantage.eu/mm#to> ?target .\n    OPTIONAL { ?target <http://www.w3.org/2000/01/rdf-schema#label> ?label . }\n    OPTIONAL {\n      ?target a ?type .\n      FILTER(?type NOT IN (\n        <http://www.w3.org/2000/01/rdf-schema#Resource>,\n        <http://www.w3.org/2002/07/owl#Thing>\n      ))\n    }\n  }\n  ORDER BY ?target"
+> }
+> ```
+>
+> ```text
+> "?target\t?label\t?type\n<http://www.omilab.org#Task_BPMN-58996-Represent_client_at_hearing>\t\"Represent client at hearing\"\t<http://bee-up.omilab.org/rdf/1_7#o_Task_BPMN>\n<http://www.omilab.org#Task_BPMN-59009-File_claim_with_Court>\t\"File claim with Court\"\t<http://bee-up.omilab.org/rdf/1_7#o_Task_BPMN>"
+> ```
+>
+> </details>
+</details>
+
+{"answer_type":"list","status":"ok","results":[{"identifier":"http://www.omilab.org#Task_BPMN-58996-Represent_client_at_hearing","label":"Represent client at hearing","element_type":"task_bpmn","rank":null,"attributes":[],"related_elements":[{"relation":"uses","identifier":"http://www.omilab.org#Data_Object_BPMN-48762-Case_file","label":"Case file","element_type":"data_object_bpmn","order":null}]},{"identifier":"http://www.omilab.org#Task_BPMN-59009-File_claim_with_Court","label":"File claim with Court","element_type":"task_bpmn","rank":null,"attributes":[],"related_elements":[{"relation":"uses","identifier":"http://www.omilab.org#Data_Object_BPMN-48762-Case_file","label":"Case file","element_type":"data_object_bpmn","order":null}]}]}

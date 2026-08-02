@@ -1,0 +1,81 @@
+# Find Settlement agreement
+
+> Does the document "Settlement agreement" exist?
+
+> Worked for 32s
+
+<details><summary>2 previous messages</summary>
+
+> I’ll check the specified BPMN repository for the exact document label.
+>
+> <details><summary>Called 4 tools</summary>
+>
+> MCP tool call
+>
+> graphdb.iri_discovery_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "Settlement agreement"
+> }
+> ```
+>
+> ```text
+> "?label\t?iri"
+> ```
+>
+> MCP tool call
+>
+> graphdb.fts_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "\"Settlement agreement\""
+> }
+> ```
+>
+> ```text
+>
+> ```
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "Settlement agreement document"
+>     }
+>   ]
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"Settlement agreement document\",\"results\":[{\"id\":\"http://www.omilab.org#Data_Association_BPMN-51160-Document_statements-Collected_statements_0\",\"text\":\"Data_Association_BPMN-51160-Document_statements-Collected_statements: - is a r_Data_Association_BPMN. - has source Document statements. - has target Collected statements.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-51160-Document_statements-Collected_statements\"},\"score\":0.5},{\"id\":\"http://www.omilab.org#Data_Object_BPMN-59176-Statement_of_claim_0\",\"text\":\"Data_Object_BPMN-59176-Statement_of_claim: - is named Statement of claim. - is a o_Data_Object_BPMN. - is inside Law firm. - has data type Data Object.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Object_BPMN-59176-Statement_of_claim\"},\"score\":0.5},{\"id\":\"http://www.omilab.org#Message_Flow_BPMN-59014-File_claim_with_Court-Claim_received_0\",\"text\":\"Message_Flow_BPMN-59014-File_claim_with_Court-Claim_received: - is a r_Message_Flow_BPMN. - has source File claim with Court. - has target Claim received. - has label Claim and supporting documents.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Message_Flow_BPMN-59014-File_claim_with_Court-Claim_received\"},\"score\":0.4473181},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court_0\",\"text\":\"Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court: - is a r_Data_Association_BPMN. - has source Statement of claim. - has target File claim with Court.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court\"},\"score\":0.40953386},{\"id\":\"http://www.omilab.org#Task_BPMN-59004-Prepare_claim_and_supporting_documents_0\",\"text\":\"Task_BPMN-59004-Prepare_claim_and_supporting_documents: - is named Prepare claim and supporting documents. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Alexander Moore. - is carried out by responsible Rachel Bennett. - is inside Law firm. - has execution time 00:000:06:00:00. - has cost 431. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59004-Prepare_claim_and_supporting_documents\"},\"score\":0.3982228},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-50990-Collected_documents_and_records-Analyze_document_and_record_0\",\"text\":\"Data_Association_BPMN-50990-Collected_documents_and_records-Analyze_document_and_record: - is a r_Data_Association_BPMN. - has source Collected documents and records. - has target Analyze document and record.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-50990-Collected_documents_and_records-Analyze_document_and_record\"},\"score\":0.37648255},{\"id\":\"http://www.omilab.org#Subsequent-49387-Start_document_collection-Identify_required_documents_and_records_0\",\"text\":\"Subsequent-49387-Start_document_collection-Identify_required_documents_and_records: - is a r_Subsequent. - has source Start document collection. - has target Identify required documents and records. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-49387-Start_document_collection-Identify_required_documents_and_records\"},\"score\":0.35193652},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59180-Prepare_claim_and_supporting_documents-Statement_of_claim_0\",\"text\":\"Data_Association_BPMN-59180-Prepare_claim_and_supporting_documents-Statement_of_claim: - is a r_Data_Association_BPMN. - has source Prepare claim and supporting documents. - has target Statement of claim.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59180-Prepare_claim_and_supporting_documents-Statement_of_claim\"},\"score\":0.34737194},{\"id\":\"http://www.omilab.org#Subsequent-48792-Record_investigation_findings-Prepare_claim_and_supporting_documents_0\",\"text\":\"Subsequent-48792-Record_investigation_findings-Prepare_claim_and_supporting_documents: - is a r_Subsequent. - has source Record investigation findings. - has target Prepare claim and supporting documents. - has label sent to court. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-48792-Record_investigation_findings-Prepare_claim_and_supporting_documents\"},\"score\":0.3319912},{\"id\":\"http://www.omilab.org#Subsequent-48774-Complaint_withdrawn-Record_withdrawal_instruction_0\",\"text\":\"Subsequent-48774-Complaint_withdrawn-Record_withdrawal_instruction: - is a r_Subsequent. - has source Complaint withdrawn. - has target Record withdrawal instruction. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-48774-Complaint_withdrawn-Record_withdrawal_instruction\"},\"score\":0.32623175}]}]}"
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "SELECT ?s ?p ?o WHERE {\n  ?s ?p ?o .\n  FILTER(isLiteral(?o))\n  FILTER(LCASE(STR(?o)) = \"settlement agreement\")\n}"
+> }
+> ```
+>
+> ```text
+> "?s\t?p\t?o"
+> ```
+>
+> </details>
+</details>
+
+No

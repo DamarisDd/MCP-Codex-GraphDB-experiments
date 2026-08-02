@@ -1,0 +1,58 @@
+# Find client communicator
+
+> Who usually communicates with the clients?
+
+> Worked for 24s
+
+<details><summary>2 previous messages</summary>
+
+> I’m querying the specified judicial BPMN repository to identify the communicating role.
+>
+> <details><summary>Called 2 tools</summary>
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "Who usually communicates with the clients? Identify the BPMN participant, role, lane, or task performer responsible for client communication."
+>     },
+>     {
+>       "query": "communicate with clients client communication contact clients"
+>     }
+>   ]
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"Who usually communicates with the clients? Identify the BPMN participant, role, lane, or task performer responsible for client communication.\",\"results\":[{\"id\":\"http://www.omilab.org#Role-50740-Client_communication_0\",\"text\":\"Role-50740-Client_communication: - is named Client communication. - is a o_Role.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Role-50740-Client_communication\"},\"score\":1.0},{\"id\":\"http://www.omilab.org#has_Role-50762-Anna_Collins-Client_communication_0\",\"text\":\"has_Role-50762-Anna_Collins-Client_communication: - is a r_has_Role. - has source Anna Collins. - has target Client communication.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#has_Role-50762-Anna_Collins-Client_communication\"},\"score\":0.68068933},{\"id\":\"http://www.omilab.org#Role-50719-Client_intake_administration_0\",\"text\":\"Role-50719-Client_intake_administration: - is named Client intake administration. - is a o_Role.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Role-50719-Client_intake_administration\"},\"score\":0.47407657},{\"id\":\"http://www.omilab.org#Task_BPMN-58996-Represent_client_at_hearing_0\",\"text\":\"Task_BPMN-58996-Represent_client_at_hearing: - is named Represent client at hearing. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Rachel Bennett. - is inside Law firm. - has execution time 00:000:03:00:00. - has cost 225. - has task type Manual. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-58996-Represent_client_at_hearing\"},\"score\":0.36176676},{\"id\":\"http://www.omilab.org#Task_BPMN-51115-Interview_involved_parties_0\",\"text\":\"Task_BPMN-51115-Interview_involved_parties: - is named Interview involved parties. - is a o_Task_BPMN. - is described in Collect and analyze statements. - is carried out by responsible Samuel Grant. - is carried out by responsible Bianca Hayes. - has execution time 00:000:00:00:00. - has cost 0. - has task type Manual. - has loop type Multi-instance. - has sequential execution No. - has cardinality 3. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-51115-Interview_involved_parties\"},\"score\":0.34663722},{\"id\":\"http://www.omilab.org#Pool_collapsed_BPMN-58856-Client_0\",\"text\":\"Pool_collapsed_BPMN-58856-Client: - is named Client. - is a o_Pool_collapsed_BPMN.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Pool_collapsed_BPMN-58856-Client\"},\"score\":0.33747518},{\"id\":\"http://www.omilab.org#Task_BPMN-48669-Register_client_complaint_0\",\"text\":\"Task_BPMN-48669-Register_client_complaint: - is named Register client complaint. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Emily Carter. - is inside Law firm. - has execution time 00:000:00:20:00. - has cost 7.33. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-48669-Register_client_complaint\"},\"score\":0.32507303},{\"id\":\"http://www.omilab.org#Task_BPMN-59096-Close_matter_for_client_non-response_0\",\"text\":\"Task_BPMN-59096-Close_matter_for_client_non-response: - is named Close matter for client non-response. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Michael Turner. - is inside Law firm. - has execution time 00:000:00:10:00. - has cost 4. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59096-Close_matter_for_client_non-response\"},\"score\":0.3088932},{\"id\":\"http://www.omilab.org#Message_Flow_BPMN-58872-Client-Instruction_to_proceed_received_0\",\"text\":\"Message_Flow_BPMN-58872-Client-Instruction_to_proceed_received: - is a r_Message_Flow_BPMN. - has source Client. - has target Instruction to proceed received. - has label Instruction to proceed.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Message_Flow_BPMN-58872-Client-Instruction_to_proceed_received\"},\"score\":0.27617693},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59198-Identify_unanswered_interview_invitations-Pending_interview_invitations_0\",\"text\":\"Data_Association_BPMN-59198-Identify_unanswered_interview_invitations-Pending_interview_invitations: - is a r_Data_Association_BPMN. - has source Identify unanswered interview invitations. - has target Pending interview invitations.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59198-Identify_unanswered_interview_invitations-Pending_interview_invitations\"},\"score\":0.27490956}]},{\"query\":\"communicate with clients client communication contact clients\",\"results\":[{\"id\":\"http://www.omilab.org#Role-50740-Client_communication_0\",\"text\":\"Role-50740-Client_communication: - is named Client communication. - is a o_Role.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Role-50740-Client_communication\"},\"score\":1.0},{\"id\":\"http://www.omilab.org#has_Role-50762-Anna_Collins-Client_communication_0\",\"text\":\"has_Role-50762-Anna_Collins-Client_communication: - is a r_has_Role. - has source Anna Collins. - has target Client communication.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#has_Role-50762-Anna_Collins-Client_communication\"},\"score\":0.73279953},{\"id\":\"http://www.omilab.org#Role-50719-Client_intake_administration_0\",\"text\":\"Role-50719-Client_intake_administration: - is named Client intake administration. - is a o_Role.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Role-50719-Client_intake_administration\"},\"score\":0.36531985},{\"id\":\"http://www.omilab.org#is_Subordinated-49651-Client_intake_and_Administration_-Law_firm_0\",\"text\":\"is_Subordinated-49651-Client_intake_and_Administration_-Law_firm: - is a r_is_Subordinated. - has source Client intake and Administration . - has target Law firm.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#is_Subordinated-49651-Client_intake_and_Administration_-Law_firm\"},\"score\":0.29898617},{\"id\":\"http://www.omilab.org#Message_Flow_BPMN-58866-Notify_case_representation_acceptance-Client_0\",\"text\":\"Message_Flow_BPMN-58866-Notify_case_representation_acceptance-Client: - is a r_Message_Flow_BPMN. - has source Notify case representation acceptance. - has target Client. - has label Case acceptance notice.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Message_Flow_BPMN-58866-Notify_case_representation_acceptance-Client\"},\"score\":0.29149783},{\"id\":\"http://www.omilab.org#Message_Flow_BPMN-58859-Client-Complaint_received_0\",\"text\":\"Message_Flow_BPMN-58859-Client-Complaint_received: - is a r_Message_Flow_BPMN. - has source Client. - has target Complaint received. - has label Complaint.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Message_Flow_BPMN-58859-Client-Complaint_received\"},\"score\":0.28559822},{\"id\":\"http://www.omilab.org#Message_Flow_BPMN-59145-Inform_about_judicial_verdict-Client_0\",\"text\":\"Message_Flow_BPMN-59145-Inform_about_judicial_verdict-Client: - is a r_Message_Flow_BPMN. - has source Inform about judicial verdict. - has target Client. - has label Judicial verdict.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Message_Flow_BPMN-59145-Inform_about_judicial_verdict-Client\"},\"score\":0.28047782},{\"id\":\"http://www.omilab.org#Message_Flow_BPMN-58860-Notify_case_representation_refusal-Client_0\",\"text\":\"Message_Flow_BPMN-58860-Notify_case_representation_refusal-Client: - is a r_Message_Flow_BPMN. - has source Notify case representation refusal. - has target Client. - has label Case representation refusal notice.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Message_Flow_BPMN-58860-Notify_case_representation_refusal-Client\"},\"score\":0.2802219},{\"id\":\"http://www.omilab.org#Pool_collapsed_BPMN-58856-Client_0\",\"text\":\"Pool_collapsed_BPMN-58856-Client: - is named Client. - is a o_Pool_collapsed_BPMN.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Pool_collapsed_BPMN-58856-Client\"},\"score\":0.2798574},{\"id\":\"http://www.omilab.org#Message_Flow_BPMN-59134-Notify_Court_rejection-Client_0\",\"text\":\"Message_Flow_BPMN-59134-Notify_Court_rejection-Client: - is a r_Message_Flow_BPMN. - has source Notify Court rejection. - has target Client. - has label Court rejection notice.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Message_Flow_BPMN-59134-Notify_Court_rejection-Client\"},\"score\":0.27489662}]}]}"
+> ```
+>
+> MCP tool call
+>
+> graphdb.fts_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "\"Anna Collins\""
+> }
+> ```
+>
+> ```text
+> "@prefix : <http://www.omilab.org#> .\r\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\r\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\r\n@prefix mm: <http://bee-up.omilab.org/rdf/1_7#> .\r\n@prefix cv: <http://www.comvantage.eu/mm#> .\r\n\n:Performer-50669-Anna_Collins a rdfs:Resource, owl:Thing, mm:o_Performer;\r\n  owl:sameAs :Performer-50669-Anna_Collins;\r\n  rdfs:label \"Anna Collins\";\r\n  cv:a_Name \"Anna Collins\";\r\n  cv:described_in :Working_Environment_Model-Law_firm_structure;\r\n  mm:a_Name \"Anna Collins\";\r\n  mm:a_Hourly_wages \"25\";\r\n  mm:r_Belongs_to :Organizational_Unit-49621-Client_intake_and_Administration_ .\r\n\r\n:has_Role-50762-Anna_Collins-Client_communication cv:from :Performer-50669-Anna_Collins .\r\n\r\n:Task_BPMN-58861-Notify_case_representation_acceptance mm:r_Responsible :Performer-50669-Anna_Collins .\r\n\r\n:Task_BPMN-59140-Inform_about_judicial_verdict mm:r_Responsible :Performer-50669-Anna_Collins .\r\n\r\n:Task_BPMN-49010-Notify_case_representation_refusal mm:r_Responsible :Performer-50669-Anna_Collins .\r\n\r\n:Task_BPMN-59128-Notify_Court_rejection mm:r_Responsible :Performer-50669-Anna_Collins ."
+> ```
+>
+> </details>
+</details>
+
+{"answer_type":"list","status":"ok","results":[{"identifier":"http://www.omilab.org#Performer-50669-Anna_Collins","label":"Anna Collins","element_type":"performer","rank":null,"attributes":[],"related_elements":[]}]}
+
+> How did you derive this answer?
+
+The process data identifies Anna Collins as a performer and links her directly to the “Client communication” role through the `has_Role` relationship. It also assigns her responsibility for several client-notification tasks.

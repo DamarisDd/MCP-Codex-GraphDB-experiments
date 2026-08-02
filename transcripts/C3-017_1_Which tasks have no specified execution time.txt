@@ -1,0 +1,81 @@
+# Find tasks without execution time
+
+> Which tasks have no specified execution time?
+
+> Worked for 49s
+
+<details><summary>2 previous messages</summary>
+
+> I’ll query the `bpmn_judicial` process repository and return the matching tasks only.
+>
+> <details><summary>Called 4 tools</summary>
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "tasks that have no specified execution time; include exact task identifiers, labels, element types, and any execution-time property evidence"
+>     }
+>   ]
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"tasks that have no specified execution time; include exact task identifiers, labels, element types, and any execution-time property evidence\",\"results\":[{\"id\":\"http://www.omilab.org#Task_BPMN-49318-Collect_physical_evidence_0\",\"text\":\"Task_BPMN-49318-Collect_physical_evidence: - is named Collect physical evidence. - is a o_Task_BPMN. - is described in Conduct on-site investigation. - is carried out by responsible Samuel Grant. - is carried out by responsible Bianca Hayes. - has execution time 00:000:02:30:00. - has cost 180. - has task type Manual. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49318-Collect_physical_evidence\"},\"score\":0.9349463},{\"id\":\"http://www.omilab.org#Task_BPMN-58916-Schedule_interview_0\",\"text\":\"Task_BPMN-58916-Schedule_interview: - is named Schedule interview. - is a o_Task_BPMN. - has execution time 00:000:00:00:00. - has cost 7. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-58916-Schedule_interview\"},\"score\":0.90797997},{\"id\":\"http://www.omilab.org#Task_BPMN-49418-Prepare_evidence_set_for_analysis_0\",\"text\":\"Task_BPMN-49418-Prepare_evidence_set_for_analysis: - is named Prepare evidence set for analysis. - is a o_Task_BPMN. - is described in Collect documents and records. - is carried out by responsible Alexander Moore. - is carried out by responsible Bianca Hayes. - has execution time 00:000:02:00:00. - has cost 96. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49418-Prepare_evidence_set_for_analysis\"},\"score\":0.8597847},{\"id\":\"http://www.omilab.org#Task_BPMN-58946-Issue_judicial_verdict_0\",\"text\":\"Task_BPMN-58946-Issue_judicial_verdict: - is named Issue judicial verdict. - is a o_Task_BPMN. - is inside Court. - has execution time 00:000:01:00:00. - has cost 60. - has task type Business rule. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-58946-Issue_judicial_verdict\"},\"score\":0.78742063},{\"id\":\"http://www.omilab.org#Task_BPMN-59035-Schedule_hearing_0\",\"text\":\"Task_BPMN-59035-Schedule_hearing: - is named Schedule hearing. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Paul Mercer. - is inside Court. - has execution time 00:000:00:20:00. - has cost 8. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59035-Schedule_hearing\"},\"score\":0.76078236},{\"id\":\"http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter_0\",\"text\":\"Task_BPMN-49014-Archive_non-adjudicated_matter: - is named Archive non-adjudicated matter. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Emily Carter. - is inside Law firm. - has execution time 00:000:00:30:00. - has cost 11. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter\"},\"score\":0.7284019},{\"id\":\"http://www.omilab.org#Task_BPMN-49342-Identify_required_documents_and_records_0\",\"text\":\"Task_BPMN-49342-Identify_required_documents_and_records: - is named Identify required documents and records. - is a o_Task_BPMN. - is described in Collect documents and records. - is carried out by responsible Samuel Grant. - is carried out by responsible Rachel Bennett. - has execution time 00:000:01:30:00. - has cost 135. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49342-Identify_required_documents_and_records\"},\"score\":0.70237815},{\"id\":\"http://www.omilab.org#Task_BPMN-59009-File_claim_with_Court_0\",\"text\":\"Task_BPMN-59009-File_claim_with_Court: - is named File claim with Court. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Marinette Cheng. - is inside Law firm. - has execution time 00:000:00:30:00. - has cost 14. - has task type Send. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59009-File_claim_with_Court\"},\"score\":0.6886724},{\"id\":\"http://www.omilab.org#Task_BPMN-59191-Identify_unanswered_interview_invitations_0\",\"text\":\"Task_BPMN-59191-Identify_unanswered_interview_invitations: - is named Identify unanswered interview invitations. - is a o_Task_BPMN. - is described in Prepare preliminary case file. - is carried out by responsible Alexander Moore. - has execution time 00:000:00:20:00. - has cost 9.33. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59191-Identify_unanswered_interview_invitations\"},\"score\":0.68757105},{\"id\":\"http://www.omilab.org#Task_BPMN-49409-Collect_missing_items_0\",\"text\":\"Task_BPMN-49409-Collect_missing_items: - is named Collect missing items. - is a o_Task_BPMN. - is described in Collect documents and records. - is carried out by responsible Marinette Cheng. - is carried out by responsible Bianca Hayes. - has execution time 00:000:02:00:00. - has cost 96. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49409-Collect_missing_items\"},\"score\":0.68496466}]}]}"
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "SELECT ?p ?o WHERE {\n    <http://www.omilab.org#Task_BPMN-58916-Schedule_interview> ?p ?o .\n  } ORDER BY ?p"
+> }
+> ```
+>
+> ```text
+> "?p\t?o\n<http://bee-up.omilab.org/rdf/1_7#a_Costs>\t\"7\"\n<http://bee-up.omilab.org/rdf/1_7#a_Execution_interruptable>\t\"yes\"\n<http://bee-up.omilab.org/rdf/1_7#a_Execution_time>\t\"00:000:00:00:00\"\n<http://bee-up.omilab.org/rdf/1_7#a_For_compensation>\t\"No\"\n<http://bee-up.omilab.org/rdf/1_7#a_Loop_type>\t\"Not specified\"\n<http://bee-up.omilab.org/rdf/1_7#a_Name>\t\"Schedule interview\"\n<http://bee-up.omilab.org/rdf/1_7#a_Sequential_execution>\t\"No\"\n<http://bee-up.omilab.org/rdf/1_7#a_Task_type>\t\"User\"\n<http://www.comvantage.eu/mm#a_Name>\t\"Schedule interview\"\n<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://www.w3.org/2000/01/rdf-schema#Resource>\n<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://www.w3.org/2002/07/owl#Thing>\n<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://bee-up.omilab.org/rdf/1_7#o_Task_BPMN>\n<http://www.w3.org/2000/01/rdf-schema#label>\t\"Schedule interview\"\n<http://www.w3.org/2002/07/owl#sameAs>\t<http://www.omilab.org#Task_BPMN-58916-Schedule_interview>"
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "PREFIX bee: <http://bee-up.omilab.org/rdf/1_7#>\nSELECT ?time (COUNT(DISTINCT ?task) AS ?count) WHERE {\n  ?task a bee:o_Task_BPMN .\n  OPTIONAL { ?task bee:a_Execution_time ?time }\n}\nGROUP BY ?time\nORDER BY ?time"
+> }
+> ```
+>
+> ```text
+> "?time\t?count\n\"00:000:00:00:00\"\t6\n\"00:000:00:05:00\"\t1\n\"00:000:00:10:00\"\t5\n\"00:000:00:15:00\"\t4\n\"00:000:00:20:00\"\t8\n\"00:000:00:25:00\"\t1\n\"00:000:00:30:00\"\t6\n\"00:000:00:40:00\"\t1\n\"00:000:00:45:00\"\t4\n\"00:000:01:00:00\"\t3\n\"00:000:01:30:00\"\t3\n\"00:000:02:00:00\"\t5\n\"00:000:02:30:00\"\t1\n\"00:000:03:00:00\"\t3\n\"00:000:06:00:00\"\t1"
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "PREFIX bee: <http://bee-up.omilab.org/rdf/1_7#>\nSELECT DISTINCT ?task ?label WHERE {\n  ?task a bee:o_Task_BPMN ;\n        bee:a_Execution_time \"00:000:00:00:00\" .\n  OPTIONAL { ?task <http://www.w3.org/2000/01/rdf-schema#label> ?rdfsLabel }\n  OPTIONAL { ?task bee:a_Name ?beeName }\n  BIND(COALESCE(?rdfsLabel, ?beeName) AS ?label)\n}\nORDER BY ?task"
+> }
+> ```
+>
+> ```text
+> "?task\t?label\n<http://www.omilab.org#Task_BPMN-48804-Send_interview_request>\t\"Send interview request\"\n<http://www.omilab.org#Task_BPMN-50986-Analyze_document_and_record>\t\"Analyze document and record\"\n<http://www.omilab.org#Task_BPMN-51115-Interview_involved_parties>\t\"Interview involved parties\"\n<http://www.omilab.org#Task_BPMN-51121-Document_statements>\t\"Document statements\"\n<http://www.omilab.org#Task_BPMN-51142-Compare_statements>\t\"Compare statements\"\n<http://www.omilab.org#Task_BPMN-58916-Schedule_interview>\t\"Schedule interview\""
+> ```
+>
+> </details>
+</details>
+
+{"answer_type":"list","status":"ok","results":[{"identifier":"http://www.omilab.org#Task_BPMN-48804-Send_interview_request","label":"Send interview request","element_type":"task_bpmn","rank":null,"attributes":[],"related_elements":[]},{"identifier":"http://www.omilab.org#Task_BPMN-50986-Analyze_document_and_record","label":"Analyze document and record","element_type":"task_bpmn","rank":null,"attributes":[],"related_elements":[]},{"identifier":"http://www.omilab.org#Task_BPMN-51115-Interview_involved_parties","label":"Interview involved parties","element_type":"task_bpmn","rank":null,"attributes":[],"related_elements":[]},{"identifier":"http://www.omilab.org#Task_BPMN-51121-Document_statements","label":"Document statements","element_type":"task_bpmn","rank":null,"attributes":[],"related_elements":[]},{"identifier":"http://www.omilab.org#Task_BPMN-51142-Compare_statements","label":"Compare statements","element_type":"task_bpmn","rank":null,"attributes":[],"related_elements":[]},{"identifier":"http://www.omilab.org#Task_BPMN-58916-Schedule_interview","label":"Schedule interview","element_type":"task_bpmn","rank":null,"attributes":[],"related_elements":[]}]}

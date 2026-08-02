@@ -1,0 +1,34 @@
+# Check evidence task process type
+
+> Is the task dealing with preparing the evidence set part of an ad-hoc (sub)process?
+
+> Worked for 23s
+
+<details><summary>1 previous message</summary>
+
+> <details><summary>Called a tool</summary>
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "task preparing the evidence set ad-hoc subprocess process"
+>     }
+>   ]
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"task preparing the evidence set ad-hoc subprocess process\",\"results\":[{\"id\":\"http://www.omilab.org#Subsequent-49422-Evidence_complete?-Prepare_evidence_set_for_analysis_0\",\"text\":\"Subsequent-49422-Evidence_complete?-Prepare_evidence_set_for_analysis: - is a r_Subsequent. - has source Evidence complete?. - has target Prepare evidence set for analysis. - has label yes. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-49422-Evidence_complete?-Prepare_evidence_set_for_analysis\"},\"score\":0.96468467},{\"id\":\"http://www.omilab.org#Subsequent-49423-Collect_missing_items-Prepare_evidence_set_for_analysis_0\",\"text\":\"Subsequent-49423-Collect_missing_items-Prepare_evidence_set_for_analysis: - is a r_Subsequent. - has source Collect missing items. - has target Prepare evidence set for analysis. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-49423-Collect_missing_items-Prepare_evidence_set_for_analysis\"},\"score\":0.9043392},{\"id\":\"http://www.omilab.org#Subsequent-49421-Prepare_evidence_set_for_analysis-Collection_completed_0\",\"text\":\"Subsequent-49421-Prepare_evidence_set_for_analysis-Collection_completed: - is a r_Subsequent. - has source Prepare evidence set for analysis. - has target Collection completed. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-49421-Prepare_evidence_set_for_analysis-Collection_completed\"},\"score\":0.86344683},{\"id\":\"http://www.omilab.org#Sub-Process_BPMN-48720-Prepare_preliminary_case_file_0\",\"text\":\"Sub-Process_BPMN-48720-Prepare_preliminary_case_file: - is named Prepare preliminary case file. - is a o_Sub-Process_BPMN. - is described in Main judicial process. - references subprocess Prepare preliminary case file. - is inside Law firm. - has subprocess type Ad-Hoc. - has loop type Not specified. - has sequential execution No. - is for compensation No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Sub-Process_BPMN-48720-Prepare_preliminary_case_file\"},\"score\":0.8314656},{\"id\":\"http://www.omilab.org#Task_BPMN-49418-Prepare_evidence_set_for_analysis_0\",\"text\":\"Task_BPMN-49418-Prepare_evidence_set_for_analysis: - is named Prepare evidence set for analysis. - is a o_Task_BPMN. - is described in Collect documents and records. - is carried out by responsible Alexander Moore. - is carried out by responsible Bianca Hayes. - has execution time 00:000:02:00:00. - has cost 96. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49418-Prepare_evidence_set_for_analysis\"},\"score\":0.73304635},{\"id\":\"http://www.omilab.org#Sub-Process_BPMN-48678-Investigate_case_0\",\"text\":\"Sub-Process_BPMN-48678-Investigate_case: - is named Investigate case. - is a o_Sub-Process_BPMN. - is described in Main judicial process. - references subprocess Investigate case. - is inside Law firm. - has subprocess type Ad-Hoc. - has loop type Not specified. - has sequential execution No. - is for compensation No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Sub-Process_BPMN-48678-Investigate_case\"},\"score\":0.6671322},{\"id\":\"http://www.omilab.org#Sub-Process_BPMN-48961-Conduct_on-site_investigation_0\",\"text\":\"Sub-Process_BPMN-48961-Conduct_on-site_investigation: - is named Conduct on-site investigation. - is a o_Sub-Process_BPMN. - is described in Investigate case. - references subprocess Conduct on-site investigation. - has subprocess type Ad-Hoc. - has loop type Not specified. - has sequential execution No. - is for compensation No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Sub-Process_BPMN-48961-Conduct_on-site_investigation\"},\"score\":0.6088922},{\"id\":\"http://www.omilab.org#Subsequent-49398-Review_collected_documents_and_records-Evidence_complete?_0\",\"text\":\"Subsequent-49398-Review_collected_documents_and_records-Evidence_complete?: - is a r_Subsequent. - has source Review collected documents and records. - has target Evidence complete?. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-49398-Review_collected_documents_and_records-Evidence_complete?\"},\"score\":0.46728927},{\"id\":\"http://www.omilab.org#Task_BPMN-49318-Collect_physical_evidence_0\",\"text\":\"Task_BPMN-49318-Collect_physical_evidence: - is named Collect physical evidence. - is a o_Task_BPMN. - is described in Conduct on-site investigation. - is carried out by responsible Samuel Grant. - is carried out by responsible Bianca Hayes. - has execution time 00:000:02:30:00. - has cost 180. - has task type Manual. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49318-Collect_physical_evidence\"},\"score\":0.4418651},{\"id\":\"http://www.omilab.org#Sub-Process_BPMN-48955-Collect_documents_and_records_0\",\"text\":\"Sub-Process_BPMN-48955-Collect_documents_and_records: - is named Collect documents and records. - is a o_Sub-Process_BPMN. - is described in Investigate case. - references subprocess Collect documents and records. - has subprocess type Embedded. - has loop type Not specified. - has sequential execution No. - is for compensation No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Sub-Process_BPMN-48955-Collect_documents_and_records\"},\"score\":0.42802554}]}]}"
+> ```
+>
+> </details>
+</details>
+
+No

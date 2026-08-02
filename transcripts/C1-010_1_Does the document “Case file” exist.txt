@@ -1,0 +1,36 @@
+# Find Case file document
+
+> Does the document "Case file" exist?
+
+> Worked for 20s
+
+<details><summary>2 previous messages</summary>
+
+> I’ll verify this against the `bpmn_judicial` GraphDB repository.
+>
+> <details><summary>Called a tool</summary>
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "document Case file"
+>     }
+>   ]
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"document Case file\",\"results\":[{\"id\":\"http://www.omilab.org#Data_Object_BPMN-48762-Case_file_0\",\"text\":\"Data_Object_BPMN-48762-Case_file: - is named Case file. - is a o_Data_Object_BPMN. - is inside Law firm. - has data type Data Object.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Object_BPMN-48762-Case_file\"},\"score\":0.87353206},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59623-Case_file-File_claim_with_Court_0\",\"text\":\"Data_Association_BPMN-59623-Case_file-File_claim_with_Court: - is a r_Data_Association_BPMN. - has source Case file. - has target File claim with Court.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59623-Case_file-File_claim_with_Court\"},\"score\":0.86560684},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-48772-Investigate_case-Case_file_0\",\"text\":\"Data_Association_BPMN-48772-Investigate_case-Case_file: - is a r_Data_Association_BPMN. - has source Investigate case. - has target Case file.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-48772-Investigate_case-Case_file\"},\"score\":0.7946504},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing_0\",\"text\":\"Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing: - is a r_Data_Association_BPMN. - has source Case file. - has target Represent client at hearing.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing\"},\"score\":0.7186793},{\"id\":\"http://www.omilab.org#Subsequent-58971-Close_case_file-Case_adjudicated_0\",\"text\":\"Subsequent-58971-Close_case_file-Case_adjudicated: - is a r_Subsequent. - has source Close case file. - has target Case adjudicated. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-58971-Close_case_file-Case_adjudicated\"},\"score\":0.6508732},{\"id\":\"http://www.omilab.org#Subsequent-59174-Archive_adjudicated_case_file-Representation_completed_0\",\"text\":\"Subsequent-59174-Archive_adjudicated_case_file-Representation_completed: - is a r_Subsequent. - has source Archive adjudicated case file. - has target Representation completed. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-59174-Archive_adjudicated_case_file-Representation_completed\"},\"score\":0.60659087},{\"id\":\"http://www.omilab.org#Subsequent-59143-Inform_about_judicial_verdict-Archive_adjudicated_case_file_0\",\"text\":\"Subsequent-59143-Inform_about_judicial_verdict-Archive_adjudicated_case_file: - is a r_Subsequent. - has source Inform about judicial verdict. - has target Archive adjudicated case file. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-59143-Inform_about_judicial_verdict-Archive_adjudicated_case_file\"},\"score\":0.5992089},{\"id\":\"http://www.omilab.org#Sub-Process_BPMN-48720-Prepare_preliminary_case_file_0\",\"text\":\"Sub-Process_BPMN-48720-Prepare_preliminary_case_file: - is named Prepare preliminary case file. - is a o_Sub-Process_BPMN. - is described in Main judicial process. - references subprocess Prepare preliminary case file. - is inside Law firm. - has subprocess type Ad-Hoc. - has loop type Not specified. - has sequential execution No. - is for compensation No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Sub-Process_BPMN-48720-Prepare_preliminary_case_file\"},\"score\":0.597417},{\"id\":\"http://www.omilab.org#Subsequent-58974-Notify_judicial_verdict-Close_case_file_0\",\"text\":\"Subsequent-58974-Notify_judicial_verdict-Close_case_file: - is a r_Subsequent. - has source Notify judicial verdict. - has target Close case file. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-58974-Notify_judicial_verdict-Close_case_file\"},\"score\":0.5472683},{\"id\":\"http://www.omilab.org#Subsequent-59842-Instruction_to_proceed_received-Prepare_preliminary_case_file_0\",\"text\":\"Subsequent-59842-Instruction_to_proceed_received-Prepare_preliminary_case_file: - is a r_Subsequent. - has source Instruction to proceed received. - has target Prepare preliminary case file. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-59842-Instruction_to_proceed_received-Prepare_preliminary_case_file\"},\"score\":0.5457151}]}]}"
+> ```
+>
+> </details>
+</details>
+
+Yes

@@ -1,0 +1,31 @@
+# Find Case file document
+
+> Does the document "Case file" exist?
+
+> Worked for 15s
+
+<details><summary>2 previous messages</summary>
+
+> I’m checking the BPMN process repository for that exact document name.
+>
+> <details><summary>Called a tool</summary>
+>
+> MCP tool call
+>
+> graphdb.iri_discovery_search
+>
+> ```json
+> {
+>   "query": "Case file",
+>   "repositoryId": "bpmn_judicial"
+> }
+> ```
+>
+> ```text
+> "?label\t?iri\n\"Close case file\"\t<http://www.omilab.org#Task_BPMN-58958-Close_case_file>\n\"Case file\"\t<http://www.omilab.org#Data_Object_BPMN-48762-Case_file>\n\"Prepare preliminary case file\"\t<http://www.omilab.org#Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file>\n\"Prepare preliminary case file\"\t<http://www.omilab.org#Sub-Process_BPMN-48720-Prepare_preliminary_case_file>\n\"Archive adjudicated case file\"\t<http://www.omilab.org#Task_BPMN-59171-Archive_adjudicated_case_file>\n\"Investigate case\"\t<http://www.omilab.org#Business_Process_Diagram_BPMN_2_0-Investigate_case>\n\"Investigate case\"\t<http://www.omilab.org#Sub-Process_BPMN-48678-Investigate_case>\n\"Case coordination\"\t<http://www.omilab.org#Role-50743-Case_coordination>\n\"Case adjudicated\"\t<http://www.omilab.org#End_Event_BPMN-58955-Case_adjudicated>\n\"File claim with Court\"\t<http://www.omilab.org#Task_BPMN-59009-File_claim_with_Court>\n\"Case-management system\"\t<http://www.omilab.org#Resource-59272-Case-management_system>\n\"Accept case representation?\"\t<http://www.omilab.org#Exclusive_Gateway_BPMN-49006-Accept_case_representation?>\n\"Assess case viability\"\t<http://www.omilab.org#Task_BPMN-49218-Assess_case_viability>\n\"Case records administration\"\t<http://www.omilab.org#Role-59239-Case_records_administration>\n\"Notify case representation acceptance\"\t<http://www.omilab.org#Task_BPMN-58861-Notify_case_representation_acceptance>\n\"Prepare case for hearing\"\t<http://www.omilab.org#Task_BPMN-59102-Prepare_case_for_hearing>\n\"Notify case representation refusal\"\t<http://www.omilab.org#Task_BPMN-49010-Notify_case_representation_refusal>\n\"Litigation and Case management\"\t<http://www.omilab.org#Organizational_Unit-49624-Litigation_and_Case_management>\n\"Law firm\"\t<http://www.omilab.org#Organizational_Unit-49618-Law_firm>\n\"Law firm\"\t<http://www.omilab.org#Pool_BPMN-58825-Law_firm>\n\"Law firm structure\"\t<http://www.omilab.org#Working_Environment_Model-Law_firm_structure>\n\"Hearing date\"\t<http://www.omilab.org#Intermediate_Event_BPMN-59618-Hearing_date>\n\"Scheduled date\"\t<http://www.omilab.org#Start_Event_BPMN-51178-Scheduled_date>\n\"Conduct on-site investigation\"\t<http://www.omilab.org#Sub-Process_BPMN-48961-Conduct_on-site_investigation>\n\"Conduct on-site investigation\"\t<http://www.omilab.org#Business_Process_Diagram_BPMN_2_0-Conduct_on-site_investigation>\n\"Scheduled hearing date\"\t<http://www.omilab.org#Intermediate_Event_BPMN-59064-Scheduled_hearing_date>\n\"Close matter for client non-response\"\t<http://www.omilab.org#Task_BPMN-59096-Close_matter_for_client_non-response>"
+> ```
+>
+> </details>
+</details>
+
+Yes

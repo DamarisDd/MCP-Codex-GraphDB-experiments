@@ -1,0 +1,36 @@
+# Check ad-hoc task membership
+
+> Is the task "Analyze document and record" part of an ad-hoc process?
+
+> Worked for 20s
+
+<details><summary>2 previous messages</summary>
+
+> I’ll verify this against the BPMN repository.
+>
+> <details><summary>Called a tool</summary>
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "Analyze document and record ad-hoc process"
+>     }
+>   ]
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"Analyze document and record ad-hoc process\",\"results\":[{\"id\":\"http://www.omilab.org#Subsequent-50989-Collect_documents_and_records-Analyze_document_and_record_0\",\"text\":\"Subsequent-50989-Collect_documents_and_records-Analyze_document_and_record: - is a r_Subsequent. - has source Collect documents and records. - has target Analyze document and record. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-50989-Collect_documents_and_records-Analyze_document_and_record\"},\"score\":0.92680335},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-50990-Collected_documents_and_records-Analyze_document_and_record_0\",\"text\":\"Data_Association_BPMN-50990-Collected_documents_and_records-Analyze_document_and_record: - is a r_Data_Association_BPMN. - has source Collected documents and records. - has target Analyze document and record.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-50990-Collected_documents_and_records-Analyze_document_and_record\"},\"score\":0.7814535},{\"id\":\"http://www.omilab.org#Task_BPMN-50986-Analyze_document_and_record_0\",\"text\":\"Task_BPMN-50986-Analyze_document_and_record: - is named Analyze document and record. - is a o_Task_BPMN. - is described in Investigate case. - is carried out by responsible Alexander Moore. - is carried out by responsible Bianca Hayes. - uses referenced data input Collected documents and records. - has execution time 00:000:00:00:00. - has cost 0. - has task type Not specified. - has loop type Multi-instance. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-50986-Analyze_document_and_record\"},\"score\":0.7118829},{\"id\":\"http://www.omilab.org#Sub-Process_BPMN-51175-Collect_and_analyze_statements_0\",\"text\":\"Sub-Process_BPMN-51175-Collect_and_analyze_statements: - is named Collect and analyze statements. - is a o_Sub-Process_BPMN. - is described in Investigate case. - references subprocess Collect and analyze statements. - has subprocess type Embedded. - has loop type Not specified. - has sequential execution No. - is for compensation No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Sub-Process_BPMN-51175-Collect_and_analyze_statements\"},\"score\":0.4914359},{\"id\":\"http://www.omilab.org#Subsequent-49387-Start_document_collection-Identify_required_documents_and_records_0\",\"text\":\"Subsequent-49387-Start_document_collection-Identify_required_documents_and_records: - is a r_Subsequent. - has source Start document collection. - has target Identify required documents and records. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-49387-Start_document_collection-Identify_required_documents_and_records\"},\"score\":0.46685186},{\"id\":\"http://www.omilab.org#Sub-Process_BPMN-48720-Prepare_preliminary_case_file_0\",\"text\":\"Sub-Process_BPMN-48720-Prepare_preliminary_case_file: - is named Prepare preliminary case file. - is a o_Sub-Process_BPMN. - is described in Main judicial process. - references subprocess Prepare preliminary case file. - is inside Law firm. - has subprocess type Ad-Hoc. - has loop type Not specified. - has sequential execution No. - is for compensation No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Sub-Process_BPMN-48720-Prepare_preliminary_case_file\"},\"score\":0.42951185},{\"id\":\"http://www.omilab.org#Task_BPMN-51121-Document_statements_0\",\"text\":\"Task_BPMN-51121-Document_statements: - is named Document statements. - is a o_Task_BPMN. - is described in Collect and analyze statements. - is carried out by responsible Marinette Cheng. - is carried out by responsible Alexander Moore. - produces referenced data output Collected statements. - has execution time 00:000:00:00:00. - has cost 0. - has task type User. - has loop type Multi-instance. - has sequential execution No. - has cardinality 3. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-51121-Document_statements\"},\"score\":0.41852012},{\"id\":\"http://www.omilab.org#Sub-Process_BPMN-48678-Investigate_case_0\",\"text\":\"Sub-Process_BPMN-48678-Investigate_case: - is named Investigate case. - is a o_Sub-Process_BPMN. - is described in Main judicial process. - references subprocess Investigate case. - is inside Law firm. - has subprocess type Ad-Hoc. - has loop type Not specified. - has sequential execution No. - is for compensation No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Sub-Process_BPMN-48678-Investigate_case\"},\"score\":0.40872744},{\"id\":\"http://www.omilab.org#Sub-Process_BPMN-48961-Conduct_on-site_investigation_0\",\"text\":\"Sub-Process_BPMN-48961-Conduct_on-site_investigation: - is named Conduct on-site investigation. - is a o_Sub-Process_BPMN. - is described in Investigate case. - references subprocess Conduct on-site investigation. - has subprocess type Ad-Hoc. - has loop type Not specified. - has sequential execution No. - is for compensation No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Sub-Process_BPMN-48961-Conduct_on-site_investigation\"},\"score\":0.39621043},{\"id\":\"http://www.omilab.org#Subsequent-48792-Record_investigation_findings-Prepare_claim_and_supporting_documents_0\",\"text\":\"Subsequent-48792-Record_investigation_findings-Prepare_claim_and_supporting_documents: - is a r_Subsequent. - has source Record investigation findings. - has target Prepare claim and supporting documents. - has label sent to court. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-48792-Record_investigation_findings-Prepare_claim_and_supporting_documents\"},\"score\":0.39103872}]}]}"
+> ```
+>
+> </details>
+</details>
+
+Yes

@@ -1,0 +1,36 @@
+# Find claim preparation time
+
+> How long is preparing the claim expected to take?
+
+> Worked for 36s
+
+<details><summary>2 previous messages</summary>
+
+> I’ll look up the modeled duration for the “preparing the claim” activity in the judicial BPMN repository.
+>
+> <details><summary>Called a tool</summary>
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "preparing the claim expected duration time"
+>     }
+>   ]
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"preparing the claim expected duration time\",\"results\":[{\"id\":\"http://www.omilab.org#Subsequent-59007-Prepare_claim_and_supporting_documents-File_claim_with_Court_0\",\"text\":\"Subsequent-59007-Prepare_claim_and_supporting_documents-File_claim_with_Court: - is a r_Subsequent. - has source Prepare claim and supporting documents. - has target File claim with Court. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-59007-Prepare_claim_and_supporting_documents-File_claim_with_Court\"},\"score\":0.74651635},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59180-Prepare_claim_and_supporting_documents-Statement_of_claim_0\",\"text\":\"Data_Association_BPMN-59180-Prepare_claim_and_supporting_documents-Statement_of_claim: - is a r_Data_Association_BPMN. - has source Prepare claim and supporting documents. - has target Statement of claim.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59180-Prepare_claim_and_supporting_documents-Statement_of_claim\"},\"score\":0.701197},{\"id\":\"http://www.omilab.org#Message_Flow_BPMN-59014-File_claim_with_Court-Claim_received_0\",\"text\":\"Message_Flow_BPMN-59014-File_claim_with_Court-Claim_received: - is a r_Message_Flow_BPMN. - has source File claim with Court. - has target Claim received. - has label Claim and supporting documents.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Message_Flow_BPMN-59014-File_claim_with_Court-Claim_received\"},\"score\":0.67185736},{\"id\":\"http://www.omilab.org#Task_BPMN-59004-Prepare_claim_and_supporting_documents_0\",\"text\":\"Task_BPMN-59004-Prepare_claim_and_supporting_documents: - is named Prepare claim and supporting documents. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Alexander Moore. - is carried out by responsible Rachel Bennett. - is inside Law firm. - has execution time 00:000:06:00:00. - has cost 431. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59004-Prepare_claim_and_supporting_documents\"},\"score\":0.6599428},{\"id\":\"http://www.omilab.org#Subsequent-58970-Claim_received-Register_claim_0\",\"text\":\"Subsequent-58970-Claim_received-Register_claim: - is a r_Subsequent. - has source Claim received. - has target Register claim. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-58970-Claim_received-Register_claim\"},\"score\":0.649171},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court_0\",\"text\":\"Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court: - is a r_Data_Association_BPMN. - has source Statement of claim. - has target File claim with Court.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court\"},\"score\":0.615929},{\"id\":\"http://www.omilab.org#Task_BPMN-59015-Register_claim_0\",\"text\":\"Task_BPMN-59015-Register_claim: - is named Register claim. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Court E-filing service. - is inside Court. - has execution time 00:000:00:05:00. - has cost 1. - has task type Service. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59015-Register_claim\"},\"score\":0.5950262},{\"id\":\"http://www.omilab.org#Task_BPMN-59009-File_claim_with_Court_0\",\"text\":\"Task_BPMN-59009-File_claim_with_Court: - is named File claim with Court. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Marinette Cheng. - is inside Law firm. - has execution time 00:000:00:30:00. - has cost 14. - has task type Send. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59009-File_claim_with_Court\"},\"score\":0.54501855},{\"id\":\"http://www.omilab.org#Subsequent-59012-File_claim_with_Court-Await_court_response_0\",\"text\":\"Subsequent-59012-File_claim_with_Court-Await_court_response: - is a r_Subsequent. - has source File claim with Court. - has target Await court response. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-59012-File_claim_with_Court-Await_court_response\"},\"score\":0.5076692},{\"id\":\"http://www.omilab.org#Subsequent-48792-Record_investigation_findings-Prepare_claim_and_supporting_documents_0\",\"text\":\"Subsequent-48792-Record_investigation_findings-Prepare_claim_and_supporting_documents: - is a r_Subsequent. - has source Record investigation findings. - has target Prepare claim and supporting documents. - has label sent to court. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-48792-Record_investigation_findings-Prepare_claim_and_supporting_documents\"},\"score\":0.50111985}]}]}"
+> ```
+>
+> </details>
+</details>
+
+{"answer_type":"value","status":"ok","results":[{"identifier":null,"label":"6 hours","element_type":"duration","rank":null,"attributes":[{"name":"expected_duration","value":6,"unit":"hours"}],"related_elements":[]}]}

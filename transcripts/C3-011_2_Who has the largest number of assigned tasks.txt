@@ -1,0 +1,81 @@
+# Find largest task assignment
+
+> Who has the largest number of assigned tasks?
+
+> Worked for 36s
+
+<details><summary>2 previous messages</summary>
+
+> I’m checking the judicial BPMN repository and comparing task assignments by assignee.
+>
+> <details><summary>Called 4 tools</summary>
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "assigned tasks assignees performers resources who is assigned to each task number of assigned tasks"
+>     }
+>   ]
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"assigned tasks assignees performers resources who is assigned to each task number of assigned tasks\",\"results\":[{\"id\":\"http://www.omilab.org#Task_BPMN-48798-Assign_investigation_team_0\",\"text\":\"Task_BPMN-48798-Assign_investigation_team: - is named Assign investigation team. - is a o_Task_BPMN. - is described in Prepare preliminary case file. - is carried out by responsible Rachel Bennett. - is carried out by responsible Victor Hayes. - has execution time 00:000:00:20:00. - has cost 24.67. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-48798-Assign_investigation_team\"},\"score\":0.5285811},{\"id\":\"http://www.omilab.org#Subsequent-49354-Required_sources?-Request_documents_0\",\"text\":\"Subsequent-49354-Required_sources?-Request_documents: - is a r_Subsequent. - has source Required sources?. - has target Request documents. - has label additional resources. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-49354-Required_sources?-Request_documents\"},\"score\":0.5},{\"id\":\"http://www.omilab.org#Task_BPMN-58916-Schedule_interview_0\",\"text\":\"Task_BPMN-58916-Schedule_interview: - is named Schedule interview. - is a o_Task_BPMN. - has execution time 00:000:00:00:00. - has cost 7. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-58916-Schedule_interview\"},\"score\":0.42861867},{\"id\":\"http://www.omilab.org#Task_BPMN-49342-Identify_required_documents_and_records_0\",\"text\":\"Task_BPMN-49342-Identify_required_documents_and_records: - is named Identify required documents and records. - is a o_Task_BPMN. - is described in Collect documents and records. - is carried out by responsible Samuel Grant. - is carried out by responsible Rachel Bennett. - has execution time 00:000:01:30:00. - has cost 135. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49342-Identify_required_documents_and_records\"},\"score\":0.4229583},{\"id\":\"http://www.omilab.org#Task_BPMN-49395-Review_collected_documents_and_records_0\",\"text\":\"Task_BPMN-49395-Review_collected_documents_and_records: - is named Review collected documents and records. - is a o_Task_BPMN. - is described in Collect documents and records. - is carried out by responsible Samuel Grant. - is carried out by responsible Rachel Bennett. - has execution time 00:000:03:00:00. - has cost 232.5. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49395-Review_collected_documents_and_records\"},\"score\":0.4200374},{\"id\":\"http://www.omilab.org#Task_BPMN-49405-Issue_additional_request_0\",\"text\":\"Task_BPMN-49405-Issue_additional_request: - is named Issue additional request. - is a o_Task_BPMN. - is described in Collect documents and records. - is carried out by responsible Marinette Cheng. - has execution time 00:000:00:20:00. - has cost 9.33. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49405-Issue_additional_request\"},\"score\":0.4186404},{\"id\":\"http://www.omilab.org#Task_BPMN-49346-Request_documents_0\",\"text\":\"Task_BPMN-49346-Request_documents: - is named Request documents. - is a o_Task_BPMN. - is described in Collect documents and records. - is carried out by responsible Marinette Cheng. - has execution time 00:000:00:30:00. - has cost 14. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49346-Request_documents\"},\"score\":0.40686446},{\"id\":\"http://www.omilab.org#Task_BPMN-51115-Interview_involved_parties_0\",\"text\":\"Task_BPMN-51115-Interview_involved_parties: - is named Interview involved parties. - is a o_Task_BPMN. - is described in Collect and analyze statements. - is carried out by responsible Samuel Grant. - is carried out by responsible Bianca Hayes. - has execution time 00:000:00:00:00. - has cost 0. - has task type Manual. - has loop type Multi-instance. - has sequential execution No. - has cardinality 3. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-51115-Interview_involved_parties\"},\"score\":0.400589},{\"id\":\"http://www.omilab.org#Task_BPMN-49409-Collect_missing_items_0\",\"text\":\"Task_BPMN-49409-Collect_missing_items: - is named Collect missing items. - is a o_Task_BPMN. - is described in Collect documents and records. - is carried out by responsible Marinette Cheng. - is carried out by responsible Bianca Hayes. - has execution time 00:000:02:00:00. - has cost 96. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49409-Collect_missing_items\"},\"score\":0.39196467},{\"id\":\"http://www.omilab.org#Task_BPMN-49356-Retrieve_existing_records_0\",\"text\":\"Task_BPMN-49356-Retrieve_existing_records: - is named Retrieve existing records. - is a o_Task_BPMN. - is described in Collect documents and records. - is carried out by responsible Alexander Moore. - is carried out by responsible Bianca Hayes. - has execution time 00:000:02:00:00. - has cost 96. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49356-Retrieve_existing_records\"},\"score\":0.38139975}]}]}"
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "SELECT ?p ?o WHERE { <http://www.omilab.org#Task_BPMN-48798-Assign_investigation_team> ?p ?o }"
+> }
+> ```
+>
+> ```text
+> "?p\t?o\n<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://www.w3.org/2000/01/rdf-schema#Resource>\n<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://www.w3.org/2002/07/owl#Thing>\n<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://bee-up.omilab.org/rdf/1_7#o_Task_BPMN>\n<http://www.w3.org/2002/07/owl#sameAs>\t<http://www.omilab.org#Task_BPMN-48798-Assign_investigation_team>\n<http://www.w3.org/2000/01/rdf-schema#label>\t\"Assign investigation team\"\n<http://www.comvantage.eu/mm#a_Name>\t\"Assign investigation team\"\n<http://www.comvantage.eu/mm#described_in>\t<http://www.omilab.org#Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file>\n<http://bee-up.omilab.org/rdf/1_7#a_Costs>\t\"24.67\"\n<http://bee-up.omilab.org/rdf/1_7#a_Execution_interruptable>\t\"yes\"\n<http://bee-up.omilab.org/rdf/1_7#a_Execution_time>\t\"00:000:00:20:00\"\n<http://bee-up.omilab.org/rdf/1_7#a_For_compensation>\t\"No\"\n<http://bee-up.omilab.org/rdf/1_7#a_Loop_type>\t\"Not specified\"\n<http://bee-up.omilab.org/rdf/1_7#a_Sequential_execution>\t\"No\"\n<http://bee-up.omilab.org/rdf/1_7#a_Task_type>\t\"User\"\n<http://bee-up.omilab.org/rdf/1_7#r_Responsible>\t<http://www.omilab.org#Performer-49636-Rachel_Bennett>\n<http://bee-up.omilab.org/rdf/1_7#r_Responsible>\t<http://www.omilab.org#Performer-49713-Victor_Hayes>\n<http://bee-up.omilab.org/rdf/1_7#a_Name>\t\"Assign investigation team\""
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "PREFIX bpmn: <http://bee-up.omilab.org/rdf/1_7#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nSELECT ?performer ?label (COUNT(DISTINCT ?task) AS ?assignedTaskCount)\nWHERE {\n  ?task a bpmn:o_Task_BPMN ;\n        bpmn:r_Responsible ?performer .\n  OPTIONAL { ?performer rdfs:label ?label }\n}\nGROUP BY ?performer ?label\nORDER BY DESC(?assignedTaskCount) ?performer"
+> }
+> ```
+>
+> ```text
+> "?performer\t?label\t?assignedTaskCount\n<http://www.omilab.org#Performer-49636-Rachel_Bennett>\t\"Rachel Bennett\"\t12\n<http://www.omilab.org#Performer-49665-Samuel_Grant>\t\"Samuel Grant\"\t12\n<http://www.omilab.org#Performer-50684-Alexander_Moore>\t\"Alexander Moore\"\t11\n<http://www.omilab.org#Performer-49671-Bianca_Hayes>\t\"Bianca Hayes\"\t9\n<http://www.omilab.org#Performer-50687-Marinette_Cheng>\t\"Marinette Cheng\"\t7\n<http://www.omilab.org#Performer-49713-Victor_Hayes>\t\"Victor Hayes\"\t4\n<http://www.omilab.org#Performer-50669-Anna_Collins>\t\"Anna Collins\"\t4\n<http://www.omilab.org#Performer-59212-Paul_Mercer>\t\"Paul Mercer\"\t4\n<http://www.omilab.org#Performer-59227-Andrew_Marshall>\t\"Andrew Marshall\"\t4\n<http://www.omilab.org#Performer-49633-Emily_Carter>\t\"Emily Carter\"\t2\n<http://www.omilab.org#Performer-49717-Michael_Turner>\t\"Michael Turner\"\t2\n<http://www.omilab.org#Performer-59206-Gabriella_Hayes>\t\"Gabriella Hayes\"\t2\n<http://www.omilab.org#Automated_Performer-59299-Court_E-filing_service>\t\"Court E-filing service\"\t1\n<http://www.omilab.org#Performer-59218-Irene_Palmer>\t\"Irene Palmer\"\t1\n<http://www.omilab.org#Performer-59316-Hanna_Hastings>\t\"Hanna Hastings\"\t1"
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "PREFIX bpmn: <http://bee-up.omilab.org/rdf/1_7#>\nSELECT ?performer ?type WHERE {\n  VALUES ?performer {\n    <http://www.omilab.org#Performer-49636-Rachel_Bennett>\n    <http://www.omilab.org#Performer-49665-Samuel_Grant>\n  }\n  ?performer a ?type .\n  FILTER(STRSTARTS(STR(?type), \"http://bee-up.omilab.org/rdf/1_7#\"))\n}"
+> }
+> ```
+>
+> ```text
+> "?performer\t?type\n<http://www.omilab.org#Performer-49636-Rachel_Bennett>\t<http://bee-up.omilab.org/rdf/1_7#o_Performer>\n<http://www.omilab.org#Performer-49665-Samuel_Grant>\t<http://bee-up.omilab.org/rdf/1_7#o_Performer>"
+> ```
+>
+> </details>
+</details>
+
+{"answer_type":"ranking","status":"ok","results":[{"identifier":"http://www.omilab.org#Performer-49636-Rachel_Bennett","label":"Rachel Bennett","element_type":"o_performer","rank":1,"attributes":[{"name":"assigned_task_count","value":12,"unit":"tasks"}],"related_elements":[]},{"identifier":"http://www.omilab.org#Performer-49665-Samuel_Grant","label":"Samuel Grant","element_type":"o_performer","rank":1,"attributes":[{"name":"assigned_task_count","value":12,"unit":"tasks"}],"related_elements":[]}]}

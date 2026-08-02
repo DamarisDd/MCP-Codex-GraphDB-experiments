@@ -1,0 +1,100 @@
+# Find prerequisite for archiving
+
+> What must be completed right before the task "Archive non-adjudicated matter" can begin?
+
+> Worked for 58s
+
+<details><summary>2 previous messages</summary>
+
+> I’m checking the BPMN process graph for the immediate predecessor of that task.
+>
+> <details><summary>Called 5 tools</summary>
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "Archive non-adjudicated matter immediate predecessor incoming sequence flow what must be completed right before this task can begin"
+>     }
+>   ]
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"Archive non-adjudicated matter immediate predecessor incoming sequence flow what must be completed right before this task can begin\",\"results\":[{\"id\":\"http://www.omilab.org#Subsequent-49021-Archive_non-adjudicated_matter-Matter_closed_without_adjudication_0\",\"text\":\"Subsequent-49021-Archive_non-adjudicated_matter-Matter_closed_without_adjudication: - is a r_Subsequent. - has source Archive non-adjudicated matter. - has target Matter closed without adjudication. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-49021-Archive_non-adjudicated_matter-Matter_closed_without_adjudication\"},\"score\":0.93961436},{\"id\":\"http://www.omilab.org#Subsequent-49229-Record_withdrawal_instruction-Archive_non-adjudicated_matter_0\",\"text\":\"Subsequent-49229-Record_withdrawal_instruction-Archive_non-adjudicated_matter: - is a r_Subsequent. - has source Record withdrawal instruction. - has target Archive non-adjudicated matter. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-49229-Record_withdrawal_instruction-Archive_non-adjudicated_matter\"},\"score\":0.90109825},{\"id\":\"http://www.omilab.org#Subsequent-59099-Close_matter_for_client_non-response-Archive_non-adjudicated_matter_0\",\"text\":\"Subsequent-59099-Close_matter_for_client_non-response-Archive_non-adjudicated_matter: - is a r_Subsequent. - has source Close matter for client non-response. - has target Archive non-adjudicated matter. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-59099-Close_matter_for_client_non-response-Archive_non-adjudicated_matter\"},\"score\":0.8723128},{\"id\":\"http://www.omilab.org#Subsequent-59133-Notify_Court_rejection-Archive_non-adjudicated_matter_0\",\"text\":\"Subsequent-59133-Notify_Court_rejection-Archive_non-adjudicated_matter: - is a r_Subsequent. - has source Notify Court rejection. - has target Archive non-adjudicated matter. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-59133-Notify_Court_rejection-Archive_non-adjudicated_matter\"},\"score\":0.7887814},{\"id\":\"http://www.omilab.org#Subsequent-59002-Withdrawal_instruction_received-Archive_non-adjudicated_matter_0\",\"text\":\"Subsequent-59002-Withdrawal_instruction_received-Archive_non-adjudicated_matter: - is a r_Subsequent. - has source Withdrawal instruction received. - has target Archive non-adjudicated matter. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-59002-Withdrawal_instruction_received-Archive_non-adjudicated_matter\"},\"score\":0.75484043},{\"id\":\"http://www.omilab.org#Subsequent-59174-Archive_adjudicated_case_file-Representation_completed_0\",\"text\":\"Subsequent-59174-Archive_adjudicated_case_file-Representation_completed: - is a r_Subsequent. - has source Archive adjudicated case file. - has target Representation completed. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-59174-Archive_adjudicated_case_file-Representation_completed\"},\"score\":0.74862504},{\"id\":\"http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter_0\",\"text\":\"Task_BPMN-49014-Archive_non-adjudicated_matter: - is named Archive non-adjudicated matter. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Emily Carter. - is inside Law firm. - has execution time 00:000:00:30:00. - has cost 11. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter\"},\"score\":0.7470521},{\"id\":\"http://www.omilab.org#Subsequent-49017-Notify_case_representation_refusal-Archive_non-adjudicated_matter_0\",\"text\":\"Subsequent-49017-Notify_case_representation_refusal-Archive_non-adjudicated_matter: - is a r_Subsequent. - has source Notify case representation refusal. - has target Archive non-adjudicated matter. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-49017-Notify_case_representation_refusal-Archive_non-adjudicated_matter\"},\"score\":0.706977},{\"id\":\"http://www.omilab.org#Task_BPMN-59171-Archive_adjudicated_case_file_0\",\"text\":\"Task_BPMN-59171-Archive_adjudicated_case_file: - is named Archive adjudicated case file. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Michael Turner. - is inside Law firm. - has execution time 00:000:00:45:00. - has cost 17. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59171-Archive_adjudicated_case_file\"},\"score\":0.51787275},{\"id\":\"http://www.omilab.org#Subsequent-59143-Inform_about_judicial_verdict-Archive_adjudicated_case_file_0\",\"text\":\"Subsequent-59143-Inform_about_judicial_verdict-Archive_adjudicated_case_file: - is a r_Subsequent. - has source Inform about judicial verdict. - has target Archive adjudicated case file. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-59143-Inform_about_judicial_verdict-Archive_adjudicated_case_file\"},\"score\":0.5122507}]}]}"
+> ```
+>
+> MCP tool call
+>
+> graphdb.fts_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "\"Archive non-adjudicated matter\""
+> }
+> ```
+>
+> Error: tool call error: tool call failed for `graphdb/fts_search`
+>
+> Caused by:
+>     Mcp error: -32603: text must not be null("IllegalArgumentException: text must not be null")
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "SELECT ?s ?p ?o WHERE {\n  ?s ?p ?o .\n  FILTER(CONTAINS(LCASE(STR(?o)), \"archive non-adjudicated matter\"))\n} LIMIT 200",
+>   "addMissingNamespaces": true
+> }
+> ```
+>
+> ```text
+> "?s\t?p\t?o\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://www.w3.org/2000/01/rdf-schema#label>\t\"Archive non-adjudicated matter\"\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://www.comvantage.eu/mm#a_Name>\t\"Archive non-adjudicated matter\"\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://bee-up.omilab.org/rdf/1_7#a_Name>\t\"Archive non-adjudicated matter\""
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "SELECT ?s ?p ?o WHERE {\n  ?s ?p ?o .\n  FILTER(?s = <http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter> ||\n         ?o = <http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>)\n} LIMIT 500",
+>   "addMissingNamespaces": true
+> }
+> ```
+>
+> ```text
+> "?s\t?p\t?o\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://www.w3.org/2000/01/rdf-schema#Resource>\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://www.w3.org/2002/07/owl#Thing>\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://bee-up.omilab.org/rdf/1_7#o_Task_BPMN>\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://www.w3.org/2002/07/owl#sameAs>\t<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://www.w3.org/2000/01/rdf-schema#label>\t\"Archive non-adjudicated matter\"\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://www.comvantage.eu/mm#a_Name>\t\"Archive non-adjudicated matter\"\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://www.comvantage.eu/mm#described_in>\t<http://www.omilab.org#Business_Process_Diagram_BPMN_2_0-Main_judicial_process>\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://bee-up.omilab.org/rdf/1_7#a_Costs>\t\"11\"\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://bee-up.omilab.org/rdf/1_7#a_Execution_interruptable>\t\"yes\"\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://bee-up.omilab.org/rdf/1_7#a_Execution_time>\t\"00:000:00:30:00\"\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://bee-up.omilab.org/rdf/1_7#a_For_compensation>\t\"No\"\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://bee-up.omilab.org/rdf/1_7#a_Loop_type>\t\"Not specified\"\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://bee-up.omilab.org/rdf/1_7#a_Sequential_execution>\t\"No\"\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://bee-up.omilab.org/rdf/1_7#a_Task_type>\t\"User\"\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://bee-up.omilab.org/rdf/1_7#r_Responsible>\t<http://www.omilab.org#Performer-49633-Emily_Carter>\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://bee-up.omilab.org/rdf/1_7#a_Name>\t\"Archive non-adjudicated matter\"\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://bee-up.omilab.org/rdf/1_7#r_Is_inside>\t<http://www.omilab.org#Pool_BPMN-58825-Law_firm>\n<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\t<http://www.w3.org/2002/07/owl#sameAs>\t<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\n<http://www.omilab.org#Subsequent-49021-Archive_non-adjudicated_matter-Matter_closed_without_adjudication>\t<http://www.comvantage.eu/mm#from>\t<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\n<http://www.omilab.org#Subsequent-59099-Close_matter_for_client_non-response-Archive_non-adjudicated_matter>\t<http://www.comvantage.eu/mm#to>\t<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\n<http://www.omilab.org#Subsequent-49229-Record_withdrawal_instruction-Archive_non-adjudicated_matter>\t<http://www.comvantage.eu/mm#to>\t<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\n<http://www.omilab.org#Subsequent-59002-Withdrawal_instruction_received-Archive_non-adjudicated_matter>\t<http://www.comvantage.eu/mm#to>\t<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\n<http://www.omilab.org#Subsequent-59133-Notify_Court_rejection-Archive_non-adjudicated_matter>\t<http://www.comvantage.eu/mm#to>\t<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>\n<http://www.omilab.org#Subsequent-49017-Notify_case_representation_refusal-Archive_non-adjudicated_matter>\t<http://www.comvantage.eu/mm#to>\t<http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter>"
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "SELECT DISTINCT ?source ?label ?type WHERE {\n  ?rel <http://www.comvantage.eu/mm#to> <http://www.omilab.org#Task_BPMN-49014-Archive_non-adjudicated_matter> ;\n       <http://www.comvantage.eu/mm#from> ?source .\n  OPTIONAL { ?source <http://www.w3.org/2000/01/rdf-schema#label> ?label . }\n  OPTIONAL {\n    ?source a ?type .\n    FILTER(CONTAINS(STR(?type), \"bee-up.omilab.org/rdf/1_7#o_\"))\n  }\n}",
+>   "addMissingNamespaces": true
+> }
+> ```
+>
+> ```text
+> "?source\t?label\t?type\n<http://www.omilab.org#Task_BPMN-59096-Close_matter_for_client_non-response>\t\"Close matter for client non-response\"\t<http://bee-up.omilab.org/rdf/1_7#o_Task_BPMN>\n<http://www.omilab.org#Task_BPMN-48690-Record_withdrawal_instruction>\t\"Record withdrawal instruction\"\t<http://bee-up.omilab.org/rdf/1_7#o_Task_BPMN>\n<http://www.omilab.org#Intermediate_Event_BPMN-58878-Withdrawal_instruction_received>\t\"Withdrawal instruction received\"\t<http://bee-up.omilab.org/rdf/1_7#o_Intermediate_Event_BPMN>\n<http://www.omilab.org#Task_BPMN-59128-Notify_Court_rejection>\t\"Notify Court rejection\"\t<http://bee-up.omilab.org/rdf/1_7#o_Task_BPMN>\n<http://www.omilab.org#Task_BPMN-49010-Notify_case_representation_refusal>\t\"Notify case representation refusal\"\t<http://bee-up.omilab.org/rdf/1_7#o_Task_BPMN>"
+> ```
+>
+> </details>
+</details>
+
+{"answer_type":"list","status":"ok","results":[{"identifier":"http://www.omilab.org#Task_BPMN-59096-Close_matter_for_client_non-response","label":"Close matter for client non-response","element_type":"task_bpmn","rank":null,"attributes":[],"related_elements":[]},{"identifier":"http://www.omilab.org#Task_BPMN-48690-Record_withdrawal_instruction","label":"Record withdrawal instruction","element_type":"task_bpmn","rank":null,"attributes":[],"related_elements":[]},{"identifier":"http://www.omilab.org#Intermediate_Event_BPMN-58878-Withdrawal_instruction_received","label":"Withdrawal instruction received","element_type":"intermediate_event_bpmn","rank":null,"attributes":[],"related_elements":[]},{"identifier":"http://www.omilab.org#Task_BPMN-59128-Notify_Court_rejection","label":"Notify Court rejection","element_type":"task_bpmn","rank":null,"attributes":[],"related_elements":[]},{"identifier":"http://www.omilab.org#Task_BPMN-49010-Notify_case_representation_refusal","label":"Notify case representation refusal","element_type":"task_bpmn","rank":null,"attributes":[],"related_elements":[]}]}

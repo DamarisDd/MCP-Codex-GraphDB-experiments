@@ -1,0 +1,54 @@
+# Find Case file document producer
+
+> What produces the Case file document?
+
+> Worked for 32s
+
+<details><summary>1 previous message</summary>
+
+> <details><summary>Called 2 tools</summary>
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "What produces the Case file document? Find the BPMN element that produces or outputs the data object/document labeled Case file."
+>     }
+>   ]
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"What produces the Case file document? Find the BPMN element that produces or outputs the data object/document labeled Case file.\",\"results\":[{\"id\":\"http://www.omilab.org#Data_Object_BPMN-48762-Case_file_0\",\"text\":\"Data_Object_BPMN-48762-Case_file: - is named Case file. - is a o_Data_Object_BPMN. - is inside Law firm. - has data type Data Object.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Object_BPMN-48762-Case_file\"},\"score\":1.0},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59623-Case_file-File_claim_with_Court_0\",\"text\":\"Data_Association_BPMN-59623-Case_file-File_claim_with_Court: - is a r_Data_Association_BPMN. - has source Case file. - has target File claim with Court.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59623-Case_file-File_claim_with_Court\"},\"score\":0.774145},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-48772-Investigate_case-Case_file_0\",\"text\":\"Data_Association_BPMN-48772-Investigate_case-Case_file: - is a r_Data_Association_BPMN. - has source Investigate case. - has target Case file.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-48772-Investigate_case-Case_file\"},\"score\":0.7670374},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing_0\",\"text\":\"Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing: - is a r_Data_Association_BPMN. - has source Case file. - has target Represent client at hearing.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing\"},\"score\":0.7309687},{\"id\":\"http://www.omilab.org#Data_Object_BPMN-49378-Collected_documents_and_records_0\",\"text\":\"Data_Object_BPMN-49378-Collected_documents_and_records: - is named Collected documents and records. - is a o_Data_Object_BPMN. - is described in Investigate case. - has data type Data Object.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Object_BPMN-49378-Collected_documents_and_records\"},\"score\":0.6001781},{\"id\":\"http://www.omilab.org#Sub-Process_BPMN-48720-Prepare_preliminary_case_file_0\",\"text\":\"Sub-Process_BPMN-48720-Prepare_preliminary_case_file: - is named Prepare preliminary case file. - is a o_Sub-Process_BPMN. - is described in Main judicial process. - references subprocess Prepare preliminary case file. - is inside Law firm. - has subprocess type Ad-Hoc. - has loop type Not specified. - has sequential execution No. - is for compensation No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Sub-Process_BPMN-48720-Prepare_preliminary_case_file\"},\"score\":0.56886333},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court_0\",\"text\":\"Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court: - is a r_Data_Association_BPMN. - has source Statement of claim. - has target File claim with Court.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court\"},\"score\":0.5043813},{\"id\":\"http://www.omilab.org#Data_Object_BPMN-51106-Potential_witnesses_0\",\"text\":\"Data_Object_BPMN-51106-Potential_witnesses: - is named Potential witnesses. - is a o_Data_Object_BPMN. - is described in Prepare preliminary case file. - has data type Data Object.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Object_BPMN-51106-Potential_witnesses\"},\"score\":0.5029444},{\"id\":\"http://www.omilab.org#Data_Object_BPMN-59176-Statement_of_claim_0\",\"text\":\"Data_Object_BPMN-59176-Statement_of_claim: - is named Statement of claim. - is a o_Data_Object_BPMN. - is inside Law firm. - has data type Data Object.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Object_BPMN-59176-Statement_of_claim\"},\"score\":0.49423438},{\"id\":\"http://www.omilab.org#Data_Object_BPMN-59195-Pending_interview_invitations_0\",\"text\":\"Data_Object_BPMN-59195-Pending_interview_invitations: - is named Pending interview invitations. - is a o_Data_Object_BPMN. - is described in Prepare preliminary case file. - has data type Data Object.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Object_BPMN-59195-Pending_interview_invitations\"},\"score\":0.47196686}]}]}"
+> ```
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "Investigate case BPMN element identifier and type. Which element outputs or produces Case file through Data_Association_BPMN-48772-Investigate_case-Case_file?"
+>     }
+>   ]
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"Investigate case BPMN element identifier and type. Which element outputs or produces Case file through Data_Association_BPMN-48772-Investigate_case-Case_file?\",\"results\":[{\"id\":\"http://www.omilab.org#Data_Association_BPMN-48772-Investigate_case-Case_file_0\",\"text\":\"Data_Association_BPMN-48772-Investigate_case-Case_file: - is a r_Data_Association_BPMN. - has source Investigate case. - has target Case file.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-48772-Investigate_case-Case_file\"},\"score\":1.0},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59623-Case_file-File_claim_with_Court_0\",\"text\":\"Data_Association_BPMN-59623-Case_file-File_claim_with_Court: - is a r_Data_Association_BPMN. - has source Case file. - has target File claim with Court.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59623-Case_file-File_claim_with_Court\"},\"score\":0.65739334},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing_0\",\"text\":\"Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing: - is a r_Data_Association_BPMN. - has source Case file. - has target Represent client at hearing.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing\"},\"score\":0.60066557},{\"id\":\"http://www.omilab.org#Data_Object_BPMN-48762-Case_file_0\",\"text\":\"Data_Object_BPMN-48762-Case_file: - is named Case file. - is a o_Data_Object_BPMN. - is inside Law firm. - has data type Data Object.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Object_BPMN-48762-Case_file\"},\"score\":0.5164546},{\"id\":\"http://www.omilab.org#Sub-Process_BPMN-48678-Investigate_case_0\",\"text\":\"Sub-Process_BPMN-48678-Investigate_case: - is named Investigate case. - is a o_Sub-Process_BPMN. - is described in Main judicial process. - references subprocess Investigate case. - is inside Law firm. - has subprocess type Ad-Hoc. - has loop type Not specified. - has sequential execution No. - is for compensation No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Sub-Process_BPMN-48678-Investigate_case\"},\"score\":0.43979484},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court_0\",\"text\":\"Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court: - is a r_Data_Association_BPMN. - has source Statement of claim. - has target File claim with Court.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court\"},\"score\":0.4096048},{\"id\":\"http://www.omilab.org#Sub-Process_BPMN-48720-Prepare_preliminary_case_file_0\",\"text\":\"Sub-Process_BPMN-48720-Prepare_preliminary_case_file: - is named Prepare preliminary case file. - is a o_Sub-Process_BPMN. - is described in Main judicial process. - references subprocess Prepare preliminary case file. - is inside Law firm. - has subprocess type Ad-Hoc. - has loop type Not specified. - has sequential execution No. - is for compensation No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Sub-Process_BPMN-48720-Prepare_preliminary_case_file\"},\"score\":0.36512977},{\"id\":\"http://www.omilab.org#Data_Object_BPMN-49378-Collected_documents_and_records_0\",\"text\":\"Data_Object_BPMN-49378-Collected_documents_and_records: - is named Collected documents and records. - is a o_Data_Object_BPMN. - is described in Investigate case. - has data type Data Object.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Object_BPMN-49378-Collected_documents_and_records\"},\"score\":0.36228883},{\"id\":\"http://www.omilab.org#Task_BPMN-59171-Archive_adjudicated_case_file_0\",\"text\":\"Task_BPMN-59171-Archive_adjudicated_case_file: - is named Archive adjudicated case file. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Michael Turner. - is inside Law firm. - has execution time 00:000:00:45:00. - has cost 17. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59171-Archive_adjudicated_case_file\"},\"score\":0.31953663},{\"id\":\"http://www.omilab.org#Task_BPMN-58958-Close_case_file_0\",\"text\":\"Task_BPMN-58958-Close_case_file: - is named Close case file. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Hanna Hastings. - is inside Court. - has execution time 00:000:00:30:00. - has cost 13. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-58958-Close_case_file\"},\"score\":0.3081146}]}]}"
+> ```
+>
+> </details>
+</details>
+
+{"answer_type":"list","status":"ok","results":[{"identifier":"http://www.omilab.org#Sub-Process_BPMN-48678-Investigate_case","label":"Investigate case","element_type":"sub_process","rank":null,"attributes":[],"related_elements":[]}]}

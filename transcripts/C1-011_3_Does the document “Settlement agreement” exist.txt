@@ -1,0 +1,80 @@
+# Find settlement agreement
+
+> Does the document "Settlement agreement" exist?
+
+> Worked for 38s
+
+<details><summary>1 previous message</summary>
+
+> <details><summary>Called 4 tools</summary>
+>
+> MCP tool call
+>
+> graphdb.fts_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "\"Settlement agreement\""
+> }
+> ```
+>
+> ```text
+>
+> ```
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "Settlement agreement"
+>     }
+>   ]
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"Settlement agreement\",\"results\":[{\"id\":\"http://www.omilab.org#Subsequent-59174-Archive_adjudicated_case_file-Representation_completed_0\",\"text\":\"Subsequent-59174-Archive_adjudicated_case_file-Representation_completed: - is a r_Subsequent. - has source Archive adjudicated case file. - has target Representation completed. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-59174-Archive_adjudicated_case_file-Representation_completed\"},\"score\":0.5},{\"id\":\"http://www.omilab.org#Subsequent-48774-Complaint_withdrawn-Record_withdrawal_instruction_0\",\"text\":\"Subsequent-48774-Complaint_withdrawn-Record_withdrawal_instruction: - is a r_Subsequent. - has source Complaint withdrawn. - has target Record withdrawal instruction. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-48774-Complaint_withdrawn-Record_withdrawal_instruction\"},\"score\":0.4821741},{\"id\":\"http://www.omilab.org#Subsequent-59012-File_claim_with_Court-Await_court_response_0\",\"text\":\"Subsequent-59012-File_claim_with_Court-Await_court_response: - is a r_Subsequent. - has source File claim with Court. - has target Await court response. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-59012-File_claim_with_Court-Await_court_response\"},\"score\":0.44842127},{\"id\":\"http://www.omilab.org#Subsequent-59089-Notify_claim_acceptance_and_hearing_details-Scheduled_hearing_date_0\",\"text\":\"Subsequent-59089-Notify_claim_acceptance_and_hearing_details-Scheduled_hearing_date: - is a r_Subsequent. - has source Notify claim acceptance and hearing details. - has target Scheduled hearing date. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-59089-Notify_claim_acceptance_and_hearing_details-Scheduled_hearing_date\"},\"score\":0.4474986},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court_0\",\"text\":\"Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court: - is a r_Data_Association_BPMN. - has source Statement of claim. - has target File claim with Court.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court\"},\"score\":0.44112208},{\"id\":\"http://www.omilab.org#End_Event_BPMN-49018-Matter_closed_without_adjudication_0\",\"text\":\"End_Event_BPMN-49018-Matter_closed_without_adjudication: - is named Matter closed without adjudication. - is a o_End_Event_BPMN. - is inside Law firm. - has event scope local. - has message trigger No. - has signal trigger No. - has error trigger No. - has escalation trigger No. - has compensation trigger No. - has cancel trigger No. - has terminate trigger No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#End_Event_BPMN-49018-Matter_closed_without_adjudication\"},\"score\":0.40505183},{\"id\":\"http://www.omilab.org#Intermediate_Event_BPMN-48687-Complaint_withdrawn_0\",\"text\":\"Intermediate_Event_BPMN-48687-Complaint_withdrawn: - is named Complaint withdrawn. - is a o_Intermediate_Event_BPMN. - is described in Main judicial process. - is attached to Investigate case. - is inside Law firm. - has boundary type interrupting. - has sequence type catching. - cancels activity No. - has message trigger Yes. - has timer trigger No. - has conditional trigger No. - has signal trigger No. - has link trigger No. - has error trigger No. - has escalation trigger No. - has compensation trigger No. - has cancel trigger No. - has parallel multiple trigger No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Intermediate_Event_BPMN-48687-Complaint_withdrawn\"},\"score\":0.4011826},{\"id\":\"http://www.omilab.org#Data_Object_BPMN-59176-Statement_of_claim_0\",\"text\":\"Data_Object_BPMN-59176-Statement_of_claim: - is named Statement of claim. - is a o_Data_Object_BPMN. - is inside Law firm. - has data type Data Object.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Object_BPMN-59176-Statement_of_claim\"},\"score\":0.37242982},{\"id\":\"http://www.omilab.org#Subsequent-59002-Withdrawal_instruction_received-Archive_non-adjudicated_matter_0\",\"text\":\"Subsequent-59002-Withdrawal_instruction_received-Archive_non-adjudicated_matter: - is a r_Subsequent. - has source Withdrawal instruction received. - has target Archive non-adjudicated matter. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-59002-Withdrawal_instruction_received-Archive_non-adjudicated_matter\"},\"score\":0.3676253},{\"id\":\"http://www.omilab.org#Message_Flow_BPMN-59014-File_claim_with_Court-Claim_received_0\",\"text\":\"Message_Flow_BPMN-59014-File_claim_with_Court-Claim_received: - is a r_Message_Flow_BPMN. - has source File claim with Court. - has target Claim received. - has label Claim and supporting documents.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Message_Flow_BPMN-59014-File_claim_with_Court-Claim_received\"},\"score\":0.35791248}]}]}"
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "addMissingNamespaces": true,
+>   "query": "SELECT DISTINCT ?s ?p ?o WHERE {\n    ?s ?p ?o .\n    FILTER(isLiteral(?o))\n    FILTER(LCASE(STR(?o)) = \"settlement agreement\")\n  }"
+> }
+> ```
+>
+> ```text
+> "?s\t?p\t?o"
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "SELECT DISTINCT ?s ?p ?o WHERE {\n    ?s ?p ?o .\n    FILTER(\n      CONTAINS(LCASE(STR(?s)), \"settlement_agreement\") ||\n      (isLiteral(?o) && CONTAINS(LCASE(STR(?o)), \"settlement agreement\"))\n    )\n  } LIMIT 100"
+> }
+> ```
+>
+> ```text
+> "?s\t?p\t?o"
+> ```
+>
+> </details>
+</details>
+
+No

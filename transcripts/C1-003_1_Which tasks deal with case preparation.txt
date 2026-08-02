@@ -1,0 +1,104 @@
+# Find case preparation tasks
+
+> Which tasks deal with case preparation?
+
+> Worked for 52s
+
+<details><summary>2 previous messages</summary>
+
+> I’m searching the `bpmn_judicial` process repository for tasks specifically associated with case preparation.
+>
+> <details><summary>Called 5 tools</summary>
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "Which BPMN tasks deal with case preparation? Return exact task identifiers, labels, and types, including tasks whose purpose or activity concerns preparing a case."
+>     }
+>   ],
+>   "repositoryId": "bpmn_judicial"
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"Which BPMN tasks deal with case preparation? Return exact task identifiers, labels, and types, including tasks whose purpose or activity concerns preparing a case.\",\"results\":[{\"id\":\"http://www.omilab.org#Task_BPMN-59102-Prepare_case_for_hearing_0\",\"text\":\"Task_BPMN-59102-Prepare_case_for_hearing: - is named Prepare case for hearing. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Gabriella Hayes. - is carried out by responsible Andrew Marshall. - is inside Court. - has execution time 00:000:02:00:00. - has cost 110. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59102-Prepare_case_for_hearing\"},\"score\":0.666776},{\"id\":\"http://www.omilab.org#Data_Association_BPMN-48772-Investigate_case-Case_file_0\",\"text\":\"Data_Association_BPMN-48772-Investigate_case-Case_file: - is a r_Data_Association_BPMN. - has source Investigate case. - has target Case file.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Association_BPMN-48772-Investigate_case-Case_file\"},\"score\":0.66340214},{\"id\":\"http://www.omilab.org#Sub-Process_BPMN-48720-Prepare_preliminary_case_file_0\",\"text\":\"Sub-Process_BPMN-48720-Prepare_preliminary_case_file: - is named Prepare preliminary case file. - is a o_Sub-Process_BPMN. - is described in Main judicial process. - references subprocess Prepare preliminary case file. - is inside Law firm. - has subprocess type Ad-Hoc. - has loop type Not specified. - has sequential execution No. - is for compensation No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Sub-Process_BPMN-48720-Prepare_preliminary_case_file\"},\"score\":0.61046314},{\"id\":\"http://www.omilab.org#Task_BPMN-59171-Archive_adjudicated_case_file_0\",\"text\":\"Task_BPMN-59171-Archive_adjudicated_case_file: - is named Archive adjudicated case file. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Michael Turner. - is inside Law firm. - has execution time 00:000:00:45:00. - has cost 17. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59171-Archive_adjudicated_case_file\"},\"score\":0.5349183},{\"id\":\"http://www.omilab.org#Task_BPMN-58958-Close_case_file_0\",\"text\":\"Task_BPMN-58958-Close_case_file: - is named Close case file. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Hanna Hastings. - is inside Court. - has execution time 00:000:00:30:00. - has cost 13. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-58958-Close_case_file\"},\"score\":0.50359744},{\"id\":\"http://www.omilab.org#Task_BPMN-49218-Assess_case_viability_0\",\"text\":\"Task_BPMN-49218-Assess_case_viability: - is named Assess case viability. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Rachel Bennett. - is carried out by responsible Victor Hayes. - is inside Law firm. - has execution time 00:000:01:00:00. - has cost 168. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49218-Assess_case_viability\"},\"score\":0.4972484},{\"id\":\"http://www.omilab.org#Task_BPMN-58861-Notify_case_representation_acceptance_0\",\"text\":\"Task_BPMN-58861-Notify_case_representation_acceptance: - is named Notify case representation acceptance. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Anna Collins. - is inside Law firm. - has execution time 00:000:00:15:00. - has cost 6. - has task type Send. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-58861-Notify_case_representation_acceptance\"},\"score\":0.47732574},{\"id\":\"http://www.omilab.org#Task_BPMN-48801-Prepare_list_of_potential_witnesses_0\",\"text\":\"Task_BPMN-48801-Prepare_list_of_potential_witnesses: - is named Prepare list of potential witnesses. - is a o_Task_BPMN. - is described in Prepare preliminary case file. - is carried out by responsible Samuel Grant. - is carried out by responsible Rachel Bennett. - has execution time 00:000:01:30:00. - has cost 97.5. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-48801-Prepare_list_of_potential_witnesses\"},\"score\":0.4706738},{\"id\":\"http://www.omilab.org#Sub-Process_BPMN-48678-Investigate_case_0\",\"text\":\"Sub-Process_BPMN-48678-Investigate_case: - is named Investigate case. - is a o_Sub-Process_BPMN. - is described in Main judicial process. - references subprocess Investigate case. - is inside Law firm. - has subprocess type Ad-Hoc. - has loop type Not specified. - has sequential execution No. - is for compensation No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Sub-Process_BPMN-48678-Investigate_case\"},\"score\":0.4563318},{\"id\":\"http://www.omilab.org#Task_BPMN-49010-Notify_case_representation_refusal_0\",\"text\":\"Task_BPMN-49010-Notify_case_representation_refusal: - is named Notify case representation refusal. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Anna Collins. - is inside Law firm. - has execution time 00:000:00:15:00. - has cost 6. - has task type Send. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49010-Notify_case_representation_refusal\"},\"score\":0.44946206}]}]}"
+> ```
+>
+> MCP tool call
+>
+> graphdb.fts_search
+>
+> ```json
+> {
+>   "query": "\"Prepare preliminary case file\"",
+>   "repositoryId": "bpmn_judicial"
+> }
+> ```
+>
+> Error: tool call error: tool call failed for `graphdb/fts_search`
+>
+> Caused by:
+>     Mcp error: -32603: text must not be null("IllegalArgumentException: text must not be null")
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "List every BPMN task that is described in the subprocess named Prepare preliminary case file. Return each exact task identifier, task label, and BPMN element type. Do not return subprocesses or tasks from other processes."
+>     }
+>   ],
+>   "repositoryId": "bpmn_judicial"
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"List every BPMN task that is described in the subprocess named Prepare preliminary case file. Return each exact task identifier, task label, and BPMN element type. Do not return subprocesses or tasks from other processes.\",\"results\":[{\"id\":\"http://www.omilab.org#Sub-Process_BPMN-48720-Prepare_preliminary_case_file_0\",\"text\":\"Sub-Process_BPMN-48720-Prepare_preliminary_case_file: - is named Prepare preliminary case file. - is a o_Sub-Process_BPMN. - is described in Main judicial process. - references subprocess Prepare preliminary case file. - is inside Law firm. - has subprocess type Ad-Hoc. - has loop type Not specified. - has sequential execution No. - is for compensation No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Sub-Process_BPMN-48720-Prepare_preliminary_case_file\"},\"score\":1.0},{\"id\":\"http://www.omilab.org#Task_BPMN-48801-Prepare_list_of_potential_witnesses_0\",\"text\":\"Task_BPMN-48801-Prepare_list_of_potential_witnesses: - is named Prepare list of potential witnesses. - is a o_Task_BPMN. - is described in Prepare preliminary case file. - is carried out by responsible Samuel Grant. - is carried out by responsible Rachel Bennett. - has execution time 00:000:01:30:00. - has cost 97.5. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-48801-Prepare_list_of_potential_witnesses\"},\"score\":0.7460139},{\"id\":\"http://www.omilab.org#Task_BPMN-59102-Prepare_case_for_hearing_0\",\"text\":\"Task_BPMN-59102-Prepare_case_for_hearing: - is named Prepare case for hearing. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Gabriella Hayes. - is carried out by responsible Andrew Marshall. - is inside Court. - has execution time 00:000:02:00:00. - has cost 110. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59102-Prepare_case_for_hearing\"},\"score\":0.57561934},{\"id\":\"http://www.omilab.org#Task_BPMN-59171-Archive_adjudicated_case_file_0\",\"text\":\"Task_BPMN-59171-Archive_adjudicated_case_file: - is named Archive adjudicated case file. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Michael Turner. - is inside Law firm. - has execution time 00:000:00:45:00. - has cost 17. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59171-Archive_adjudicated_case_file\"},\"score\":0.49327153},{\"id\":\"http://www.omilab.org#Task_BPMN-59191-Identify_unanswered_interview_invitations_0\",\"text\":\"Task_BPMN-59191-Identify_unanswered_interview_invitations: - is named Identify unanswered interview invitations. - is a o_Task_BPMN. - is described in Prepare preliminary case file. - is carried out by responsible Alexander Moore. - has execution time 00:000:00:20:00. - has cost 9.33. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59191-Identify_unanswered_interview_invitations\"},\"score\":0.49172288},{\"id\":\"http://www.omilab.org#Data_Object_BPMN-51106-Potential_witnesses_0\",\"text\":\"Data_Object_BPMN-51106-Potential_witnesses: - is named Potential witnesses. - is a o_Data_Object_BPMN. - is described in Prepare preliminary case file. - has data type Data Object.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Data_Object_BPMN-51106-Potential_witnesses\"},\"score\":0.485953},{\"id\":\"http://www.omilab.org#Task_BPMN-58958-Close_case_file_0\",\"text\":\"Task_BPMN-58958-Close_case_file: - is named Close case file. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Hanna Hastings. - is inside Court. - has execution time 00:000:00:30:00. - has cost 13. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-58958-Close_case_file\"},\"score\":0.46392614},{\"id\":\"http://www.omilab.org#Task_BPMN-59004-Prepare_claim_and_supporting_documents_0\",\"text\":\"Task_BPMN-59004-Prepare_claim_and_supporting_documents: - is named Prepare claim and supporting documents. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Alexander Moore. - is carried out by responsible Rachel Bennett. - is inside Law firm. - has execution time 00:000:06:00:00. - has cost 431. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59004-Prepare_claim_and_supporting_documents\"},\"score\":0.4630062},{\"id\":\"http://www.omilab.org#Subsequent-48784-Prepare_preliminary_case_file-Follow-up_required?_0\",\"text\":\"Subsequent-48784-Prepare_preliminary_case_file-Follow-up_required?: - is a r_Subsequent. - has source Prepare preliminary case file. - has target Follow-up required?. - is interrupting no. - is default process path No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Subsequent-48784-Prepare_preliminary_case_file-Follow-up_required?\"},\"score\":0.4593674},{\"id\":\"http://www.omilab.org#Sub-Process_BPMN-48678-Investigate_case_0\",\"text\":\"Sub-Process_BPMN-48678-Investigate_case: - is named Investigate case. - is a o_Sub-Process_BPMN. - is described in Main judicial process. - references subprocess Investigate case. - is inside Law firm. - has subprocess type Ad-Hoc. - has loop type Not specified. - has sequential execution No. - is for compensation No.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Sub-Process_BPMN-48678-Investigate_case\"},\"score\":0.45892602}]}]}"
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "addMissingNamespaces": true,
+>   "query": "SELECT ?p ?o WHERE { <http://www.omilab.org#Task_BPMN-48801-Prepare_list_of_potential_witnesses> ?p ?o }",
+>   "repositoryId": "bpmn_judicial"
+> }
+> ```
+>
+> ```text
+> "?p\t?o\n<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://www.w3.org/2000/01/rdf-schema#Resource>\n<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://www.w3.org/2002/07/owl#Thing>\n<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\t<http://bee-up.omilab.org/rdf/1_7#o_Task_BPMN>\n<http://www.w3.org/2002/07/owl#sameAs>\t<http://www.omilab.org#Task_BPMN-48801-Prepare_list_of_potential_witnesses>\n<http://www.w3.org/2000/01/rdf-schema#label>\t\"Prepare list of potential witnesses\"\n<http://www.comvantage.eu/mm#a_Name>\t\"Prepare list of potential witnesses\"\n<http://www.comvantage.eu/mm#described_in>\t<http://www.omilab.org#Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file>\n<http://bee-up.omilab.org/rdf/1_7#a_Costs>\t\"97.5\"\n<http://bee-up.omilab.org/rdf/1_7#a_Execution_interruptable>\t\"yes\"\n<http://bee-up.omilab.org/rdf/1_7#a_Execution_time>\t\"00:000:01:30:00\"\n<http://bee-up.omilab.org/rdf/1_7#a_For_compensation>\t\"No\"\n<http://bee-up.omilab.org/rdf/1_7#a_Loop_type>\t\"Not specified\"\n<http://bee-up.omilab.org/rdf/1_7#a_Sequential_execution>\t\"No\"\n<http://bee-up.omilab.org/rdf/1_7#a_Task_type>\t\"User\"\n<http://bee-up.omilab.org/rdf/1_7#r_Responsible>\t<http://www.omilab.org#Performer-49665-Samuel_Grant>\n<http://bee-up.omilab.org/rdf/1_7#r_Responsible>\t<http://www.omilab.org#Performer-49636-Rachel_Bennett>\n<http://bee-up.omilab.org/rdf/1_7#a_Name>\t\"Prepare list of potential witnesses\""
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "addMissingNamespaces": false,
+>   "query": "SELECT DISTINCT ?task ?label ?type WHERE {\n  ?task <http://www.comvantage.eu/mm#described_in> <http://www.omilab.org#Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file> ;\n        a ?type .\n  FILTER(?type = <http://bee-up.omilab.org/rdf/1_7#o_Task_BPMN>)\n  OPTIONAL { ?task <http://www.w3.org/2000/01/rdf-schema#label> ?label }\n}\nORDER BY ?task",
+>   "repositoryId": "bpmn_judicial"
+> }
+> ```
+>
+> ```text
+> "?task\t?label\t?type\n<http://www.omilab.org#Task_BPMN-48798-Assign_investigation_team>\t\"Assign investigation team\"\t<http://bee-up.omilab.org/rdf/1_7#o_Task_BPMN>\n<http://www.omilab.org#Task_BPMN-48801-Prepare_list_of_potential_witnesses>\t\"Prepare list of potential witnesses\"\t<http://bee-up.omilab.org/rdf/1_7#o_Task_BPMN>\n<http://www.omilab.org#Task_BPMN-48804-Send_interview_request>\t\"Send interview request\"\t<http://bee-up.omilab.org/rdf/1_7#o_Task_BPMN>\n<http://www.omilab.org#Task_BPMN-59191-Identify_unanswered_interview_invitations>\t\"Identify unanswered interview invitations\"\t<http://bee-up.omilab.org/rdf/1_7#o_Task_BPMN>"
+> ```
+>
+> </details>
+</details>
+
+{"answer_type":"list","status":"ok","results":[{"identifier":"http://www.omilab.org#Task_BPMN-48798-Assign_investigation_team","label":"Assign investigation team","element_type":"task_bpmn","rank":null,"attributes":[],"related_elements":[]},{"identifier":"http://www.omilab.org#Task_BPMN-48801-Prepare_list_of_potential_witnesses","label":"Prepare list of potential witnesses","element_type":"task_bpmn","rank":null,"attributes":[],"related_elements":[]},{"identifier":"http://www.omilab.org#Task_BPMN-48804-Send_interview_request","label":"Send interview request","element_type":"task_bpmn","rank":null,"attributes":[],"related_elements":[]},{"identifier":"http://www.omilab.org#Task_BPMN-59191-Identify_unanswered_interview_invitations","label":"Identify unanswered interview invitations","element_type":"task_bpmn","rank":null,"attributes":[],"related_elements":[]}]}

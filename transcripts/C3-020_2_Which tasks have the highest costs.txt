@@ -1,0 +1,66 @@
+# Find highest-cost tasks
+
+> Which tasks have the highest costs?
+
+> Worked for 57s
+
+<details><summary>2 previous messages</summary>
+
+> I’m querying the specified BPMN repository to identify and rank task costs.
+>
+> <details><summary>Called 3 tools</summary>
+>
+> MCP tool call
+>
+> graphdb.retrieval_search
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "connectorInstance": "bpmnprocess",
+>   "queries": [
+>     {
+>       "query": "Which tasks have the highest costs? Include task identifiers, task labels, costs, and units. Rank all tied highest-cost tasks."
+>     }
+>   ]
+> }
+> ```
+>
+> ```text
+> "{\"results\":[{\"query\":\"Which tasks have the highest costs? Include task identifiers, task labels, costs, and units. Rank all tied highest-cost tasks.\",\"results\":[{\"id\":\"http://www.omilab.org#Task_BPMN-58916-Schedule_interview_0\",\"text\":\"Task_BPMN-58916-Schedule_interview: - is named Schedule interview. - is a o_Task_BPMN. - has execution time 00:000:00:00:00. - has cost 7. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-58916-Schedule_interview\"},\"score\":0.88087666},{\"id\":\"http://www.omilab.org#Task_BPMN-58946-Issue_judicial_verdict_0\",\"text\":\"Task_BPMN-58946-Issue_judicial_verdict: - is named Issue judicial verdict. - is a o_Task_BPMN. - is inside Court. - has execution time 00:000:01:00:00. - has cost 60. - has task type Business rule. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-58946-Issue_judicial_verdict\"},\"score\":0.64857316},{\"id\":\"http://www.omilab.org#Task_BPMN-49342-Identify_required_documents_and_records_0\",\"text\":\"Task_BPMN-49342-Identify_required_documents_and_records: - is named Identify required documents and records. - is a o_Task_BPMN. - is described in Collect documents and records. - is carried out by responsible Samuel Grant. - is carried out by responsible Rachel Bennett. - has execution time 00:000:01:30:00. - has cost 135. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49342-Identify_required_documents_and_records\"},\"score\":0.59626293},{\"id\":\"http://www.omilab.org#Task_BPMN-49395-Review_collected_documents_and_records_0\",\"text\":\"Task_BPMN-49395-Review_collected_documents_and_records: - is named Review collected documents and records. - is a o_Task_BPMN. - is described in Collect documents and records. - is carried out by responsible Samuel Grant. - is carried out by responsible Rachel Bennett. - has execution time 00:000:03:00:00. - has cost 232.5. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49395-Review_collected_documents_and_records\"},\"score\":0.5887114},{\"id\":\"http://www.omilab.org#Task_BPMN-49346-Request_documents_0\",\"text\":\"Task_BPMN-49346-Request_documents: - is named Request documents. - is a o_Task_BPMN. - is described in Collect documents and records. - is carried out by responsible Marinette Cheng. - has execution time 00:000:00:30:00. - has cost 14. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49346-Request_documents\"},\"score\":0.5830762},{\"id\":\"http://www.omilab.org#Task_BPMN-59035-Schedule_hearing_0\",\"text\":\"Task_BPMN-59035-Schedule_hearing: - is named Schedule hearing. - is a o_Task_BPMN. - is described in Main judicial process. - is carried out by responsible Paul Mercer. - is inside Court. - has execution time 00:000:00:20:00. - has cost 8. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-59035-Schedule_hearing\"},\"score\":0.57660615},{\"id\":\"http://www.omilab.org#Task_BPMN-51136-Flag_contradictions_0\",\"text\":\"Task_BPMN-51136-Flag_contradictions: - is named Flag contradictions. - is a o_Task_BPMN. - is described in Collect and analyze statements. - is carried out by responsible Samuel Grant. - is carried out by responsible Rachel Bennett. - has execution time 00:000:01:00:00. - has cost 78. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-51136-Flag_contradictions\"},\"score\":0.57372975},{\"id\":\"http://www.omilab.org#Task_BPMN-49314-Document_observations_0\",\"text\":\"Task_BPMN-49314-Document_observations: - is named Document observations. - is a o_Task_BPMN. - is described in Conduct on-site investigation. - is carried out by responsible Samuel Grant. - is carried out by responsible Bianca Hayes. - has execution time 00:000:01:30:00. - has cost 80. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-49314-Document_observations\"},\"score\":0.5443395},{\"id\":\"http://www.omilab.org#Task_BPMN-51133-Prepare_statement_analysis_notes_0\",\"text\":\"Task_BPMN-51133-Prepare_statement_analysis_notes: - is named Prepare statement analysis notes. - is a o_Task_BPMN. - is described in Collect and analyze statements. - is carried out by responsible Samuel Grant. - is carried out by responsible Rachel Bennett. - has execution time 00:000:02:00:00. - has cost 155. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-51133-Prepare_statement_analysis_notes\"},\"score\":0.5396509},{\"id\":\"http://www.omilab.org#Task_BPMN-51130-Confirm_consistency_0\",\"text\":\"Task_BPMN-51130-Confirm_consistency: - is named Confirm consistency. - is a o_Task_BPMN. - is described in Collect and analyze statements. - is carried out by responsible Rachel Bennett. - is carried out by responsible Bianca Hayes. - has execution time 00:000:00:30:00. - has cost 40. - has task type User. - has loop type Not specified. - has sequential execution No. - is for compensation No. - has interruptible execution yes.\",\"metadata\":{,\"document_id\":\"http://www.omilab.org#Task_BPMN-51130-Confirm_consistency\"},\"score\":0.52842766}]}]}"
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "DESCRIBE <http://www.omilab.org#Task_BPMN-49395-Review_collected_documents_and_records>"
+> }
+> ```
+>
+> ```text
+> "@prefix : <http://www.omilab.org#> .\r\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\r\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\r\n@prefix mm: <http://bee-up.omilab.org/rdf/1_7#> .\r\n@prefix cv: <http://www.comvantage.eu/mm#> .\r\n\n:Task_BPMN-49395-Review_collected_documents_and_records a rdfs:Resource, owl:Thing,\r\n    mm:o_Task_BPMN;\r\n  owl:sameAs :Task_BPMN-49395-Review_collected_documents_and_records;\r\n  rdfs:label \"Review collected documents and records\";\r\n  cv:a_Name \"Review collected documents and records\";\r\n  cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records;\r\n  mm:a_Costs \"232.5\";\r\n  mm:a_Execution_interruptable \"yes\";\r\n  mm:a_Execution_time \"00:000:03:00:00\";\r\n  mm:a_For_compensation \"No\";\r\n  mm:a_Loop_type \"Not specified\";\r\n  mm:a_Sequential_execution \"No\";\r\n  mm:a_Task_type \"User\";\r\n  mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49636-Rachel_Bennett;\r\n  mm:a_Name \"Review collected documents and records\" .\r\n\r\n<http://www.omilab.org#Subsequent-49398-Review_collected_documents_and_records-Evidence_complete?>\r\n  cv:from :Task_BPMN-49395-Review_collected_documents_and_records .\r\n\r\n:Subsequent-49375--Review_collected_documents_and_records cv:to :Task_BPMN-49395-Review_collected_documents_and_records ."
+> ```
+>
+> MCP tool call
+>
+> graphdb.sparql_query
+>
+> ```json
+> {
+>   "repositoryId": "bpmn_judicial",
+>   "query": "\nPREFIX mm: <http://bee-up.omilab.org/rdf/1_7#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nSELECT ?task ?label ?cost WHERE {\n  ?task a mm:o_Task_BPMN ;\n        mm:a_Costs ?rawCost .\n  OPTIONAL { ?task rdfs:label ?label }\n  BIND(xsd:decimal(?rawCost) AS ?cost)\n  {\n    SELECT (MAX(xsd:decimal(?c)) AS ?maxCost) WHERE {\n      ?t a mm:o_Task_BPMN ; mm:a_Costs ?c .\n    }\n  }\n  FILTER(?cost = ?maxCost)\n}\nORDER BY ?task"
+> }
+> ```
+>
+> ```text
+> "?task\t?label\t?cost\n<http://www.omilab.org#Task_BPMN-59004-Prepare_claim_and_supporting_documents>\t\"Prepare claim and supporting documents\"\t431.0"
+> ```
+>
+> </details>
+</details>
+
+{"answer_type":"ranking","status":"ok","results":[{"identifier":"http://www.omilab.org#Task_BPMN-59004-Prepare_claim_and_supporting_documents","label":"Prepare claim and supporting documents","element_type":"task_bpmn","rank":1,"attributes":[{"name":"cost","value":431.0,"unit":null}],"related_elements":[]}]}
