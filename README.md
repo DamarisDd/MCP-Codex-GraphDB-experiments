@@ -1,1 +1,1 @@
-# MCP-Codex-GraphDB-querying
+# MCP-Codex-GraphDB-experiments
