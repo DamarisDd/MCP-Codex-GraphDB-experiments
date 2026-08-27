@@ -824,6 +824,7 @@ web_search = "disabled"
 sandbox = "elevated"
 
 [features]
+memories = false
 multi_agent = false
 
 [mcp_servers.graphdb]
