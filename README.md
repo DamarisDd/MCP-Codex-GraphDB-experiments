@@ -741,10 +741,7 @@ SELECT ?documentID ?score {
 }
 ```
 
-You can test it on the same **Explore → Similarity** page. Select `text_index`
-from the existing indexes, set **Search type** to **Term**, set **Result type**
-to **Document**, and try a short phrase such as `task that archives a case`.
-GraphDB should return matching BPMN identifiers together with similarity scores.
+You can test it on the same **Explore → Similarity** page.
 
 ### 9. Create the `bpmnprocess` retrieval connector
 
