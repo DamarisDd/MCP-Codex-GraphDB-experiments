@@ -1,0 +1,63 @@
+{"query_id":"C1-001","question":"What processes and subprocesses do we have?"}
+{"query_id":"C1-002","question":"What tasks are involved in each process or subprocess?"}
+{"query_id":"C1-003","question":"Which tasks deal with case preparation?"}
+{"query_id":"C1-004","question":"Which tasks deal with case investigation?"}
+{"query_id":"C1-005","question":"Which tasks deal with case investigation, except for those dealing with collecting documents and records?"}
+{"query_id":"C1-006","question":"What decisions occur in each process or subprocess?"}
+{"query_id":"C1-007","question":"What documents are involved in each process or subprocess?"}
+{"query_id":"C1-008","question":"How is each process or subprocess initiated?"}
+{"query_id":"C1-009","question":"How can each process or subprocess conclude?"}
+{"query_id":"C1-010","question":"Does the document \"Case file\" exist?"}
+{"query_id":"C1-011","question":"Does the document \"Settlement agreement\" exist?"}
+{"query_id":"C1-012","question":"Is the task \"Analyze document and record\" part of an ad-hoc process?"}
+{"query_id":"C1-013","question":"Is the task dealing with preparing the evidence set part of an ad-hoc (sub)process?"}
+{"query_id":"C1-014","question":"Do the tasks \"Collect physical evidence\" and \"Document observations\" occur within the same subprocess?"}
+{"query_id":"C2-001","question":"What must be completed right before the task \"Archive non-adjudicated matter\" can begin?"}
+{"query_id":"C2-002","question":"Give me the possible outcomes of the decision regarding a required follow-up and the conditions leading to those outcomes."}
+{"query_id":"C2-003","question":"What are all the steps that occur between registering a claim and adjudicating the case?"}
+{"query_id":"C2-004","question":"What are all the steps that occur between the beginning of a case investigation and preparing the claim and the supporting documents?"}
+{"query_id":"C2-005","question":"Which routes allow the task of assessing the case's viability to lead to archiving the non-adjudicated matter without notifying the refusal to represent the case?"}
+{"query_id":"C2-006","question":"Which other tasks can be performed in parallel with interviewing the parties?"}
+{"query_id":"C2-007","question":"Does reviewing the collected documents occur before collecting the missing items?"}
+{"query_id":"C2-008","question":"Does notifying the client about the Court's rejection occur before having the procedural rejection issued?"}
+{"query_id":"C2-009","question":"Is every case accepted for representation guaranteed to be adjudicated?"}
+{"query_id":"C3-001","question":"Who or what is responsible for registering the claim?"}
+{"query_id":"C3-002","question":"Who are responsible for the tasks related to preparing the preliminary case file?"}
+{"query_id":"C3-003","question":"Which tasks are assigned to Samuel Grant?"}
+{"query_id":"C3-004","question":"Which tasks are assigned to Marinette and which to Alexander?"}
+{"query_id":"C3-005","question":"Who usually communicates with the clients?"}
+{"query_id":"C3-006","question":"Which organizational units are involved in investigating a case?"}
+{"query_id":"C3-007","question":"Which responsible individuals are involved within the Court's process?"}
+{"query_id":"C3-008","question":"Which tasks require more than one responsible?"}
+{"query_id":"C3-009","question":"Which tasks require collaboration between different roles within the law firm?"}
+{"query_id":"C3-010","question":"How many tasks are assigned to each responsible from the law firm's process?"}
+{"query_id":"C3-011","question":"Who has the largest number of assigned tasks?"}
+{"query_id":"C3-012","question":"Who has the fewest assigned tasks in the law firm's process? What about the Court's process?"}
+{"query_id":"C3-013","question":"How long is preparing the claim expected to take?"}
+{"query_id":"C3-014","question":"How long is conducting the on-site investigation expected to take?"}
+{"query_id":"C3-015","question":"Which tasks are expected to take longer than an hour?"}
+{"query_id":"C3-016","question":"Which tasks have the longest execution times?"}
+{"query_id":"C3-017","question":"Which tasks have no specified execution time?"}
+{"query_id":"C3-018","question":"How much does representing the client cost?"}
+{"query_id":"C3-019","question":"How much would resolving a pending interview invitation cost for each outcome?"}
+{"query_id":"C3-020","question":"Which tasks have the highest costs?"}
+{"query_id":"C3-021","question":"Which tasks have no specified costs?"}
+{"query_id":"C3-022","question":"Of the available ways to complete the process, which ones, from start to finish, are expected to cost the least and what are each of their costs?"}
+{"query_id":"C3-023","question":"Of the available ways to complete the process, which ones, from start to finish, have the longest execution time and what are each of their durations?"}
+{"query_id":"C4-001","question":"What produces the Case file document?"}
+{"query_id":"C4-002","question":"What uses the Case file document?"}
+{"query_id":"C4-003","question":"What documents are produced by identifying unanswered invitations?"}
+{"query_id":"C4-004","question":"What documents are needed to resolve the pending invitations?"}
+{"query_id":"C4-005","question":"What documents are needed during the case's investigation?"}
+{"query_id":"C4-006","question":"Which documents must have been produced until the Court registers the claim?"}
+{"query_id":"C4-007","question":"Which documents are used or produced between preparing the witnesses list and closing the matter?"}
+{"query_id":"C4-008","question":"Which documents are produced, but never used?"}
+{"query_id":"C5-001","question":"Which participants communicate with one another, what does each of them send and what do they receive received?"}
+{"query_id":"C5-002","question":"What information must the client provide to the law firm?"}
+{"query_id":"C5-003","question":"What information does the law firm receive from the Court?"}
+{"query_id":"C5-004","question":"At what points in the process does the law firm interact with the client?"}
+{"query_id":"C5-005","question":"What are the messages sent by the Court to the law firm after the hearing is scheduled?"}
+{"query_id":"C6-001","question":"Where does the process repeat the work?"}
+{"query_id":"C6-002","question":"Where in the process can work be sent back to an earlier step?"}
+{"query_id":"C6-003","question":"Which process outcomes from the main process depend on awaiting for the client's instruction?"}
+{"query_id":"C6-004","question":"Where does the process lack a fallback if another party does not respond?"}

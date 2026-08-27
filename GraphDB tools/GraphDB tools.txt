@@ -1,0 +1,243 @@
+  "tools": [
+    {
+      "name": "similarity_search",
+      "description": "    Performs semantic similarity search to find conceptually related content using vector embeddings.\n    Best for conceptual queries like \"who is interested in sports\", \"employees with leadership experience\",\n    or \"people working on similar projects\".\n    Returns entities ranked by semantic similarity rather than exact keyword matches.\n    **Use this when you want to find content that means something similar, even if the exact words don't match.\n    For exact keyword or phrase matching, use fts_search instead.**\n    Always call get_similarity_options first to discover available connectors, indexes, and vector fields.\n",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Natural language description of what you're looking for. Write conceptually - describe the meaning, not exact keywords.\nGood examples: 'interested in sports', 'has management experience', 'works with data analysis', 'enjoys creative hobbies'\nAvoid: exact names, specific keywords, boolean operators\n"
+          },
+          "similarityIndex": {
+            "type": "string",
+            "description": "Name of the similarity index or connector instance to use. Get this from get_similarity_options output.\n"
+          },
+          "resultThreshold": {
+            "type": "number",
+            "description": "Minimum similarity score 0-1 to filter results (optional).\n- 0.6 → Broader, more inclusive results\n- 0.7 → Balanced relevance (good default)\n- 0.8+ → Only very similar content\n- 0.9+ → Nearly identical content only\nLower values cast a wider net, higher values are more selective.\n"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Maximum number of RDF triples to return (optional).\nDefault is automatically determined based on result relevance.\nStart with default, then specify if you need more/fewer results.\n"
+          },
+          "connectorType": {
+            "type": "string",
+            "description": "The search method to use:\n- 'similarity' → GraphDB's built-in semantic similarity (most common)\n- 'elasticsearch' → External Elasticsearch connector (requires connectorField)\n- 'opensearch' → External OpenSearch connector (requires connectorField)\nUse get_similarity_options to see which types are available.\n"
+          },
+          "connectorField": {
+            "type": "string",
+            "description": "Vector field name in the external index **(required only for 'elasticsearch' and 'opensearch' connector types)**.\nGet available field names from get_similarity_options.\n"
+          },
+          "repositoryId": {
+            "type": "string",
+            "description": "The name of the GraphDB repository to query. This ID should correspond to a registered RDF repository in the MCP server of GraphDB instance."
+          }
+        },
+        "required": [
+          "query",
+          "similarityIndex",
+          "connectorType",
+          "repositoryId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "iri_discovery_search",
+      "description": "Discovery IRIs by full-text search in labels.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "FTS search query"
+          },
+          "repositoryId": {
+            "type": "string",
+            "description": "The name of the GraphDB repository to query. This ID should correspond to a registered RDF repository in the MCP server of GraphDB instance."
+          }
+        },
+        "required": [
+          "query",
+          "repositoryId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "retrieval_search",
+      "description": "Query GraphDB by full-text search and return a textual representation of RDF triples.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "queries": {
+            "type": "string",
+            "description": "Array of queries to be processed"
+          },
+          "connectorInstance": {
+            "type": "string",
+            "description": "The ChatGPT Retrieval Connector instance to use for CtatGPT retrieval queries."
+          },
+          "queryTemplate": {
+            "type": "string",
+            "description": "This template may use a filter with the available metadata fields in your ChatGPT Retrieval Connector instance. The default value contains only the query part and uses no metadata fields. Please consult the documentation for more information."
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Limit the maximum number of text chunks returned by the ChatGPT Retrieval Connector. The default value is automatic and determined at runtime. If not sure, leave the default value."
+          },
+          "repositoryId": {
+            "type": "string",
+            "description": "The name of the GraphDB repository to query. This ID should correspond to a registered RDF repository in the MCP server of GraphDB instance."
+          }
+        },
+        "required": [
+          "queries",
+          "connectorInstance",
+          "queryTemplate",
+          "repositoryId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_similarity_options",
+      "description": "    Discovers available similarity search capabilities in a GraphDB repository.\n    This tool is a prerequisite for using similarity_search - it shows which similarity indexes,\n    connector types, and vector fields are available.\n    Always call this first before performing similarity searches to understand your options and configure the similarity_search parameters correctly.\n",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "repositoryId": {
+            "type": "string",
+            "description": "The name of the GraphDB repository to query. This ID should correspond to a registered RDF repository in the MCP server of GraphDB instance."
+          }
+        },
+        "required": [
+          "repositoryId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "sparql_query",
+      "description": "Execute a SPARQL `SELECT`, `CONSTRUCT`, or `DESCRIBE` query against GraphDB\nand return the results.\n\n# Internal Federation in GraphDB\n\nGraphDB supports federated queries across repositories using the `SERVICE` clause.\nTo query multiple repositories from a specific repository (e.g., from repository `a`)\nwithin the same GraphDB MCP server, use the following pattern:\n\n## Example: From Repository `a`\n\n```sparql\nSELECT * WHERE {\n    ?s ?p ?o .\n    SERVICE <repository:b> {\n        ?s ?p ?o .\n    }\n}\n```\n\nThis is the recommended approach for retrieving related data across repositories managed by the GraphDB MCP Server.\n\n## Best Practices\n\n1. **Query optimization:** Place the most selective patterns and filters inside `SERVICE` blocks to minimize transferred data.\n2. **Error isolation:** Validate queries against each individual repository before combining them in a federated query.\n3. **Performance awareness:** Be mindful of data volume and cardinality when joining results across repositories.\n\nThis method enables robust, scalable cross-repository analytics while preserving the benefits of distributed RDF storage.\n",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "SPARQL query"
+          },
+          "addMissingNamespaces": {
+            "type": "boolean",
+            "description": "Automatically inserts missing namespaces in SPARQL queries"
+          },
+          "repositoryId": {
+            "type": "string",
+            "description": "The name of the GraphDB repository to query. This ID should correspond to a registered RDF repository in the MCP server of GraphDB instance."
+          }
+        },
+        "required": [
+          "query",
+          "repositoryId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "autocomplete_iri_discovery_search",
+      "description": "Discover IRIs by searching their names and getting results in order of relevance leveraging GraphDB's Autocomplete index.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Autocomplete for IRI discovery search query"
+          },
+          "resultClass": {
+            "type": "string",
+            "description": "Filter results by class. Valid values are the exact URI of one class from the ontology."
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Limit the maximum number of IRIs (using autocomplete).The default value is automatic and determined at runtime. If not sure leave the default value"
+          },
+          "repositoryId": {
+            "type": "string",
+            "description": "The name of the GraphDB repository to query. This ID should correspond to a registered RDF repository in the MCP server of GraphDB instance."
+          }
+        },
+        "required": [
+          "query",
+          "repositoryId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "ontology_schema",
+      "description": "List all node types, their attributes and their relationships to other node-types in the GraphDB database.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ontologyGraph": {
+            "type": "string",
+            "description": "The named graph that contains the entire ontology or a subset sufficient to generate useful SPARQL queriesEither this or 'ontologyQuery' must be provided."
+          },
+          "ontologyQuery": {
+            "type": "string",
+            "description": "A SPARQL CONSTRUCT query that returns the entire ontology or a subset sufficient to generate useful SPARQL queriesEither this or 'ontologyGraph' must be provided"
+          },
+          "addMissingNamespaces": {
+            "type": "boolean",
+            "description": "Automatically inserts missing namespaces in SPARQL queries"
+          },
+          "repositoryId": {
+            "type": "string",
+            "description": "The name of the repository from which to extract the ontology. This ID should correspond to a registered RDF repository in the MCP server of GraphDB instance."
+          }
+        },
+        "required": [
+          "repositoryId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_repository_ids",
+      "description": "Provides system information about available repositories in GraphDB MCP Server",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "fts_search",
+      "description": "Query GraphDB by full-text search and return a subgraph of RDF triples.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "FTS search query"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Limit the maximum number of triples returned by Full-text search.The default value is automatic and determined at runtime. If not sure leave the default value"
+          },
+          "repositoryId": {
+            "type": "string",
+            "description": "The name of the GraphDB repository to query. This ID should correspond to a registered RDF repository in the MCP server of GraphDB instance."
+          }
+        },
+        "required": [
+          "query",
+          "repositoryId"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

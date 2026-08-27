@@ -1,0 +1,6340 @@
+{
+  "configuration": {
+    "gold": "gold_answers_all.jsonl",
+    "predictions": "predictions-out\\predictions_all.jsonl",
+    "schema": "schema\\answer_schema.json",
+    "match": "hybrid",
+    "numeric_tolerance": 0.0,
+    "response_mode_policy": "Boolean gold answers are binary; JSON-object gold answers are structured. Question wording is not used for classification.",
+    "structured_scoring_unit": "requested root entities and requested attributes, with normalized path/value handling; related_elements and relation strings ignored",
+    "binary_scoring_unit": "one Yes/No fact per run",
+    "missing_run_policy": "reported but excluded from metrics when --allow-incomplete is used",
+    "principal_metrics": [
+      "macro_precision",
+      "macro_recall",
+      "macro_f1",
+      "exact_answer_accuracy"
+    ]
+  },
+  "prediction_build": {
+    "source": "unified_prediction_file",
+    "source_files": [
+      "predictions-out\\predictions_all.jsonl"
+    ]
+  },
+  "coverage": {
+    "gold_queries": 63,
+    "structured_queries": 55,
+    "binary_queries": 8,
+    "expected_runs_per_query": 3,
+    "expected_predictions": 189,
+    "available_predictions": 189,
+    "coverage_rate": 1.0,
+    "missing_query_runs": [],
+    "unexpected_query_runs": []
+  },
+  "aggregate": {
+    "evaluated_runs": 189,
+    "format_validation": {
+      "valid_predictions": 189,
+      "invalid_predictions": 0,
+      "validity_rate": 1.0
+    },
+    "metrics": {
+      "macro_precision": 0.9269825236491902,
+      "macro_recall": 0.9397296260934523,
+      "macro_f1": 0.9191308434138118,
+      "exact_answer_accuracy": 0.8095238095238095
+    }
+  },
+  "by_response_mode": {
+    "binary": {
+      "evaluated_runs": 24,
+      "format_validation": {
+        "valid_predictions": 24,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.9583333333333334,
+        "macro_recall": 0.9583333333333334,
+        "macro_f1": 0.9583333333333334,
+        "exact_answer_accuracy": 0.9583333333333334
+      }
+    },
+    "structured": {
+      "evaluated_runs": 165,
+      "format_validation": {
+        "valid_predictions": 165,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.9224224058769512,
+        "macro_recall": 0.9370236323131059,
+        "macro_f1": 0.9134286630618813,
+        "exact_answer_accuracy": 0.7878787878787878
+      }
+    }
+  },
+  "by_category": {
+    "C1": {
+      "evaluated_runs": 42,
+      "format_validation": {
+        "valid_predictions": 42,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.9115007215007215,
+        "macro_recall": 0.9198554421768707,
+        "macro_f1": 0.8996731355377401,
+        "exact_answer_accuracy": 0.8333333333333334
+      }
+    },
+    "C2": {
+      "evaluated_runs": 27,
+      "format_validation": {
+        "valid_predictions": 27,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.9444444444444444,
+        "macro_recall": 0.9333333333333333,
+        "macro_f1": 0.9274971941638609,
+        "exact_answer_accuracy": 0.8148148148148148
+      }
+    },
+    "C3": {
+      "evaluated_runs": 69,
+      "format_validation": {
+        "valid_predictions": 69,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.8973429951690821,
+        "macro_recall": 0.9435986100516993,
+        "macro_f1": 0.899812079278277,
+        "exact_answer_accuracy": 0.7246376811594203
+      }
+    },
+    "C4": {
+      "evaluated_runs": 24,
+      "format_validation": {
+        "valid_predictions": 24,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 0.9652777777777778,
+        "macro_f1": 0.9777777777777777,
+        "exact_answer_accuracy": 0.9166666666666666
+      }
+    },
+    "C5": {
+      "evaluated_runs": 15,
+      "format_validation": {
+        "valid_predictions": 15,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.9333333333333333,
+        "macro_recall": 0.9333333333333333,
+        "macro_f1": 0.9333333333333333,
+        "exact_answer_accuracy": 0.9333333333333333
+      }
+    },
+    "C6": {
+      "evaluated_runs": 12,
+      "format_validation": {
+        "valid_predictions": 12,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.9583333333333334,
+        "macro_recall": 0.9583333333333334,
+        "macro_f1": 0.9444444444444445,
+        "exact_answer_accuracy": 0.8333333333333334
+      }
+    }
+  },
+  "by_query": {
+    "C1-001": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C1-002": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C1-003": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C1-004": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 0.6875,
+        "macro_f1": 0.7058823529411765,
+        "exact_answer_accuracy": 0.6666666666666666
+      }
+    },
+    "C1-005": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C1-006": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C1-007": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C1-008": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.45555555555555555,
+        "macro_recall": 0.5238095238095238,
+        "macro_f1": 0.4844489519945909,
+        "exact_answer_accuracy": 0.0
+      }
+    },
+    "C1-009": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.6387878787878788,
+        "macro_recall": 1.0,
+        "macro_f1": 0.7384259259259259,
+        "exact_answer_accuracy": 0.3333333333333333
+      }
+    },
+    "C1-010": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C1-011": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C1-012": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C1-013": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.6666666666666666,
+        "macro_recall": 0.6666666666666666,
+        "macro_f1": 0.6666666666666666,
+        "exact_answer_accuracy": 0.6666666666666666
+      }
+    },
+    "C1-014": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C2-001": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C2-002": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.5555555555555555,
+        "macro_recall": 0.6666666666666666,
+        "macro_f1": 0.6,
+        "exact_answer_accuracy": 0.0
+      }
+    },
+    "C2-003": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C2-004": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.9444444444444445,
+        "macro_recall": 0.7333333333333334,
+        "macro_f1": 0.7474747474747474,
+        "exact_answer_accuracy": 0.3333333333333333
+      }
+    },
+    "C2-005": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C2-006": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C2-007": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C2-008": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C2-009": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-001": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-002": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-003": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-004": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-005": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-006": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-007": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-008": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-009": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 0.5185185185185185,
+        "macro_f1": 0.6231884057971014,
+        "exact_answer_accuracy": 0.3333333333333333
+      }
+    },
+    "C3-010": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.7916666666666666,
+        "macro_recall": 0.7407407407407408,
+        "macro_f1": 0.7647058823529411,
+        "exact_answer_accuracy": 0.3333333333333333
+      }
+    },
+    "C3-011": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.5,
+        "macro_recall": 1.0,
+        "macro_f1": 0.6666666666666666,
+        "exact_answer_accuracy": 0.0
+      }
+    },
+    "C3-012": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.375,
+        "macro_recall": 0.7333333333333334,
+        "macro_f1": 0.4937154348919055,
+        "exact_answer_accuracy": 0.0
+      }
+    },
+    "C3-013": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-014": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-015": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-016": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.5,
+        "macro_recall": 1.0,
+        "macro_f1": 0.6666666666666666,
+        "exact_answer_accuracy": 0.0
+      }
+    },
+    "C3-017": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-018": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-019": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-020": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.5,
+        "macro_recall": 1.0,
+        "macro_f1": 0.6666666666666666,
+        "exact_answer_accuracy": 0.0
+      }
+    },
+    "C3-021": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-022": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C3-023": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.9722222222222223,
+        "macro_recall": 0.7101754385964912,
+        "macro_f1": 0.814068100358423,
+        "exact_answer_accuracy": 0.0
+      }
+    },
+    "C4-001": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C4-002": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C4-003": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C4-004": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C4-005": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 0.8333333333333334,
+        "macro_f1": 0.8888888888888888,
+        "exact_answer_accuracy": 0.6666666666666666
+      }
+    },
+    "C4-006": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C4-007": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 0.8888888888888888,
+        "macro_f1": 0.9333333333333332,
+        "exact_answer_accuracy": 0.6666666666666666
+      }
+    },
+    "C4-008": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C5-001": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C5-002": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C5-003": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C5-004": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.6666666666666666,
+        "macro_recall": 0.6666666666666666,
+        "macro_f1": 0.6666666666666666,
+        "exact_answer_accuracy": 0.6666666666666666
+      }
+    },
+    "C5-005": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C6-001": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.8333333333333334,
+        "macro_recall": 1.0,
+        "macro_f1": 0.8888888888888888,
+        "exact_answer_accuracy": 0.6666666666666666
+      }
+    },
+    "C6-002": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    },
+    "C6-003": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 0.8333333333333334,
+        "macro_f1": 0.8888888888888888,
+        "exact_answer_accuracy": 0.6666666666666666
+      }
+    },
+    "C6-004": {
+      "evaluated_runs": 3,
+      "format_validation": {
+        "valid_predictions": 3,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0,
+        "exact_answer_accuracy": 1.0
+      }
+    }
+  },
+  "by_run": {
+    "1": {
+      "evaluated_runs": 63,
+      "format_validation": {
+        "valid_predictions": 63,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.917473544973545,
+        "macro_recall": 0.9406479160865125,
+        "macro_f1": 0.9163794648686572,
+        "exact_answer_accuracy": 0.7936507936507936
+      }
+    },
+    "2": {
+      "evaluated_runs": 63,
+      "format_validation": {
+        "valid_predictions": 63,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.9295454545454546,
+        "macro_recall": 0.9492898913951545,
+        "macro_f1": 0.9286106647990222,
+        "exact_answer_accuracy": 0.8412698412698413
+      }
+    },
+    "3": {
+      "evaluated_runs": 63,
+      "format_validation": {
+        "valid_predictions": 63,
+        "invalid_predictions": 0,
+        "validity_rate": 1.0
+      },
+      "metrics": {
+        "macro_precision": 0.9339285714285714,
+        "macro_recall": 0.9292510707986898,
+        "macro_f1": 0.912402400573756,
+        "exact_answer_accuracy": 0.7936507936507936
+      }
+    }
+  },
+  "per_run": [
+    {
+      "query_id": "C1-001",
+      "category": "C1",
+      "run_id": 1,
+      "question": "What processes and subprocesses do we have?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 7,
+          "predicted": 7,
+          "tp": 7,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-001",
+      "category": "C1",
+      "run_id": 2,
+      "question": "What processes and subprocesses do we have?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 7,
+          "predicted": 7,
+          "tp": 7,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-001",
+      "category": "C1",
+      "run_id": 3,
+      "question": "What processes and subprocesses do we have?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 7,
+          "predicted": 7,
+          "tp": 7,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-002",
+      "category": "C1",
+      "run_id": 1,
+      "question": "What tasks are involved in each process or subprocess?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 52,
+          "predicted": 52,
+          "tp": 52,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-002",
+      "category": "C1",
+      "run_id": 2,
+      "question": "What tasks are involved in each process or subprocess?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 52,
+          "predicted": 52,
+          "tp": 52,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-002",
+      "category": "C1",
+      "run_id": 3,
+      "question": "What tasks are involved in each process or subprocess?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 52,
+          "predicted": 52,
+          "tp": 52,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-003",
+      "category": "C1",
+      "run_id": 1,
+      "question": "Which tasks deal with case preparation?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 4,
+          "predicted": 4,
+          "tp": 4,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-003",
+      "category": "C1",
+      "run_id": 2,
+      "question": "Which tasks deal with case preparation?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 4,
+          "predicted": 4,
+          "tp": 4,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-003",
+      "category": "C1",
+      "run_id": 3,
+      "question": "Which tasks deal with case preparation?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 4,
+          "predicted": 4,
+          "tp": 4,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-004",
+      "category": "C1",
+      "run_id": 1,
+      "question": "Which tasks deal with case investigation?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 16,
+          "predicted": 16,
+          "tp": 16,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-004",
+      "category": "C1",
+      "run_id": 2,
+      "question": "Which tasks deal with case investigation?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 16,
+          "predicted": 16,
+          "tp": 16,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-004",
+      "category": "C1",
+      "run_id": 3,
+      "question": "Which tasks deal with case investigation?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 0.0625,
+      "f1": 0.11764705882352941,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 16,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 15
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-005",
+      "category": "C1",
+      "run_id": 1,
+      "question": "Which tasks deal with case investigation, except for those dealing with collecting documents and records?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 9,
+          "predicted": 9,
+          "tp": 9,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-005",
+      "category": "C1",
+      "run_id": 2,
+      "question": "Which tasks deal with case investigation, except for those dealing with collecting documents and records?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 9,
+          "predicted": 9,
+          "tp": 9,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-005",
+      "category": "C1",
+      "run_id": 3,
+      "question": "Which tasks deal with case investigation, except for those dealing with collecting documents and records?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 9,
+          "predicted": 9,
+          "tp": 9,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-006",
+      "category": "C1",
+      "run_id": 1,
+      "question": "What decisions occur in each process or subprocess?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 9,
+          "predicted": 9,
+          "tp": 9,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-006",
+      "category": "C1",
+      "run_id": 2,
+      "question": "What decisions occur in each process or subprocess?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 9,
+          "predicted": 9,
+          "tp": 9,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-006",
+      "category": "C1",
+      "run_id": 3,
+      "question": "What decisions occur in each process or subprocess?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 9,
+          "predicted": 9,
+          "tp": 9,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-007",
+      "category": "C1",
+      "run_id": 1,
+      "question": "What documents are involved in each process or subprocess?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 6,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-007",
+      "category": "C1",
+      "run_id": 2,
+      "question": "What documents are involved in each process or subprocess?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 6,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-007",
+      "category": "C1",
+      "run_id": 3,
+      "question": "What documents are involved in each process or subprocess?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 6,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-008",
+      "category": "C1",
+      "run_id": 1,
+      "question": "How is each process or subprocess initiated?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1": 0.5,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 14,
+          "predicted": 14,
+          "tp": 7,
+          "fp": 7,
+          "fn": 7
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-008",
+      "category": "C1",
+      "run_id": 2,
+      "question": "How is each process or subprocess initiated?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.4666666666666667,
+      "recall": 0.5,
+      "f1": 0.4827586206896552,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 14,
+          "predicted": 15,
+          "tp": 7,
+          "fp": 8,
+          "fn": 7
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-008",
+      "category": "C1",
+      "run_id": 3,
+      "question": "How is each process or subprocess initiated?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.4,
+      "recall": 0.5714285714285714,
+      "f1": 0.47058823529411764,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 14,
+          "predicted": 20,
+          "tp": 8,
+          "fp": 12,
+          "fn": 6
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-009",
+      "category": "C1",
+      "run_id": 1,
+      "question": "How can each process or subprocess conclude?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.28,
+      "recall": 1.0,
+      "f1": 0.43750000000000006,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 7,
+          "predicted": 25,
+          "tp": 7,
+          "fp": 18,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-009",
+      "category": "C1",
+      "run_id": 2,
+      "question": "How can each process or subprocess conclude?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.6363636363636364,
+      "recall": 1.0,
+      "f1": 0.7777777777777778,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 7,
+          "predicted": 11,
+          "tp": 7,
+          "fp": 4,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-009",
+      "category": "C1",
+      "run_id": 3,
+      "question": "How can each process or subprocess conclude?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 7,
+          "predicted": 7,
+          "tp": 7,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C1-010",
+      "category": "C1",
+      "run_id": 1,
+      "question": "Does the document \"Case file\" exist?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "Yes"
+        ],
+        "parsed_prediction": "Yes"
+      }
+    },
+    {
+      "query_id": "C1-010",
+      "category": "C1",
+      "run_id": 2,
+      "question": "Does the document \"Case file\" exist?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "Yes"
+        ],
+        "parsed_prediction": "Yes"
+      }
+    },
+    {
+      "query_id": "C1-010",
+      "category": "C1",
+      "run_id": 3,
+      "question": "Does the document \"Case file\" exist?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "Yes"
+        ],
+        "parsed_prediction": "Yes"
+      }
+    },
+    {
+      "query_id": "C1-011",
+      "category": "C1",
+      "run_id": 1,
+      "question": "Does the document \"Settlement agreement\" exist?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "No"
+        ],
+        "parsed_prediction": "No"
+      }
+    },
+    {
+      "query_id": "C1-011",
+      "category": "C1",
+      "run_id": 2,
+      "question": "Does the document \"Settlement agreement\" exist?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "No"
+        ],
+        "parsed_prediction": "No"
+      }
+    },
+    {
+      "query_id": "C1-011",
+      "category": "C1",
+      "run_id": 3,
+      "question": "Does the document \"Settlement agreement\" exist?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "No"
+        ],
+        "parsed_prediction": "No"
+      }
+    },
+    {
+      "query_id": "C1-012",
+      "category": "C1",
+      "run_id": 1,
+      "question": "Is the task \"Analyze document and record\" part of an ad-hoc process?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "Yes"
+        ],
+        "parsed_prediction": "Yes"
+      }
+    },
+    {
+      "query_id": "C1-012",
+      "category": "C1",
+      "run_id": 2,
+      "question": "Is the task \"Analyze document and record\" part of an ad-hoc process?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "Yes"
+        ],
+        "parsed_prediction": "Yes"
+      }
+    },
+    {
+      "query_id": "C1-012",
+      "category": "C1",
+      "run_id": 3,
+      "question": "Is the task \"Analyze document and record\" part of an ad-hoc process?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "Yes"
+        ],
+        "parsed_prediction": "Yes"
+      }
+    },
+    {
+      "query_id": "C1-013",
+      "category": "C1",
+      "run_id": 1,
+      "question": "Is the task dealing with preparing the evidence set part of an ad-hoc (sub)process?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "No"
+        ],
+        "parsed_prediction": "No"
+      }
+    },
+    {
+      "query_id": "C1-013",
+      "category": "C1",
+      "run_id": 2,
+      "question": "Is the task dealing with preparing the evidence set part of an ad-hoc (sub)process?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "exact_answer": false,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 0,
+          "fp": 1,
+          "fn": 1
+        },
+        "gold_answers": [
+          "No"
+        ],
+        "parsed_prediction": "Yes"
+      }
+    },
+    {
+      "query_id": "C1-013",
+      "category": "C1",
+      "run_id": 3,
+      "question": "Is the task dealing with preparing the evidence set part of an ad-hoc (sub)process?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "No"
+        ],
+        "parsed_prediction": "No"
+      }
+    },
+    {
+      "query_id": "C1-014",
+      "category": "C1",
+      "run_id": 1,
+      "question": "Do the tasks \"Collect physical evidence\" and \"Document observations\" occur within the same subprocess?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "Yes"
+        ],
+        "parsed_prediction": "Yes"
+      }
+    },
+    {
+      "query_id": "C1-014",
+      "category": "C1",
+      "run_id": 2,
+      "question": "Do the tasks \"Collect physical evidence\" and \"Document observations\" occur within the same subprocess?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "Yes"
+        ],
+        "parsed_prediction": "Yes"
+      }
+    },
+    {
+      "query_id": "C1-014",
+      "category": "C1",
+      "run_id": 3,
+      "question": "Do the tasks \"Collect physical evidence\" and \"Document observations\" occur within the same subprocess?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "Yes"
+        ],
+        "parsed_prediction": "Yes"
+      }
+    },
+    {
+      "query_id": "C2-001",
+      "category": "C2",
+      "run_id": 1,
+      "question": "What must be completed right before the task \"Archive non-adjudicated matter\" can begin?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 5,
+          "tp": 5,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-001",
+      "category": "C2",
+      "run_id": 2,
+      "question": "What must be completed right before the task \"Archive non-adjudicated matter\" can begin?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 5,
+          "tp": 5,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-001",
+      "category": "C2",
+      "run_id": 3,
+      "question": "What must be completed right before the task \"Archive non-adjudicated matter\" can begin?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 5,
+          "tp": 5,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-002",
+      "category": "C2",
+      "run_id": 1,
+      "question": "Give me the possible outcomes of the decision regarding a required follow-up and the conditions leading to those outcomes.",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.6666666666666666,
+      "recall": 1.0,
+      "f1": 0.8,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 4,
+          "predicted": 6,
+          "tp": 4,
+          "fp": 2,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-002",
+      "category": "C2",
+      "run_id": 2,
+      "question": "Give me the possible outcomes of the decision regarding a required follow-up and the conditions leading to those outcomes.",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1": 0.5,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 4,
+          "predicted": 4,
+          "tp": 2,
+          "fp": 2,
+          "fn": 2
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-002",
+      "category": "C2",
+      "run_id": 3,
+      "question": "Give me the possible outcomes of the decision regarding a required follow-up and the conditions leading to those outcomes.",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1": 0.5,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 4,
+          "predicted": 4,
+          "tp": 2,
+          "fp": 2,
+          "fn": 2
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-003",
+      "category": "C2",
+      "run_id": 1,
+      "question": "What are all the steps that occur between registering a claim and adjudicating the case?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 11,
+          "predicted": 11,
+          "tp": 11,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": true,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-003",
+      "category": "C2",
+      "run_id": 2,
+      "question": "What are all the steps that occur between registering a claim and adjudicating the case?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 11,
+          "predicted": 11,
+          "tp": 11,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": true,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-003",
+      "category": "C2",
+      "run_id": 3,
+      "question": "What are all the steps that occur between registering a claim and adjudicating the case?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 11,
+          "predicted": 11,
+          "tp": 11,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": true,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-004",
+      "category": "C2",
+      "run_id": 1,
+      "question": "What are all the steps that occur between the beginning of a case investigation and preparing the claim and the supporting documents?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.8333333333333334,
+      "recall": 1.0,
+      "f1": 0.9090909090909091,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 6,
+          "tp": 5,
+          "fp": 1,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-004",
+      "category": "C2",
+      "run_id": 2,
+      "question": "What are all the steps that occur between the beginning of a case investigation and preparing the claim and the supporting documents?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 0.2,
+      "f1": 0.33333333333333337,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 4
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-004",
+      "category": "C2",
+      "run_id": 3,
+      "question": "What are all the steps that occur between the beginning of a case investigation and preparing the claim and the supporting documents?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 5,
+          "tp": 5,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-005",
+      "category": "C2",
+      "run_id": 1,
+      "question": "Which routes allow the task of assessing the case's viability to lead to archiving the non-adjudicated matter without notifying the refusal to represent the case?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 71,
+          "predicted": 71,
+          "tp": 71,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": true,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-005",
+      "category": "C2",
+      "run_id": 2,
+      "question": "Which routes allow the task of assessing the case's viability to lead to archiving the non-adjudicated matter without notifying the refusal to represent the case?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 71,
+          "predicted": 71,
+          "tp": 71,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": true,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-005",
+      "category": "C2",
+      "run_id": 3,
+      "question": "Which routes allow the task of assessing the case's viability to lead to archiving the non-adjudicated matter without notifying the refusal to represent the case?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 71,
+          "predicted": 71,
+          "tp": 71,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": true,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-006",
+      "category": "C2",
+      "run_id": 1,
+      "question": "Which other tasks can be performed in parallel with interviewing the parties?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-006",
+      "category": "C2",
+      "run_id": 2,
+      "question": "Which other tasks can be performed in parallel with interviewing the parties?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-006",
+      "category": "C2",
+      "run_id": 3,
+      "question": "Which other tasks can be performed in parallel with interviewing the parties?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C2-007",
+      "category": "C2",
+      "run_id": 1,
+      "question": "Does reviewing the collected documents occur before collecting the missing items?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "Yes"
+        ],
+        "parsed_prediction": "Yes"
+      }
+    },
+    {
+      "query_id": "C2-007",
+      "category": "C2",
+      "run_id": 2,
+      "question": "Does reviewing the collected documents occur before collecting the missing items?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "Yes"
+        ],
+        "parsed_prediction": "Yes"
+      }
+    },
+    {
+      "query_id": "C2-007",
+      "category": "C2",
+      "run_id": 3,
+      "question": "Does reviewing the collected documents occur before collecting the missing items?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "Yes"
+        ],
+        "parsed_prediction": "Yes"
+      }
+    },
+    {
+      "query_id": "C2-008",
+      "category": "C2",
+      "run_id": 1,
+      "question": "Does notifying the client about the Court's rejection occur before having the procedural rejection issued?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "No"
+        ],
+        "parsed_prediction": "No"
+      }
+    },
+    {
+      "query_id": "C2-008",
+      "category": "C2",
+      "run_id": 2,
+      "question": "Does notifying the client about the Court's rejection occur before having the procedural rejection issued?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "No"
+        ],
+        "parsed_prediction": "No"
+      }
+    },
+    {
+      "query_id": "C2-008",
+      "category": "C2",
+      "run_id": 3,
+      "question": "Does notifying the client about the Court's rejection occur before having the procedural rejection issued?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "No"
+        ],
+        "parsed_prediction": "No"
+      }
+    },
+    {
+      "query_id": "C2-009",
+      "category": "C2",
+      "run_id": 1,
+      "question": "Is every case accepted for representation guaranteed to be adjudicated?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "No"
+        ],
+        "parsed_prediction": "No"
+      }
+    },
+    {
+      "query_id": "C2-009",
+      "category": "C2",
+      "run_id": 2,
+      "question": "Is every case accepted for representation guaranteed to be adjudicated?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "No"
+        ],
+        "parsed_prediction": "No"
+      }
+    },
+    {
+      "query_id": "C2-009",
+      "category": "C2",
+      "run_id": 3,
+      "question": "Is every case accepted for representation guaranteed to be adjudicated?",
+      "response_mode": "binary",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "gold_answers": [
+          "No"
+        ],
+        "parsed_prediction": "No"
+      }
+    },
+    {
+      "query_id": "C3-001",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Who or what is responsible for registering the claim?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-001",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Who or what is responsible for registering the claim?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-001",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Who or what is responsible for registering the claim?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-002",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Who are responsible for the tasks related to preparing the preliminary case file?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 5,
+          "tp": 5,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-002",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Who are responsible for the tasks related to preparing the preliminary case file?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 5,
+          "tp": 5,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-002",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Who are responsible for the tasks related to preparing the preliminary case file?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 5,
+          "tp": 5,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-003",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Which tasks are assigned to Samuel Grant?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 12,
+          "predicted": 12,
+          "tp": 12,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-003",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Which tasks are assigned to Samuel Grant?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 12,
+          "predicted": 12,
+          "tp": 12,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-003",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Which tasks are assigned to Samuel Grant?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 12,
+          "predicted": 12,
+          "tp": 12,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-004",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Which tasks are assigned to Marinette and which to Alexander?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 16,
+          "predicted": 16,
+          "tp": 16,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-004",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Which tasks are assigned to Marinette and which to Alexander?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 16,
+          "predicted": 16,
+          "tp": 16,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-004",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Which tasks are assigned to Marinette and which to Alexander?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 16,
+          "predicted": 16,
+          "tp": 16,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-005",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Who usually communicates with the clients?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-005",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Who usually communicates with the clients?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-005",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Who usually communicates with the clients?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-006",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Which organizational units are involved in investigating a case?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-006",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Which organizational units are involved in investigating a case?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-006",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Which organizational units are involved in investigating a case?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-007",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Which responsible individuals are involved within the Court's process?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 5,
+          "tp": 5,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-007",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Which responsible individuals are involved within the Court's process?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 5,
+          "tp": 5,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-007",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Which responsible individuals are involved within the Court's process?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 5,
+          "tp": 5,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-008",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Which tasks require more than one responsible?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 26,
+          "predicted": 26,
+          "tp": 26,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-008",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Which tasks require more than one responsible?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 26,
+          "predicted": 26,
+          "tp": 26,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-008",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Which tasks require more than one responsible?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 26,
+          "predicted": 26,
+          "tp": 26,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-009",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Which tasks require collaboration between different roles within the law firm?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 0.2777777777777778,
+      "f1": 0.4347826086956522,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 18,
+          "predicted": 5,
+          "tp": 5,
+          "fp": 0,
+          "fn": 13
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-009",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Which tasks require collaboration between different roles within the law firm?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 18,
+          "predicted": 18,
+          "tp": 18,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-009",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Which tasks require collaboration between different roles within the law firm?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 0.2777777777777778,
+      "f1": 0.4347826086956522,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 18,
+          "predicted": 5,
+          "tp": 5,
+          "fp": 0,
+          "fn": 13
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-010",
+      "category": "C3",
+      "run_id": 1,
+      "question": "How many tasks are assigned to each responsible from the law firm's process?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.6875,
+      "recall": 0.6111111111111112,
+      "f1": 0.6470588235294118,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 18,
+          "predicted": 16,
+          "tp": 11,
+          "fp": 5,
+          "fn": 7
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-010",
+      "category": "C3",
+      "run_id": 2,
+      "question": "How many tasks are assigned to each responsible from the law firm's process?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 18,
+          "predicted": 18,
+          "tp": 18,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-010",
+      "category": "C3",
+      "run_id": 3,
+      "question": "How many tasks are assigned to each responsible from the law firm's process?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.6875,
+      "recall": 0.6111111111111112,
+      "f1": 0.6470588235294118,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 18,
+          "predicted": 16,
+          "tp": 11,
+          "fp": 5,
+          "fn": 7
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-011",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Who has the largest number of assigned tasks?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 4,
+          "tp": 2,
+          "fp": 2,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-011",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Who has the largest number of assigned tasks?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 4,
+          "tp": 2,
+          "fp": 2,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-011",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Who has the largest number of assigned tasks?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 4,
+          "tp": 2,
+          "fp": 2,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-012",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Who has the fewest assigned tasks in the law firm's process? What about the Court's process?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.375,
+      "recall": 0.6,
+      "f1": 0.4615384615384615,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 8,
+          "tp": 3,
+          "fp": 5,
+          "fn": 2
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-012",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Who has the fewest assigned tasks in the law firm's process? What about the Court's process?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 10,
+          "tp": 5,
+          "fp": 5,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-012",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Who has the fewest assigned tasks in the law firm's process? What about the Court's process?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.25,
+      "recall": 0.6,
+      "f1": 0.35294117647058826,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 12,
+          "tp": 3,
+          "fp": 9,
+          "fn": 2
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-013",
+      "category": "C3",
+      "run_id": 1,
+      "question": "How long is preparing the claim expected to take?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": true
+      }
+    },
+    {
+      "query_id": "C3-013",
+      "category": "C3",
+      "run_id": 2,
+      "question": "How long is preparing the claim expected to take?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": true
+      }
+    },
+    {
+      "query_id": "C3-013",
+      "category": "C3",
+      "run_id": 3,
+      "question": "How long is preparing the claim expected to take?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": true
+      }
+    },
+    {
+      "query_id": "C3-014",
+      "category": "C3",
+      "run_id": 1,
+      "question": "How long is conducting the on-site investigation expected to take?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": true
+      }
+    },
+    {
+      "query_id": "C3-014",
+      "category": "C3",
+      "run_id": 2,
+      "question": "How long is conducting the on-site investigation expected to take?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": true
+      }
+    },
+    {
+      "query_id": "C3-014",
+      "category": "C3",
+      "run_id": 3,
+      "question": "How long is conducting the on-site investigation expected to take?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": true
+      }
+    },
+    {
+      "query_id": "C3-015",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Which tasks are expected to take longer than an hour?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 13,
+          "predicted": 13,
+          "tp": 13,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-015",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Which tasks are expected to take longer than an hour?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 13,
+          "predicted": 13,
+          "tp": 13,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-015",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Which tasks are expected to take longer than an hour?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 13,
+          "predicted": 13,
+          "tp": 13,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-016",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Which tasks have the longest execution times?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 2,
+          "tp": 1,
+          "fp": 1,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-016",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Which tasks have the longest execution times?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 2,
+          "tp": 1,
+          "fp": 1,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-016",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Which tasks have the longest execution times?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 2,
+          "tp": 1,
+          "fp": 1,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-017",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Which tasks have no specified execution time?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 6,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-017",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Which tasks have no specified execution time?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 6,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-017",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Which tasks have no specified execution time?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 6,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-018",
+      "category": "C3",
+      "run_id": 1,
+      "question": "How much does representing the client cost?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": true
+      }
+    },
+    {
+      "query_id": "C3-018",
+      "category": "C3",
+      "run_id": 2,
+      "question": "How much does representing the client cost?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": true
+      }
+    },
+    {
+      "query_id": "C3-018",
+      "category": "C3",
+      "run_id": 3,
+      "question": "How much does representing the client cost?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": true
+      }
+    },
+    {
+      "query_id": "C3-019",
+      "category": "C3",
+      "run_id": 1,
+      "question": "How much would resolving a pending interview invitation cost for each outcome?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 6,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-019",
+      "category": "C3",
+      "run_id": 2,
+      "question": "How much would resolving a pending interview invitation cost for each outcome?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 6,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-019",
+      "category": "C3",
+      "run_id": 3,
+      "question": "How much would resolving a pending interview invitation cost for each outcome?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 6,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-020",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Which tasks have the highest costs?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 2,
+          "tp": 1,
+          "fp": 1,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-020",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Which tasks have the highest costs?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 2,
+          "tp": 1,
+          "fp": 1,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-020",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Which tasks have the highest costs?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 2,
+          "tp": 1,
+          "fp": 1,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-021",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Which tasks have no specified costs?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 5,
+          "tp": 5,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-021",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Which tasks have no specified costs?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 5,
+          "tp": 5,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-021",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Which tasks have no specified costs?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 5,
+          "predicted": 5,
+          "tp": 5,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-022",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Of the available ways to complete the process, which ones, from start to finish, are expected to cost the least and what are each of their costs?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 18,
+          "predicted": 18,
+          "tp": 18,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": true,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-022",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Of the available ways to complete the process, which ones, from start to finish, are expected to cost the least and what are each of their costs?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 18,
+          "predicted": 18,
+          "tp": 18,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": true,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-022",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Of the available ways to complete the process, which ones, from start to finish, are expected to cost the least and what are each of their costs?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 18,
+          "predicted": 18,
+          "tp": 18,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": true,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-023",
+      "category": "C3",
+      "run_id": 1,
+      "question": "Of the available ways to complete the process, which ones, from start to finish, have the longest execution time and what are each of their durations?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.9583333333333334,
+      "recall": 0.6052631578947368,
+      "f1": 0.7419354838709677,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 38,
+          "predicted": 24,
+          "tp": 23,
+          "fp": 1,
+          "fn": 15
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": true,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-023",
+      "category": "C3",
+      "run_id": 2,
+      "question": "Of the available ways to complete the process, which ones, from start to finish, have the longest execution time and what are each of their durations?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.9583333333333334,
+      "recall": 0.6052631578947368,
+      "f1": 0.7419354838709677,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 38,
+          "predicted": 24,
+          "tp": 23,
+          "fp": 1,
+          "fn": 15
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": true,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C3-023",
+      "category": "C3",
+      "run_id": 3,
+      "question": "Of the available ways to complete the process, which ones, from start to finish, have the longest execution time and what are each of their durations?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 0.92,
+      "f1": 0.9583333333333334,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 1,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 75,
+          "predicted": 69,
+          "tp": 69,
+          "fp": 0,
+          "fn": 6
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": true,
+        "path_serialization_normalized": true,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-001",
+      "category": "C4",
+      "run_id": 1,
+      "question": "What produces the Case file document?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-001",
+      "category": "C4",
+      "run_id": 2,
+      "question": "What produces the Case file document?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-001",
+      "category": "C4",
+      "run_id": 3,
+      "question": "What produces the Case file document?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-002",
+      "category": "C4",
+      "run_id": 1,
+      "question": "What uses the Case file document?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-002",
+      "category": "C4",
+      "run_id": 2,
+      "question": "What uses the Case file document?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-002",
+      "category": "C4",
+      "run_id": 3,
+      "question": "What uses the Case file document?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-003",
+      "category": "C4",
+      "run_id": 1,
+      "question": "What documents are produced by identifying unanswered invitations?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-003",
+      "category": "C4",
+      "run_id": 2,
+      "question": "What documents are produced by identifying unanswered invitations?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-003",
+      "category": "C4",
+      "run_id": 3,
+      "question": "What documents are produced by identifying unanswered invitations?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-004",
+      "category": "C4",
+      "run_id": 1,
+      "question": "What documents are needed to resolve the pending invitations?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-004",
+      "category": "C4",
+      "run_id": 2,
+      "question": "What documents are needed to resolve the pending invitations?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-004",
+      "category": "C4",
+      "run_id": 3,
+      "question": "What documents are needed to resolve the pending invitations?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 1,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-005",
+      "category": "C4",
+      "run_id": 1,
+      "question": "What documents are needed during the case's investigation?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-005",
+      "category": "C4",
+      "run_id": 2,
+      "question": "What documents are needed during the case's investigation?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-005",
+      "category": "C4",
+      "run_id": 3,
+      "question": "What documents are needed during the case's investigation?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 1,
+          "tp": 1,
+          "fp": 0,
+          "fn": 1
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-006",
+      "category": "C4",
+      "run_id": 1,
+      "question": "Which documents must have been produced until the Court registers the claim?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 6,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-006",
+      "category": "C4",
+      "run_id": 2,
+      "question": "Which documents must have been produced until the Court registers the claim?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 6,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-006",
+      "category": "C4",
+      "run_id": 3,
+      "question": "Which documents must have been produced until the Court registers the claim?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 6,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-007",
+      "category": "C4",
+      "run_id": 1,
+      "question": "Which documents are used or produced between preparing the witnesses list and closing the matter?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "f1": 0.8,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 4,
+          "tp": 4,
+          "fp": 0,
+          "fn": 2
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-007",
+      "category": "C4",
+      "run_id": 2,
+      "question": "Which documents are used or produced between preparing the witnesses list and closing the matter?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 6,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-007",
+      "category": "C4",
+      "run_id": 3,
+      "question": "Which documents are used or produced between preparing the witnesses list and closing the matter?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 6,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-008",
+      "category": "C4",
+      "run_id": 1,
+      "question": "Which documents are produced, but never used?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 0,
+          "predicted": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-008",
+      "category": "C4",
+      "run_id": 2,
+      "question": "Which documents are produced, but never used?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 0,
+          "predicted": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C4-008",
+      "category": "C4",
+      "run_id": 3,
+      "question": "Which documents are produced, but never used?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 0,
+          "predicted": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C5-001",
+      "category": "C5",
+      "run_id": 1,
+      "question": "Which participants communicate with one another, what does each of them send and what do they receive received?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 25,
+          "predicted": 25,
+          "tp": 25,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C5-001",
+      "category": "C5",
+      "run_id": 2,
+      "question": "Which participants communicate with one another, what does each of them send and what do they receive received?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 25,
+          "predicted": 25,
+          "tp": 25,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C5-001",
+      "category": "C5",
+      "run_id": 3,
+      "question": "Which participants communicate with one another, what does each of them send and what do they receive received?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 25,
+          "predicted": 25,
+          "tp": 25,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C5-002",
+      "category": "C5",
+      "run_id": 1,
+      "question": "What information must the client provide to the law firm?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 3,
+          "predicted": 3,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C5-002",
+      "category": "C5",
+      "run_id": 2,
+      "question": "What information must the client provide to the law firm?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 3,
+          "predicted": 3,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C5-002",
+      "category": "C5",
+      "run_id": 3,
+      "question": "What information must the client provide to the law firm?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 3,
+          "predicted": 3,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C5-003",
+      "category": "C5",
+      "run_id": 1,
+      "question": "What information does the law firm receive from the Court?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 3,
+          "predicted": 3,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C5-003",
+      "category": "C5",
+      "run_id": 2,
+      "question": "What information does the law firm receive from the Court?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 3,
+          "predicted": 3,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C5-003",
+      "category": "C5",
+      "run_id": 3,
+      "question": "What information does the law firm receive from the Court?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 3,
+          "predicted": 3,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C5-004",
+      "category": "C5",
+      "run_id": 1,
+      "question": "At what points in the process does the law firm interact with the client?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 7,
+          "predicted": 7,
+          "tp": 0,
+          "fp": 7,
+          "fn": 7
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C5-004",
+      "category": "C5",
+      "run_id": 2,
+      "question": "At what points in the process does the law firm interact with the client?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 7,
+          "predicted": 7,
+          "tp": 7,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C5-004",
+      "category": "C5",
+      "run_id": 3,
+      "question": "At what points in the process does the law firm interact with the client?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 7,
+          "predicted": 7,
+          "tp": 7,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C5-005",
+      "category": "C5",
+      "run_id": 1,
+      "question": "What are the messages sent by the Court to the law firm after the hearing is scheduled?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C5-005",
+      "category": "C5",
+      "run_id": 2,
+      "question": "What are the messages sent by the Court to the law firm after the hearing is scheduled?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C5-005",
+      "category": "C5",
+      "run_id": 3,
+      "question": "What are the messages sent by the Court to the law firm after the hearing is scheduled?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C6-001",
+      "category": "C6",
+      "run_id": 1,
+      "question": "Where does the process repeat the work?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 6,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C6-001",
+      "category": "C6",
+      "run_id": 2,
+      "question": "Where does the process repeat the work?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 6,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C6-001",
+      "category": "C6",
+      "run_id": 3,
+      "question": "Where does the process repeat the work?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 6,
+          "predicted": 12,
+          "tp": 6,
+          "fp": 6,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C6-002",
+      "category": "C6",
+      "run_id": 1,
+      "question": "Where in the process can work be sent back to an earlier step?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 0,
+          "predicted": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C6-002",
+      "category": "C6",
+      "run_id": 2,
+      "question": "Where in the process can work be sent back to an earlier step?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 0,
+          "predicted": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C6-002",
+      "category": "C6",
+      "run_id": 3,
+      "question": "Where in the process can work be sent back to an earlier step?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 0,
+          "predicted": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C6-003",
+      "category": "C6",
+      "run_id": 1,
+      "question": "Which process outcomes from the main process depend on awaiting for the client's instruction?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 4,
+          "predicted": 4,
+          "tp": 4,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C6-003",
+      "category": "C6",
+      "run_id": 2,
+      "question": "Which process outcomes from the main process depend on awaiting for the client's instruction?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 4,
+          "predicted": 4,
+          "tp": 4,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C6-003",
+      "category": "C6",
+      "run_id": 3,
+      "question": "Which process outcomes from the main process depend on awaiting for the client's instruction?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "exact_answer": false,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 4,
+          "predicted": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 2
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C6-004",
+      "category": "C6",
+      "run_id": 1,
+      "question": "Where does the process lack a fallback if another party does not respond?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C6-004",
+      "category": "C6",
+      "run_id": 2,
+      "question": "Where does the process lack a fallback if another party does not respond?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    },
+    {
+      "query_id": "C6-004",
+      "category": "C6",
+      "run_id": 3,
+      "question": "Where does the process lack a fallback if another party does not respond?",
+      "response_mode": "structured",
+      "format_valid": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "exact_answer": true,
+      "diagnostics": {
+        "selected_ground_truth": 0,
+        "format_errors": [],
+        "fact_counts": {
+          "gold": 2,
+          "predicted": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "answer_type_correct": true,
+        "status_correct": true,
+        "order_sensitive": false,
+        "path_serialization_normalized": false,
+        "value_serialization_normalized": false
+      }
+    }
+  ]
+}

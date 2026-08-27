@@ -1,0 +1,2964 @@
+@prefix agg: <http://jena.apache.org/ARQ/function/aggregate#> .
+@prefix : <http://www.omilab.org#> .
+@prefix sail: <http://www.openrdf.org/config/sail#> .
+@prefix retr: <http://www.ontotext.com/connectors/retrieval#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix geof: <http://www.opengis.net/def/function/geosparql/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix omi: <http://www.omilab.org/#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix path: <http://www.ontotext.com/path#> .
+@prefix array: <http://www.w3.org/2005/xpath-functions/array> .
+@prefix apf: <http://jena.apache.org/ARQ/property#> .
+@prefix rep: <http://www.openrdf.org/config/repository#> .
+@prefix map: <http://www.w3.org/2005/xpath-functions/map> .
+@prefix sr: <http://www.openrdf.org/config/repository/sail#> .
+@prefix rdf4j: <http://rdf4j.org/schema/rdf4j#> .
+@prefix mm: <http://bee-up.omilab.org/rdf/1_7#> .
+@prefix wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gn: <http://www.geonames.org/ontology#> .
+@prefix afn: <http://jena.apache.org/ARQ/function#> .
+@prefix list: <http://jena.apache.org/ARQ/list#> .
+@prefix cv: <http://www.comvantage.eu/mm#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ofn: <http://www.ontotext.com/sparql/functions/> .
+@prefix geoext: <http://rdf.useekm.com/ext#> .
+@prefix graphdb: <http://www.ontotext.com/config/graphdb#> .
+@prefix sesame: <http://www.openrdf.org/schema/sesame#> .
+@prefix math: <http://www.w3.org/2005/xpath-functions/math> .
+@prefix omgeo: <http://www.ontotext.com/owlim/geo#> .
+@prefix retr-index: <http://www.ontotext.com/connectors/retrieval/instance#> .
+
+:Business_Process_Diagram_BPMN_2_0-Resolve_pending_interview_invitation {
+  :Subsequent-58919-Schedule_interview-Interview_scheduled a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-58916-Schedule_interview;
+    cv:to :End_Event_BPMN-49495-Interview_scheduled .
+  
+  :Task_BPMN-58916-Schedule_interview a mm:o_Task_BPMN;
+    rdfs:label "Schedule interview" .
+  
+  :End_Event_BPMN-49495-Interview_scheduled a mm:o_End_Event_BPMN;
+    rdfs:label "Interview scheduled";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No";
+    mm:a_Escalation "No" .
+  
+  :Subsequent-49493-Await_interview_response-Participation_refusal_received a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Exclusive_Gateway_BPMN-49476-Await_interview_response;
+    cv:to :Intermediate_Event_BPMN-58900-Participation_refusal_received .
+  
+  :Exclusive_Gateway_BPMN-49476-Await_interview_response a mm:o_Exclusive_Gateway_BPMN;
+    rdfs:label "Await interview response" .
+  
+  :Intermediate_Event_BPMN-58900-Participation_refusal_received a mm:o_Intermediate_Event_BPMN;
+    rdfs:label "Participation refusal received";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No";
+    mm:a_Escalation "No" .
+  
+  :End_Event_BPMN-58921-Participation_refusal_recorded a mm:o_End_Event_BPMN;
+    rdfs:label "Participation refusal recorded";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No";
+    mm:a_Escalation "No" .
+  
+  :Subsequent-58942-Record_non-response-Interview_response_unresolved a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-58932-Record_non-response;
+    cv:to :End_Event_BPMN-58938-Interview_response_unresolved .
+  
+  :Task_BPMN-58932-Record_non-response a mm:o_Task_BPMN;
+    rdfs:label "Record non-response" .
+  
+  :End_Event_BPMN-58938-Interview_response_unresolved a mm:o_End_Event_BPMN;
+    rdfs:label "Interview response unresolved";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No";
+    mm:a_Escalation "No" .
+  
+  :Intermediate_Event_BPMN-58891-Participation_confirmation_received a mm:o_Intermediate_Event_BPMN;
+    rdfs:label "Participation confirmation received";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No";
+    mm:a_Escalation "No" .
+  
+  :Subsequent-49483-Await_interview_response-Participation_confirmation_received a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Exclusive_Gateway_BPMN-49476-Await_interview_response;
+    cv:to :Intermediate_Event_BPMN-58891-Participation_confirmation_received .
+  
+  :Subsequent-59199-5_business_days-Record_non-response a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Intermediate_Event_BPMN-58910-5_business_days;
+    cv:to :Task_BPMN-58932-Record_non-response .
+  
+  :Intermediate_Event_BPMN-58910-5_business_days a mm:o_Intermediate_Event_BPMN;
+    rdfs:label "5 business days";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No";
+    mm:a_Escalation "No" .
+  
+  :Subsequent-58894-Participation_confirmation_received-Record_interview_availability
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Intermediate_Event_BPMN-58891-Participation_confirmation_received;
+    cv:to :Task_BPMN-49480-Record_interview_availability .
+  
+  :Task_BPMN-49480-Record_interview_availability a mm:o_Task_BPMN;
+    rdfs:label "Record interview availability" .
+  
+  :Task_BPMN-49468-Verify_contact_details a mm:o_Task_BPMN;
+    rdfs:label "Verify contact details" .
+  
+  :Subsequent-58925-Record_participation_refusal-Participation_refusal_recorded a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-58905-Record_participation_refusal;
+    cv:to :End_Event_BPMN-58921-Participation_refusal_recorded .
+  
+  :Task_BPMN-58905-Record_participation_refusal a mm:o_Task_BPMN;
+    rdfs:label "Record participation refusal" .
+  
+  :Subsequent-49479-Send_follow-up_interview_request-Await_interview_response a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-49472-Send_follow-up_interview_request;
+    cv:to :Exclusive_Gateway_BPMN-49476-Await_interview_response .
+  
+  :Task_BPMN-49472-Send_follow-up_interview_request a mm:o_Task_BPMN;
+    rdfs:label "Send follow-up interview request" .
+  
+  :Start_Event_BPMN-49465-Initial_interview_request_unanswered a mm:o_Start_Event_BPMN;
+    rdfs:label "Initial interview request unanswered";
+    mm:a_Compensation "No";
+    mm:a_Error "No";
+    mm:a_Escalation "No" .
+  
+  :Subsequent-58914-Await_interview_response-5_business_days a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Exclusive_Gateway_BPMN-49476-Await_interview_response;
+    cv:to :Intermediate_Event_BPMN-58910-5_business_days .
+  
+  :Subsequent-49475-Verify_contact_details-Send_follow-up_interview_request a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-49468-Verify_contact_details;
+    cv:to :Task_BPMN-49472-Send_follow-up_interview_request .
+  
+  :Subsequent-49471-Initial_interview_request_unanswered-Verify_contact_details a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Start_Event_BPMN-49465-Initial_interview_request_unanswered;
+    cv:to :Task_BPMN-49468-Verify_contact_details .
+  
+  :Subsequent-49498-Record_interview_availability-Schedule_interview a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-49480-Record_interview_availability;
+    cv:to :Task_BPMN-58916-Schedule_interview .
+  
+  :Subsequent-58909-Participation_refusal_received-Record_participation_refusal a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Intermediate_Event_BPMN-58900-Participation_refusal_received;
+    cv:to :Task_BPMN-58905-Record_participation_refusal .
+}
+
+:Working_Environment_Model-Law_firm_structure {
+  :Performer-50687-Marinette_Cheng a mm:o_Performer;
+    rdfs:label "Marinette Cheng" .
+  
+  :Performer-49665-Samuel_Grant a mm:o_Performer;
+    rdfs:label "Samuel Grant" .
+  
+  :Performer-50684-Alexander_Moore a mm:o_Performer;
+    rdfs:label "Alexander Moore" .
+  
+  :Performer-49636-Rachel_Bennett a mm:o_Performer;
+    rdfs:label "Rachel Bennett" .
+  
+  :Performer-49713-Victor_Hayes a mm:o_Performer;
+    rdfs:label "Victor Hayes" .
+  
+  :Performer-49671-Bianca_Hayes a mm:o_Performer;
+    rdfs:label "Bianca Hayes" .
+  
+  :Performer-49717-Michael_Turner a mm:o_Performer;
+    rdfs:label "Michael Turner" .
+  
+  :Performer-49633-Emily_Carter a mm:o_Performer;
+    rdfs:label "Emily Carter" .
+  
+  :uses_Resource-59277-Michael_Turner-Case-management_system a mm:r_uses_Resource;
+    cv:from :Performer-49717-Michael_Turner;
+    cv:to :Resource-59272-Case-management_system .
+  
+  :Resource-59272-Case-management_system a mm:o_Resource;
+    rdfs:label "Case-management system" .
+  
+  <http://www.omilab.org#has_Role-50761-Bianca_Hayes-Investigation_+_Evidence_collection>
+    a mm:r_has_Role;
+    cv:from :Performer-49671-Bianca_Hayes;
+    cv:to <http://www.omilab.org#Role-50725-Investigation_+_Evidence_collection> .
+  
+  <http://www.omilab.org#Role-50725-Investigation_+_Evidence_collection> a mm:o_Role;
+    rdfs:label "Investigation & Evidence collection" .
+  
+  :Performer-50669-Anna_Collins a mm:o_Performer;
+    rdfs:label "Anna Collins" .
+  
+  :uses_Resource-59278-Rachel_Bennett-Case-management_system a mm:r_uses_Resource;
+    cv:from :Performer-49636-Rachel_Bennett;
+    cv:to :Resource-59272-Case-management_system .
+  
+  :Role-50719-Client_intake_administration a mm:o_Role;
+    rdfs:label "Client intake administration" .
+  
+  <http://www.omilab.org#has_Role-50768-Samuel_Grant-Investigation_+_Evidence_collection>
+    a mm:r_has_Role;
+    cv:from :Performer-49665-Samuel_Grant;
+    cv:to <http://www.omilab.org#Role-50725-Investigation_+_Evidence_collection> .
+  
+  <http://www.omilab.org#has_Role-50764-Alexander_Moore-Legal_+_Filing_support> a mm:r_has_Role;
+    cv:from :Performer-50684-Alexander_Moore;
+    cv:to <http://www.omilab.org#Role-50722-Legal_+_Filing_support> .
+  
+  <http://www.omilab.org#Role-50722-Legal_+_Filing_support> a mm:o_Role;
+    rdfs:label "Legal & Filing support" .
+  
+  :Organizational_Unit-49618-Law_firm a mm:o_Organizational_Unit;
+    rdfs:label "Law firm" .
+  
+  :Role-50740-Client_communication a mm:o_Role;
+    rdfs:label "Client communication" .
+  
+  :has_Role-50762-Anna_Collins-Client_communication a mm:r_has_Role;
+    cv:from :Performer-50669-Anna_Collins;
+    cv:to :Role-50740-Client_communication .
+  
+  :uses_Resource-59276-Victor_Hayes-Case-management_system a mm:r_uses_Resource;
+    cv:from :Performer-49713-Victor_Hayes;
+    cv:to :Resource-59272-Case-management_system .
+  
+  :has_Role-50756-Victor_Hayes-Case_coordination a mm:r_has_Role;
+    cv:from :Performer-49713-Victor_Hayes;
+    cv:to :Role-50743-Case_coordination .
+  
+  :Role-50743-Case_coordination a mm:o_Role;
+    rdfs:label "Case coordination" .
+  
+  <http://www.omilab.org#has_Role-50765-Marinette_Cheng-Legal_+_Filing_support> a mm:r_has_Role;
+    cv:from :Performer-50687-Marinette_Cheng;
+    cv:to <http://www.omilab.org#Role-50722-Legal_+_Filing_support> .
+  
+  :uses_Resource-59280-Marinette_Cheng-Case-management_system a mm:r_uses_Resource;
+    cv:from :Performer-50687-Marinette_Cheng;
+    cv:to :Resource-59272-Case-management_system .
+  
+  :has_Role-50752-Emily_Carter-Client_intake_administration a mm:r_has_Role;
+    cv:from :Performer-49633-Emily_Carter;
+    cv:to :Role-50719-Client_intake_administration .
+  
+  :has_Role-50753-Michael_Turner-Client_intake_administration a mm:r_has_Role;
+    cv:from :Performer-49717-Michael_Turner;
+    cv:to :Role-50719-Client_intake_administration .
+  
+  :Organizational_Unit-49621-Client_intake_and_Administration_ a mm:o_Organizational_Unit;
+    rdfs:label "Client intake and Administration " .
+  
+  :is_Subordinated-49651-Client_intake_and_Administration_-Law_firm a mm:r_is_Subordinated;
+    cv:from :Organizational_Unit-49621-Client_intake_and_Administration_;
+    cv:to :Organizational_Unit-49618-Law_firm .
+  
+  :Organizational_Unit-49624-Litigation_and_Case_management a mm:o_Organizational_Unit;
+    rdfs:label "Litigation and Case management" .
+  
+  :Organizational_Unit-49661-Investigation_and_Evidence a mm:o_Organizational_Unit;
+    rdfs:label "Investigation and Evidence" .
+  
+  :has_Role-50763-Rachel_Bennett-Legal_assessment_and_Representation a mm:r_has_Role;
+    cv:from :Performer-49636-Rachel_Bennett;
+    cv:to :Role-50737-Legal_assessment_and_Representation .
+  
+  :Role-50737-Legal_assessment_and_Representation a mm:o_Role;
+    rdfs:label "Legal assessment and Representation" .
+  
+  :is_Subordinated-49664-Investigation_and_Evidence-Law_firm a mm:r_is_Subordinated;
+    cv:from :Organizational_Unit-49661-Investigation_and_Evidence;
+    cv:to :Organizational_Unit-49618-Law_firm .
+  
+  :is_Subordinated-49652-Litigation_and_Case_management-Law_firm a mm:r_is_Subordinated;
+    cv:from :Organizational_Unit-49624-Litigation_and_Case_management;
+    cv:to :Organizational_Unit-49618-Law_firm .
+}
+
+cv:graphmetadata {
+  :Business_Process_Diagram_BPMN_2_0-Main_judicial_process a mm:m_Business_Process_Diagram_BPMN_2_0;
+    rdfs:label "Main judicial process" .
+  
+  :Working_Environment_Model-Law_firm_structure a mm:m_Working_Environment_Model;
+    rdfs:label "Law firm structure" .
+  
+  :Working_Environment_Model-Court_structure a mm:m_Working_Environment_Model;
+    rdfs:label "Court structure" .
+  
+  mm:a_Name owl:equivalentProperty rdfs:label .
+  
+  :Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file rdfs:label "Prepare preliminary case file" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Investigate_case rdfs:label "Investigate case" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Conduct_on-site_investigation rdfs:label "Conduct on-site investigation" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records rdfs:label "Collect documents and records" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements rdfs:label "Collect and analyze statements" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Resolve_pending_interview_invitation rdfs:label
+      "Resolve pending interview invitation" .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file {
+  :Task_BPMN-48798-Assign_investigation_team a mm:o_Task_BPMN;
+    rdfs:label "Assign investigation team" .
+  
+  :Task_BPMN-48801-Prepare_list_of_potential_witnesses a mm:o_Task_BPMN;
+    rdfs:label "Prepare list of potential witnesses" .
+  
+  :Data_Object_BPMN-59195-Pending_interview_invitations a mm:o_Data_Object_BPMN;
+    rdfs:label "Pending interview invitations" .
+  
+  :Task_BPMN-48804-Send_interview_request a mm:o_Task_BPMN;
+    rdfs:label "Send interview request" .
+  
+  :Subsequent-48807-Prepare_list_of_potential_witnesses-Send_interview_request a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-48801-Prepare_list_of_potential_witnesses;
+    cv:to :Task_BPMN-48804-Send_interview_request .
+  
+  :Task_BPMN-59191-Identify_unanswered_interview_invitations a mm:o_Task_BPMN;
+    rdfs:label "Identify unanswered interview invitations" .
+  
+  :Data_Association_BPMN-51111-Potential_witnesses-Send_interview_request a mm:r_Data_Association_BPMN;
+    cv:from :Data_Object_BPMN-51106-Potential_witnesses;
+    cv:to :Task_BPMN-48804-Send_interview_request .
+  
+  :Data_Object_BPMN-51106-Potential_witnesses a mm:o_Data_Object_BPMN;
+    rdfs:label "Potential witnesses" .
+  
+  :Data_Association_BPMN-59198-Identify_unanswered_interview_invitations-Pending_interview_invitations
+    a mm:r_Data_Association_BPMN;
+    cv:from :Task_BPMN-59191-Identify_unanswered_interview_invitations;
+    cv:to :Data_Object_BPMN-59195-Pending_interview_invitations .
+  
+  :Data_Association_BPMN-51110-Prepare_list_of_potential_witnesses-Potential_witnesses
+    a mm:r_Data_Association_BPMN;
+    cv:from :Task_BPMN-48801-Prepare_list_of_potential_witnesses;
+    cv:to :Data_Object_BPMN-51106-Potential_witnesses .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Main_judicial_process {
+  :Sub-Process_BPMN-48720-Prepare_preliminary_case_file a mm:o_Sub-Process_BPMN;
+    rdfs:label "Prepare preliminary case file" .
+  
+  :Sub-Process_BPMN-48678-Investigate_case a mm:o_Sub-Process_BPMN;
+    rdfs:label "Investigate case" .
+  
+  :Task_BPMN-58861-Notify_case_representation_acceptance a mm:o_Task_BPMN;
+    rdfs:label "Notify case representation acceptance" .
+  
+  :Task_BPMN-59140-Inform_about_judicial_verdict a mm:o_Task_BPMN;
+    rdfs:label "Inform about judicial verdict" .
+  
+  :Task_BPMN-49010-Notify_case_representation_refusal a mm:o_Task_BPMN;
+    rdfs:label "Notify case representation refusal" .
+  
+  :Task_BPMN-48756-Record_investigation_findings a mm:o_Task_BPMN;
+    rdfs:label "Record investigation findings" .
+  
+  :Task_BPMN-48669-Register_client_complaint a mm:o_Task_BPMN;
+    rdfs:label "Register client complaint" .
+  
+  :Task_BPMN-48690-Record_withdrawal_instruction a mm:o_Task_BPMN;
+    rdfs:label "Record withdrawal instruction" .
+  
+  :Task_BPMN-58996-Represent_client_at_hearing a mm:o_Task_BPMN;
+    rdfs:label "Represent client at hearing" .
+  
+  :Task_BPMN-59171-Archive_adjudicated_case_file a mm:o_Task_BPMN;
+    rdfs:label "Archive adjudicated case file" .
+  
+  :Task_BPMN-49218-Assess_case_viability a mm:o_Task_BPMN;
+    rdfs:label "Assess case viability" .
+  
+  :Task_BPMN-59096-Close_matter_for_client_non-response a mm:o_Task_BPMN;
+    rdfs:label "Close matter for client non-response" .
+  
+  :Task_BPMN-59128-Notify_Court_rejection a mm:o_Task_BPMN;
+    rdfs:label "Notify Court rejection" .
+  
+  :Task_BPMN-49014-Archive_non-adjudicated_matter a mm:o_Task_BPMN;
+    rdfs:label "Archive non-adjudicated matter" .
+  
+  :Task_BPMN-59009-File_claim_with_Court a mm:o_Task_BPMN;
+    rdfs:label "File claim with Court" .
+  
+  <http://www.omilab.org#Subsequent-59086-Requirements_satisfied?-Prepare_case_for_hearing>
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from <http://www.omilab.org#Exclusive_Gateway_BPMN-59025-Requirements_satisfied?>;
+    cv:to :Task_BPMN-59102-Prepare_case_for_hearing .
+  
+  <http://www.omilab.org#Exclusive_Gateway_BPMN-59025-Requirements_satisfied?> a mm:o_Exclusive_Gateway_BPMN;
+    rdfs:label "Requirements satisfied?" .
+  
+  :Task_BPMN-59102-Prepare_case_for_hearing a mm:o_Task_BPMN;
+    rdfs:label "Prepare case for hearing" .
+  
+  :Subsequent-59105-Prepare_case_for_hearing-Schedule_hearing a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-59102-Prepare_case_for_hearing;
+    cv:to :Task_BPMN-59035-Schedule_hearing .
+  
+  :Task_BPMN-59035-Schedule_hearing a mm:o_Task_BPMN;
+    rdfs:label "Schedule hearing" .
+  
+  :Pool_BPMN-58825-Law_firm a mm:o_Pool_BPMN;
+    rdfs:label "Law firm" .
+  
+  :End_Event_BPMN-58955-Case_adjudicated a mm:o_End_Event_BPMN;
+    rdfs:label "Case adjudicated";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No";
+    mm:a_Escalation "No" .
+  
+  :Pool_BPMN-58943-Court a mm:o_Pool_BPMN;
+    rdfs:label "Court" .
+  
+  :Subsequent-48771-Investigate_case-Record_investigation_findings a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Sub-Process_BPMN-48678-Investigate_case;
+    cv:to :Task_BPMN-48756-Record_investigation_findings .
+  
+  :Subsequent-58864-Notify_case_representation_acceptance-Await_client_instruction a
+      mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-58861-Notify_case_representation_acceptance;
+    cv:to :Exclusive_Gateway_BPMN-58873-Await_client_instruction .
+  
+  :Exclusive_Gateway_BPMN-58873-Await_client_instruction a mm:o_Exclusive_Gateway_BPMN;
+    rdfs:label "Await client instruction" .
+  
+  :Data_Association_BPMN-48772-Investigate_case-Case_file a mm:r_Data_Association_BPMN;
+    cv:from :Sub-Process_BPMN-48678-Investigate_case;
+    cv:to :Data_Object_BPMN-48762-Case_file .
+  
+  :Data_Object_BPMN-48762-Case_file a mm:o_Data_Object_BPMN;
+    rdfs:label "Case file" .
+  
+  :Subsequent-48774-Complaint_withdrawn-Record_withdrawal_instruction a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Intermediate_Event_BPMN-48687-Complaint_withdrawn;
+    cv:to :Task_BPMN-48690-Record_withdrawal_instruction .
+  
+  :Intermediate_Event_BPMN-48687-Complaint_withdrawn a mm:o_Intermediate_Event_BPMN;
+    rdfs:label "Complaint withdrawn";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No" .
+  
+  :Task_BPMN-58949-Register_decision a mm:o_Task_BPMN;
+    rdfs:label "Register decision" .
+  
+  :Intermediate_Event_BPMN-59122-Procedural_rejection_received a mm:o_Intermediate_Event_BPMN;
+    rdfs:label "Procedural rejection received";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No" .
+  
+  :Subsequent-59126-Await_court_response-Procedural_rejection_received a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Exclusive_Gateway_BPMN-59117-Await_court_response;
+    cv:to :Intermediate_Event_BPMN-59122-Procedural_rejection_received .
+  
+  :Exclusive_Gateway_BPMN-59117-Await_court_response a mm:o_Exclusive_Gateway_BPMN;
+    rdfs:label "Await court response" .
+  
+  :Subsequent-58999-Represent_client_at_hearing-Judicial_verdict_received a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-58996-Represent_client_at_hearing;
+    cv:to :Intermediate_Event_BPMN-59135-Judicial_verdict_received .
+  
+  :Intermediate_Event_BPMN-59135-Judicial_verdict_received a mm:o_Intermediate_Event_BPMN;
+    rdfs:label "Judicial verdict received";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No" .
+  
+  :Message_Flow_BPMN-58860-Notify_case_representation_refusal-Client a mm:r_Message_Flow_BPMN;
+    cv:from :Task_BPMN-49010-Notify_case_representation_refusal;
+    cv:to :Pool_collapsed_BPMN-58856-Client .
+  
+  :Pool_collapsed_BPMN-58856-Client a mm:o_Pool_collapsed_BPMN;
+    rdfs:label "Client" .
+  
+  :Subsequent-48768-Complaint_received-Register_client_complaint a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Start_Event_BPMN-48666-Complaint_received;
+    cv:to :Task_BPMN-48669-Register_client_complaint .
+  
+  :Start_Event_BPMN-48666-Complaint_received a mm:o_Start_Event_BPMN;
+    rdfs:label "Complaint received";
+    mm:a_Compensation "No";
+    mm:a_Error "No" .
+  
+  :End_Event_BPMN-59165-Claim_rejected a mm:o_End_Event_BPMN;
+    rdfs:label "Claim rejected";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No" .
+  
+  :Subsequent-58974-Notify_judicial_verdict-Close_case_file a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-58961-Notify_judicial_verdict;
+    cv:to :Task_BPMN-58958-Close_case_file .
+  
+  :Task_BPMN-58961-Notify_judicial_verdict a mm:o_Task_BPMN;
+    rdfs:label "Notify judicial verdict" .
+  
+  :Task_BPMN-58958-Close_case_file a mm:o_Task_BPMN;
+    rdfs:label "Close case file" .
+  
+  :Subsequent-49021-Archive_non-adjudicated_matter-Matter_closed_without_adjudication
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-49014-Archive_non-adjudicated_matter;
+    cv:to :End_Event_BPMN-49018-Matter_closed_without_adjudication .
+  
+  :End_Event_BPMN-49018-Matter_closed_without_adjudication a mm:o_End_Event_BPMN;
+    rdfs:label "Matter closed without adjudication";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No" .
+  
+  :Data_Object_BPMN-59176-Statement_of_claim a mm:o_Data_Object_BPMN;
+    rdfs:label "Statement of claim" .
+  
+  :Message_Flow_BPMN-59134-Notify_Court_rejection-Client a mm:r_Message_Flow_BPMN;
+    cv:from :Task_BPMN-59128-Notify_Court_rejection;
+    cv:to :Pool_collapsed_BPMN-58856-Client .
+  
+  :Intermediate_Event_BPMN-59064-Scheduled_hearing_date a mm:o_Intermediate_Event_BPMN;
+    rdfs:label "Scheduled hearing date";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No" .
+  
+  <http://www.omilab.org#Subsequent-59034-Requirements_satisfied?-Issue_procedural_rejection>
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from <http://www.omilab.org#Exclusive_Gateway_BPMN-59025-Requirements_satisfied?>;
+    cv:to :Task_BPMN-59030-Issue_procedural_rejection .
+  
+  :Task_BPMN-59030-Issue_procedural_rejection a mm:o_Task_BPMN;
+    rdfs:label "Issue procedural rejection" .
+  
+  :Subsequent-59055-Register_claim-Examine_procedural_requirements a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-59015-Register_claim;
+    cv:to :Task_BPMN-59020-Examine_procedural_requirements .
+  
+  :Task_BPMN-59015-Register_claim a mm:o_Task_BPMN;
+    rdfs:label "Register claim" .
+  
+  :Task_BPMN-59020-Examine_procedural_requirements a mm:o_Task_BPMN;
+    rdfs:label "Examine procedural requirements" .
+  
+  <http://www.omilab.org#Subsequent-49013-Accept_case_representation?-Notify_case_representation_refusal>
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from <http://www.omilab.org#Exclusive_Gateway_BPMN-49006-Accept_case_representation?>;
+    cv:to :Task_BPMN-49010-Notify_case_representation_refusal .
+  
+  <http://www.omilab.org#Exclusive_Gateway_BPMN-49006-Accept_case_representation?> a
+      mm:o_Exclusive_Gateway_BPMN;
+    rdfs:label "Accept case representation?" .
+  
+  :Message_Flow_BPMN-58888-Client-Withdrawal_instruction_received a mm:r_Message_Flow_BPMN;
+    cv:from :Pool_collapsed_BPMN-58856-Client;
+    cv:to :Intermediate_Event_BPMN-58878-Withdrawal_instruction_received .
+  
+  :Intermediate_Event_BPMN-58878-Withdrawal_instruction_received a mm:o_Intermediate_Event_BPMN;
+    rdfs:label "Withdrawal instruction received";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No" .
+  
+  <http://www.omilab.org#Subsequent-49221-Assess_case_viability-Accept_case_representation?>
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-49218-Assess_case_viability;
+    cv:to <http://www.omilab.org#Exclusive_Gateway_BPMN-49006-Accept_case_representation?> .
+  
+  :Subsequent-59138-Judicial_verdict_received-Inform_about_judicial_verdict a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Intermediate_Event_BPMN-59135-Judicial_verdict_received;
+    cv:to :Task_BPMN-59140-Inform_about_judicial_verdict .
+  
+  :Message_Flow_BPMN-59127-Notify_procedural_rejection-Procedural_rejection_received
+    a mm:r_Message_Flow_BPMN;
+    cv:from :Task_BPMN-59107-Notify_procedural_rejection;
+    cv:to :Intermediate_Event_BPMN-59122-Procedural_rejection_received .
+  
+  :Task_BPMN-59107-Notify_procedural_rejection a mm:o_Task_BPMN;
+    rdfs:label "Notify procedural rejection" .
+  
+  :Intermediate_Event_BPMN-59618-Hearing_date a mm:o_Intermediate_Event_BPMN;
+    rdfs:label "Hearing date";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No" .
+  
+  :Subsequent-59099-Close_matter_for_client_non-response-Archive_non-adjudicated_matter
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-59096-Close_matter_for_client_non-response;
+    cv:to :Task_BPMN-49014-Archive_non-adjudicated_matter .
+  
+  :Subsequent-59132-Procedural_rejection_received-Notify_Court_rejection a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Intermediate_Event_BPMN-59122-Procedural_rejection_received;
+    cv:to :Task_BPMN-59128-Notify_Court_rejection .
+  
+  :Subsequent-49229-Record_withdrawal_instruction-Archive_non-adjudicated_matter a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-48690-Record_withdrawal_instruction;
+    cv:to :Task_BPMN-49014-Archive_non-adjudicated_matter .
+  
+  :Subsequent-59002-Withdrawal_instruction_received-Archive_non-adjudicated_matter a
+      mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Intermediate_Event_BPMN-58878-Withdrawal_instruction_received;
+    cv:to :Task_BPMN-49014-Archive_non-adjudicated_matter .
+  
+  :Subsequent-59169-Notify_procedural_rejection-Claim_rejected a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-59107-Notify_procedural_rejection;
+    cv:to :End_Event_BPMN-59165-Claim_rejected .
+  
+  :Subsequent-58887-Await_client_instruction-5_business_days a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Exclusive_Gateway_BPMN-58873-Await_client_instruction;
+    cv:to :Intermediate_Event_BPMN-58882-5_business_days .
+  
+  :Intermediate_Event_BPMN-58882-5_business_days a mm:o_Intermediate_Event_BPMN;
+    rdfs:label "5 business days";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No" .
+  
+  :Subsequent-59143-Inform_about_judicial_verdict-Archive_adjudicated_case_file a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-59140-Inform_about_judicial_verdict;
+    cv:to :Task_BPMN-59171-Archive_adjudicated_case_file .
+  
+  :Subsequent-59003-5_business_days-Close_matter_for_client_non-response a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Intermediate_Event_BPMN-58882-5_business_days;
+    cv:to :Task_BPMN-59096-Close_matter_for_client_non-response .
+  
+  :Subsequent-58971-Close_case_file-Case_adjudicated a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-58958-Close_case_file;
+    cv:to :End_Event_BPMN-58955-Case_adjudicated .
+  
+  :Subsequent-59621-Hearing_date-Represent_client_at_hearing a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Intermediate_Event_BPMN-59618-Hearing_date;
+    cv:to :Task_BPMN-58996-Represent_client_at_hearing .
+  
+  :Subsequent-59067-Scheduled_hearing_date-Conduct_hearing a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Intermediate_Event_BPMN-59064-Scheduled_hearing_date;
+    cv:to :Task_BPMN-59050-Conduct_hearing .
+  
+  :Task_BPMN-59050-Conduct_hearing a mm:o_Task_BPMN;
+    rdfs:label "Conduct hearing" .
+  
+  :Subsequent-59012-File_claim_with_Court-Await_court_response a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-59009-File_claim_with_Court;
+    cv:to :Exclusive_Gateway_BPMN-59117-Await_court_response .
+  
+  :Subsequent-58970-Claim_received-Register_claim a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Start_Event_BPMN-58952-Claim_received;
+    cv:to :Task_BPMN-59015-Register_claim .
+  
+  :Start_Event_BPMN-58952-Claim_received a mm:o_Start_Event_BPMN;
+    rdfs:label "Claim received";
+    mm:a_Compensation "No";
+    mm:a_Error "No" .
+  
+  :Subsequent-59058-Conduct_hearing-Issue_judicial_verdict a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-59050-Conduct_hearing;
+    cv:to :Task_BPMN-58946-Issue_judicial_verdict .
+  
+  :Task_BPMN-58946-Issue_judicial_verdict a mm:o_Task_BPMN;
+    rdfs:label "Issue judicial verdict" .
+  
+  :Data_Association_BPMN-59182-Statement_of_claim-File_claim_with_Court a mm:r_Data_Association_BPMN;
+    cv:from :Data_Object_BPMN-59176-Statement_of_claim;
+    cv:to :Task_BPMN-59009-File_claim_with_Court .
+  
+  <http://www.omilab.org#Subsequent-59023-Examine_procedural_requirements-Requirements_satisfied?>
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-59020-Examine_procedural_requirements;
+    cv:to <http://www.omilab.org#Exclusive_Gateway_BPMN-59025-Requirements_satisfied?> .
+  
+  :Subsequent-58972-Issue_judicial_verdict-Register_decision a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-58946-Issue_judicial_verdict;
+    cv:to :Task_BPMN-58949-Register_decision .
+  
+  :End_Event_BPMN-48759-Representation_completed a mm:o_End_Event_BPMN;
+    rdfs:label "Representation completed";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No" .
+  
+  <http://www.omilab.org#Subsequent-49022-Accept_case_representation?-Notify_case_representation_acceptance>
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from <http://www.omilab.org#Exclusive_Gateway_BPMN-49006-Accept_case_representation?>;
+    cv:to :Task_BPMN-58861-Notify_case_representation_acceptance .
+  
+  :Intermediate_Event_BPMN-58867-Instruction_to_proceed_received a mm:o_Intermediate_Event_BPMN;
+    rdfs:label "Instruction to proceed received";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No" .
+  
+  :Message_Flow_BPMN-59145-Inform_about_judicial_verdict-Client a mm:r_Message_Flow_BPMN;
+    cv:from :Task_BPMN-59140-Inform_about_judicial_verdict;
+    cv:to :Pool_collapsed_BPMN-58856-Client .
+  
+  :Subsequent-49009-Register_client_complaint-Assess_case_viability a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-48669-Register_client_complaint;
+    cv:to :Task_BPMN-49218-Assess_case_viability .
+  
+  :Data_Association_BPMN-59001-Case_file-Represent_client_at_hearing a mm:r_Data_Association_BPMN;
+    cv:from :Data_Object_BPMN-48762-Case_file;
+    cv:to :Task_BPMN-58996-Represent_client_at_hearing .
+  
+  :Subsequent-58876-Await_client_instruction-Instruction_to_proceed_received a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Exclusive_Gateway_BPMN-58873-Await_client_instruction;
+    cv:to :Intermediate_Event_BPMN-58867-Instruction_to_proceed_received .
+  
+  :Message_Flow_BPMN-58859-Client-Complaint_received a mm:r_Message_Flow_BPMN;
+    cv:from :Pool_collapsed_BPMN-58856-Client;
+    cv:to :Start_Event_BPMN-48666-Complaint_received .
+  
+  :Message_Flow_BPMN-58872-Client-Instruction_to_proceed_received a mm:r_Message_Flow_BPMN;
+    cv:from :Pool_collapsed_BPMN-58856-Client;
+    cv:to :Intermediate_Event_BPMN-58867-Instruction_to_proceed_received .
+  
+  :Subsequent-58973-Register_decision-Notify_judicial_verdict a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-58949-Register_decision;
+    cv:to :Task_BPMN-58961-Notify_judicial_verdict .
+  
+  :Subsequent-59174-Archive_adjudicated_case_file-Representation_completed a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-59171-Archive_adjudicated_case_file;
+    cv:to :End_Event_BPMN-48759-Representation_completed .
+  
+  :Subsequent-58886-Await_client_instruction-Withdrawal_instruction_received a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Exclusive_Gateway_BPMN-58873-Await_client_instruction;
+    cv:to :Intermediate_Event_BPMN-58878-Withdrawal_instruction_received .
+  
+  :Message_Flow_BPMN-59163-Notify_judicial_verdict-Judicial_verdict_received a mm:r_Message_Flow_BPMN;
+    cv:from :Task_BPMN-58961-Notify_judicial_verdict;
+    cv:to :Intermediate_Event_BPMN-59135-Judicial_verdict_received .
+  
+  :Subsequent-59133-Notify_Court_rejection-Archive_non-adjudicated_matter a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-59128-Notify_Court_rejection;
+    cv:to :Task_BPMN-49014-Archive_non-adjudicated_matter .
+  
+  :Message_Flow_BPMN-58866-Notify_case_representation_acceptance-Client a mm:r_Message_Flow_BPMN;
+    cv:from :Task_BPMN-58861-Notify_case_representation_acceptance;
+    cv:to :Pool_collapsed_BPMN-58856-Client .
+  
+  :Subsequent-59111-Issue_procedural_rejection-Notify_procedural_rejection a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-59030-Issue_procedural_rejection;
+    cv:to :Task_BPMN-59107-Notify_procedural_rejection .
+  
+  :Subsequent-49017-Notify_case_representation_refusal-Archive_non-adjudicated_matter
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-49010-Notify_case_representation_refusal;
+    cv:to :Task_BPMN-49014-Archive_non-adjudicated_matter .
+  
+  :Message_Flow_BPMN-59014-File_claim_with_Court-Claim_received a mm:r_Message_Flow_BPMN;
+    cv:from :Task_BPMN-59009-File_claim_with_Court;
+    cv:to :Start_Event_BPMN-58952-Claim_received .
+  
+  :Task_BPMN-59004-Prepare_claim_and_supporting_documents a mm:o_Task_BPMN;
+    rdfs:label "Prepare claim and supporting documents" .
+  
+  :Task_BPMN-59040-Notify_claim_acceptance_and_hearing_details a mm:o_Task_BPMN;
+    rdfs:label "Notify claim acceptance and hearing details" .
+  
+  :Subsequent-59093-Acceptance_and_hearing_details_received-Hearing_date a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Intermediate_Event_BPMN-59090-Acceptance_and_hearing_details_received;
+    cv:to :Intermediate_Event_BPMN-59618-Hearing_date .
+  
+  :Intermediate_Event_BPMN-59090-Acceptance_and_hearing_details_received a mm:o_Intermediate_Event_BPMN;
+    rdfs:label "Acceptance and hearing details received";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No" .
+  
+  :Subsequent-59089-Notify_claim_acceptance_and_hearing_details-Scheduled_hearing_date
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-59040-Notify_claim_acceptance_and_hearing_details;
+    cv:to :Intermediate_Event_BPMN-59064-Scheduled_hearing_date .
+  
+  :Subsequent-59120-Await_court_response-Acceptance_and_hearing_details_received a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Exclusive_Gateway_BPMN-59117-Await_court_response;
+    cv:to :Intermediate_Event_BPMN-59090-Acceptance_and_hearing_details_received .
+  
+  :Message_Flow_BPMN-59095-Notify_claim_acceptance_and_hearing_details-Acceptance_and_hearing_details_received
+    a mm:r_Message_Flow_BPMN;
+    cv:from :Task_BPMN-59040-Notify_claim_acceptance_and_hearing_details;
+    cv:to :Intermediate_Event_BPMN-59090-Acceptance_and_hearing_details_received .
+  
+  :Subsequent-59088-Schedule_hearing-Notify_claim_acceptance_and_hearing_details a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-59035-Schedule_hearing;
+    cv:to :Task_BPMN-59040-Notify_claim_acceptance_and_hearing_details .
+  
+  :Subsequent-48792-Record_investigation_findings-Prepare_claim_and_supporting_documents
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-48756-Record_investigation_findings;
+    cv:to :Task_BPMN-59004-Prepare_claim_and_supporting_documents .
+  
+  :Data_Association_BPMN-59180-Prepare_claim_and_supporting_documents-Statement_of_claim
+    a mm:r_Data_Association_BPMN;
+    cv:from :Task_BPMN-59004-Prepare_claim_and_supporting_documents;
+    cv:to :Data_Object_BPMN-59176-Statement_of_claim .
+  
+  :Data_Association_BPMN-59623-Case_file-File_claim_with_Court a mm:r_Data_Association_BPMN;
+    cv:from :Data_Object_BPMN-48762-Case_file;
+    cv:to :Task_BPMN-59009-File_claim_with_Court .
+  
+  :Subsequent-59007-Prepare_claim_and_supporting_documents-File_claim_with_Court a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-59004-Prepare_claim_and_supporting_documents;
+    cv:to :Task_BPMN-59009-File_claim_with_Court .
+  
+  :Sub-Process_BPMN-48726-Resolve_pending_interview_invitation a mm:o_Sub-Process_BPMN;
+    rdfs:label "Resolve pending interview invitation" .
+  
+  <http://www.omilab.org#Subsequent-59849-Follow-up_required?-Resolve_pending_interview_invitation>
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from <http://www.omilab.org#Non-exclusive_Gateway_BPMN-59843-Follow-up_required?>;
+    cv:to :Sub-Process_BPMN-48726-Resolve_pending_interview_invitation .
+  
+  <http://www.omilab.org#Non-exclusive_Gateway_BPMN-59843-Follow-up_required?> a mm:o_Non-exclusive_Gateway_BPMN;
+    rdfs:label "Follow-up required?" .
+  
+  :Subsequent-59835-Resolve_pending_interview_invitation-Non-exclusive_Gateway_BPMN-59830
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Sub-Process_BPMN-48726-Resolve_pending_interview_invitation;
+    cv:to :Non-exclusive_Gateway_BPMN-59830-Non-exclusive_Gateway_BPMN-59830 .
+  
+  :Non-exclusive_Gateway_BPMN-59830-Non-exclusive_Gateway_BPMN-59830 a mm:o_Non-exclusive_Gateway_BPMN;
+    rdfs:label "Non-exclusive Gateway (BPMN)-59830" .
+  
+  <http://www.omilab.org#Subsequent-48784-Prepare_preliminary_case_file-Follow-up_required?>
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Sub-Process_BPMN-48720-Prepare_preliminary_case_file;
+    cv:to <http://www.omilab.org#Non-exclusive_Gateway_BPMN-59843-Follow-up_required?> .
+  
+  :Subsequent-59833-Non-exclusive_Gateway_BPMN-59830-Investigate_case a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Non-exclusive_Gateway_BPMN-59830-Non-exclusive_Gateway_BPMN-59830;
+    cv:to :Sub-Process_BPMN-48678-Investigate_case .
+  
+  <http://www.omilab.org#Subsequent-59846-Follow-up_required?-Non-exclusive_Gateway_BPMN-59830>
+    a mm:r_Subsequent;
+    mm:a_Default "Yes";
+    mm:a_IsInterrupting "no";
+    cv:from <http://www.omilab.org#Non-exclusive_Gateway_BPMN-59843-Follow-up_required?>;
+    cv:to :Non-exclusive_Gateway_BPMN-59830-Non-exclusive_Gateway_BPMN-59830 .
+  
+  :Subsequent-59842-Instruction_to_proceed_received-Prepare_preliminary_case_file a
+      mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Intermediate_Event_BPMN-58867-Instruction_to_proceed_received;
+    cv:to :Sub-Process_BPMN-48720-Prepare_preliminary_case_file .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Investigate_case {
+  :Sub-Process_BPMN-48961-Conduct_on-site_investigation a mm:o_Sub-Process_BPMN;
+    rdfs:label "Conduct on-site investigation" .
+  
+  :Sub-Process_BPMN-51175-Collect_and_analyze_statements a mm:o_Sub-Process_BPMN;
+    rdfs:label "Collect and analyze statements" .
+  
+  :Subsequent-50989-Collect_documents_and_records-Analyze_document_and_record a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Sub-Process_BPMN-48955-Collect_documents_and_records;
+    cv:to :Task_BPMN-50986-Analyze_document_and_record .
+  
+  :Sub-Process_BPMN-48955-Collect_documents_and_records a mm:o_Sub-Process_BPMN;
+    rdfs:label "Collect documents and records" .
+  
+  :Task_BPMN-50986-Analyze_document_and_record a mm:o_Task_BPMN;
+    rdfs:label "Analyze document and record" .
+  
+  :Data_Association_BPMN-49381-Collect_documents_and_records-Collected_documents_and_records
+    a mm:r_Data_Association_BPMN;
+    cv:from :Sub-Process_BPMN-48955-Collect_documents_and_records;
+    cv:to :Data_Object_BPMN-49378-Collected_documents_and_records .
+  
+  :Data_Object_BPMN-49378-Collected_documents_and_records a mm:o_Data_Object_BPMN;
+    rdfs:label "Collected documents and records" .
+  
+  :Data_Association_BPMN-50990-Collected_documents_and_records-Analyze_document_and_record
+    a mm:r_Data_Association_BPMN;
+    cv:from :Data_Object_BPMN-49378-Collected_documents_and_records;
+    cv:to :Task_BPMN-50986-Analyze_document_and_record .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records {
+  <http://www.omilab.org#Subsequent-49398-Review_collected_documents_and_records-Evidence_complete?>
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-49395-Review_collected_documents_and_records;
+    cv:to <http://www.omilab.org#Exclusive_Gateway_BPMN-49400-Evidence_complete?> .
+  
+  :Task_BPMN-49395-Review_collected_documents_and_records a mm:o_Task_BPMN;
+    rdfs:label "Review collected documents and records" .
+  
+  <http://www.omilab.org#Exclusive_Gateway_BPMN-49400-Evidence_complete?> a mm:o_Exclusive_Gateway_BPMN;
+    rdfs:label "Evidence complete?" .
+  
+  :Task_BPMN-49405-Issue_additional_request a mm:o_Task_BPMN;
+    rdfs:label "Issue additional request" .
+  
+  :Subsequent-49421-Prepare_evidence_set_for_analysis-Collection_completed a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-49418-Prepare_evidence_set_for_analysis;
+    cv:to :End_Event_BPMN-49388-Collection_completed .
+  
+  :Task_BPMN-49418-Prepare_evidence_set_for_analysis a mm:o_Task_BPMN;
+    rdfs:label "Prepare evidence set for analysis" .
+  
+  :End_Event_BPMN-49388-Collection_completed a mm:o_End_Event_BPMN;
+    rdfs:label "Collection completed";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No";
+    mm:a_Escalation "No" .
+  
+  :Task_BPMN-49356-Retrieve_existing_records a mm:o_Task_BPMN;
+    rdfs:label "Retrieve existing records" .
+  
+  <http://www.omilab.org#Subsequent-49412-Evidence_complete?-Issue_additional_request>
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from <http://www.omilab.org#Exclusive_Gateway_BPMN-49400-Evidence_complete?>;
+    cv:to :Task_BPMN-49405-Issue_additional_request .
+  
+  :Subsequent-49377-Retrieve_existing_records- a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-49356-Retrieve_existing_records;
+    cv:to :Non-exclusive_Gateway_BPMN-49372- .
+  
+  :Non-exclusive_Gateway_BPMN-49372- a mm:o_Non-exclusive_Gateway_BPMN;
+    rdfs:label "" .
+  
+  :Start_Event_BPMN-49383-Start_document_collection a mm:o_Start_Event_BPMN;
+    rdfs:label "Start document collection";
+    mm:a_Compensation "No";
+    mm:a_Error "No";
+    mm:a_Escalation "No" .
+  
+  <http://www.omilab.org#Subsequent-49360-Required_sources?-Retrieve_existing_records>
+    a mm:r_Subsequent;
+    mm:a_Default "Yes";
+    mm:a_IsInterrupting "no";
+    cv:from <http://www.omilab.org#Non-exclusive_Gateway_BPMN-49351-Required_sources?>;
+    cv:to :Task_BPMN-49356-Retrieve_existing_records .
+  
+  <http://www.omilab.org#Non-exclusive_Gateway_BPMN-49351-Required_sources?> a mm:o_Non-exclusive_Gateway_BPMN;
+    rdfs:label "Required sources?" .
+  
+  :Subsequent-49375--Review_collected_documents_and_records a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Non-exclusive_Gateway_BPMN-49372-;
+    cv:to :Task_BPMN-49395-Review_collected_documents_and_records .
+  
+  :Subsequent-49413-Issue_additional_request-Collect_missing_items a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-49405-Issue_additional_request;
+    cv:to :Task_BPMN-49409-Collect_missing_items .
+  
+  :Task_BPMN-49409-Collect_missing_items a mm:o_Task_BPMN;
+    rdfs:label "Collect missing items" .
+  
+  :Subsequent-49370-Request_documents- a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-49346-Request_documents;
+    cv:to :Non-exclusive_Gateway_BPMN-49372- .
+  
+  :Task_BPMN-49346-Request_documents a mm:o_Task_BPMN;
+    rdfs:label "Request documents" .
+  
+  :Subsequent-49423-Collect_missing_items-Prepare_evidence_set_for_analysis a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-49409-Collect_missing_items;
+    cv:to :Task_BPMN-49418-Prepare_evidence_set_for_analysis .
+  
+  <http://www.omilab.org#Subsequent-49422-Evidence_complete?-Prepare_evidence_set_for_analysis>
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from <http://www.omilab.org#Exclusive_Gateway_BPMN-49400-Evidence_complete?>;
+    cv:to :Task_BPMN-49418-Prepare_evidence_set_for_analysis .
+  
+  <http://www.omilab.org#Subsequent-49354-Required_sources?-Request_documents> a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from <http://www.omilab.org#Non-exclusive_Gateway_BPMN-49351-Required_sources?>;
+    cv:to :Task_BPMN-49346-Request_documents .
+  
+  <http://www.omilab.org#Subsequent-49350-Identify_required_documents_and_records-Required_sources?>
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-49342-Identify_required_documents_and_records;
+    cv:to <http://www.omilab.org#Non-exclusive_Gateway_BPMN-49351-Required_sources?> .
+  
+  :Task_BPMN-49342-Identify_required_documents_and_records a mm:o_Task_BPMN;
+    rdfs:label "Identify required documents and records" .
+  
+  :Subsequent-49387-Start_document_collection-Identify_required_documents_and_records
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Start_Event_BPMN-49383-Start_document_collection;
+    cv:to :Task_BPMN-49342-Identify_required_documents_and_records .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Conduct_on-site_investigation {
+  :Task_BPMN-49318-Collect_physical_evidence a mm:o_Task_BPMN;
+    rdfs:label "Collect physical evidence" .
+  
+  :Task_BPMN-49314-Document_observations a mm:o_Task_BPMN;
+    rdfs:label "Document observations" .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements {
+  :Task_BPMN-51121-Document_statements a mm:o_Task_BPMN;
+    rdfs:label "Document statements" .
+  
+  :Task_BPMN-51130-Confirm_consistency a mm:o_Task_BPMN;
+    rdfs:label "Confirm consistency" .
+  
+  :Task_BPMN-51136-Flag_contradictions a mm:o_Task_BPMN;
+    rdfs:label "Flag contradictions" .
+  
+  :Task_BPMN-51115-Interview_involved_parties a mm:o_Task_BPMN;
+    rdfs:label "Interview involved parties" .
+  
+  :Task_BPMN-51142-Compare_statements a mm:o_Task_BPMN;
+    rdfs:label "Compare statements" .
+  
+  :Task_BPMN-51133-Prepare_statement_analysis_notes a mm:o_Task_BPMN;
+    rdfs:label "Prepare statement analysis notes" .
+  
+  :Subsequent-51156-Confirm_consistency-Prepare_statement_analysis_notes a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-51130-Confirm_consistency;
+    cv:to :Task_BPMN-51133-Prepare_statement_analysis_notes .
+  
+  :Non-exclusive_Gateway_BPMN-51124-Non-exclusive_Gateway_BPMN-49234 a mm:o_Non-exclusive_Gateway_BPMN;
+    rdfs:label "Non-exclusive Gateway (BPMN)-49234" .
+  
+  :Data_Object_BPMN-51118-Collected_statements a mm:o_Data_Object_BPMN;
+    rdfs:label "Collected statements" .
+  
+  <http://www.omilab.org#Subsequent-51161-Compare_statements-Inconsistencies_identified?>
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-51142-Compare_statements;
+    cv:to <http://www.omilab.org#Exclusive_Gateway_BPMN-51139-Inconsistencies_identified?> .
+  
+  <http://www.omilab.org#Exclusive_Gateway_BPMN-51139-Inconsistencies_identified?> a
+      mm:o_Exclusive_Gateway_BPMN;
+    rdfs:label "Inconsistencies identified?" .
+  
+  :Subsequent-51182-Scheduled_date-Non-exclusive_Gateway_BPMN-49234 a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Start_Event_BPMN-51178-Scheduled_date;
+    cv:to :Non-exclusive_Gateway_BPMN-51124-Non-exclusive_Gateway_BPMN-49234 .
+  
+  :Start_Event_BPMN-51178-Scheduled_date a mm:o_Start_Event_BPMN;
+    rdfs:label "Scheduled date";
+    mm:a_Compensation "No";
+    mm:a_Error "No" .
+  
+  <http://www.omilab.org#Subsequent-51155-Inconsistencies_identified?-Confirm_consistency>
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from <http://www.omilab.org#Exclusive_Gateway_BPMN-51139-Inconsistencies_identified?>;
+    cv:to :Task_BPMN-51130-Confirm_consistency .
+  
+  :Subsequent-51159-Non-exclusive_Gateway_BPMN-49238-Compare_statements a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Non-exclusive_Gateway_BPMN-51127-Non-exclusive_Gateway_BPMN-49238;
+    cv:to :Task_BPMN-51142-Compare_statements .
+  
+  :Non-exclusive_Gateway_BPMN-51127-Non-exclusive_Gateway_BPMN-49238 a mm:o_Non-exclusive_Gateway_BPMN;
+    rdfs:label "Non-exclusive Gateway (BPMN)-49238" .
+  
+  :Subsequent-51152-Non-exclusive_Gateway_BPMN-49234-Document_statements a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Non-exclusive_Gateway_BPMN-51124-Non-exclusive_Gateway_BPMN-49234;
+    cv:to :Task_BPMN-51121-Document_statements .
+  
+  :Data_Association_BPMN-51160-Document_statements-Collected_statements a mm:r_Data_Association_BPMN;
+    cv:from :Task_BPMN-51121-Document_statements;
+    cv:to :Data_Object_BPMN-51118-Collected_statements .
+  
+  :End_Event_BPMN-51183-Statement_prepared a mm:o_End_Event_BPMN;
+    rdfs:label "Statement prepared";
+    mm:a_Cancel "No";
+    mm:a_Compensation "No";
+    mm:a_Error "No" .
+  
+  :Subsequent-51187-Prepare_statement_analysis_notes-Statement_prepared a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-51133-Prepare_statement_analysis_notes;
+    cv:to :End_Event_BPMN-51183-Statement_prepared .
+  
+  <http://www.omilab.org#Subsequent-51158-Inconsistencies_identified?-Flag_contradictions>
+    a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from <http://www.omilab.org#Exclusive_Gateway_BPMN-51139-Inconsistencies_identified?>;
+    cv:to :Task_BPMN-51136-Flag_contradictions .
+  
+  :Subsequent-51157-Flag_contradictions-Prepare_statement_analysis_notes a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-51136-Flag_contradictions;
+    cv:to :Task_BPMN-51133-Prepare_statement_analysis_notes .
+  
+  :Subsequent-51154-Document_statements-Non-exclusive_Gateway_BPMN-49238 a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-51121-Document_statements;
+    cv:to :Non-exclusive_Gateway_BPMN-51127-Non-exclusive_Gateway_BPMN-49238 .
+  
+  :Subsequent-51153-Interview_involved_parties-Non-exclusive_Gateway_BPMN-49238 a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Task_BPMN-51115-Interview_involved_parties;
+    cv:to :Non-exclusive_Gateway_BPMN-51127-Non-exclusive_Gateway_BPMN-49238 .
+  
+  :Subsequent-51151-Non-exclusive_Gateway_BPMN-49234-Interview_involved_parties a mm:r_Subsequent;
+    mm:a_Default "No";
+    mm:a_IsInterrupting "no";
+    cv:from :Non-exclusive_Gateway_BPMN-51124-Non-exclusive_Gateway_BPMN-49234;
+    cv:to :Task_BPMN-51115-Interview_involved_parties .
+  
+  :Data_Association_BPMN-51162-Collected_statements-Compare_statements a mm:r_Data_Association_BPMN;
+    cv:from :Data_Object_BPMN-51118-Collected_statements;
+    cv:to :Task_BPMN-51142-Compare_statements .
+}
+
+:Working_Environment_Model-Court_structure {
+  :Performer-59316-Hanna_Hastings a mm:o_Performer;
+    rdfs:label "Hanna Hastings" .
+  
+  :Performer-59218-Irene_Palmer a mm:o_Performer;
+    rdfs:label "Irene Palmer" .
+  
+  :Performer-59206-Gabriella_Hayes a mm:o_Performer;
+    rdfs:label "Gabriella Hayes" .
+  
+  :Performer-59227-Andrew_Marshall a mm:o_Performer;
+    rdfs:label "Andrew Marshall" .
+  
+  :Automated_Performer-59299-Court_E-filing_service a mm:o_Automated_Performer;
+    rdfs:label "Court E-filing service" .
+  
+  :Performer-59212-Paul_Mercer a mm:o_Performer;
+    rdfs:label "Paul Mercer" .
+  
+  :Organizational_Unit-59215-Records_Management a mm:o_Organizational_Unit;
+    rdfs:label "Records Management" .
+  
+  :is_Subordinated-59288-Judicial_Chamber-Court a mm:r_is_Subordinated;
+    cv:from :Organizational_Unit-59224-Judicial_Chamber;
+    cv:to :Organizational_Unit-59203-Court .
+  
+  :Organizational_Unit-59224-Judicial_Chamber a mm:o_Organizational_Unit;
+    rdfs:label "Judicial Chamber" .
+  
+  :Organizational_Unit-59203-Court a mm:o_Organizational_Unit;
+    rdfs:label "Court" .
+  
+  :has_Role-59255-Laura_Bennett-Filing_administration a mm:r_has_Role;
+    cv:from :Performer-59221-Laura_Bennett;
+    cv:to :Role-59233-Filing_administration .
+  
+  :Performer-59221-Laura_Bennett a mm:o_Performer;
+    rdfs:label "Laura Bennett" .
+  
+  :Role-59233-Filing_administration a mm:o_Role;
+    rdfs:label "Filing administration" .
+  
+  :is_Subordinated-59287-Records_Management-Court a mm:r_is_Subordinated;
+    cv:from :Organizational_Unit-59215-Records_Management;
+    cv:to :Organizational_Unit-59203-Court .
+  
+  :has_Role-59259-Paul_Mercer-Court_registry_administration a mm:r_has_Role;
+    cv:from :Performer-59212-Paul_Mercer;
+    cv:to :Role-59242-Court_registry_administration .
+  
+  :Role-59242-Court_registry_administration a mm:o_Role;
+    rdfs:label "Court registry administration" .
+  
+  :is_Subordinated-59247-Court_Registry-Court a mm:r_is_Subordinated;
+    cv:from :Organizational_Unit-59209-Court_Registry;
+    cv:to :Organizational_Unit-59203-Court .
+  
+  :Organizational_Unit-59209-Court_Registry a mm:o_Organizational_Unit;
+    rdfs:label "Court Registry" .
+  
+  :Role-59236-Judicial_adjudication a mm:o_Role;
+    rdfs:label "Judicial adjudication" .
+  
+  :Position-59308-Filing_clerk a mm:o_Position;
+    rdfs:label "Filing clerk" .
+  
+  :Performer-59230-Olivia_Carter a mm:o_Performer;
+    rdfs:label "Olivia Carter" .
+  
+  :has_Position-59314-Court_Registry-Filing_clerk a mm:r_has_Position;
+    cv:from :Organizational_Unit-59209-Court_Registry;
+    cv:to :Position-59308-Filing_clerk .
+  
+  :has_Role-59313-Filing_clerk-Filing_administration a mm:r_has_Role;
+    cv:from :Position-59308-Filing_clerk;
+    cv:to :Role-59233-Filing_administration .
+  
+  :has_Role-59256-Gabriella_Hayes-Court_registry_administration a mm:r_has_Role;
+    cv:from :Performer-59206-Gabriella_Hayes;
+    cv:to :Role-59242-Court_registry_administration .
+  
+  :has_Role-59258-Olivia_Carter-Judicial_adjudication a mm:r_has_Role;
+    cv:from :Performer-59230-Olivia_Carter;
+    cv:to :Role-59236-Judicial_adjudication .
+  
+  :Role-59239-Case_records_administration a mm:o_Role;
+    rdfs:label "Case records administration" .
+  
+  :has_Role-59254-Irene_Palmer-Case_records_administration a mm:r_has_Role;
+    cv:from :Performer-59218-Irene_Palmer;
+    cv:to :Role-59239-Case_records_administration .
+  
+  :has_Role-59257-Andrew_Marshall-Judicial_adjudication a mm:r_has_Role;
+    cv:from :Performer-59227-Andrew_Marshall;
+    cv:to :Role-59236-Judicial_adjudication .
+  
+  :has_Role-59319-Hanna_Hastings-Case_records_administration a mm:r_has_Role;
+    cv:from :Performer-59316-Hanna_Hastings;
+    cv:to :Role-59239-Case_records_administration .
+  
+  :has_Role-59315-Court_E-filing_service-Filing_administration a mm:r_has_Role;
+    cv:from :Automated_Performer-59299-Court_E-filing_service;
+    cv:to :Role-59233-Filing_administration .
+  
+  _:node8 a rdf:List;
+    rdf:first :Position-59308-Filing_clerk-Position_holders_1 .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Main_judicial_process {
+  :Intermediate_Event_BPMN-48687-Complaint_withdrawn mm:a_Escalation "No";
+    mm:a_Message "Yes";
+    mm:a_Signal "No";
+    cv:a_Name "Complaint withdrawn";
+    mm:a_Cancel_activity "No";
+    mm:a_Conditional "No";
+    mm:a_Link "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "No";
+    mm:a_Type_boundary "interrupting";
+    mm:a_Type_sequence "catching";
+    cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process .
+  
+  :Intermediate_Event_BPMN-59122-Procedural_rejection_received mm:a_Escalation "No";
+    mm:a_Message "Yes";
+    mm:a_Signal "No";
+    cv:a_Name "Procedural rejection received";
+    mm:a_Cancel_activity "No";
+    mm:a_Conditional "No";
+    mm:a_Link "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "No";
+    mm:a_Type_boundary "non-interrupting";
+    mm:a_Type_sequence "catching" .
+  
+  :Intermediate_Event_BPMN-59135-Judicial_verdict_received mm:a_Escalation "No";
+    mm:a_Message "Yes";
+    mm:a_Signal "No";
+    cv:a_Name "Judicial verdict received";
+    mm:a_Cancel_activity "No";
+    mm:a_Conditional "No";
+    mm:a_Link "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "No";
+    mm:a_Type_boundary "non-interrupting";
+    mm:a_Type_sequence "catching" .
+  
+  :Start_Event_BPMN-48666-Complaint_received mm:a_Escalation "No";
+    mm:a_Message "Yes";
+    mm:a_Signal "No";
+    mm:a_Type "Top-level";
+    cv:a_Name "Complaint received";
+    mm:a_Conditional "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "No" .
+  
+  :End_Event_BPMN-59165-Claim_rejected mm:a_Escalation "No";
+    mm:a_Message "No";
+    mm:a_Signal "No";
+    mm:a_Terminate "No";
+    mm:a_Type "local";
+    cv:a_Name "Claim rejected" .
+  
+  :End_Event_BPMN-49018-Matter_closed_without_adjudication mm:a_Escalation "No";
+    mm:a_Message "No";
+    mm:a_Signal "No";
+    mm:a_Terminate "No";
+    mm:a_Type "local";
+    cv:a_Name "Matter closed without adjudication" .
+  
+  :Intermediate_Event_BPMN-59064-Scheduled_hearing_date mm:a_Escalation "No";
+    mm:a_Message "No";
+    mm:a_Signal "No";
+    cv:a_Name "Scheduled hearing date";
+    mm:a_Cancel_activity "No";
+    mm:a_Conditional "No";
+    mm:a_Link "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "Yes";
+    mm:a_Type_boundary "non-interrupting";
+    mm:a_Type_sequence "catching" .
+  
+  :Intermediate_Event_BPMN-58878-Withdrawal_instruction_received mm:a_Escalation "No";
+    mm:a_Message "Yes";
+    mm:a_Signal "No";
+    cv:a_Name "Withdrawal instruction received";
+    mm:a_Cancel_activity "No";
+    mm:a_Conditional "No";
+    mm:a_Link "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "No";
+    mm:a_Type_boundary "non-interrupting";
+    mm:a_Type_sequence "catching" .
+  
+  :Intermediate_Event_BPMN-59618-Hearing_date mm:a_Escalation "No";
+    mm:a_Message "No";
+    mm:a_Signal "No";
+    cv:a_Name "Hearing date";
+    mm:a_Cancel_activity "No";
+    mm:a_Conditional "No";
+    mm:a_Link "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "Yes";
+    mm:a_Type_boundary "non-interrupting";
+    mm:a_Type_sequence "catching" .
+  
+  :Intermediate_Event_BPMN-58882-5_business_days mm:a_Escalation "No";
+    mm:a_Message "No";
+    mm:a_Signal "No";
+    cv:a_Name "5 business days";
+    mm:a_Cancel_activity "No";
+    mm:a_Conditional "No";
+    mm:a_Link "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "Yes";
+    mm:a_Type_boundary "non-interrupting";
+    mm:a_Type_sequence "catching" .
+  
+  :Start_Event_BPMN-58952-Claim_received mm:a_Escalation "No";
+    mm:a_Message "Yes";
+    mm:a_Signal "No";
+    mm:a_Type "Top-level";
+    cv:a_Name "Claim received";
+    mm:a_Conditional "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "No" .
+  
+  :End_Event_BPMN-48759-Representation_completed mm:a_Escalation "No";
+    mm:a_Message "No";
+    mm:a_Signal "No";
+    mm:a_Terminate "No";
+    mm:a_Type "local";
+    cv:a_Name "Representation completed" .
+  
+  :Intermediate_Event_BPMN-58867-Instruction_to_proceed_received mm:a_Escalation "No";
+    mm:a_Message "Yes";
+    mm:a_Signal "No";
+    cv:a_Name "Instruction to proceed received";
+    mm:a_Cancel_activity "No";
+    mm:a_Conditional "No";
+    mm:a_Link "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "No";
+    mm:a_Type_boundary "non-interrupting";
+    mm:a_Type_sequence "catching" .
+  
+  :Intermediate_Event_BPMN-59090-Acceptance_and_hearing_details_received mm:a_Escalation
+      "No";
+    mm:a_Message "Yes";
+    mm:a_Signal "No";
+    cv:a_Name "Acceptance and hearing details received";
+    mm:a_Cancel_activity "No";
+    mm:a_Conditional "No";
+    mm:a_Link "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "No";
+    mm:a_Type_boundary "non-interrupting";
+    mm:a_Type_sequence "catching" .
+  
+  :End_Event_BPMN-58955-Case_adjudicated mm:a_Message "No";
+    mm:a_Signal "No";
+    mm:a_Terminate "No";
+    mm:a_Type "local";
+    cv:a_Name "Case adjudicated" .
+  
+  :Sub-Process_BPMN-48720-Prepare_preliminary_case_file cv:a_Name "Prepare preliminary case file";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:r_Referenced_subprocess :Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file .
+  
+  :Sub-Process_BPMN-48678-Investigate_case cv:a_Name "Investigate case";
+    cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No" .
+  
+  :Task_BPMN-58861-Notify_case_representation_acceptance cv:a_Name "Notify case representation acceptance";
+    mm:a_Costs "6";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:15:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Send";
+    mm:r_Responsible :Performer-50669-Anna_Collins .
+  
+  :Task_BPMN-59140-Inform_about_judicial_verdict cv:a_Name "Inform about judicial verdict";
+    mm:a_Costs "90";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:40:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Send";
+    mm:r_Responsible :Performer-49636-Rachel_Bennett, :Performer-50669-Anna_Collins .
+  
+  :Task_BPMN-49010-Notify_case_representation_refusal cv:a_Name "Notify case representation refusal";
+    mm:a_Costs "6";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:15:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Send";
+    mm:r_Responsible :Performer-50669-Anna_Collins .
+  
+  :Task_BPMN-48756-Record_investigation_findings cv:a_Name "Record investigation findings";
+    mm:a_Costs "29";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:45:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49713-Victor_Hayes .
+  
+  :Task_BPMN-48669-Register_client_complaint cv:a_Name "Register client complaint";
+    mm:a_Costs "7.33";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:20:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49633-Emily_Carter .
+  
+  :Task_BPMN-48690-Record_withdrawal_instruction cv:a_Name "Record withdrawal instruction";
+    mm:a_Costs "12";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:20:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49713-Victor_Hayes .
+  
+  :Task_BPMN-58996-Represent_client_at_hearing cv:a_Name "Represent client at hearing";
+    mm:a_Costs "225";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:03:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Manual";
+    mm:r_Responsible :Performer-49636-Rachel_Bennett .
+  
+  :Task_BPMN-59171-Archive_adjudicated_case_file cv:a_Name "Archive adjudicated case file";
+    mm:a_Costs "17";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:45:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49717-Michael_Turner .
+  
+  :Task_BPMN-49218-Assess_case_viability cv:a_Name "Assess case viability";
+    mm:a_Costs "168";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:01:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49636-Rachel_Bennett, :Performer-49713-Victor_Hayes .
+  
+  :Task_BPMN-59096-Close_matter_for_client_non-response cv:a_Name "Close matter for client non-response";
+    mm:a_Costs "4";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:10:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49717-Michael_Turner .
+  
+  :Task_BPMN-59128-Notify_Court_rejection cv:a_Name "Notify Court rejection";
+    mm:a_Costs "30";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:25:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Send";
+    mm:r_Responsible :Performer-49636-Rachel_Bennett, :Performer-50669-Anna_Collins .
+  
+  :Task_BPMN-49014-Archive_non-adjudicated_matter cv:a_Name "Archive non-adjudicated matter";
+    mm:a_Costs "11";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:30:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49633-Emily_Carter .
+  
+  :Task_BPMN-59009-File_claim_with_Court cv:a_Name "File claim with Court";
+    mm:a_Costs "14";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:30:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Send";
+    mm:r_Responsible :Performer-50687-Marinette_Cheng .
+  
+  <http://www.omilab.org#Exclusive_Gateway_BPMN-59025-Requirements_satisfied?> cv:a_Name
+      "Requirements satisfied?" .
+  
+  :Task_BPMN-59102-Prepare_case_for_hearing cv:a_Name "Prepare case for hearing";
+    mm:a_Costs "110";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:02:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-59206-Gabriella_Hayes, :Performer-59227-Andrew_Marshall .
+  
+  :Task_BPMN-59035-Schedule_hearing cv:a_Name "Schedule hearing";
+    mm:a_Costs "8";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:20:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-59212-Paul_Mercer .
+  
+  :Pool_BPMN-58825-Law_firm cv:a_Name "Law firm" .
+  
+  :Pool_BPMN-58943-Court cv:a_Name "Court" .
+  
+  :Exclusive_Gateway_BPMN-58873-Await_client_instruction cv:a_Name "Await client instruction" .
+  
+  :Data_Object_BPMN-48762-Case_file cv:a_Name "Case file" .
+  
+  :Task_BPMN-58949-Register_decision cv:a_Name "Register decision";
+    mm:a_Costs "13";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:30:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-59218-Irene_Palmer .
+  
+  :Exclusive_Gateway_BPMN-59117-Await_court_response cv:a_Name "Await court response" .
+  
+  :Pool_collapsed_BPMN-58856-Client cv:a_Name "Client" .
+  
+  :Task_BPMN-58961-Notify_judicial_verdict cv:a_Name "Notify judicial verdict";
+    mm:a_Costs "8";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:20:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Send";
+    mm:r_Responsible :Performer-59212-Paul_Mercer .
+  
+  :Task_BPMN-58958-Close_case_file cv:a_Name "Close case file";
+    mm:a_Costs "13";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:30:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-59316-Hanna_Hastings .
+  
+  :Data_Object_BPMN-59176-Statement_of_claim cv:a_Name "Statement of claim" .
+  
+  :Task_BPMN-59030-Issue_procedural_rejection cv:a_Name "Issue procedural rejection";
+    mm:a_Costs "45";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:45:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-59227-Andrew_Marshall .
+  
+  :Task_BPMN-59015-Register_claim cv:a_Name "Register claim";
+    mm:a_Costs "1";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:05:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Service";
+    mm:r_Responsible :Automated_Performer-59299-Court_E-filing_service .
+  
+  :Task_BPMN-59020-Examine_procedural_requirements cv:a_Name "Examine procedural requirements";
+    mm:a_Costs "45";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:45:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-59227-Andrew_Marshall .
+  
+  <http://www.omilab.org#Exclusive_Gateway_BPMN-49006-Accept_case_representation?> cv:a_Name
+      "Accept case representation?" .
+  
+  :Task_BPMN-59107-Notify_procedural_rejection cv:a_Name "Notify procedural rejection";
+    mm:a_Costs "6";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:15:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Send";
+    mm:r_Responsible :Performer-59212-Paul_Mercer .
+  
+  :Task_BPMN-59050-Conduct_hearing cv:a_Name "Conduct hearing";
+    mm:a_Costs "255";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:03:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Manual";
+    mm:r_Responsible :Performer-59206-Gabriella_Hayes, :Performer-59227-Andrew_Marshall .
+  
+  :Task_BPMN-58946-Issue_judicial_verdict cv:a_Name "Issue judicial verdict";
+    mm:a_Costs "60";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:01:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Business rule" .
+  
+  :Task_BPMN-59004-Prepare_claim_and_supporting_documents cv:a_Name "Prepare claim and supporting documents";
+    mm:a_Costs "431";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:06:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-50684-Alexander_Moore, :Performer-49636-Rachel_Bennett .
+  
+  :Task_BPMN-59040-Notify_claim_acceptance_and_hearing_details cv:a_Name "Notify claim acceptance and hearing details";
+    mm:a_Costs "4";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:10:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Send";
+    mm:r_Responsible :Performer-59212-Paul_Mercer .
+  
+  :Sub-Process_BPMN-48726-Resolve_pending_interview_invitation cv:a_Name "Resolve pending interview invitation";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Multi-instance";
+    mm:a_Sequential_execution "No" .
+  
+  <http://www.omilab.org#Non-exclusive_Gateway_BPMN-59843-Follow-up_required?> cv:a_Name
+      "Follow-up required?" .
+  
+  :Non-exclusive_Gateway_BPMN-59830-Non-exclusive_Gateway_BPMN-59830 cv:a_Name "Non-exclusive Gateway (BPMN)-59830" .
+  
+  :Performer-50687-Marinette_Cheng cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-49665-Samuel_Grant cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-50684-Alexander_Moore cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-49636-Rachel_Bennett cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-49713-Victor_Hayes cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Data_Object_BPMN-59195-Pending_interview_invitations cv:described_in :Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file .
+  
+  :Performer-49717-Michael_Turner cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-49633-Emily_Carter cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-50669-Anna_Collins cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-59316-Hanna_Hastings cv:described_in :Working_Environment_Model-Court_structure .
+  
+  :Performer-59218-Irene_Palmer cv:described_in :Working_Environment_Model-Court_structure .
+  
+  :Performer-59206-Gabriella_Hayes cv:described_in :Working_Environment_Model-Court_structure .
+  
+  :Performer-59227-Andrew_Marshall cv:described_in :Working_Environment_Model-Court_structure .
+  
+  :Automated_Performer-59299-Court_E-filing_service cv:described_in :Working_Environment_Model-Court_structure .
+  
+  :Performer-59212-Paul_Mercer cv:described_in :Working_Environment_Model-Court_structure .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements {
+  :Start_Event_BPMN-51178-Scheduled_date mm:a_Escalation "No";
+    mm:a_Message "No";
+    mm:a_Signal "No";
+    mm:a_Type "Top-level";
+    cv:a_Name "Scheduled date";
+    mm:a_Conditional "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "Yes" .
+  
+  :End_Event_BPMN-51183-Statement_prepared mm:a_Escalation "No";
+    mm:a_Message "No";
+    mm:a_Signal "No";
+    mm:a_Terminate "No";
+    mm:a_Type "local";
+    cv:a_Name "Statement prepared" .
+  
+  :Task_BPMN-51121-Document_statements cv:a_Name "Document statements";
+    cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements;
+    mm:a_Costs "0";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Multi-instance";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-50687-Marinette_Cheng, :Performer-50684-Alexander_Moore .
+  
+  :Task_BPMN-51130-Confirm_consistency cv:a_Name "Confirm consistency";
+    mm:a_Costs "40";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:30:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49636-Rachel_Bennett, :Performer-49671-Bianca_Hayes .
+  
+  :Task_BPMN-51136-Flag_contradictions cv:a_Name "Flag contradictions";
+    mm:a_Costs "78";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:01:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49636-Rachel_Bennett .
+  
+  :Task_BPMN-51115-Interview_involved_parties cv:a_Name "Interview involved parties";
+    mm:a_Costs "0";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Multi-instance";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Manual";
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49671-Bianca_Hayes .
+  
+  :Task_BPMN-51142-Compare_statements cv:a_Name "Compare statements";
+    cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements;
+    mm:a_Costs "0";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Multi-instance";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49671-Bianca_Hayes .
+  
+  :Task_BPMN-51133-Prepare_statement_analysis_notes cv:a_Name "Prepare statement analysis notes";
+    mm:a_Costs "155";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:02:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49636-Rachel_Bennett .
+  
+  :Non-exclusive_Gateway_BPMN-51124-Non-exclusive_Gateway_BPMN-49234 cv:a_Name "Non-exclusive Gateway (BPMN)-49234" .
+  
+  :Data_Object_BPMN-51118-Collected_statements cv:a_Name "Collected statements";
+    cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements .
+  
+  <http://www.omilab.org#Exclusive_Gateway_BPMN-51139-Inconsistencies_identified?> cv:a_Name
+      "Inconsistencies identified?" .
+  
+  :Non-exclusive_Gateway_BPMN-51127-Non-exclusive_Gateway_BPMN-49238 cv:a_Name "Non-exclusive Gateway (BPMN)-49238" .
+  
+  :Performer-50687-Marinette_Cheng cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-49665-Samuel_Grant cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-50684-Alexander_Moore cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-49636-Rachel_Bennett cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-49671-Bianca_Hayes cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Sub-Process_BPMN-51175-Collect_and_analyze_statements cv:described_in :Business_Process_Diagram_BPMN_2_0-Investigate_case .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Resolve_pending_interview_invitation {
+  :End_Event_BPMN-49495-Interview_scheduled mm:a_Message "No";
+    mm:a_Signal "No";
+    mm:a_Terminate "No";
+    mm:a_Type "local";
+    cv:a_Name "Interview scheduled" .
+  
+  :Intermediate_Event_BPMN-58900-Participation_refusal_received mm:a_Message "Yes";
+    mm:a_Signal "No";
+    cv:a_Name "Participation refusal received";
+    mm:a_Cancel_activity "No";
+    mm:a_Conditional "No";
+    mm:a_Link "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "No";
+    mm:a_Type_boundary "non-interrupting";
+    mm:a_Type_sequence "catching" .
+  
+  :End_Event_BPMN-58921-Participation_refusal_recorded mm:a_Message "No";
+    mm:a_Signal "No";
+    mm:a_Terminate "No";
+    mm:a_Type "local";
+    cv:a_Name "Participation refusal recorded" .
+  
+  :End_Event_BPMN-58938-Interview_response_unresolved mm:a_Message "No";
+    mm:a_Signal "No";
+    mm:a_Terminate "No";
+    mm:a_Type "local";
+    cv:a_Name "Interview response unresolved" .
+  
+  :Intermediate_Event_BPMN-58891-Participation_confirmation_received mm:a_Message "Yes";
+    mm:a_Signal "No";
+    cv:a_Name "Participation confirmation received";
+    mm:a_Cancel_activity "No";
+    mm:a_Conditional "No";
+    mm:a_Link "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "No";
+    mm:a_Type_boundary "non-interrupting";
+    mm:a_Type_sequence "catching" .
+  
+  :Intermediate_Event_BPMN-58910-5_business_days mm:a_Message "No";
+    mm:a_Signal "No";
+    cv:a_Name "5 business days";
+    mm:a_Cancel_activity "No";
+    mm:a_Conditional "No";
+    mm:a_Link "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "Yes";
+    mm:a_Type_boundary "non-interrupting";
+    mm:a_Type_sequence "catching" .
+  
+  :Start_Event_BPMN-49465-Initial_interview_request_unanswered mm:a_Message "No";
+    mm:a_Signal "No";
+    mm:a_Type "Top-level";
+    cv:a_Name "Initial interview request unanswered";
+    mm:a_Conditional "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "No" .
+  
+  :Task_BPMN-58916-Schedule_interview cv:a_Name "Schedule interview";
+    mm:a_Costs "7";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User" .
+  
+  :Exclusive_Gateway_BPMN-49476-Await_interview_response cv:a_Name "Await interview response" .
+  
+  :Task_BPMN-58932-Record_non-response cv:a_Name "Record non-response";
+    mm:a_Costs "14.67";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:15:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-50684-Alexander_Moore .
+  
+  :Task_BPMN-49480-Record_interview_availability cv:a_Name "Record interview availability";
+    mm:a_Costs "4.67";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:10:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-50684-Alexander_Moore .
+  
+  :Task_BPMN-49468-Verify_contact_details cv:a_Name "Verify contact details";
+    mm:a_Costs "16";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:20:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-50684-Alexander_Moore .
+  
+  :Task_BPMN-58905-Record_participation_refusal cv:a_Name "Record participation refusal";
+    mm:a_Costs "4.67";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:10:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-50684-Alexander_Moore .
+  
+  :Task_BPMN-49472-Send_follow-up_interview_request cv:a_Name "Send follow-up interview request";
+    mm:a_Costs "4.67";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:10:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Send";
+    mm:r_Responsible :Performer-50687-Marinette_Cheng .
+  
+  :Performer-50687-Marinette_Cheng cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-49665-Samuel_Grant cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-50684-Alexander_Moore cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Sub-Process_BPMN-48726-Resolve_pending_interview_invitation cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records {
+  :End_Event_BPMN-49388-Collection_completed mm:a_Message "No";
+    mm:a_Signal "No";
+    mm:a_Terminate "No";
+    mm:a_Type "local";
+    cv:a_Name "Collection completed" .
+  
+  :Start_Event_BPMN-49383-Start_document_collection mm:a_Message "No";
+    mm:a_Signal "No";
+    mm:a_Type "Top-level";
+    cv:a_Name "Start document collection";
+    mm:a_Conditional "No";
+    mm:a_Parallel "No";
+    mm:a_Timer "No" .
+  
+  :Task_BPMN-49395-Review_collected_documents_and_records cv:a_Name "Review collected documents and records";
+    mm:a_Costs "232.5";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:03:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49636-Rachel_Bennett .
+  
+  <http://www.omilab.org#Exclusive_Gateway_BPMN-49400-Evidence_complete?> cv:a_Name
+      "Evidence complete?" .
+  
+  :Task_BPMN-49405-Issue_additional_request cv:a_Name "Issue additional request";
+    mm:a_Costs "9.33";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:20:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-50687-Marinette_Cheng .
+  
+  :Task_BPMN-49418-Prepare_evidence_set_for_analysis cv:a_Name "Prepare evidence set for analysis";
+    mm:a_Costs "96";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:02:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-50684-Alexander_Moore, :Performer-49671-Bianca_Hayes .
+  
+  :Task_BPMN-49356-Retrieve_existing_records cv:a_Name "Retrieve existing records";
+    mm:a_Costs "96";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:02:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-50684-Alexander_Moore, :Performer-49671-Bianca_Hayes .
+  
+  :Non-exclusive_Gateway_BPMN-49372- cv:a_Name "" .
+  
+  <http://www.omilab.org#Non-exclusive_Gateway_BPMN-49351-Required_sources?> cv:a_Name
+      "Required sources?" .
+  
+  :Task_BPMN-49409-Collect_missing_items cv:a_Name "Collect missing items";
+    mm:a_Costs "96";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:02:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-50687-Marinette_Cheng, :Performer-49671-Bianca_Hayes .
+  
+  :Task_BPMN-49346-Request_documents cv:a_Name "Request documents";
+    mm:a_Costs "14";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:30:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-50687-Marinette_Cheng .
+  
+  :Task_BPMN-49342-Identify_required_documents_and_records cv:a_Name "Identify required documents and records";
+    mm:a_Costs "135";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:01:30:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49636-Rachel_Bennett .
+  
+  :Performer-50687-Marinette_Cheng cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-49665-Samuel_Grant cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-50684-Alexander_Moore cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-49636-Rachel_Bennett cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-49671-Bianca_Hayes cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Sub-Process_BPMN-48955-Collect_documents_and_records cv:described_in :Business_Process_Diagram_BPMN_2_0-Investigate_case .
+}
+
+cv:graphmetadata {
+  :Business_Process_Diagram_BPMN_2_0-Main_judicial_process mm:a_Type "Business Process Diagram (BPMN 2.0)";
+    cv:a_Name "Main judicial process" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file mm:a_Type "Business Process Diagram (BPMN 2.0)";
+    cv:a_Name "Prepare preliminary case file" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Investigate_case mm:a_Type "Business Process Diagram (BPMN 2.0)";
+    cv:a_Name "Investigate case" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Conduct_on-site_investigation mm:a_Type "Business Process Diagram (BPMN 2.0)";
+    cv:a_Name "Conduct on-site investigation" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records mm:a_Type "Business Process Diagram (BPMN 2.0)";
+    cv:a_Name "Collect documents and records" .
+  
+  :Working_Environment_Model-Law_firm_structure mm:a_Type "Working Environment Model";
+    cv:a_Name "Law firm structure" .
+  
+  :Working_Environment_Model-Court_structure mm:a_Type "Working Environment Model";
+    cv:a_Name "Court structure" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements mm:a_Type "Business Process Diagram (BPMN 2.0)";
+    cv:a_Name "Collect and analyze statements" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Resolve_pending_interview_invitation mm:a_Type
+      "Business Process Diagram (BPMN 2.0)";
+    cv:a_Name "Resolve pending interview invitation" .
+}
+
+:Working_Environment_Model-Law_firm_structure {
+  :Organizational_Unit-49618-Law_firm mm:a_Type "Standard";
+    cv:a_Name "Law firm" .
+  
+  :Organizational_Unit-49621-Client_intake_and_Administration_ mm:a_Type "Standard";
+    cv:a_Name "Client intake and Administration " .
+  
+  :Organizational_Unit-49624-Litigation_and_Case_management mm:a_Type "Standard";
+    cv:a_Name "Litigation and Case management" .
+  
+  :Organizational_Unit-49661-Investigation_and_Evidence mm:a_Type "Standard";
+    cv:a_Name "Investigation and Evidence" .
+  
+  :Performer-50687-Marinette_Cheng cv:a_Name "Marinette Cheng" .
+  
+  :Performer-49665-Samuel_Grant cv:a_Name "Samuel Grant" .
+  
+  :Performer-50684-Alexander_Moore cv:a_Name "Alexander Moore" .
+  
+  :Performer-49636-Rachel_Bennett cv:a_Name "Rachel Bennett" .
+  
+  :Performer-49713-Victor_Hayes cv:a_Name "Victor Hayes" .
+  
+  :Performer-49671-Bianca_Hayes cv:a_Name "Bianca Hayes" .
+  
+  :Performer-49717-Michael_Turner cv:a_Name "Michael Turner" .
+  
+  :Performer-49633-Emily_Carter cv:a_Name "Emily Carter" .
+  
+  :Resource-59272-Case-management_system cv:a_Name "Case-management system" .
+  
+  <http://www.omilab.org#Role-50725-Investigation_+_Evidence_collection> cv:a_Name "Investigation & Evidence collection" .
+  
+  :Performer-50669-Anna_Collins cv:a_Name "Anna Collins" .
+  
+  :Role-50719-Client_intake_administration cv:a_Name "Client intake administration" .
+  
+  <http://www.omilab.org#Role-50722-Legal_+_Filing_support> cv:a_Name "Legal & Filing support" .
+  
+  :Role-50740-Client_communication cv:a_Name "Client communication" .
+  
+  :Role-50743-Case_coordination cv:a_Name "Case coordination" .
+  
+  :Role-50737-Legal_assessment_and_Representation cv:a_Name "Legal assessment and Representation" .
+  
+  :Task_BPMN-58932-Record_non-response cv:described_in :Business_Process_Diagram_BPMN_2_0-Resolve_pending_interview_invitation;
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-50684-Alexander_Moore .
+  
+  :Task_BPMN-49480-Record_interview_availability cv:described_in :Business_Process_Diagram_BPMN_2_0-Resolve_pending_interview_invitation;
+    mm:r_Responsible :Performer-50684-Alexander_Moore .
+  
+  :Task_BPMN-49468-Verify_contact_details cv:described_in :Business_Process_Diagram_BPMN_2_0-Resolve_pending_interview_invitation;
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-50684-Alexander_Moore .
+  
+  :Task_BPMN-58905-Record_participation_refusal cv:described_in :Business_Process_Diagram_BPMN_2_0-Resolve_pending_interview_invitation;
+    mm:r_Responsible :Performer-50684-Alexander_Moore .
+  
+  :Task_BPMN-49472-Send_follow-up_interview_request cv:described_in :Business_Process_Diagram_BPMN_2_0-Resolve_pending_interview_invitation;
+    mm:r_Responsible :Performer-50687-Marinette_Cheng .
+  
+  :Task_BPMN-48798-Assign_investigation_team cv:described_in :Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file;
+    mm:r_Responsible :Performer-49636-Rachel_Bennett, :Performer-49713-Victor_Hayes .
+  
+  :Task_BPMN-48801-Prepare_list_of_potential_witnesses cv:described_in :Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file;
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49636-Rachel_Bennett .
+  
+  :Task_BPMN-48804-Send_interview_request cv:described_in :Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file;
+    mm:r_Responsible :Performer-50687-Marinette_Cheng, :Performer-50684-Alexander_Moore .
+  
+  :Task_BPMN-49395-Review_collected_documents_and_records cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records;
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49636-Rachel_Bennett .
+  
+  :Task_BPMN-49405-Issue_additional_request cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records;
+    mm:r_Responsible :Performer-50687-Marinette_Cheng .
+  
+  :Task_BPMN-49418-Prepare_evidence_set_for_analysis cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records;
+    mm:r_Responsible :Performer-50684-Alexander_Moore, :Performer-49671-Bianca_Hayes .
+  
+  :Task_BPMN-49356-Retrieve_existing_records cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records;
+    mm:r_Responsible :Performer-50684-Alexander_Moore, :Performer-49671-Bianca_Hayes .
+  
+  :Task_BPMN-49409-Collect_missing_items cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records;
+    mm:r_Responsible :Performer-50687-Marinette_Cheng, :Performer-49671-Bianca_Hayes .
+  
+  :Task_BPMN-49346-Request_documents cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records;
+    mm:r_Responsible :Performer-50687-Marinette_Cheng .
+  
+  :Task_BPMN-49318-Collect_physical_evidence cv:described_in :Business_Process_Diagram_BPMN_2_0-Conduct_on-site_investigation;
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49671-Bianca_Hayes .
+  
+  :Task_BPMN-49314-Document_observations cv:described_in :Business_Process_Diagram_BPMN_2_0-Conduct_on-site_investigation;
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49671-Bianca_Hayes .
+  
+  :Task_BPMN-51121-Document_statements cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements;
+    mm:r_Responsible :Performer-50687-Marinette_Cheng, :Performer-50684-Alexander_Moore .
+  
+  :Task_BPMN-58861-Notify_case_representation_acceptance cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-50669-Anna_Collins .
+  
+  :Task_BPMN-59140-Inform_about_judicial_verdict cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-49636-Rachel_Bennett, :Performer-50669-Anna_Collins .
+  
+  :Task_BPMN-49010-Notify_case_representation_refusal cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-50669-Anna_Collins .
+  
+  :Task_BPMN-51130-Confirm_consistency cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements;
+    mm:r_Responsible :Performer-49636-Rachel_Bennett, :Performer-49671-Bianca_Hayes .
+  
+  :Task_BPMN-51136-Flag_contradictions cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements;
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49636-Rachel_Bennett .
+  
+  :Task_BPMN-51115-Interview_involved_parties cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements;
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49671-Bianca_Hayes .
+  
+  :Task_BPMN-48756-Record_investigation_findings cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49713-Victor_Hayes .
+  
+  :Task_BPMN-48669-Register_client_complaint cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-49633-Emily_Carter .
+  
+  :Task_BPMN-51142-Compare_statements cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements;
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49671-Bianca_Hayes .
+  
+  :Task_BPMN-48690-Record_withdrawal_instruction cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-49713-Victor_Hayes .
+  
+  :Task_BPMN-58996-Represent_client_at_hearing cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-49636-Rachel_Bennett .
+  
+  :Task_BPMN-51133-Prepare_statement_analysis_notes cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements;
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49636-Rachel_Bennett .
+  
+  :Task_BPMN-59171-Archive_adjudicated_case_file cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-49717-Michael_Turner .
+  
+  :Task_BPMN-49218-Assess_case_viability cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-49636-Rachel_Bennett, :Performer-49713-Victor_Hayes .
+  
+  :Task_BPMN-59096-Close_matter_for_client_non-response cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-49717-Michael_Turner .
+  
+  :Task_BPMN-59128-Notify_Court_rejection cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-49636-Rachel_Bennett, :Performer-50669-Anna_Collins .
+  
+  :Task_BPMN-49014-Archive_non-adjudicated_matter cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-49633-Emily_Carter .
+  
+  :Task_BPMN-59009-File_claim_with_Court cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-50687-Marinette_Cheng .
+  
+  :Task_BPMN-50986-Analyze_document_and_record cv:described_in :Business_Process_Diagram_BPMN_2_0-Investigate_case;
+    mm:r_Responsible :Performer-50684-Alexander_Moore, :Performer-49671-Bianca_Hayes .
+  
+  :Task_BPMN-49342-Identify_required_documents_and_records cv:described_in :Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records;
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49636-Rachel_Bennett .
+  
+  :Task_BPMN-59004-Prepare_claim_and_supporting_documents cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-50684-Alexander_Moore, :Performer-49636-Rachel_Bennett .
+  
+  :Task_BPMN-59191-Identify_unanswered_interview_invitations cv:described_in :Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file;
+    mm:r_Responsible :Performer-50684-Alexander_Moore .
+}
+
+:Working_Environment_Model-Court_structure {
+  :Automated_Performer-59299-Court_E-filing_service mm:a_Type "Digital";
+    cv:a_Name "Court E-filing service" .
+  
+  :Organizational_Unit-59215-Records_Management mm:a_Type "Standard";
+    cv:a_Name "Records Management" .
+  
+  :Organizational_Unit-59224-Judicial_Chamber mm:a_Type "Standard";
+    cv:a_Name "Judicial Chamber" .
+  
+  :Organizational_Unit-59203-Court mm:a_Type "Standard";
+    cv:a_Name "Court" .
+  
+  :Organizational_Unit-59209-Court_Registry mm:a_Type "Standard";
+    cv:a_Name "Court Registry" .
+  
+  :Performer-59316-Hanna_Hastings cv:a_Name "Hanna Hastings" .
+  
+  :Performer-59218-Irene_Palmer cv:a_Name "Irene Palmer" .
+  
+  :Performer-59206-Gabriella_Hayes cv:a_Name "Gabriella Hayes" .
+  
+  :Performer-59227-Andrew_Marshall cv:a_Name "Andrew Marshall" .
+  
+  :Performer-59212-Paul_Mercer cv:a_Name "Paul Mercer" .
+  
+  :Performer-59221-Laura_Bennett cv:a_Name "Laura Bennett" .
+  
+  :Role-59233-Filing_administration cv:a_Name "Filing administration" .
+  
+  :Role-59242-Court_registry_administration cv:a_Name "Court registry administration" .
+  
+  :Role-59236-Judicial_adjudication cv:a_Name "Judicial adjudication" .
+  
+  :Position-59308-Filing_clerk cv:a_Name "Filing clerk" .
+  
+  :Performer-59230-Olivia_Carter cv:a_Name "Olivia Carter" .
+  
+  :Role-59239-Case_records_administration cv:a_Name "Case records administration" .
+  
+  :Task_BPMN-59102-Prepare_case_for_hearing cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-59206-Gabriella_Hayes, :Performer-59227-Andrew_Marshall .
+  
+  :Task_BPMN-59035-Schedule_hearing cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-59212-Paul_Mercer .
+  
+  :Task_BPMN-58949-Register_decision cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-59218-Irene_Palmer .
+  
+  :Task_BPMN-58961-Notify_judicial_verdict cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-59212-Paul_Mercer .
+  
+  :Task_BPMN-58958-Close_case_file cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-59316-Hanna_Hastings .
+  
+  :Task_BPMN-59030-Issue_procedural_rejection cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-59227-Andrew_Marshall .
+  
+  :Task_BPMN-59015-Register_claim cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Automated_Performer-59299-Court_E-filing_service .
+  
+  :Task_BPMN-59020-Examine_procedural_requirements cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-59227-Andrew_Marshall .
+  
+  :Task_BPMN-59107-Notify_procedural_rejection cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-59212-Paul_Mercer .
+  
+  :Task_BPMN-59050-Conduct_hearing cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-59206-Gabriella_Hayes, :Performer-59227-Andrew_Marshall .
+  
+  :Task_BPMN-59040-Notify_claim_acceptance_and_hearing_details cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Responsible :Performer-59212-Paul_Mercer .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file {
+  :Task_BPMN-48798-Assign_investigation_team cv:a_Name "Assign investigation team";
+    mm:a_Costs "24.67";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:20:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49636-Rachel_Bennett, :Performer-49713-Victor_Hayes .
+  
+  :Task_BPMN-48801-Prepare_list_of_potential_witnesses cv:a_Name "Prepare list of potential witnesses";
+    mm:a_Costs "97.5";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:01:30:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49636-Rachel_Bennett .
+  
+  :Data_Object_BPMN-59195-Pending_interview_invitations cv:a_Name "Pending interview invitations" .
+  
+  :Task_BPMN-48804-Send_interview_request cv:a_Name "Send interview request";
+    cv:described_in :Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file;
+    mm:a_Costs "0";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Multi-instance";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Send";
+    mm:r_Responsible :Performer-50687-Marinette_Cheng, :Performer-50684-Alexander_Moore .
+  
+  :Task_BPMN-59191-Identify_unanswered_interview_invitations cv:a_Name "Identify unanswered interview invitations";
+    mm:a_Costs "9.33";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:20:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-50684-Alexander_Moore .
+  
+  :Data_Object_BPMN-51106-Potential_witnesses cv:a_Name "Potential witnesses";
+    cv:described_in :Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file .
+  
+  :Performer-50687-Marinette_Cheng cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-49665-Samuel_Grant cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-50684-Alexander_Moore cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-49636-Rachel_Bennett cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-49713-Victor_Hayes cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Sub-Process_BPMN-48720-Prepare_preliminary_case_file cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process;
+    mm:r_Referenced_subprocess :Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file .
+  
+  :Sub-Process_BPMN-48726-Resolve_pending_interview_invitation cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Investigate_case {
+  :Sub-Process_BPMN-48961-Conduct_on-site_investigation cv:a_Name "Conduct on-site investigation";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:r_Referenced_subprocess :Business_Process_Diagram_BPMN_2_0-Conduct_on-site_investigation .
+  
+  :Sub-Process_BPMN-51175-Collect_and_analyze_statements cv:a_Name "Collect and analyze statements";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No" .
+  
+  :Sub-Process_BPMN-48955-Collect_documents_and_records cv:a_Name "Collect documents and records";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No" .
+  
+  :Task_BPMN-50986-Analyze_document_and_record cv:a_Name "Analyze document and record";
+    cv:described_in :Business_Process_Diagram_BPMN_2_0-Investigate_case;
+    mm:a_Costs "0";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:00:00:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Multi-instance";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Not specified";
+    mm:r_Responsible :Performer-50684-Alexander_Moore, :Performer-49671-Bianca_Hayes .
+  
+  :Data_Object_BPMN-49378-Collected_documents_and_records cv:a_Name "Collected documents and records";
+    cv:described_in :Business_Process_Diagram_BPMN_2_0-Investigate_case .
+  
+  :Performer-50684-Alexander_Moore cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Performer-49671-Bianca_Hayes cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Sub-Process_BPMN-48678-Investigate_case cv:described_in :Business_Process_Diagram_BPMN_2_0-Main_judicial_process .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Conduct_on-site_investigation {
+  :Task_BPMN-49318-Collect_physical_evidence cv:a_Name "Collect physical evidence";
+    mm:a_Costs "180";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:02:30:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "Manual";
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49671-Bianca_Hayes .
+  
+  :Task_BPMN-49314-Document_observations cv:a_Name "Document observations";
+    mm:a_Costs "80";
+    mm:a_Execution_interruptable "yes";
+    mm:a_Execution_time "00:000:01:30:00";
+    mm:a_For_compensation "No";
+    mm:a_Loop_type "Not specified";
+    mm:a_Sequential_execution "No";
+    mm:a_Task_type "User";
+    mm:r_Responsible :Performer-49665-Samuel_Grant, :Performer-49671-Bianca_Hayes .
+  
+  :Performer-49665-Samuel_Grant cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Sub-Process_BPMN-48961-Conduct_on-site_investigation cv:described_in :Business_Process_Diagram_BPMN_2_0-Investigate_case .
+  
+  :Performer-49671-Bianca_Hayes cv:described_in :Working_Environment_Model-Law_firm_structure .
+  
+  :Sub-Process_BPMN-48961-Conduct_on-site_investigation mm:r_Referenced_subprocess :Business_Process_Diagram_BPMN_2_0-Conduct_on-site_investigation .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Main_judicial_process {
+  :Sub-Process_BPMN-48678-Investigate_case mm:r_Referenced_subprocess :Business_Process_Diagram_BPMN_2_0-Investigate_case;
+    mm:a_Sub-Process_type "Ad-Hoc";
+    mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Sub-Process_BPMN-48726-Resolve_pending_interview_invitation mm:r_Referenced_subprocess
+      :Business_Process_Diagram_BPMN_2_0-Resolve_pending_interview_invitation;
+    mm:r_Referenced_data_input :Data_Object_BPMN-59195-Pending_interview_invitations;
+    mm:a_Sub-Process_type "Embedded";
+    mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  <http://www.omilab.org#Exclusive_Gateway_BPMN-59025-Requirements_satisfied?> mm:a_Gateway_type
+      "Data-based (without marker)";
+    mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :Exclusive_Gateway_BPMN-58873-Await_client_instruction mm:a_Gateway_type "Event-based (do not instantiate)";
+    mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Exclusive_Gateway_BPMN-59117-Await_court_response mm:a_Gateway_type "Event-based (do not instantiate)";
+    mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  <http://www.omilab.org#Exclusive_Gateway_BPMN-49006-Accept_case_representation?> mm:a_Gateway_type
+      "Data-based (without marker)";
+    mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  <http://www.omilab.org#Non-exclusive_Gateway_BPMN-59843-Follow-up_required?> mm:a_Gateway_type
+      "Inclusive";
+    mm:a_Parallel_type "Data-based";
+    mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Non-exclusive_Gateway_BPMN-59830-Non-exclusive_Gateway_BPMN-59830 mm:a_Gateway_type
+      "Inclusive";
+    mm:a_Parallel_type "Data-based";
+    mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Data_Object_BPMN-48762-Case_file mm:a_Data_type "Data Object";
+    mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Data_Object_BPMN-59176-Statement_of_claim mm:a_Data_type "Data Object";
+    mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Intermediate_Event_BPMN-48687-Complaint_withdrawn mm:r_Attached_to :Sub-Process_BPMN-48678-Investigate_case;
+    mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Sub-Process_BPMN-48720-Prepare_preliminary_case_file mm:a_Sub-Process_type "Ad-Hoc";
+    mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  <http://www.omilab.org#Subsequent-59086-Requirements_satisfied?-Prepare_case_for_hearing>
+    mm:a_Denomination "yes" .
+  
+  :Message_Flow_BPMN-58860-Notify_case_representation_refusal-Client mm:a_Denomination
+      "Case representation refusal notice" .
+  
+  :Message_Flow_BPMN-59134-Notify_Court_rejection-Client mm:a_Denomination "Court rejection notice" .
+  
+  <http://www.omilab.org#Subsequent-59034-Requirements_satisfied?-Issue_procedural_rejection>
+    mm:a_Denomination "no" .
+  
+  <http://www.omilab.org#Subsequent-49013-Accept_case_representation?-Notify_case_representation_refusal>
+    mm:a_Denomination "no" .
+  
+  :Message_Flow_BPMN-58888-Client-Withdrawal_instruction_received mm:a_Denomination
+      "Withdrawal instruction" .
+  
+  :Message_Flow_BPMN-59127-Notify_procedural_rejection-Procedural_rejection_received
+    mm:a_Denomination "Procedural rejection order" .
+  
+  <http://www.omilab.org#Subsequent-49022-Accept_case_representation?-Notify_case_representation_acceptance>
+    mm:a_Denomination "yes" .
+  
+  :Message_Flow_BPMN-59145-Inform_about_judicial_verdict-Client mm:a_Denomination "Judicial verdict" .
+  
+  :Message_Flow_BPMN-58859-Client-Complaint_received mm:a_Denomination "Complaint" .
+  
+  :Message_Flow_BPMN-58872-Client-Instruction_to_proceed_received mm:a_Denomination
+      "Instruction to proceed" .
+  
+  :Message_Flow_BPMN-59163-Notify_judicial_verdict-Judicial_verdict_received mm:a_Denomination
+      "Judicial verdict" .
+  
+  :Message_Flow_BPMN-58866-Notify_case_representation_acceptance-Client mm:a_Denomination
+      "Case acceptance notice" .
+  
+  :Message_Flow_BPMN-59014-File_claim_with_Court-Claim_received mm:a_Denomination "Claim and supporting documents" .
+  
+  :Message_Flow_BPMN-59095-Notify_claim_acceptance_and_hearing_details-Acceptance_and_hearing_details_received
+    mm:a_Denomination "Acceptance and hearing details" .
+  
+  :Subsequent-48792-Record_investigation_findings-Prepare_claim_and_supporting_documents
+    mm:a_Denomination "sent to court" .
+  
+  <http://www.omilab.org#Subsequent-59849-Follow-up_required?-Resolve_pending_interview_invitation>
+    mm:a_Denomination "unanswered interview invitations" .
+  
+  :Task_BPMN-58861-Notify_case_representation_acceptance mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-59140-Inform_about_judicial_verdict mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-49010-Notify_case_representation_refusal mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-48756-Record_investigation_findings mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-48669-Register_client_complaint mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-48690-Record_withdrawal_instruction mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-58996-Represent_client_at_hearing mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-59171-Archive_adjudicated_case_file mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-49218-Assess_case_viability mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-59096-Close_matter_for_client_non-response mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-59128-Notify_Court_rejection mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-49014-Archive_non-adjudicated_matter mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-59009-File_claim_with_Court mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-59102-Prepare_case_for_hearing mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :Task_BPMN-59035-Schedule_hearing mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :End_Event_BPMN-58955-Case_adjudicated mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :Task_BPMN-58949-Register_decision mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :Intermediate_Event_BPMN-59122-Procedural_rejection_received mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Intermediate_Event_BPMN-59135-Judicial_verdict_received mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Start_Event_BPMN-48666-Complaint_received mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :End_Event_BPMN-59165-Claim_rejected mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :Task_BPMN-58961-Notify_judicial_verdict mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :Task_BPMN-58958-Close_case_file mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :End_Event_BPMN-49018-Matter_closed_without_adjudication mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Intermediate_Event_BPMN-59064-Scheduled_hearing_date mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :Task_BPMN-59030-Issue_procedural_rejection mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :Task_BPMN-59015-Register_claim mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :Task_BPMN-59020-Examine_procedural_requirements mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :Intermediate_Event_BPMN-58878-Withdrawal_instruction_received mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-59107-Notify_procedural_rejection mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :Intermediate_Event_BPMN-59618-Hearing_date mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Intermediate_Event_BPMN-58882-5_business_days mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-59050-Conduct_hearing mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :Start_Event_BPMN-58952-Claim_received mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :Task_BPMN-58946-Issue_judicial_verdict mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :End_Event_BPMN-48759-Representation_completed mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Intermediate_Event_BPMN-58867-Instruction_to_proceed_received mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-59004-Prepare_claim_and_supporting_documents mm:r_Is_inside :Pool_BPMN-58825-Law_firm .
+  
+  :Task_BPMN-59040-Notify_claim_acceptance_and_hearing_details mm:r_Is_inside :Pool_BPMN-58943-Court .
+  
+  :Intermediate_Event_BPMN-59090-Acceptance_and_hearing_details_received mm:r_Is_inside
+      :Pool_BPMN-58825-Law_firm .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Investigate_case {
+  :Sub-Process_BPMN-48678-Investigate_case mm:r_Referenced_subprocess :Business_Process_Diagram_BPMN_2_0-Investigate_case .
+  
+  :Sub-Process_BPMN-51175-Collect_and_analyze_statements mm:r_Referenced_subprocess
+      :Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements;
+    mm:a_Sub-Process_type "Embedded" .
+  
+  :Sub-Process_BPMN-48955-Collect_documents_and_records mm:r_Referenced_subprocess :Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records;
+    mm:a_Sub-Process_type "Embedded" .
+  
+  :Data_Object_BPMN-49378-Collected_documents_and_records mm:a_Data_type "Data Object" .
+  
+  :Task_BPMN-50986-Analyze_document_and_record mm:r_Referenced_data_input :Data_Object_BPMN-49378-Collected_documents_and_records .
+  
+  :Sub-Process_BPMN-48961-Conduct_on-site_investigation mm:a_Sub-Process_type "Ad-Hoc" .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements {
+  :Sub-Process_BPMN-51175-Collect_and_analyze_statements mm:r_Referenced_subprocess
+      :Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements .
+  
+  :Non-exclusive_Gateway_BPMN-51124-Non-exclusive_Gateway_BPMN-49234 mm:a_Gateway_type
+      "Parallel";
+    mm:a_Parallel_type "Data-based" .
+  
+  <http://www.omilab.org#Exclusive_Gateway_BPMN-51139-Inconsistencies_identified?> mm:a_Gateway_type
+      "Data-based (without marker)" .
+  
+  :Non-exclusive_Gateway_BPMN-51127-Non-exclusive_Gateway_BPMN-49238 mm:a_Gateway_type
+      "Parallel";
+    mm:a_Parallel_type "Data-based" .
+  
+  :Data_Object_BPMN-51118-Collected_statements mm:a_Data_type "Data Object" .
+  
+  :Task_BPMN-51142-Compare_statements mm:r_Referenced_data_input :Data_Object_BPMN-51118-Collected_statements;
+    mm:a_Cardinality "3" .
+  
+  <http://www.omilab.org#Subsequent-51155-Inconsistencies_identified?-Confirm_consistency>
+    mm:a_Denomination "no" .
+  
+  <http://www.omilab.org#Subsequent-51158-Inconsistencies_identified?-Flag_contradictions>
+    mm:a_Denomination "yes" .
+  
+  :Task_BPMN-51121-Document_statements mm:a_Cardinality "3";
+    mm:r_Referenced_data_output :Data_Object_BPMN-51118-Collected_statements .
+  
+  :Task_BPMN-51115-Interview_involved_parties mm:a_Cardinality "3" .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records {
+  :Sub-Process_BPMN-48955-Collect_documents_and_records mm:r_Referenced_subprocess :Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records .
+  
+  <http://www.omilab.org#Exclusive_Gateway_BPMN-49400-Evidence_complete?> mm:a_Gateway_type
+      "Data-based (without marker)" .
+  
+  :Non-exclusive_Gateway_BPMN-49372- mm:a_Gateway_type "Inclusive";
+    mm:a_Parallel_type "Data-based" .
+  
+  <http://www.omilab.org#Non-exclusive_Gateway_BPMN-49351-Required_sources?> mm:a_Gateway_type
+      "Inclusive";
+    mm:a_Parallel_type "Data-based" .
+  
+  <http://www.omilab.org#Subsequent-49412-Evidence_complete?-Issue_additional_request>
+    mm:a_Denomination "no" .
+  
+  <http://www.omilab.org#Subsequent-49422-Evidence_complete?-Prepare_evidence_set_for_analysis>
+    mm:a_Denomination "yes" .
+  
+  <http://www.omilab.org#Subsequent-49354-Required_sources?-Request_documents> mm:a_Denomination
+      "additional resources" .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Resolve_pending_interview_invitation {
+  :Sub-Process_BPMN-48726-Resolve_pending_interview_invitation mm:r_Referenced_subprocess
+      :Business_Process_Diagram_BPMN_2_0-Resolve_pending_interview_invitation .
+  
+  :Exclusive_Gateway_BPMN-49476-Await_interview_response mm:a_Gateway_type "Event-based (do not instantiate)" .
+}
+
+:Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file {
+  :Data_Object_BPMN-59195-Pending_interview_invitations mm:a_Data_type "Data Object" .
+  
+  :Data_Object_BPMN-51106-Potential_witnesses mm:a_Data_type "Data Object" .
+  
+  :Task_BPMN-48804-Send_interview_request mm:r_Referenced_data_input :Data_Object_BPMN-51106-Potential_witnesses .
+  
+  :Sub-Process_BPMN-48726-Resolve_pending_interview_invitation mm:r_Referenced_data_input
+      :Data_Object_BPMN-59195-Pending_interview_invitations .
+}
+
+cv:graphmetadata {
+  :Business_Process_Diagram_BPMN_2_0-Main_judicial_process mm:a_Name "Main judicial process" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Prepare_preliminary_case_file mm:a_Name "Prepare preliminary case file" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Investigate_case mm:a_Name "Investigate case" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Conduct_on-site_investigation mm:a_Name "Conduct on-site investigation" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Collect_documents_and_records mm:a_Name "Collect documents and records" .
+  
+  :Working_Environment_Model-Law_firm_structure mm:a_Name "Law firm structure" .
+  
+  :Working_Environment_Model-Court_structure mm:a_Name "Court structure" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Collect_and_analyze_statements mm:a_Name "Collect and analyze statements" .
+  
+  :Business_Process_Diagram_BPMN_2_0-Resolve_pending_interview_invitation mm:a_Name
+      "Resolve pending interview invitation" .
+}
+
+:Working_Environment_Model-Law_firm_structure {
+  :Performer-50687-Marinette_Cheng mm:a_Hourly_wages "32";
+    mm:r_Belongs_to :Organizational_Unit-49661-Investigation_and_Evidence .
+  
+  :Performer-49665-Samuel_Grant mm:a_Hourly_wages "40";
+    mm:r_Belongs_to :Organizational_Unit-49661-Investigation_and_Evidence .
+  
+  :Performer-50684-Alexander_Moore mm:a_Hourly_wages "32";
+    mm:r_Belongs_to :Organizational_Unit-49661-Investigation_and_Evidence .
+  
+  :Performer-49636-Rachel_Bennett mm:a_Hourly_wages "75";
+    mm:r_Belongs_to :Organizational_Unit-49624-Litigation_and_Case_management .
+  
+  :Performer-49713-Victor_Hayes mm:a_Hourly_wages "35";
+    mm:r_Belongs_to :Organizational_Unit-49624-Litigation_and_Case_management .
+  
+  :Performer-49671-Bianca_Hayes mm:a_Hourly_wages "40";
+    mm:r_Belongs_to :Organizational_Unit-49661-Investigation_and_Evidence .
+  
+  :Performer-49717-Michael_Turner mm:a_Hourly_wages "22";
+    mm:r_Belongs_to :Organizational_Unit-49621-Client_intake_and_Administration_ .
+  
+  :Performer-49633-Emily_Carter mm:a_Hourly_wages "22";
+    mm:r_Belongs_to :Organizational_Unit-49621-Client_intake_and_Administration_ .
+  
+  :Resource-59272-Case-management_system mm:a_Hourly_wages "0";
+    mm:a_Resource_type "EDP system" .
+  
+  :Performer-50669-Anna_Collins mm:a_Hourly_wages "25";
+    mm:r_Belongs_to :Organizational_Unit-49621-Client_intake_and_Administration_ .
+}
+
+:Working_Environment_Model-Court_structure {
+  :Performer-59316-Hanna_Hastings mm:a_Hourly_wages "25";
+    mm:r_Belongs_to :Organizational_Unit-59215-Records_Management .
+  
+  :Performer-59218-Irene_Palmer mm:a_Hourly_wages "25";
+    mm:r_Belongs_to :Organizational_Unit-59215-Records_Management .
+  
+  :Performer-59206-Gabriella_Hayes mm:a_Hourly_wages "26";
+    mm:r_Belongs_to :Organizational_Unit-59209-Court_Registry .
+  
+  :Performer-59227-Andrew_Marshall mm:a_Hourly_wages "60";
+    mm:r_Belongs_to :Organizational_Unit-59224-Judicial_Chamber .
+  
+  :Automated_Performer-59299-Court_E-filing_service mm:a_Hourly_wages "0" .
+  
+  :Performer-59212-Paul_Mercer mm:a_Hourly_wages "26";
+    mm:r_Belongs_to :Organizational_Unit-59209-Court_Registry .
+  
+  :Performer-59221-Laura_Bennett mm:a_Hourly_wages "26";
+    mm:r_Belongs_to :Organizational_Unit-59209-Court_Registry .
+  
+  :Position-59308-Filing_clerk mm:a_Hourly_wages "0";
+    mm:a_Owner "EXPR val:\"Filing clerk\"";
+    mm:a_Vacant "no" .
+  
+  :Performer-59230-Olivia_Carter mm:a_Hourly_wages "60";
+    mm:r_Belongs_to :Organizational_Unit-59224-Judicial_Chamber .
+  
+  :Position-59308-Filing_clerk-Position_holders_1 mm:a_Title "Filing clerk" .
+}

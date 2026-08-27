@@ -1,5 +1,93 @@
-#!/usr/bin/env python3
-"""Build and evaluate one mixed structured & binary BPMN experiment dataset."""
+"""Evaluate generated BPMN answers against their gold answers."""
+
+# WHAT DOES THIS SCRIPT DO
+#
+# 1. It loads the answer schema and the gold answers.
+# 2. It either gets the generated answers from the existing prediction file or extracts
+#    them from the transcript files (in the transcripts directory).
+# 3. During transcript extraction, it identifies the question and run, keeps the
+#    first answer to the experiment question and ignores later follow-ups.
+# 4. It normalizes the predictions and saves them in one JSONL file. query_id
+#    connects an answer to its question and run_id identifies the attempt.
+# 5. It checks whether every expected question and run is present.
+# 6. It validates each answer and compares it with the corresponding gold answer.
+# 7. It scores every individual answer, then averages the scores overall and by
+#    question, category (C1-C6), response type (binary or structured) and run (1-3).
+# 8. It writes a detailed JSON report and the CSV table of per-run scores.
+#
+# The script does not generate answers or determine the truth from the BPMN model.
+# It assumes that the supplied gold answers are correct.
+#
+#
+# ANSWER FORMAT
+#
+# Yes/no questions require only "Yes" or "No". All other answers follow the JSON
+# schema and contain three main fields:
+# - answer_type: the kind of answer, such as a list, value, ranking or path;
+# - status: whether an answer was found or why it could not be provided;
+# - results: the items returned as the answer.
+#
+# Each result contains identifier, label, element_type, rank, attributes and
+# related_elements. rank, attributes and related_elements are used only when the
+# question needs them; otherwise they are null or empty. element_type records the
+# BPMN kind but is not scored for the current questions.
+#
+#
+# SCORING
+#
+# - Lists: compare the returned items/entities and when requested, their attributes. 
+#   Order is ignored unless the question asks for an ordered answer.
+# - Values: compare the requested values and their units. Durations are converted to seconds 
+#   before comparison.
+# - Rankings: rank is an entity's position; rank 1 is the top position,
+#   rank 2 is the next; tied entities share the same rank.
+#   For example, individuals X and Y both have rank 1 because they
+#   are tied for the largest number of assigned activities.
+# - Paths: compare each path/route as an ordered sequence of BPMN elements. Correct
+#   elements receive credit when they appear in the same relative order. For
+#   example, if the gold path is A -> B -> C and the generated path is A -> C,
+#   the two elements count as matches, while the missing one counts as a false negative.
+#   Missing elements reduce recall, extra elements reduce precision and 
+#   either can lower F1. Requested path costs or durations are also compared.
+# - Yes/no answers: accept only "Yes" or "No" and check whether it matches the
+#   gold answer.
+#
+# Entities are matched by identifier when possible, with labels as a fallback.
+# related_elements are ignored for ordinary answers and used only when they
+# represent an ordered path. A structured answer must be valid JSON and follow
+# the schema; otherwise, the run is marked invalid and its scores are zero.
+#
+# Some questions accept more than one gold representation. For example, C3-023
+# accepts a compact path and the same path with expanded subprocesses. A prediction
+# is scored against every accepted version, and the best result is kept.
+#
+#
+# METRICS AND OUTPUTS
+#
+# A true positive is a generated item or value that matches the gold answer. A
+# false positive is a generated item or value with no gold match. A false negative
+# is a gold item or value with no match in the generated answer. For example, if
+# the gold list is A, B, C and the generated list is A, C, D, then A and C are true
+# positives, D is a false positive and B is a false negative.
+#
+# Precision measures how much of the generated answer is correct; recall measures
+# how much of the gold answer was recovered; F1 balances precision and recall.
+#
+# exact_answer shows whether the whole answer is correct. For a structured answer,
+# it is true only when all expected items and values are present, nothing extra is
+# returned, and answer_type and status match the gold answer.
+#
+# Scores are first calculated separately for every run and then averaged. Each run
+# has the same influence on the final average, whether its answer contains one
+# item or fifty.
+#
+# Three runs are expected for every question. By default, evaluation stops when a
+# run is missing. With "--allow-incomplete", missing runs are listed in the
+# coverage report and excluded from score calculations.
+#
+# The script writes normalized predictions, a detailed JSON report and a CSV file
+# containing one row of scores for every evaluated run.
+
 
 from __future__ import annotations
 
@@ -225,8 +313,8 @@ def canonical_communication_attribute_name(value: Any) -> str | None:
     """Return the atomic communication direction encoded by an attribute.
 
     Generated answers may serialize the same requested message facts as
-    ``sends``, ``sent_messages`` or a counterpart-qualified name such as
-    ``sends_to_court``.  The counterpart remains represented by the root's
+    "sends", "sent_messages" or a counterpart-qualified name such as
+    "sends_to_court". The counterpart remains represented by the root's
     communication relation; the attribute itself records whether the root
     sends or receives the message.
     """
@@ -422,7 +510,7 @@ def answer_results(answer: dict[str, Any]) -> list[Entity]:
 def answer_is_order_sensitive(answer: dict[str, Any]) -> bool:
     """Return whether rank/order carries answer semantics in the gold answer.
 
-    ``path`` and ``ranking`` are ordered by definition. A gold answer of
+    "path" and "ranking" are ordered by definition. A gold answer of
     another type may still explicitly encode an ordered result, in which case
     a non-null root rank enables order-sensitive matching. Related-element
     order is metadata outside normalized path scoring. Prediction-only ordering
@@ -567,7 +655,7 @@ def scalar_facts(answer: dict[str, Any]) -> list[ScalarFact]:
     """Extract the logical scalar values from a value answer.
 
     A value may be serialized as an attribute or, when no attribute is
-    present, directly in a derived result label such as ``4 hours``.
+    present, directly in a derived result label such as "4 hours".
     """
     facts: list[ScalarFact] = []
     for root in answer_results(answer):
@@ -948,8 +1036,6 @@ def score_answer(
         f1 = counts.f1
         exact_answer = counts.exact and answer_type_correct and status_correct
     else:
-        # Invalid output receives no structured-answer credit, even if fragments
-        # of its content happen to resemble the ground truth.
         counts = Counts(
             tp=0,
             fp=predicted_fact_count,
@@ -1063,10 +1149,6 @@ def unwrap_entire_code_fence(text: str) -> str:
 def final_response(text: str) -> tuple[Any, str, str | None]:
     """Return (answer value, extraction mode, JSON parsing error)."""
     tail = text.rsplit("</details>", 1)[-1].strip()
-    # An exported transcript may contain a later user follow-up after the
-    # answer being evaluated. User turns are block-quoted in the Markdown
-    # export, whereas the assistant's final answer is not. Evaluate only the
-    # first assistant response to the matched experiment question.
     follow_up = re.search(r"(?m)^>\s+\S", tail)
     has_follow_up = follow_up is not None
     if follow_up is not None:
@@ -1078,8 +1160,6 @@ def final_response(text: str) -> tuple[Any, str, str | None]:
         mode = "standalone_json_before_followup" if has_follow_up else "standalone_json"
         return json.loads(tail), mode, None
     except json.JSONDecodeError as exc:
-        # Preserve the full text. Embedded-JSON extraction would conceal narration
-        # or formatting failures and artificially improve schema-validity results.
         mode = "raw_text_before_followup" if has_follow_up else "raw_text"
         return tail, mode, str(exc)
 
