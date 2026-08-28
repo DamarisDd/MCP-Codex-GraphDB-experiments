@@ -6,7 +6,7 @@ in Ontotext GraphDB (RDF triplestore). It includes the process data, the questio
 
 This experiment was set up and tested on Windows 11. The commands, file paths and installation steps are written for Windows. I suppose macOS and Linux users can still follow the same general workflow, but some paths and setup steps - especially those for Bee-Up - will most likely need to be adapted.
 
-Sidenote: Yes, there are many instructions, but with a reason (for this madness). This repository tried to include the little things that helped me crawl my way out of the obstacles encountered.
+Sidenote: yes, there are many instructions, but with a reason (for this madness). This repository tried to include the little things that helped me crawl my way out of the obstacles encountered.
 
 Installing the entire system just to check the published
 results is not necessary. There are a few different ways to use this repository:
