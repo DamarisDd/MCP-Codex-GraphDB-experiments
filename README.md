@@ -217,21 +217,20 @@ The experiment used GraphDB 11.4 Desktop.
 
 1. Open the official
    [GraphDB download page](https://www.ontotext.com/products/graphdb/).
-2. Request the Windows installer and choose GraphDB 11.4 if the site asks which
+2. Request the Windows installer and choose GraphDB 11.4 (or newer) if the site asks which
    version you need.
 3. Run the downloaded `.msi` installer.
 4. Start GraphDB Desktop from the Windows Start menu.
 5. Select **Open GraphDB Workbench** or open
    [http://localhost:7200/](http://localhost:7200/) yourself.
 
-GraphDB Desktop includes its own Java runtime. You do not need to install Java
-for GraphDB. The separate Java requirement mentioned above applies only to
-Bee-Up's RDF export.
+GraphDB Desktop includes its own Java runtime. You do not need to install Java for GraphDB.
 
 ### 3. Install Docker Desktop
 
 1. Follow Docker's official
-   [Windows installation guide](https://docs.docker.com/desktop/setup/install/windows-install/).
+   [Windows installation guide](https://docs.docker.com/desktop/setup/install/windows-install/). For these experiments,
+Docker version 29.6.1 was used (v5.3.0 for Docker Compose).
 2. Use the WSL 2 backend when the installer offers it.
 3. Restart Windows if asked.
 4. Open Docker Desktop and wait until it says that the Docker engine is running.
@@ -244,8 +243,7 @@ docker compose version
 
 ### 4. Download the OpenAI ChatGPT Retrieval Plugin
 
-Despite its name, this is not something you install from Codex's Plugins page.
-It is a standalone API created by OpenAI. GraphDB sends text to that API and
+Despite its name, this is a standalone API created by OpenAI. GraphDB sends text to that API and
 the API stores and searches embeddings in Weaviate.
 
 Clone it beside this repository:
@@ -265,7 +263,7 @@ local retrieval API.
 
 The Compose file in this repository is the one used in the experiment. It must
 be placed in the cloned `chatgpt-retrieval-plugin` folder because it builds the
-plugin using `context: .` and the plugin's own `Dockerfile`.
+plugin using the source files and the plugin's own `Dockerfile`.
 
 While PowerShell is still inside `chatgpt-retrieval-plugin`, copy both templates:
 
@@ -275,8 +273,7 @@ Copy-Item ..\MCP-Codex-GraphDB-experiments\.env.example .\.env
 notepad .\.env
 ```
 
-If your experiment-repository folder has a different name, adjust those two
-paths.
+If your experiment repository folder has a different name, adjust those two paths.
 
 Replace `OPENAI_API_KEY` with your own OpenAI API key. Replace `BEARER_TOKEN`
 with a long, random secret. You can generate that token at
@@ -294,8 +291,7 @@ DATASTORE="weaviate"
 WEAVIATE_CLASS="BPMNPROCESS"
 ```
 
-The actual secrets are deliberately not included. The same bearer token must be
-used later when the GraphDB retrieval connector is created.
+The same bearer token must be utilized later when the GraphDB retrieval connector is created.
 
 The Docker setup creates two containers:
 
@@ -303,8 +299,7 @@ The Docker setup creates two containers:
 - the OpenAI retrieval API, available on port 8000.
 
 It also uses a retrieval chunk size of 400, an informational logging level and
-a Weaviate query limit of 500. These values are already in the supplied Compose
-file.
+a Weaviate query limit of 500. These values are already in the supplied Compose file.
 
 Start the containers and the retrieval API:
 
@@ -313,15 +308,14 @@ docker compose up -d --build
 docker compose ps
 ```
 
-Both services should appear as running. Check them with:
+Both services should appear as running. Check their status either in Docker Desktop or with:
 
 ```powershell
 Invoke-WebRequest http://localhost:8000/docs -UseBasicParsing
 Invoke-RestMethod http://localhost:8080/v1/.well-known/ready
 ```
 
-If the retrieval service starts before Weaviate is ready, wait a few seconds and
-restart only that service:
+If the retrieval service starts before Weaviate is ready, wait a few seconds and restart only that service:
 
 ```powershell
 docker compose restart retrieval
@@ -340,8 +334,7 @@ Be careful with this version:
 docker compose down -v
 ```
 
-The `-v` removes the Weaviate volume as well, which means the indexed data is
-deleted and must be created again.
+The `-v` removes the Weaviate volume as well, which means the indexed data is deleted and must be created again.
 
 ### 6. Create the GraphDB repository
 
@@ -350,14 +343,13 @@ Open GraphDB Workbench at [http://localhost:7200/](http://localhost:7200/) and:
 1. Go to **Setup → Repositories**.
 2. Select **Create new repository**, then **GraphDB Repository**.
 3. Set the repository ID to `bpmn_judicial`.
-4. You can use the `RDFS-Plus (Optimized)` ruleset.
-5. Enable the full-text-search index. Include `default` and `iri`, use `default`
-   for `xsd:string` literals and use `iri` for IRI indexing.
-6. Select **Create**, then connect to the new repository.
+4. You can use the `RDFS-Plus (Optimized)` ruleset and uncheck `Disable owl:sameAs`.
+5. Check `Enable context index`, `Enable predicate list index` and `Enable full-text-search index`. Include `default` and `iri` for `FTS indexes to build`, use `default` for `xsd:string literals`.
+6. Select **Create**, then connect to the new repository by clicking on `Connect repository` in **Repositories**.
 
 ### 7. Import the RDF data
 
-The simplest option is to import the already-cleaned data:
+The simplest option is to import the already cleaned data:
 
 1. In GraphDB Workbench, go to **Import → User data → Upload RDF files**.
 2. Upload
@@ -365,12 +357,9 @@ The simplest option is to import the already-cleaned data:
    and select **Import**.
 
 Or you can upload
-[raw Bee-Up RDF export.trig](context/raw%20Bee-Up%20RDF%20export.trig) and clean
-it yourself. After importing the raw file, open the **SPARQL** workbench and run
-the following three updates, one at a time.
+[raw Bee-Up RDF export.trig](context/raw%20Bee-Up%20RDF%20export.trig) and clean it yourself. After importing the raw file, open the **SPARQL** workbench and run the following three queries, one at a time.
 
-The first update removes Bee-Up statements that were not needed in this
-experiment:
+The first update removes Bee-Up statements that were not needed in this experiment:
 
 ```sparql
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -490,8 +479,7 @@ WHERE {
 }
 ```
 
-The second update removes the business-process-diagram type from diagrams that
-are referenced as subprocesses:
+The second update removes the business-process-diagram type from diagrams that are referenced as subprocesses:
 
 ```sparql
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -514,8 +502,7 @@ WHERE {
 }
 ```
 
-The third update tells GraphDB that Bee-Up's `a_Name` property can be treated as
-an RDF label:
+The third update tells GraphDB that Bee-Up's `a_Name` property can be treated as an RDF label:
 
 ```sparql
 PREFIX mm: <http://bee-up.omilab.org/rdf/1_7#>
@@ -539,40 +526,32 @@ WHERE {
 }
 ```
 
-Once the import or cleanup is finished, check that the repository contains data:
+Once the import and/or cleanup is finished, check that the repository is not empty:
 
 ```sparql
 SELECT (COUNT(*) AS ?triple_count)
 WHERE { ?subject ?predicate ?object }
 ```
 
-You should get a number larger than zero. The exact number shown can include
-statements inferred by the repository's ruleset.
+You should get a number bigger than zero. The exact number shown can include statements inferred by the repository's ruleset.
 
 ### 8. Create the `text_index` similarity index
 
-The experiment also used GraphDB's text-similarity search. The index was created
-directly in GraphDB Workbench:
+The experiment also used GraphDB's text-similarity search. The index was created directly in GraphDB Workbench:
 
-We first considered a Predication Semantic Index (PSI). It could be queried
-directly with its own SPARQL pattern, but, in this setup, it did not return
-usable results through MCP's `similarity_search` tool. The likely reason is a
-difference in query shape: PSI is organized around RDF predications, while the
-MCP tool takes a natural-language query and returns document-style similarity
-matches. We therefore used `text_index`, which fits that MCP call directly.
-This was a practical choice for this experiment, not a claim that PSI or the
-MCP integration is generally limited.
+Sidenote: we first considered a Predication Semantic Index (PSI), but it did not return usable results through MCP's `similarity_search` tool. The likely reason could be a difference in query shape: PSI is organized around RDF predications, while the MCP tool takes a natural-language query and returns document-style similarity
+matches. Therefore, we used `text_index`, which fits that MCP call directly.
 
 1. Go to **Explore → Similarity**.
 2. Select **Create similarity index**.
 3. Select **Create text similarity index**.
 4. Set the index name to `text_index`.
+5. Unfold **more options** and make sure `-termweight idf` is utilized for the **Semantic Vectors create index parameters**, and `org.apache.lucene.analysis.en.EnglishAnalyzer`, for **Analyzer Class**.
 5. Replace the **Data query** with the query below.
 6. Replace the **Search query** with the second query below.
 7. Select **Create** and wait for GraphDB to finish building the index.
 
-The data query decides which BPMN elements are indexed and turns the useful
-facts about each element into a piece of searchable text:
+The data query decides which BPMN elements are indexed and turns the useful facts about each element into a piece of searchable text:
 
 ```sparql
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -725,8 +704,7 @@ WHERE {
 }
 ```
 
-The search query tells GraphDB how to return matching document identifiers and
-their similarity scores:
+The search query tells GraphDB how to return matching document identifiers and the corresponding similarity scores:
 
 ```sparql
 PREFIX : <http://www.ontotext.com/graphdb/similarity/>
@@ -747,25 +725,23 @@ You can test it on the same **Explore → Similarity** page.
 
 ### 9. Create the `bpmnprocess` retrieval connector
 
+The `bpmnprocess` connector turns selected BPMN data from GraphDB into actual text (in natural language) and sends it to the retrieval service, allowing Codex to retrieve relevant process information using that indexed text.
+
 Make sure the Docker containers are still running. Then:
 
-1. Open the `.env` file in `chatgpt-retrieval-plugin` and copy its
+1. Open the `.env` file in `chatgpt-retrieval-plugin` folder and copy its
    `BEARER_TOKEN` value.
 2. Open
    [bpmnprocess_retrieval_connector_11_4.sparql](scripts/bpmnprocess_retrieval_connector_11_4.sparql).
 3. Copy that query into GraphDB Workbench's **SPARQL** editor.
 4. In the Workbench copy, replace
    `REPLACE_WITH_THE_SAME_BEARER_TOKEN_AS_IN_DOT_ENV` with the token from `.env`.
-5. Make sure `bpmn_judicial` is the selected repository and run the update.
-6. Go to **Setup → Connectors** and wait for `bpmnprocess` to finish
-   synchronizing.
+5. Make sure `bpmn_judicial` is the selected repository and run the query.
+6. Go to **Setup → Connectors** and wait for `bpmnprocess` to finish synchronizing.
 
-Do not put the real token into the tracked SPARQL file. Paste it only into the
-copy you run in Workbench.
+Do not put the real token into the tracked SPARQL file. Paste it only into the copy you run in Workbench.
 
-If `bpmnprocess` already exists, running the creation query again will fail.
-Remove the old connector from **Setup → Connectors** only when you genuinely
-want to rebuild it.
+If `bpmnprocess` already exists, running the creation query again will fail. Remove the old connector from **Setup → Connectors** only when you genuinely want to rebuild it.
 
 ### 10. Check GraphDB's MCP endpoint
 
@@ -775,13 +751,9 @@ GraphDB 11.4 exposes its MCP server here:
 http://localhost:7200/mcp
 ```
 
-This is how Codex receives the GraphDB tools. The MCP endpoint does not contain
-a second copy of the data; it simply lets Codex ask the running GraphDB instance
-to list repositories, run SPARQL, perform full-text and similarity searches, and
-use retrieval search.
+This is how Codex receives the GraphDB tools. The MCP endpoint does not contain a second copy of the data; it simply lets Codex ask the running GraphDB instance to list repositories, run SPARQL, perform full-text and similarity searches, use retrieval search and others.
 
-Keep this setup on localhost unless you have deliberately configured GraphDB
-authentication and network security.
+Keep this setup on localhost unless you have deliberately configured GraphDB authentication and network security.
 
 ### 11. Install Codex
 
@@ -789,13 +761,10 @@ For the Windows desktop setup:
 
 1. Download the [ChatGPT desktop app](https://chatgpt.com/download/).
 2. Install it and sign in.
-3. Open Codex inside the app.
+3. Open Codex inside the app (from the upper left dropdown menu).
 4. Open this repository as the working folder.
 
-Current official OpenAI documentation places Codex inside the ChatGPT desktop
-app. Older screenshots may show a separate Codex application.
-
-The Codex CLI is optional. If you prefer it, the official Windows installer is:
+Sidenote: current official OpenAI documentation places Codex inside the ChatGPT desktop app. Older screenshots may show a separate Codex application. Also, the Codex CLI is optional. If you prefer it, the official Windows installer is:
 
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"
@@ -838,29 +807,17 @@ tool_timeout_sec = 120
 default_tools_approval_mode = "prompt"
 ```
 
-This keeps only the settings that matter for the experiment. Machine-specific
-paths, notification commands, unrelated plugins, browser settings and desktop
-preferences are left out.
+This keeps only the settings that matter for the experiment. Machine-specific paths, notification commands, unrelated plugins, browser settings and desktop preferences are left out.
 
-`enabled = true` matters. A saved local configuration contained
-`enabled = false`, but that setting turns the GraphDB MCP server off. It cannot
-be used while running the experiment.
+The Large Language Model (LLM) must also be available in your Codex account. If you use another LLM, the setup can still work, but it is no longer a reproduction with gpt-5.6-sol.
 
-The model must also be available in your Codex account. If you use another
-model, the setup can still work, but it is no longer a reproduction with the
-same model.
+Restart Codex after saving `config.toml`. Then open **Settings → MCP servers** and check that `graphdb` appears.
 
-Restart Codex after saving `config.toml`. Then open **Settings → MCP servers**
-and check that `graphdb` appears.
-
-Now open **Settings → Personalization → Custom instructions**. Copy everything
-from
+Now open **Settings → Personalization → Custom instructions**. Copy everything from
 [agent_personalization.txt](agent%20instructions/agent_personalization.txt),
 paste it into the custom-instructions box and save it.
 
-These are personal instructions, so they may also affect later Codex threads.
-Remove them after the experiment if you do not want unrelated work to use the
-BPMN answer format.
+These are personal instructions, so they may also affect later Codex threads. Remove them after the experiment if you do not want unrelated work to use them.
 
 ### 13. Test the connection before doing 189 runs
 
@@ -877,26 +834,20 @@ Codex should call `get_repository_ids` and return `bpmn_judicial` (among other p
 3. restart Codex after changing the configuration; and
 4. check GraphDB's access settings if the request is denied.
 
-Next, ask Codex to call `retrieval_search` using repository `bpmn_judicial` and
-index `bpmnprocess`. If that fails, check:
+Next, you can also ask Codex to call, for instance, `retrieval_search` using the GraphDB repository called `bpmn_judicial` and the `bpmnprocess` index. If that fails, check:
 
 ```powershell
 docker compose ps
 docker compose logs --tail 100 retrieval
 ```
 
-Also make sure that `.env` and the GraphDB connector use exactly the same bearer
-token.
+Also make sure that `.env` and the GraphDB connector use exactly the same bearer token.
 
-You can also ask Codex to use `similarity_search` with repository
-`bpmn_judicial` and index `text_index`. A successful response confirms that the
-similarity index is available through MCP as well as through Workbench.
+You can also ask Codex to use `similarity_search` with the previously created index `text_index`, to query the knowledge graph database.s
 
 ### 14. Run the questions
 
-Use [questions_all.jsonl](scripts/questions_all.jsonl). It contains only the
-question IDs and questions. The gold answers were deliberately removed so that
-Codex cannot see them.
+Use [questions_all.jsonl](scripts/questions_all.jsonl); it contains only the question IDs and questions. 
 
 For every question:
 
@@ -915,48 +866,33 @@ C1-001_2_optional description.txt
 C1-001_3_optional description.txt
 ```
 
-The evaluator reads the question ID and run number from the filename. Anything
-after the second underscore is only a description for humans.
+The evaluator reads the question ID and run number from the filename. Anything after the second underscore is only a description for humans.
 
-Use a fresh thread for every run. Do not put all three attempts in the same
-thread. The evaluator takes the first visible answer to the experiment question
-from each transcript; later follow-up messages do not replace that main answer.
+Use a fresh thread for every run. If you want to reproduce the current experiments, do not put all three attempts in the same thread.
 
-This repository does not contain a program that automatically submits all 63
-questions to Codex. The runs and transcript exports are created through Codex.
-The Python evaluator is used afterwards, when transcripts or predictions
-already exist.
+The evaluator (`evaluate_generated_answers.py`) takes the first visible answer to the experiment question from each transcript; later follow-up messages (for instance, I also asked, at times, "How did you derive this answer?") do not replace that main answer.
 
-Once all the transcripts are ready, run the command from
+Once all the transcripts are ready, run the command from 
 [Run `evaluate_generated_answers.py`](#3-run-evaluate_generated_answerspy).
-New model answers can vary, so a new experiment may not produce exactly the same
-scores as the saved one.
+New agent answers can vary, so a new experiment may not produce exactly the same scores as the saved one.
 
 ## The answer format
 
 Yes/no questions must be answered with only `Yes` or `No`.
 
-Every other answer must be one JSON object following the supplied schema. It has
-three main fields:
+Every other answer must be one JSON object following the supplied schema. It has three main fields:
 
-- `answer_type`: what kind of answer it is, such as a list, value, ranking or
-  path;
+- `answer_type`: what kind of answer it is, such as a list, value, ranking or path;
 - `status`: whether an answer was found or why it could not be provided; and
 - `results`: the items or values that answer the question.
 
-Each result has `identifier`, `label`, `element_type`, `rank`, `attributes` and
-`related_elements`. Fields that do not apply are left `null` or empty.
+Each result has `identifier`, `label`, `element_type`, `rank`, `attributes` and `related_elements`. Fields that do not apply are left `null` or empty.
 
-Why use one schema when not every question needs every field? Because the
-evaluator can always find the answer in the same place. It does not need a
-different parser for lists, rankings, values and paths.
+Why use one schema when not every question needs every field? Because the evaluator can always find the answer in the same place. It does not need a different parser for lists, rankings, values and paths.
 
-Not every field is scored. In these 63 questions, `element_type` is descriptive
-information and does not change the score. Depending on what the question asks,
-the evaluator scores identifiers, labels, requested attributes, values, ranks,
-or ordered path steps.
+Not every field is scored. In these 63 questions, `element_type` is descriptive information and does not change the score. Depending on what the question asks, the evaluator scores identifiers, labels, requested attributes, values, ranks or ordered path steps.
 
-A small list answer looks like this:
+An example of an answer looks like this:
 
 ```json
 {
@@ -984,24 +920,17 @@ The complete format is in
 these steps:
 
 1. It loads the answer schema and gold answers.
-2. It reads either the saved transcripts or an existing predictions JSONL file.
-3. When reading transcripts, it finds the first answer to the experiment
-   question.
-4. It puts every prediction into one consistent JSONL file. `query_id` tells us
-   which question it answers; `run_id` tells us which attempt it came from.
-5. It checks whether all expected question/run combinations exist. In this
-   experiment, that means 63 questions × 3 runs = 189 predictions.
-6. It checks the answer format and compares every valid prediction with its gold
-   answer.
-7. It calculates scores for each run, then reports averages overall, for C1–C6,
-   for yes/no and structured answers, for each question and for runs 1–3.
-8. It writes the detailed JSON report and the simpler per-run CSV file.
+2. It reads either the saved transcripts or an existing predictions JSONL file (containing the agent generated answers).
+3. When reading transcripts, it finds the first answer to the experiment question.
+4. It puts every prediction (generated answer) into one consistent JSONL file. `query_id` tells us which question it answers; `run_id` tells us which attempt (1-3) it came from.
+5. It checks whether all expected question/run combinations exist. In this experiment, that means 63 questions × 3 runs = 189 predictions.
+6. It checks the answer format and compares every valid prediction with its gold answer/ground truth.
+7. It calculates scores for each run, then reports averages overall.
+8. It writes a detailed JSON report and a simpler per-run CSV file.
 
-The normalized predictions in step 4 are not new model answers. They are the
-same answers extracted from the transcripts and stored in a predictable format.
+The normalized predictions in step 4 are not new agent answers. They are the same answers extracted from the transcripts and stored in a predictable format.
 
-The evaluator does not query GraphDB and does not decide what the correct answer
-should be. It treats the supplied gold answers as correct.
+The evaluator does not query GraphDB and does not decide what the correct answer should be. It treats the supplied gold answers as correct.
 
 ## How the scores work
 
@@ -1010,33 +939,20 @@ What gets compared depends on the question:
 | Answer type | What the evaluator compares |
 | --- | --- |
 | List | The returned entities and, when requested, their attributes. Order is ignored unless the question asks for an ordered answer. |
-| Value | The requested value and unit. Durations are converted to seconds before comparison. |
+| Value | The requested value (like cost, execution time) and unit. Execution time (i.e., durations) are converted to seconds before comparison. |
 | Ranking | The entities and their positions. Rank 1 is first, rank 2 is next and tied entities share the same rank. |
 | Path | The BPMN elements in their correct order, plus any requested cost or duration. |
 | Yes/no | Whether the bare `Yes` or `No` matches the gold answer. |
 
-For a ranking example: if two people are tied for the largest number of assigned
-tasks, both have rank 1. The person with the next lower number has rank 2. The
-answer receives credit when it returns the correct people with the correct
-ranks.
+For a ranking example: if two people are tied for the largest number of assigned tasks, both have rank 1. The person with the next lower number has rank 2. The answer receives credit when it returns the correct people with the correct ranks.
 
-Entities are matched by identifier when possible. If an identifier is missing,
-the evaluator can fall back to a normalized label. `related_elements` are
-ignored in ordinary answers, but they can be used to store an ordered path.
+Entities are matched by identifier when possible. If an identifier is missing, the evaluator can fall back to a normalized label. `related_elements` are ignored in ordinary answers, but they can be used to store an ordered path.
 
-Paths receive partial credit. Suppose the gold path is `A → B → C`, while the
-generated path is `A → C`. `A` and `C` still match because they remain in the
-correct relative order. `B` is missing, so recall goes down. An extra incorrect
-step would reduce precision. Either problem can lower F1. If the question also
-asks for a path cost or duration, that value is compared too.
+Paths receive partial credit. Suppose the gold path is `A → B → C`, while the generated path is `A → C`. `A` and `C` still match because they remain in the correct relative order. `B` is missing, so, recall goes down. An extra incorrect step would reduce precision. Either problem can lower F1. If the question also asks for a path cost or duration, that value is compared, too.
 
-A structured answer must be valid JSON and follow the schema. If its JSON cannot
-be read or required fields are missing, the run is marked invalid and receives
-zero precision, recall and F1.
+A structured answer must be valid JSON and follow the schema. If its JSON cannot be read or required fields are missing, the run is marked invalid and receives zero precision, recall and F1.
 
-Some questions allow more than one correct gold representation. C3-023, for
-example, accepts both a compact path and a version with expanded subprocesses.
-The prediction is compared with both and the better score is kept.
+Some questions allow more than one correct gold representation. `C3-023`, for example - asking "Of the available ways to complete the process, which ones, from start to finish, have the longest execution time and what are each of their durations?" - accepts both a compact path and a version with expanded subprocesses. The prediction is compared with both and the better score is kept.
 
 ### Precision, recall, F1 and exact answers
 
@@ -1047,38 +963,25 @@ The prediction is compared with both and the better score is kept.
 - **Recall** asks how much of the gold answer was recovered.
 - **F1** balances precision and recall.
 
-For example, if the gold list is `A, B, C` and the generated list is `A, C, D`,
-then `A` and `C` are true positives, `D` is a false positive and `B` is a false
-negative.
+For example, if the gold list is `A, B, C` and the generated list is `A, C, D`, then `A` and `C` are true positives, `D` is a false positive and `B` is a false negative.
 
-`exact_answer` is stricter. It is true only when nothing scored is missing,
-nothing scored is extra and a structured answer also has the correct
-`answer_type` and `status`.
+`exact_answer` is stricter. It is true only when nothing scored is missing, nothing scored is extra and a structured answer also has the correct `answer_type` and `status`.
 
-The script calculates the scores separately for every run and then averages
-them. Every run has the same weight, whether the answer contains one fact or
-fifty.
+The script calculates the scores separately for every run and then averages them. Every run has the same weight, whether the answer contains one fact or fifty.
 
-Three runs are expected for every question. Normally, the evaluator stops if a
-run is missing. With `--allow-incomplete`, it scores the runs that exist and
-lists the missing ones in the coverage report. Those missing runs are left out
-of the averages; they are not counted as zero.
+Three runs are expected for every question. Normally, the evaluator stops if a run is missing. Running the evaluator with `--allow-incomplete`, it scores the runs that exist and lists the missing ones in the coverage report. Those missing runs are left out of the averages; they are not counted as zero.
 
 ## Files created by the evaluator
 
 The evaluator writes:
 
-- `scripts/predictions-out/predictions_all.jsonl`: the answers extracted from
-  the transcripts;
-- `scripts/report/evaluation_all_report.json`: the full report, including
-  coverage, averages and details for every run; and
-- `scripts/csv/evaluation_all_per_run.csv`: a simpler table with one row per
-  run.
+- `scripts/predictions-out/predictions_all.jsonl`: the answers extracted from the transcripts;
+- `scripts/report/evaluation_all_report.json`: the full report, including coverage, averages and details for every run; and
+- `scripts/csv/evaluation_all_per_run.csv`: a simpler table with one row per run.
 
 ## Results saved in this repository
 
-The saved report includes all 189 expected runs. Every answer passed its
-applicable format check.
+The saved report includes all 189 expected runs. Every answer passed its applicable format check.
 
 | Responses | Runs | Macro precision | Macro recall | Macro F1 | Exact-answer accuracy |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -1091,25 +994,15 @@ The complete, unrounded values are in
 
 ## What cannot be reproduced exactly
 
-The saved scores can be recalculated exactly from this repository. Generating a
-new set of answers is less exact, for a few honest reasons:
+The saved scores can be recalculated exactly from this repository. Generating a new set of answers is less exact, for a few reasons:
 
-- model answers can change from one run to another;
-- model and service versions can change; and
-- the repository does not contain an automated Codex runner, so the threads and
-  transcript exports are created manually.
-
-These limits should be mentioned when reporting results from a new run.
+- agent-generated answers can change from one run to another (given the well-known stohastic behavior of LLMs);
+- LLM and service versions can change; and
+- the repository does not contain an automated Codex runner, so the threads and transcript exports are created manually.
 
 ## A short security note
 
-Never commit an OpenAI API key or bearer token. The files in this repository use
-placeholders on purpose. Put the real secrets only in the local `.env` file and
-paste the bearer token into the temporary Workbench copy of the connector query.
-
-The supplied Weaviate container allows anonymous access because this setup is
-meant to run only on your own computer. Do not expose ports 7200, 8000, 8080 or
-50051 to an untrusted network without adding authentication and network rules.
+The supplied Weaviate container allows anonymous access because this setup is meant to run only on your own device. Thus, ports 7200, 8000, 8080 or 50051 should not be exposed to an untrusted network without adding authentication and network rules.
 
 ## Official documentation
 
