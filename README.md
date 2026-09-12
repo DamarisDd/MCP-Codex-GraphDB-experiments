@@ -497,7 +497,7 @@ WHERE {
 }
 ```
 
-The third update tells GraphDB that Bee-Up's `a_Name` property can be treated as an RDF label:
+Optional: the third update tells GraphDB that Bee-Up's `a_Name` property can be treated as an RDF label:
 
 ```sparql
 PREFIX mm: <http://bee-up.omilab.org/rdf/1_7#>
@@ -909,7 +909,7 @@ An example of an answer looks like this:
 The complete format is in
 [answer_schema.json](scripts/schema/answer_schema.json).
 
-## What the evaluator does
+## What does the evaluator do
 
 [evaluate_generated_answers.py](scripts/evaluate_generated_answers.py) follows
 these steps:
@@ -927,7 +927,7 @@ The normalized predictions in step 4 are not new agent answers. They are the sam
 
 The evaluator does not query GraphDB and does not decide what the correct answer should be. It treats the supplied gold answers as correct.
 
-## How the scores work
+## How do the scores work
 
 What gets compared depends on the question:
 
