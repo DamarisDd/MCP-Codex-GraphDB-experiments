@@ -1010,6 +1010,12 @@ The saved scores can be recalculated exactly from this repository. Generating a 
 - LLM and service versions can change; and
 - the repository does not contain an automated Codex runner, so the threads and transcript exports are created manually.
 
+## A note about wording
+
+In the [agent instructions](agent%20instructions/agent_personalization.txt), *provided context* refers to the business-process evidence available through the GraphDB tools and retrieval indices. Later in the instructions, *context* has a narrower meaning: an entity that restricts or qualifies the requested answer without being an answer itself. The repository's [`context/`](context/) folder is simply where the supporting model files are stored. These uses of the same word should not be confused.
+
+Question [`C5-001`](scripts/questions_all.jsonl#L55) contains a typo in its original wording: *"what do they receive received?"* The intended wording is *"what do they receive?"* The typo was kept in the questions, gold answers and transcripts so that the repository reflects the question actually given to the agent - being observed only later. Nevertheless, all three generated answers were exact, so the typo had no visible effect on the results.
+
 ## A short security note
 
 The supplied Weaviate container allows anonymous access because this setup is meant to run only on your own device. Thus, ports 7200, 8000, 8080 or 50051 should not be exposed to an untrusted network without adding authentication and network rules.
