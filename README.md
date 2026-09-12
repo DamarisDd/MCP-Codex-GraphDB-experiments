@@ -941,13 +941,21 @@ What gets compared depends on the question:
 
 For a ranking example: if two people are tied for the largest number of assigned tasks, both have rank 1. The person with the next lower number has rank 2. The answer receives credit when it returns the correct people with the correct ranks.
 
-Entities are matched by identifier when possible. If an identifier is missing, the evaluator can fall back to a normalized label. `related_elements` are ignored in ordinary answers, but they can be used to store an ordered path.
+Entities are matched by identifier when possible. If an identifier is missing, the evaluator can fall back to a normalized label. Most ordinary answers ignore `related_elements`. However, a gold record can set `score_related_elements` to `true` when the relationships are part of the requested answer. This is currently enabled for C1-002, C1-006 through C1-009, and C3-002. For the five C1 questions, the evaluator compares the returned item and related element, but not the exact relation name. In those cases, two differently named relations can match when they connect the same two items. C3-002 likewise checks which performer is connected to which task, but it does not require the exact relation name `responsible_for`. C3-009 stores the two responsible roles for each collaborative task as useful context, but keeps `score_related_elements` set to `false`; only the root task identifiers, with labels as a fallback, affect its score. Because the question does not say whether tasks inside nested subprocesses should also be included, C3-009 accepts two answers: all 18 collaborative tasks across the nested process structure, or the five collaborative tasks found directly in the law-firm process. C3-010 follows the same distinction when counting assignments: its primary answer includes tasks from nested subprocesses, while its accepted alternative counts only tasks placed directly inside the `Law firm` pool. In that direct-only version, Bianca Hayes is omitted because she has no task directly inside the pool. C3-011 records that Rachel Bennett and Samuel Grant each have 12 assigned tasks, but sets `score_attributes` to `false` because the question asks who has the largest number rather than requesting the totals themselves. The counts therefore explain the shared rank without affecting the score. C3-012 also accepts recursive and direct-only interpretations. The recursive answer identifies Emily Carter and Michael Turner for the law firm, with two tasks each; the direct-only answer identifies Alexander Moore, Marinette Cheng and Samuel Grant, with one directly contained task each. Both use the same three Court results: Court E-filing service, Hanna Hastings and Irene Palmer, with one task each. These totals and the `related_elements` are retained as context but remain unscored. C3-015 likewise records each task's expected duration while setting `score_attributes` to `false`, because the requested answer is the set of tasks rather than their exact duration values. C3-016 similarly records that the top-ranked task takes six hours, but does not score that duration because the question asks which task has the longest execution time. C3-020 follows the same rule for cost: the gold answer records a cost of 431, but the evaluator scores only which task is ranked first. Missing relationships reduce recall, while extra relationships reduce precision. For C1-007, a document is linked only to the process or subprocess containing it and to any other process or subprocess that explicitly references it through a data association or referenced-data link. The link is not inherited merely because one subprocess sits inside another. C1-008 uses the BPMN flow resources as its formal primary answer; its standalone roots and free-form attributes remain useful context but do not enter TP, FP or FN. The Main judicial process is triggered by the arrival of the Complaint message, represented by its message flow. Investigate case, Prepare preliminary case file and Resolve pending interview invitation are instantiated by their incoming sequence flows. For these three subprocesses, an accepted alternative allows the answer to name the event or gateway from which the flow comes. This gives credit to an answer such as `incoming sequence flow from Instruction to proceed received` even when it identifies the event rather than the flow resource. The Start Event is not accepted as a substitute for the arriving message that initiates the main process. No external initiation rule is represented for Collect documents and records, Conduct on-site investigation or Collect and analyze statements. Internal start events and possible first activities remain extra context rather than outer subprocess initiators. C1-009 likewise scores only which conclusion element is connected to each process or subprocess. Its root-only facts and attributes are not independently scored, and different relation names do not matter. When a required conclusion was not already returned in `related_elements`, a string in an attribute's `value` may be used as its label. The value may be the exact label or begin with that label followed by an explanation, such as `Conduct on-site investigation completes last`. The attribute name and unit are ignored, and a related element is never counted twice. The longer form still receives precision, recall and F1 credit, but prevents `exact_answer` from being true. Related targets are matched by identifier, or by normalized label with a compatible `element_type` when an identifier is unavailable. `element_type` is not used alone because many BPMN elements share the same type. When a related process or subprocess has one identifier for its Bee-Up object and another for its process diagram, matching labels allow the evaluator to treat them as the same process. `related_elements` can also store an ordered path.
 
-Paths receive partial credit. Suppose the gold path is `A → B → C`, while the generated path is `A → C`. `A` and `C` still match because they remain in the correct relative order. `B` is missing, so, recall goes down. An extra incorrect step would reduce precision. Either problem can lower F1. If the question also asks for a path cost or duration, that value is compared, too.
+Paths receive partial credit. Suppose the gold path is `A → B → C`, while the generated path is `A → C`. `A` and `C` still match because they remain in the correct relative order. `B` is missing, so, recall goes down. An extra incorrect step would reduce precision. Either problem can lower F1. If the question also asks for a path cost or duration, that value is compared, too. A gold path may additionally identify an ad-hoc section whose elements have no fixed order. Those elements must still be returned, but their order is ignored except for explicitly listed internal sequences. Collaboration routes are handled in a similar way: the sequence inside each pool remains fixed, while elements from different pools may be interleaved. A message-sending element must still occur before the corresponding receiving element.
+
+`C2-003` uses the BPMN meaning of a process step: an activity, represented by a Task or a decomposable Sub-Process. Events such as `Scheduled hearing date` and gateways such as `Requirements satisfied?` are therefore not scored as steps. The Court conducts the hearing, issues and registers the decision, notifies the verdict and closes the case file. In parallel, the law firm represents the client and, after the Court sends the verdict, informs the client. `Conduct hearing` and `Represent client at hearing` may be listed in either order, but both must precede `Issue judicial verdict`. After the verdict is sent, `Close case file` and `Inform about judicial verdict` may likewise appear in either order. `Archive adjudicated case file` is not part of this gold path because it begins only after the Court has reached `Case adjudicated`, which marks the end of the interval asked about.
+
+For C5-001, the three participants remain the root results. Each communication is then scored once as a sender, message and receiver. The matching `sent` and `received` descriptions are combined instead of being counted as two separate facts. For example, `Client sends Complaint` and `Law firm receives Complaint` describe the same communication: `Client -> Complaint -> Law firm`.
+
+C5-004 accepts two ways of naming a client-interaction point. An answer may return the law-firm activity or event directly. It may instead return the corresponding message flow with `from` and `to` related elements. In the second form, the evaluator uses the single endpoint that is not a pool. If no such endpoint exists, or more than one is supplied, the message-flow wrapper is not converted and does not receive credit as the requested interaction point.
 
 A structured answer must be valid JSON and follow the schema. If its JSON cannot be read or required fields are missing, the run is marked invalid and receives zero precision, recall and F1.
 
-Some questions allow more than one correct gold representation. `C3-023`, for example - asking "Of the available ways to complete the process, which ones, from start to finish, have the longest execution time and what are each of their durations?" - accepts both a compact path and a version with expanded subprocesses. The prediction is compared with both and the better score is kept.
+Some questions allow more than one defensible gold answer. `C3-023`, for example, asks for the longest complete route and its execution time. The RDF content provides execution times for individual tasks, but it does not provide one aggregate route duration or state whether task times from different pools should be added or treated as overlapping. The evaluation therefore accepts two interpretations. The cumulative interpretation adds every represented task execution time, giving 42 hours and 40 minutes. The elapsed critical-path interpretation treats concurrently performed work as one time interval, giving 39 hours and 10 minutes. Both interpretations require the same complete route: `Conduct hearing` and `Represent client at hearing` must both be present, as must `Close case file` and `Inform about judicial verdict`. Possible overlap changes the duration calculation, not whether an activity belongs to the route.
+
+Both interpretations accept a compact path and a version with expanded subprocesses. In the expanded version, each subprocess is replaced by its enclosed elements; if a prediction also names the six subprocess containers, those names are treated as unscored context rather than counted twice. The gateways and events in all four gold representations are also optional context: returning or omitting them does not change the score. The activities, their required order and the route duration are still scored. Ad-hoc portions may be enumerated in different orders, while their explicitly represented sequence relationships remain order-sensitive. For example, `Prepare list of potential witnesses` must precede `Send interview request`. `Document statements` and `Interview involved parties` must both precede `Compare statements`, although either may be listed first and both have zero execution time. After `File claim with Court`, Court and law-firm activities may be interleaved, but the order inside each pool and the direction of the two message exchanges must be preserved. The evaluator compares each prediction with all accepted representations and keeps the best score.
 
 ### Precision, recall, F1 and exact answers
 
@@ -980,12 +988,58 @@ The saved report includes all 189 expected runs. Every answer passed its applica
 
 | Responses | Runs | Macro precision | Macro recall | Macro F1 | Exact-answer accuracy |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| All | 189 | 0.9270 | 0.9397 | 0.9191 | 0.8095 |
-| Yes/no | 24 | 0.9583 | 0.9583 | 0.9583 | 0.9583 |
-| Structured | 165 | 0.9224 | 0.9370 | 0.9134 | 0.7879 |
+| All | 189 | 0.9730 | 0.9690 | 0.9647 | 0.8995 |
+| Yes/no | 24 | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
+| Structured | 165 | 0.9691 | 0.9645 | 0.9596 | 0.8848 |
 
 The complete, unrounded values are in
 [evaluation_all_report.json](scripts/report/evaluation_all_report.json).
+
+C1-004 has two accepted answers because "Which tasks deal with case
+investigation?" does not say whether tasks inside nested subprocesses should be
+included. The primary answer contains all 16 tasks found directly or indirectly
+inside `Investigate case`. The accepted alternative contains only `Analyze
+document and record`, the sole task directly contained in that process diagram.
+Each prediction is compared with both interpretations, and the better match is
+kept.
+
+C1-005 follows the same direct-versus-recursive policy. Its primary answer
+contains nine investigation tasks after excluding those in `Collect documents
+and records`, including tasks from the other nested subprocesses. Its accepted
+alternative contains only `Analyze document and record`, the sole task directly
+contained in `Investigate case`. All three predictions match the recursive
+primary answer, so adding this alternative does not change the scores.
+
+C1-007 uses only associations supported by the model. A document is involved in
+the process or subprocess containing it and in another process or subprocess
+only when a data association or referenced-data link explicitly connects them.
+The association is not inherited merely because the subprocess is nested inside
+a larger process. Runs 2 and 3 exactly match this mapping. Run 1 additionally
+associates `Pending interview invitations` with the Main judicial process, so it
+receives partial rather than exact credit.
+
+C1-013 accepts both `No` and `Yes` because the wording does not say whether
+"part of" means direct containment only. `No` refers to the task's immediate
+embedded subprocess, while `Yes` follows the containment chain to the ad-hoc
+`Investigate case` subprocess. This question therefore records an ambiguity in
+the wording rather than distinguishing between those two interpretations.
+
+C2-002 also accepts two representations of the default outcome of `Follow-up
+required?`. The primary answer names the gateway reached directly by the default
+flow; the alternative names `Investigate case`, which is reached immediately
+after that gateway. Conditions beginning with `default path`, as well as
+`default process path`, are treated as the same condition. When a Boolean
+`default_path` attribute merely clarifies a condition already provided for the
+same outcome, it is not counted again. Other unexpected attributes still reduce
+precision.
+
+C2-004 accepts two levels of subprocess detail because the word "steps" does not
+say whether a subprocess should remain one Activity or be expanded. The primary
+answer lists the five Activities shown at the `Investigate case` level. The
+alternative replaces the three Sub-Processes with their 15 internal Tasks and
+retains the two Tasks modeled directly in `Investigate case`, giving 17
+Activities in total. Both answers remain lists because the ad-hoc investigation
+does not define one fixed order for all of its internal Activities.
 
 ## What cannot be reproduced exactly
 
