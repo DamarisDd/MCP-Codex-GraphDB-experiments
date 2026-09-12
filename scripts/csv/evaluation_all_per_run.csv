@@ -17,14 +17,14 @@ C1-005,C1,3,"Which tasks deal with case investigation, except for those dealing 
 C1-006,C1,1,What decisions occur in each process or subprocess?,structured,True,1.0,1.0,1.0,True
 C1-006,C1,2,What decisions occur in each process or subprocess?,structured,True,1.0,1.0,1.0,True
 C1-006,C1,3,What decisions occur in each process or subprocess?,structured,True,1.0,1.0,1.0,True
-C1-007,C1,1,What documents are involved in each process or subprocess?,structured,True,1.0,1.0,1.0,True
+C1-007,C1,1,What documents are involved in each process or subprocess?,structured,True,0.9375,1.0,0.967741935483871,False
 C1-007,C1,2,What documents are involved in each process or subprocess?,structured,True,1.0,1.0,1.0,True
 C1-007,C1,3,What documents are involved in each process or subprocess?,structured,True,1.0,1.0,1.0,True
-C1-008,C1,1,How is each process or subprocess initiated?,structured,True,0.5,0.5,0.5,False
-C1-008,C1,2,How is each process or subprocess initiated?,structured,True,0.4666666666666667,0.5,0.4827586206896552,False
-C1-008,C1,3,How is each process or subprocess initiated?,structured,True,0.4,0.5714285714285714,0.47058823529411764,False
-C1-009,C1,1,How can each process or subprocess conclude?,structured,True,0.28,1.0,0.43750000000000006,False
-C1-009,C1,2,How can each process or subprocess conclude?,structured,True,0.6363636363636364,1.0,0.7777777777777778,False
+C1-008,C1,1,How is each process or subprocess initiated?,structured,True,0.2727272727272727,0.75,0.39999999999999997,False
+C1-008,C1,2,How is each process or subprocess initiated?,structured,True,0.15789473684210525,0.75,0.2608695652173913,False
+C1-008,C1,3,How is each process or subprocess initiated?,structured,True,0.14285714285714285,0.75,0.24,False
+C1-009,C1,1,How can each process or subprocess conclude?,structured,True,1.0,1.0,1.0,False
+C1-009,C1,2,How can each process or subprocess conclude?,structured,True,1.0,1.0,1.0,True
 C1-009,C1,3,How can each process or subprocess conclude?,structured,True,1.0,1.0,1.0,True
 C1-010,C1,1,"Does the document ""Case file"" exist?",binary,True,1.0,1.0,1.0,True
 C1-010,C1,2,"Does the document ""Case file"" exist?",binary,True,1.0,1.0,1.0,True
@@ -44,12 +44,12 @@ C1-014,C1,3,"Do the tasks ""Collect physical evidence"" and ""Document observati
 C2-001,C2,1,"What must be completed right before the task ""Archive non-adjudicated matter"" can begin?",structured,True,1.0,1.0,1.0,True
 C2-001,C2,2,"What must be completed right before the task ""Archive non-adjudicated matter"" can begin?",structured,True,1.0,1.0,1.0,True
 C2-001,C2,3,"What must be completed right before the task ""Archive non-adjudicated matter"" can begin?",structured,True,1.0,1.0,1.0,True
-C2-002,C2,1,Give me the possible outcomes of the decision regarding a required follow-up and the conditions leading to those outcomes.,structured,True,0.6666666666666666,1.0,0.8,False
-C2-002,C2,2,Give me the possible outcomes of the decision regarding a required follow-up and the conditions leading to those outcomes.,structured,True,0.5,0.5,0.5,False
-C2-002,C2,3,Give me the possible outcomes of the decision regarding a required follow-up and the conditions leading to those outcomes.,structured,True,0.5,0.5,0.5,False
-C2-003,C2,1,What are all the steps that occur between registering a claim and adjudicating the case?,structured,True,1.0,1.0,1.0,True
-C2-003,C2,2,What are all the steps that occur between registering a claim and adjudicating the case?,structured,True,1.0,1.0,1.0,True
-C2-003,C2,3,What are all the steps that occur between registering a claim and adjudicating the case?,structured,True,1.0,1.0,1.0,True
+C2-002,C2,1,Give me the possible outcomes of the decision regarding a required follow-up and the conditions leading to those outcomes.,structured,True,1.0,1.0,1.0,True
+C2-002,C2,2,Give me the possible outcomes of the decision regarding a required follow-up and the conditions leading to those outcomes.,structured,True,1.0,1.0,1.0,True
+C2-002,C2,3,Give me the possible outcomes of the decision regarding a required follow-up and the conditions leading to those outcomes.,structured,True,1.0,1.0,1.0,True
+C2-003,C2,1,What are all the steps that occur between registering a claim and adjudicating the case?,structured,True,0.8181818181818182,0.8181818181818182,0.8181818181818182,False
+C2-003,C2,2,What are all the steps that occur between registering a claim and adjudicating the case?,structured,True,0.8181818181818182,0.8181818181818182,0.8181818181818182,False
+C2-003,C2,3,What are all the steps that occur between registering a claim and adjudicating the case?,structured,True,0.8181818181818182,0.8181818181818182,0.8181818181818182,False
 C2-004,C2,1,What are all the steps that occur between the beginning of a case investigation and preparing the claim and the supporting documents?,structured,True,0.8333333333333334,1.0,0.9090909090909091,False
 C2-004,C2,2,What are all the steps that occur between the beginning of a case investigation and preparing the claim and the supporting documents?,structured,True,1.0,0.2,0.33333333333333337,False
 C2-004,C2,3,What are all the steps that occur between the beginning of a case investigation and preparing the claim and the supporting documents?,structured,True,1.0,1.0,1.0,True
@@ -98,12 +98,12 @@ C3-009,C3,3,Which tasks require collaboration between different roles within the
 C3-010,C3,1,How many tasks are assigned to each responsible from the law firm's process?,structured,True,0.6875,0.6111111111111112,0.6470588235294118,False
 C3-010,C3,2,How many tasks are assigned to each responsible from the law firm's process?,structured,True,1.0,1.0,1.0,True
 C3-010,C3,3,How many tasks are assigned to each responsible from the law firm's process?,structured,True,0.6875,0.6111111111111112,0.6470588235294118,False
-C3-011,C3,1,Who has the largest number of assigned tasks?,structured,True,0.5,1.0,0.6666666666666666,False
-C3-011,C3,2,Who has the largest number of assigned tasks?,structured,True,0.5,1.0,0.6666666666666666,False
-C3-011,C3,3,Who has the largest number of assigned tasks?,structured,True,0.5,1.0,0.6666666666666666,False
-C3-012,C3,1,Who has the fewest assigned tasks in the law firm's process? What about the Court's process?,structured,True,0.375,0.6,0.4615384615384615,False
-C3-012,C3,2,Who has the fewest assigned tasks in the law firm's process? What about the Court's process?,structured,True,0.5,1.0,0.6666666666666666,False
-C3-012,C3,3,Who has the fewest assigned tasks in the law firm's process? What about the Court's process?,structured,True,0.25,0.6,0.35294117647058826,False
+C3-011,C3,1,Who has the largest number of assigned tasks?,structured,True,1.0,1.0,1.0,True
+C3-011,C3,2,Who has the largest number of assigned tasks?,structured,True,1.0,1.0,1.0,True
+C3-011,C3,3,Who has the largest number of assigned tasks?,structured,True,1.0,1.0,1.0,True
+C3-012,C3,1,Who has the fewest assigned tasks in the law firm's process? What about the Court's process?,structured,True,0.75,0.6,0.6666666666666665,False
+C3-012,C3,2,Who has the fewest assigned tasks in the law firm's process? What about the Court's process?,structured,True,1.0,1.0,1.0,True
+C3-012,C3,3,Who has the fewest assigned tasks in the law firm's process? What about the Court's process?,structured,True,0.5,0.6,0.5454545454545454,False
 C3-013,C3,1,How long is preparing the claim expected to take?,structured,True,1.0,1.0,1.0,True
 C3-013,C3,2,How long is preparing the claim expected to take?,structured,True,1.0,1.0,1.0,True
 C3-013,C3,3,How long is preparing the claim expected to take?,structured,True,1.0,1.0,1.0,True
@@ -113,9 +113,9 @@ C3-014,C3,3,How long is conducting the on-site investigation expected to take?,s
 C3-015,C3,1,Which tasks are expected to take longer than an hour?,structured,True,1.0,1.0,1.0,True
 C3-015,C3,2,Which tasks are expected to take longer than an hour?,structured,True,1.0,1.0,1.0,True
 C3-015,C3,3,Which tasks are expected to take longer than an hour?,structured,True,1.0,1.0,1.0,True
-C3-016,C3,1,Which tasks have the longest execution times?,structured,True,0.5,1.0,0.6666666666666666,False
-C3-016,C3,2,Which tasks have the longest execution times?,structured,True,0.5,1.0,0.6666666666666666,False
-C3-016,C3,3,Which tasks have the longest execution times?,structured,True,0.5,1.0,0.6666666666666666,False
+C3-016,C3,1,Which tasks have the longest execution times?,structured,True,1.0,1.0,1.0,True
+C3-016,C3,2,Which tasks have the longest execution times?,structured,True,1.0,1.0,1.0,True
+C3-016,C3,3,Which tasks have the longest execution times?,structured,True,1.0,1.0,1.0,True
 C3-017,C3,1,Which tasks have no specified execution time?,structured,True,1.0,1.0,1.0,True
 C3-017,C3,2,Which tasks have no specified execution time?,structured,True,1.0,1.0,1.0,True
 C3-017,C3,3,Which tasks have no specified execution time?,structured,True,1.0,1.0,1.0,True
@@ -125,18 +125,18 @@ C3-018,C3,3,How much does representing the client cost?,structured,True,1.0,1.0,
 C3-019,C3,1,How much would resolving a pending interview invitation cost for each outcome?,structured,True,1.0,1.0,1.0,True
 C3-019,C3,2,How much would resolving a pending interview invitation cost for each outcome?,structured,True,1.0,1.0,1.0,True
 C3-019,C3,3,How much would resolving a pending interview invitation cost for each outcome?,structured,True,1.0,1.0,1.0,True
-C3-020,C3,1,Which tasks have the highest costs?,structured,True,0.5,1.0,0.6666666666666666,False
-C3-020,C3,2,Which tasks have the highest costs?,structured,True,0.5,1.0,0.6666666666666666,False
-C3-020,C3,3,Which tasks have the highest costs?,structured,True,0.5,1.0,0.6666666666666666,False
+C3-020,C3,1,Which tasks have the highest costs?,structured,True,1.0,1.0,1.0,True
+C3-020,C3,2,Which tasks have the highest costs?,structured,True,1.0,1.0,1.0,True
+C3-020,C3,3,Which tasks have the highest costs?,structured,True,1.0,1.0,1.0,True
 C3-021,C3,1,Which tasks have no specified costs?,structured,True,1.0,1.0,1.0,True
 C3-021,C3,2,Which tasks have no specified costs?,structured,True,1.0,1.0,1.0,True
 C3-021,C3,3,Which tasks have no specified costs?,structured,True,1.0,1.0,1.0,True
 C3-022,C3,1,"Of the available ways to complete the process, which ones, from start to finish, are expected to cost the least and what are each of their costs?",structured,True,1.0,1.0,1.0,True
 C3-022,C3,2,"Of the available ways to complete the process, which ones, from start to finish, are expected to cost the least and what are each of their costs?",structured,True,1.0,1.0,1.0,True
 C3-022,C3,3,"Of the available ways to complete the process, which ones, from start to finish, are expected to cost the least and what are each of their costs?",structured,True,1.0,1.0,1.0,True
-C3-023,C3,1,"Of the available ways to complete the process, which ones, from start to finish, have the longest execution time and what are each of their durations?",structured,True,0.9583333333333334,0.6052631578947368,0.7419354838709677,False
-C3-023,C3,2,"Of the available ways to complete the process, which ones, from start to finish, have the longest execution time and what are each of their durations?",structured,True,0.9583333333333334,0.6052631578947368,0.7419354838709677,False
-C3-023,C3,3,"Of the available ways to complete the process, which ones, from start to finish, have the longest execution time and what are each of their durations?",structured,True,1.0,0.92,0.9583333333333334,False
+C3-023,C3,1,"Of the available ways to complete the process, which ones, from start to finish, have the longest execution time and what are each of their durations?",structured,True,0.9230769230769231,0.5217391304347826,0.6666666666666667,False
+C3-023,C3,2,"Of the available ways to complete the process, which ones, from start to finish, have the longest execution time and what are each of their durations?",structured,True,0.9230769230769231,0.5217391304347826,0.6666666666666667,False
+C3-023,C3,3,"Of the available ways to complete the process, which ones, from start to finish, have the longest execution time and what are each of their durations?",structured,True,1.0,0.926829268292683,0.9620253164556963,False
 C4-001,C4,1,What produces the Case file document?,structured,True,1.0,1.0,1.0,True
 C4-001,C4,2,What produces the Case file document?,structured,True,1.0,1.0,1.0,True
 C4-001,C4,3,What produces the Case file document?,structured,True,1.0,1.0,1.0,True
@@ -155,9 +155,9 @@ C4-005,C4,3,What documents are needed during the case's investigation?,structure
 C4-006,C4,1,Which documents must have been produced until the Court registers the claim?,structured,True,1.0,1.0,1.0,True
 C4-006,C4,2,Which documents must have been produced until the Court registers the claim?,structured,True,1.0,1.0,1.0,True
 C4-006,C4,3,Which documents must have been produced until the Court registers the claim?,structured,True,1.0,1.0,1.0,True
-C4-007,C4,1,Which documents are used or produced between preparing the witnesses list and closing the matter?,structured,True,1.0,0.6666666666666666,0.8,False
-C4-007,C4,2,Which documents are used or produced between preparing the witnesses list and closing the matter?,structured,True,1.0,1.0,1.0,True
-C4-007,C4,3,Which documents are used or produced between preparing the witnesses list and closing the matter?,structured,True,1.0,1.0,1.0,True
+C4-007,C4,1,Which documents are used or produced between preparing the witnesses list and closing the matter?,structured,True,0.75,1.0,0.8571428571428571,False
+C4-007,C4,2,Which documents are used or produced between preparing the witnesses list and closing the matter?,structured,True,0.8333333333333334,1.0,0.9090909090909091,False
+C4-007,C4,3,Which documents are used or produced between preparing the witnesses list and closing the matter?,structured,True,0.8333333333333334,1.0,0.9090909090909091,False
 C4-008,C4,1,"Which documents are produced, but never used?",structured,True,1.0,1.0,1.0,True
 C4-008,C4,2,"Which documents are produced, but never used?",structured,True,1.0,1.0,1.0,True
 C4-008,C4,3,"Which documents are produced, but never used?",structured,True,1.0,1.0,1.0,True
@@ -170,7 +170,7 @@ C5-002,C5,3,What information must the client provide to the law firm?,structured
 C5-003,C5,1,What information does the law firm receive from the Court?,structured,True,1.0,1.0,1.0,True
 C5-003,C5,2,What information does the law firm receive from the Court?,structured,True,1.0,1.0,1.0,True
 C5-003,C5,3,What information does the law firm receive from the Court?,structured,True,1.0,1.0,1.0,True
-C5-004,C5,1,At what points in the process does the law firm interact with the client?,structured,True,0.0,0.0,0.0,False
+C5-004,C5,1,At what points in the process does the law firm interact with the client?,structured,True,1.0,1.0,1.0,True
 C5-004,C5,2,At what points in the process does the law firm interact with the client?,structured,True,1.0,1.0,1.0,True
 C5-004,C5,3,At what points in the process does the law firm interact with the client?,structured,True,1.0,1.0,1.0,True
 C5-005,C5,1,What are the messages sent by the Court to the law firm after the hearing is scheduled?,structured,True,1.0,1.0,1.0,True
@@ -178,7 +178,7 @@ C5-005,C5,2,What are the messages sent by the Court to the law firm after the he
 C5-005,C5,3,What are the messages sent by the Court to the law firm after the hearing is scheduled?,structured,True,1.0,1.0,1.0,True
 C6-001,C6,1,Where does the process repeat the work?,structured,True,1.0,1.0,1.0,True
 C6-001,C6,2,Where does the process repeat the work?,structured,True,1.0,1.0,1.0,True
-C6-001,C6,3,Where does the process repeat the work?,structured,True,0.5,1.0,0.6666666666666666,False
+C6-001,C6,3,Where does the process repeat the work?,structured,True,1.0,1.0,1.0,True
 C6-002,C6,1,Where in the process can work be sent back to an earlier step?,structured,True,1.0,1.0,1.0,True
 C6-002,C6,2,Where in the process can work be sent back to an earlier step?,structured,True,1.0,1.0,1.0,True
 C6-002,C6,3,Where in the process can work be sent back to an earlier step?,structured,True,1.0,1.0,1.0,True

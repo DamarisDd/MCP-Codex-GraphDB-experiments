@@ -35,27 +35,61 @@
 #
 # SCORING
 #
-# - Lists: compare the returned items/entities and when requested, their attributes. 
-#   Order is ignored unless the question asks for an ordered answer.
+# - Lists: compare the returned items/entities and when requested, their attributes.
+#   For questions marked with score_related_elements, the linked item is compared
+#   as well. The relation name can be ignored when the question asks only which
+#   items belong together. A gold record can also leave root entities or attributes
+#   unscored when they are only context. Order is ignored unless the question asks
+#   for it.
+#   A communication question may keep participants as the root items while
+#   treating matching "sent" and "received" descriptions as one directed message
+#   flow. This prevents the same communication from being scored twice.
+#   A message-flow answer may also identify an interaction point through its
+#   unique non-pool "from" or "to" endpoint. When enabled by the gold record,
+#   that endpoint is compared with the requested activity or event.
 # - Values: compare the requested values and their units. Durations are converted to seconds 
 #   before comparison.
 # - Rankings: rank is an entity's position; rank 1 is the top position,
 #   rank 2 is the next; tied entities share the same rank.
 #   For example, individuals X and Y both have rank 1 because they
 #   are tied for the largest number of assigned activities.
-# - Paths: compare each path/route as an ordered sequence of BPMN elements. Correct
-#   elements receive credit when they appear in the same relative order. For
-#   example, if the gold path is A -> B -> C and the generated path is A -> C,
+# - Paths: normally compare each path/route as an ordered sequence of BPMN elements.
+#   A gold path can mark an ad-hoc section as unordered while retaining any
+#   explicitly required order inside that section. For collaboration routes,
+#   each pool keeps its own sequence, while elements from different pools may
+#   interleave; a message send must still precede its matching receipt.
+#   Inclusive-gateway branches may likewise be interleaved between their split
+#   and join when the model does not order one branch before the other. Correct
+#   elements receive credit when they respect the order that the model actually
+#   defines. For example, if the gold path is A -> B -> C and the generated path is A -> C,
 #   the two elements count as matches, while the missing one counts as a false negative.
 #   Missing elements reduce recall, extra elements reduce precision and 
 #   either can lower F1. Requested path costs or durations are also compared.
+#   A path policy may keep selected events and gateways as optional context. Their
+#   presence or absence then has no effect on the score, while the required order
+#   between the remaining activities is still checked.
 # - Yes/no answers: accept only "Yes" or "No" and check whether it matches the
 #   gold answer.
 #
 # Entities are matched by identifier when possible, with labels as a fallback.
-# related_elements are ignored for ordinary answers and used only when they
-# represent an ordered path. A structured answer must be valid JSON and follow
-# the schema; otherwise, the run is marked invalid and its scores are zero.
+# For a scored relationship to a process or subprocess, matching labels can also
+# bridge the subprocess object and its corresponding process-diagram identifier.
+# related_elements are scored for explicitly marked gold questions and when they
+# represent an ordered path. They are ignored for other ordinary answers. A
+# marked gold record may also name contextual relation types that should remain
+# unscored. It may also list plausible but optional related associations. Returning
+# one of these is not an error, while leaving it out does not reduce recall. A
+# marked question may use an attribute value as a fallback related-target label
+# when that target was not already returned in related_elements. The value may
+# equal the label or begin with it before a short explanation. The attribute name
+# and unit are ignored by this fallback.
+# Equivalent default-branch conditions are normalized. For example, "default
+# path", "default process path" and "default path; no explicit condition is
+# represented" express the same condition. A Boolean default_path attribute is
+# ignored when it only clarifies a condition already given for the same result;
+# other unexpected attributes remain extra scored facts.
+# A structured answer must be valid JSON and follow the schema; otherwise, the run
+# is marked invalid and its scores are zero.
 #
 # Some questions accept more than one gold representation. For example, C3-023
 # accepts a compact path and the same path with expanded subprocesses. A prediction
@@ -69,13 +103,18 @@
 # is a gold item or value with no match in the generated answer. For example, if
 # the gold list is A, B, C and the generated list is A, C, D, then A and C are true
 # positives, D is a false positive and B is a false negative.
+# An allowed association is reported separately. It is a plausible optional
+# answer: returning it is not a false positive, and omitting it is not a false
+# negative.
 #
 # Precision measures how much of the generated answer is correct; recall measures
 # how much of the gold answer was recovered; F1 balances precision and recall.
 #
 # exact_answer shows whether the whole answer is correct. For a structured answer,
 # it is true only when all expected items and values are present, nothing extra is
-# returned, and answer_type and status match the gold answer.
+# returned, and answer_type and status match the gold answer. When an attribute
+# value supplies a related-element label, added explanatory wording still earns
+# ordinary matching credit but prevents an exact answer.
 #
 # Scores are first calculated separately for every run and then averaged. Each run
 # has the same influence on the final average, whether its answer contains one
@@ -107,6 +146,26 @@ from typing import Any, Callable, Iterable, Sequence
 
 JSONValue = Any
 Entity = dict[str, Any]
+PathPolicy = dict[str, Any]
+
+PROCESS_CONTAINER_TYPES = frozenset(
+    {
+        "business_process_diagram_bpmn_2_0",
+        "business_process",
+        "process",
+        "sub_process_bpmn",
+        "subprocess_bpmn",
+        "subprocess",
+    }
+)
+
+POOL_TYPES = frozenset(
+    {
+        "pool_bpmn",
+        "pool_collapsed_bpmn",
+        "collapsed_pool_bpmn",
+    }
+)
 
 
 @dataclass(frozen=True)
@@ -157,6 +216,21 @@ class AttributeFact:
     name: str
     value: JSONValue
     unit: str | None
+
+
+@dataclass(frozen=True)
+class CommunicationFact:
+    sender: Entity | None
+    message: JSONValue
+    receiver: Entity | None
+
+
+@dataclass(frozen=True)
+class CommunicationStatement:
+    participant: Entity
+    direction: str
+    message: JSONValue
+    counterpart_hint: str | None
 
 
 @dataclass(frozen=True)
@@ -320,23 +394,56 @@ def canonical_communication_attribute_name(value: Any) -> str | None:
     """
     name = canonical_attribute_name(value)
     if name in {"sends", "sent_message", "sent_messages"} or name.startswith(
-        "sends_to_"
+        ("sends_to_", "sent_to_")
     ):
         return "sent_message"
     if name in {
         "receives",
         "received_message",
         "received_messages",
-    } or name.startswith("receives_from_"):
+    } or name.startswith(("receives_from_", "received_from_")):
         return "received_message"
     return None
+
+
+def communication_attribute_parts(value: Any) -> tuple[str | None, str | None]:
+    """Return a communication direction and any participant named in the field."""
+    name = canonical_attribute_name(value)
+    if name.startswith(("sends_to_", "sent_to_")):
+        prefix = "sends_to_" if name.startswith("sends_to_") else "sent_to_"
+        return "sent_message", normalized_text(
+            name.removeprefix(prefix).replace("_", " "), casefold=True
+        )
+    if name.startswith(("receives_from_", "received_from_")):
+        prefix = (
+            "receives_from_"
+            if name.startswith("receives_from_")
+            else "received_from_"
+        )
+        return "received_message", normalized_text(
+            name.removeprefix(prefix).replace("_", " "), casefold=True
+        )
+    return canonical_communication_attribute_name(name), None
+
+
+def canonical_condition_value(value: JSONValue) -> JSONValue:
+    """Normalize equivalent wording for a default BPMN branch condition."""
+    if not isinstance(value, str):
+        return value
+    normalized = normalized_text(value, casefold=True)
+    if re.match(r"^default(?: process)? path(?:\b|$)", normalized):
+        return "default path"
+    return value
 
 
 def atomic_attribute_values(name: Any, value: JSONValue) -> list[tuple[str, JSONValue]]:
     """Expand only known communication-list attributes into atomic facts."""
     communication_name = canonical_communication_attribute_name(name)
     if communication_name is None:
-        return [(canonical_attribute_name(name), value)]
+        canonical_name = canonical_attribute_name(name)
+        if canonical_name == "condition":
+            value = canonical_condition_value(value)
+        return [(canonical_name, value)]
     if isinstance(value, str):
         parts = [part.strip() for part in value.split(";") if part.strip()]
         if parts:
@@ -365,6 +472,12 @@ def canonical_unit(value: Any) -> str | None:
 
 def duration_seconds(value: JSONValue, unit: str | None) -> float | None:
     """Normalize supported duration serializations to seconds."""
+    factors = {
+        "seconds": 1.0,
+        "minutes": 60.0,
+        "hours": 3600.0,
+        "days": 86400.0,
+    }
     if isinstance(value, str):
         serialized = re.fullmatch(
             r"\s*(\d+):(\d+):(\d+):(\d+):(\d+)\s*", value
@@ -378,24 +491,29 @@ def duration_seconds(value: JSONValue, unit: str | None) -> float | None:
                 + minutes * 60
                 + seconds
             )
-        labelled = re.fullmatch(
-            r"\s*([+-]?(?:\d+(?:\.\d*)?|\.\d+))\s+"
-            r"(seconds?|minutes?|hours?|days?)\s*",
-            value,
+        component_pattern = re.compile(
+            r"([+-]?(?:\d+(?:\.\d*)?|\.\d+))\s+"
+            r"(seconds?|minutes?|hours?|days?)",
             flags=re.IGNORECASE,
         )
-        if labelled:
-            value = float(labelled.group(1))
-            unit = canonical_unit(labelled.group(2))
+        components = list(component_pattern.finditer(value))
+        if components:
+            cursor = 0
+            complete = True
+            for component in components:
+                if value[cursor : component.start()].strip():
+                    complete = False
+                    break
+                cursor = component.end()
+            if complete and not value[cursor:].strip():
+                return sum(
+                    float(component.group(1))
+                    * factors[canonical_unit(component.group(2))]
+                    for component in components
+                )
 
     if not isinstance(value, (int, float)) or isinstance(value, bool):
         return None
-    factors = {
-        "seconds": 1.0,
-        "minutes": 60.0,
-        "hours": 3600.0,
-        "days": 86400.0,
-    }
     canonical = canonical_unit(unit)
     if canonical not in factors:
         return None
@@ -476,6 +594,31 @@ def entity_matches(gold: Entity, predicted: Entity, mode: str) -> bool:
     return gold_type is None or predicted_type is None or gold_type == predicted_type
 
 
+def related_target_matches(gold: Entity, predicted: Entity, mode: str) -> bool:
+    """Match a related target, treating matching process labels as equivalent.
+
+    Bee-Up can represent one subprocess both as a subprocess object and as its
+    process diagram. Their identifiers and element types differ even though they
+    name the same process. Identifier-only mode remains strict.
+    """
+    if entity_matches(gold, predicted, mode):
+        return True
+    if mode == "identifier":
+        return False
+    gold_type, predicted_type = element_type(gold), element_type(predicted)
+    if (
+        gold_type not in PROCESS_CONTAINER_TYPES
+        or predicted_type not in PROCESS_CONTAINER_TYPES
+    ):
+        return False
+    gold_label, predicted_label = label(gold), label(predicted)
+    return (
+        gold_label is not None
+        and predicted_label is not None
+        and gold_label == predicted_label
+    )
+
+
 def path_entity_matches(gold: Entity, predicted: Entity, mode: str) -> bool:
     """Match path elements by identifier, falling back to label only.
 
@@ -525,28 +668,70 @@ def answer_is_order_sensitive(answer: dict[str, Any]) -> bool:
 
 
 def answer_facts(
-    answer: dict[str, Any], *, order_sensitive: bool = False
+    answer: dict[str, Any],
+    *,
+    order_sensitive: bool = False,
+    include_root_entities: bool = True,
+    include_attributes: bool = True,
+    include_relations: bool = False,
+    score_relation_names: bool = True,
+    ignored_relations: frozenset[str] = frozenset(),
 ) -> list[AnswerFact]:
-    """Extract scored roots and attributes from a non-path answer.
+    """Extract the requested facts from a non-path answer.
 
-    Related elements are intentionally omitted. They remain available in the
-    original JSON for qualitative inspection but cannot create true positives,
-    false positives, or false negatives.
+    Relationships are included only when the gold record explicitly enables
+    them. This keeps contextual related elements from affecting other questions.
     """
     facts: list[AnswerFact] = []
     for root in answer_results(answer):
         rank = root.get("rank")
-        facts.append(
-            RootFact(
-                root,
-                rank if order_sensitive and isinstance(rank, int) else None,
+        if include_root_entities:
+            facts.append(
+                RootFact(
+                    root,
+                    rank if order_sensitive and isinstance(rank, int) else None,
+                )
             )
-        )
+
+        if include_relations:
+            related_elements = root.get("related_elements", [])
+            if isinstance(related_elements, list):
+                for related in related_elements:
+                    if not isinstance(related, dict):
+                        continue
+                    relation = related.get("relation")
+                    if not isinstance(relation, str):
+                        continue
+                    if relation in ignored_relations:
+                        continue
+                    order = related.get("order")
+                    facts.append(
+                        RelationFact(
+                            root=root,
+                            relation=relation if score_relation_names else "",
+                            target=related,
+                            order=order if isinstance(order, int) else None,
+                        )
+                    )
 
         attributes = root.get("attributes", [])
-        if isinstance(attributes, list):
+        if include_attributes and isinstance(attributes, list):
+            has_condition = any(
+                isinstance(attribute, dict)
+                and canonical_attribute_name(attribute.get("name")) == "condition"
+                for attribute in attributes
+            )
             for attribute in attributes:
                 if not isinstance(attribute, dict):
+                    continue
+                attribute_name = canonical_attribute_name(attribute.get("name"))
+                if (
+                    has_condition
+                    and attribute_name == "default_path"
+                    and isinstance(attribute.get("value"), bool)
+                ):
+                    # This Boolean only clarifies the condition already given
+                    # for the same outcome; it is not a second condition fact.
                     continue
                 unit = attribute.get("unit")
                 for atomic_name, atomic_value in atomic_attribute_values(
@@ -561,6 +746,82 @@ def answer_facts(
                         )
                     )
     return facts
+
+
+def allowed_relation_facts(
+    associations: Sequence[dict[str, Any]],
+    *,
+    score_relation_names: bool,
+) -> list[RelationFact]:
+    """Convert optional allowed associations into matchable relation facts."""
+    return [
+        RelationFact(
+            root=association["root"],
+            relation=(association["relation"] if score_relation_names else ""),
+            target=association["target"],
+            order=association["order"],
+        )
+        for association in associations
+    ]
+
+
+def attribute_value_relation_facts(
+    answer: dict[str, Any],
+    gold_relations: Sequence[RelationFact],
+    predicted_relations: Sequence[RelationFact],
+    mode: str,
+    tolerance: float,
+) -> tuple[list[RelationFact], int]:
+    """Use matching attribute values as missing related-target labels."""
+    covered_gold = {
+        gold_index
+        for gold_index, _ in maximum_matching(
+            gold_relations,
+            predicted_relations,
+            lambda left, right: fact_matches(left, right, mode, tolerance),
+        )
+    }
+    fallbacks: list[RelationFact] = []
+    non_exact_labels = 0
+    for root in answer_results(answer):
+        attributes = root.get("attributes", [])
+        if not isinstance(attributes, list):
+            continue
+        for attribute in attributes:
+            if not isinstance(attribute, dict):
+                continue
+            value = attribute.get("value")
+            if not isinstance(value, str) or not value.strip():
+                continue
+            normalized_value = normalized_text(value, casefold=True)
+            for gold_index, gold_relation in enumerate(gold_relations):
+                expected_label = label(gold_relation.target)
+                if (
+                    gold_index in covered_gold
+                    or expected_label is None
+                    or not entity_matches(gold_relation.root, root, mode)
+                    or not (
+                        normalized_value == expected_label
+                        or normalized_value.startswith(f"{expected_label} ")
+                    )
+                ):
+                    continue
+                candidate = RelationFact(
+                    root=root,
+                    relation="",
+                    target={
+                        "identifier": None,
+                        "label": gold_relation.target.get("label"),
+                        "element_type": None,
+                    },
+                    order=None,
+                )
+                fallbacks.append(candidate)
+                if normalized_value != expected_label:
+                    non_exact_labels += 1
+                covered_gold.add(gold_index)
+                break
+    return fallbacks, non_exact_labels
 
 
 def scalar_matches(gold: JSONValue, predicted: JSONValue, tolerance: float) -> bool:
@@ -591,9 +852,10 @@ def fact_matches(
         )
     if isinstance(gold, RelationFact) and isinstance(predicted, RelationFact):
         return (
-            gold.order == predicted.order
+            gold.relation == predicted.relation
+            and (gold.order is None or gold.order == predicted.order)
             and entity_matches(gold.root, predicted.root, mode)
-            and entity_matches(gold.target, predicted.target, mode)
+            and related_target_matches(gold.target, predicted.target, mode)
         )
     if isinstance(gold, AttributeFact) and isinstance(predicted, AttributeFact):
         gold_scalar = ScalarFact(gold.name, gold.value, gold.unit)
@@ -603,6 +865,18 @@ def fact_matches(
         return (
             entity_matches(gold.root, predicted.root, mode)
             and scalar_fact_matches(gold_scalar, predicted_scalar, tolerance)
+        )
+    if isinstance(gold, CommunicationFact) and isinstance(
+        predicted, CommunicationFact
+    ):
+        return (
+            gold.sender is not None
+            and predicted.sender is not None
+            and gold.receiver is not None
+            and predicted.receiver is not None
+            and entity_matches(gold.sender, predicted.sender, mode)
+            and entity_matches(gold.receiver, predicted.receiver, mode)
+            and scalar_matches(gold.message, predicted.message, tolerance)
         )
     return False
 
@@ -641,14 +915,257 @@ def score_fact_sets(
     predicted: Sequence[AnswerFact],
     mode: str,
     tolerance: float,
-) -> Counts:
-    pairs = maximum_matching(
+    allowed: Sequence[AnswerFact] = (),
+) -> tuple[Counts, int]:
+    required_pairs = maximum_matching(
         gold,
         predicted,
         lambda left, right: fact_matches(left, right, mode, tolerance),
     )
-    tp = len(pairs)
-    return Counts(tp=tp, fp=len(predicted) - tp, fn=len(gold) - tp)
+    matched_prediction_indexes = {
+        predicted_index for _, predicted_index in required_pairs
+    }
+    unmatched_predictions = [
+        fact
+        for index, fact in enumerate(predicted)
+        if index not in matched_prediction_indexes
+    ]
+    allowed_pairs = maximum_matching(
+        allowed,
+        unmatched_predictions,
+        lambda left, right: fact_matches(left, right, mode, tolerance),
+    )
+    tp = len(required_pairs)
+    allowed_count = len(allowed_pairs)
+    counts = Counts(
+        tp=tp,
+        fp=len(predicted) - tp - allowed_count,
+        fn=len(gold) - tp,
+    )
+    return counts, allowed_count
+
+
+def communication_statements(answer: dict[str, Any]) -> list[CommunicationStatement]:
+    """Read sent and received message descriptions without scoring them twice."""
+    statements: list[CommunicationStatement] = []
+    for participant in answer_results(answer):
+        attributes = participant.get("attributes", [])
+        if not isinstance(attributes, list):
+            continue
+        for attribute in attributes:
+            if not isinstance(attribute, dict):
+                continue
+            direction, counterpart_hint = communication_attribute_parts(
+                attribute.get("name")
+            )
+            if direction is None:
+                continue
+            for _, message in atomic_attribute_values(
+                attribute.get("name"), attribute.get("value")
+            ):
+                statements.append(
+                    CommunicationStatement(
+                        participant=participant,
+                        direction=direction,
+                        message=message,
+                        counterpart_hint=counterpart_hint,
+                    )
+                )
+    return statements
+
+
+def resolve_participant_hint(
+    hint: str | None, participants: Sequence[Entity]
+) -> Entity | None:
+    if hint is None:
+        return None
+    matches = [participant for participant in participants if label(participant) == hint]
+    return matches[0] if len(matches) == 1 else None
+
+
+def communication_peers(
+    participant: Entity,
+    participants: Sequence[Entity],
+    mode: str,
+) -> list[Entity]:
+    peers: list[Entity] = []
+    related_elements = participant.get("related_elements", [])
+    if not isinstance(related_elements, list):
+        return peers
+    for related in related_elements:
+        if (
+            not isinstance(related, dict)
+            or canonical_attribute_name(related.get("relation"))
+            != "communicates_with"
+        ):
+            continue
+        for candidate in participants:
+            if entity_matches(related, candidate, mode) and not any(
+                entity_matches(candidate, existing, mode) for existing in peers
+            ):
+                peers.append(candidate)
+    return peers
+
+
+def communication_facts(
+    answer: dict[str, Any],
+    mode: str,
+    tolerance: float,
+) -> list[CommunicationFact]:
+    """Collapse mirrored send/receive descriptions into directed message facts."""
+    participants = answer_results(answer)
+    statements = communication_statements(answer)
+    sent = [item for item in statements if item.direction == "sent_message"]
+    received = [
+        item for item in statements if item.direction == "received_message"
+    ]
+
+    peer_cache = {
+        id(participant): communication_peers(participant, participants, mode)
+        for participant in participants
+    }
+
+    def statement_pair_matches(
+        sent_item: CommunicationStatement,
+        received_item: CommunicationStatement,
+    ) -> bool:
+        if entity_matches(
+            sent_item.participant, received_item.participant, mode
+        ) or not scalar_matches(
+            sent_item.message, received_item.message, tolerance
+        ):
+            return False
+        sent_hint = resolve_participant_hint(
+            sent_item.counterpart_hint, participants
+        )
+        received_hint = resolve_participant_hint(
+            received_item.counterpart_hint, participants
+        )
+        if sent_hint is not None and not entity_matches(
+            sent_hint, received_item.participant, mode
+        ):
+            return False
+        if received_hint is not None and not entity_matches(
+            received_hint, sent_item.participant, mode
+        ):
+            return False
+        sent_peers = peer_cache[id(sent_item.participant)]
+        received_peers = peer_cache[id(received_item.participant)]
+        if sent_peers and not any(
+            entity_matches(received_item.participant, peer, mode)
+            for peer in sent_peers
+        ):
+            return False
+        if received_peers and not any(
+            entity_matches(sent_item.participant, peer, mode)
+            for peer in received_peers
+        ):
+            return False
+        return True
+
+    pairs = maximum_matching(sent, received, statement_pair_matches)
+    matched_sent = {left for left, _ in pairs}
+    matched_received = {right for _, right in pairs}
+    facts = [
+        CommunicationFact(
+            sender=sent[left].participant,
+            message=sent[left].message,
+            receiver=received[right].participant,
+        )
+        for left, right in pairs
+    ]
+
+    def inferred_counterpart(statement: CommunicationStatement) -> Entity | None:
+        hinted = resolve_participant_hint(statement.counterpart_hint, participants)
+        if hinted is not None:
+            return hinted
+        peers = peer_cache[id(statement.participant)]
+        return peers[0] if len(peers) == 1 else None
+
+    for index, item in enumerate(sent):
+        if index not in matched_sent:
+            facts.append(
+                CommunicationFact(
+                    sender=item.participant,
+                    message=item.message,
+                    receiver=inferred_counterpart(item),
+                )
+            )
+    for index, item in enumerate(received):
+        if index not in matched_received:
+            facts.append(
+                CommunicationFact(
+                    sender=inferred_counterpart(item),
+                    message=item.message,
+                    receiver=item.participant,
+                )
+            )
+    return facts
+
+
+def communication_answer_facts(
+    answer: dict[str, Any],
+    mode: str,
+    tolerance: float,
+    *,
+    include_root_entities: bool,
+) -> list[AnswerFact]:
+    facts: list[AnswerFact] = []
+    if include_root_entities:
+        facts.extend(RootFact(participant, None) for participant in answer_results(answer))
+    facts.extend(communication_facts(answer, mode, tolerance))
+    return facts
+
+
+def is_pool_entity(entity: Entity) -> bool:
+    if element_type(entity) in POOL_TYPES:
+        return True
+    entity_identifier = identifier(entity)
+    if entity_identifier is None:
+        return False
+    local_name = entity_identifier.rsplit("#", maxsplit=1)[-1].casefold()
+    return local_name.startswith(("pool_bpmn-", "pool_collapsed_bpmn-"))
+
+
+def is_message_flow_entity(entity: Entity) -> bool:
+    if element_type(entity) == "message_flow_bpmn":
+        return True
+    entity_identifier = identifier(entity)
+    if entity_identifier is None:
+        return False
+    local_name = entity_identifier.rsplit("#", maxsplit=1)[-1].casefold()
+    return local_name.startswith("message_flow_bpmn-")
+
+
+def message_flow_endpoint_root_facts(
+    answer: dict[str, Any],
+    *,
+    order_sensitive: bool,
+) -> list[AnswerFact]:
+    """Use a message flow's single non-pool from/to endpoint as its root fact."""
+    facts: list[AnswerFact] = []
+    for root in answer_results(answer):
+        effective_root = root
+        if is_message_flow_entity(root):
+            related_elements = root.get("related_elements", [])
+            endpoints = [
+                related
+                for related in related_elements
+                if isinstance(related, dict)
+                and canonical_attribute_name(related.get("relation"))
+                in {"from", "to"}
+                and not is_pool_entity(related)
+            ] if isinstance(related_elements, list) else []
+            if len(endpoints) == 1:
+                effective_root = endpoints[0]
+        rank = root.get("rank")
+        facts.append(
+            RootFact(
+                effective_root,
+                rank if order_sensitive and isinstance(rank, int) else None,
+            )
+        )
+    return facts
 
 
 def scalar_facts(answer: dict[str, Any]) -> list[ScalarFact]:
@@ -827,6 +1344,360 @@ def path_views(answer: dict[str, Any]) -> list[PathView]:
     return views
 
 
+def normalize_path_policy(
+    raw: Any,
+    answer: dict[str, Any],
+    *,
+    location: str,
+) -> PathPolicy:
+    """Validate evaluator-only ordering rules for one gold path answer."""
+    if raw is None or raw == {}:
+        return {}
+    if not isinstance(raw, dict):
+        raise ValueError(f"{location}: path policy must be an object.")
+    if answer.get("answer_type") != "path":
+        raise ValueError(f"{location}: path policy requires answer_type='path'.")
+
+    allowed_keys = {
+        "single_path_prediction",
+        "ignored_predicted_elements",
+        "optional_path_elements",
+        "optional_path_element_types",
+        "unordered_groups",
+    }
+    unknown = sorted(set(raw) - allowed_keys)
+    if unknown:
+        raise ValueError(f"{location}: unknown path-policy fields: {unknown}.")
+
+    single_path = raw.get("single_path_prediction", False)
+    if not isinstance(single_path, bool):
+        raise ValueError(
+            f"{location}/single_path_prediction: value must be true or false."
+        )
+
+    ignored_raw = raw.get("ignored_predicted_elements", [])
+    if not isinstance(ignored_raw, list) or not all(
+        isinstance(item, str) and item.strip() for item in ignored_raw
+    ):
+        raise ValueError(
+            f"{location}/ignored_predicted_elements: expected an array of "
+            "non-empty identifiers."
+        )
+    ignored = [normalized_text(item) for item in ignored_raw]
+    if len(ignored) != len(set(ignored)):
+        raise ValueError(
+            f"{location}/ignored_predicted_elements: duplicate identifier."
+        )
+
+    optional_raw = raw.get("optional_path_elements", [])
+    if not isinstance(optional_raw, list) or not all(
+        isinstance(item, str) and item.strip() for item in optional_raw
+    ):
+        raise ValueError(
+            f"{location}/optional_path_elements: expected an array of "
+            "non-empty identifiers."
+        )
+    optional = [normalized_text(item) for item in optional_raw]
+    if len(optional) != len(set(optional)):
+        raise ValueError(
+            f"{location}/optional_path_elements: duplicate identifier."
+        )
+
+    optional_types_raw = raw.get("optional_path_element_types", [])
+    if not isinstance(optional_types_raw, list) or not all(
+        isinstance(item, str) and item.strip() for item in optional_types_raw
+    ):
+        raise ValueError(
+            f"{location}/optional_path_element_types: expected an array of "
+            "non-empty element types."
+        )
+    optional_types = [normalized_text(item) for item in optional_types_raw]
+    if len(optional_types) != len(set(optional_types)):
+        raise ValueError(
+            f"{location}/optional_path_element_types: duplicate element type."
+        )
+
+    answer_paths = path_views(answer)
+    positions: dict[str, list[tuple[int, int]]] = defaultdict(list)
+    matched_optional_types: set[str] = set()
+    for path_index, path in enumerate(answer_paths):
+        for step_index, step in enumerate(path.steps):
+            step_id = identifier(step)
+            if step_id is not None:
+                positions[step_id].append((path_index, step_index))
+                step_type = element_type(step)
+                if step_type in optional_types:
+                    optional.append(step_id)
+                    matched_optional_types.add(step_type)
+
+    unmatched_optional_types = set(optional_types) - matched_optional_types
+    if unmatched_optional_types:
+        raise ValueError(
+            f"{location}/optional_path_element_types: no gold path element "
+            f"uses {sorted(unmatched_optional_types)}."
+        )
+    optional = list(dict.fromkeys(optional))
+    overlap = set(ignored) & set(optional)
+    if overlap:
+        raise ValueError(
+            f"{location}: ignored and optional path elements overlap at "
+            f"{sorted(overlap)}."
+        )
+
+    def unique_position(step_id: str, item_location: str) -> tuple[int, int]:
+        found = positions.get(step_id, [])
+        if len(found) != 1:
+            detail = "not found" if not found else "not unique"
+            raise ValueError(
+                f"{item_location}: identifier is {detail} in this gold answer: "
+                f"{step_id!r}."
+            )
+        return found[0]
+
+    for step_id in ignored:
+        if step_id in positions:
+            raise ValueError(
+                f"{location}/ignored_predicted_elements: an expected gold step "
+                f"cannot be ignored: {step_id!r}."
+            )
+
+    for step_id in optional:
+        unique_position(step_id, f"{location}/optional_path_elements")
+
+    groups_raw = raw.get("unordered_groups", [])
+    if not isinstance(groups_raw, list):
+        raise ValueError(f"{location}/unordered_groups: expected an array.")
+
+    groups: list[dict[str, Any]] = []
+    all_group_members: set[str] = set()
+    for group_index, group_raw in enumerate(groups_raw, start=1):
+        group_location = f"{location}/unordered_groups/{group_index}"
+        if not isinstance(group_raw, dict):
+            raise ValueError(f"{group_location}: group must be an object.")
+        group_unknown = sorted(
+            set(group_raw)
+            - {
+                "after",
+                "before",
+                "members",
+                "ordered_subgroups",
+                "required_precedence",
+            }
+        )
+        if group_unknown:
+            raise ValueError(
+                f"{group_location}: unknown fields: {group_unknown}."
+            )
+
+        after_raw = group_raw.get("after")
+        before_raw = group_raw.get("before")
+        if not isinstance(after_raw, str) or not after_raw.strip():
+            raise ValueError(f"{group_location}/after: identifier is required.")
+        if before_raw is not None and (
+            not isinstance(before_raw, str) or not before_raw.strip()
+        ):
+            raise ValueError(
+                f"{group_location}/before: expected an identifier or null."
+            )
+        after = normalized_text(after_raw)
+        before = normalized_text(before_raw) if before_raw is not None else None
+
+        members_raw = group_raw.get("members")
+        if not isinstance(members_raw, list) or len(members_raw) < 2 or not all(
+            isinstance(item, str) and item.strip() for item in members_raw
+        ):
+            raise ValueError(
+                f"{group_location}/members: expected at least two identifiers."
+            )
+        members = [normalized_text(item) for item in members_raw]
+        member_set = set(members)
+        if len(members) != len(member_set):
+            raise ValueError(f"{group_location}/members: duplicate identifier.")
+        overlap = all_group_members & member_set
+        if overlap:
+            raise ValueError(
+                f"{group_location}/members: groups overlap at {sorted(overlap)}."
+            )
+
+        member_positions = [
+            unique_position(item, f"{group_location}/members") for item in members
+        ]
+        path_indexes = {path_index for path_index, _ in member_positions}
+        if len(path_indexes) != 1:
+            raise ValueError(
+                f"{group_location}: all members must belong to the same gold path."
+            )
+        path_index = next(iter(path_indexes))
+        step_indexes = {step_index for _, step_index in member_positions}
+        skipped_indexes = (
+            set(range(min(step_indexes), max(step_indexes) + 1)) - step_indexes
+        )
+        skipped_ids = {
+            identifier(answer_paths[path_index].steps[step_index])
+            for step_index in skipped_indexes
+        }
+        if skipped_ids - set(optional):
+            raise ValueError(
+                f"{group_location}: members must form one gold section; only "
+                "optional path elements may occur between them."
+            )
+
+        after_position = unique_position(after, f"{group_location}/after")
+        before_position = (
+            unique_position(before, f"{group_location}/before")
+            if before is not None
+            else None
+        )
+        invalid_bounds = (
+            after_position[0] != path_index
+            or after_position[1] >= min(step_indexes)
+            or (
+                before_position is not None
+                and (
+                    before_position[0] != path_index
+                    or before_position[1] <= max(step_indexes)
+                )
+            )
+            or (
+                before_position is None
+                and any(
+                    identifier(answer_paths[path_index].steps[step_index])
+                    not in set(optional)
+                    for step_index in range(
+                        max(step_indexes) + 1,
+                        len(answer_paths[path_index].steps),
+                    )
+                )
+            )
+        )
+        if invalid_bounds:
+            raise ValueError(
+                f"{group_location}: after and before must bound the unordered section."
+            )
+
+        subgroups_raw = group_raw.get("ordered_subgroups", [])
+        if not isinstance(subgroups_raw, list):
+            raise ValueError(
+                f"{group_location}/ordered_subgroups: expected an array."
+            )
+        ordered_subgroups: list[list[str]] = []
+        subgroup_members: set[str] = set()
+        for subgroup_index, subgroup_raw in enumerate(subgroups_raw, start=1):
+            subgroup_location = (
+                f"{group_location}/ordered_subgroups/{subgroup_index}"
+            )
+            if not isinstance(subgroup_raw, list) or len(subgroup_raw) < 2 or not all(
+                isinstance(item, str) and item.strip() for item in subgroup_raw
+            ):
+                raise ValueError(
+                    f"{subgroup_location}: expected at least two identifiers."
+                )
+            subgroup = [normalized_text(item) for item in subgroup_raw]
+            subgroup_set = set(subgroup)
+            if len(subgroup) != len(subgroup_set):
+                raise ValueError(f"{subgroup_location}: duplicate identifier.")
+            if not subgroup_set <= member_set:
+                raise ValueError(
+                    f"{subgroup_location}: every identifier must also be a group member."
+                )
+            subgroup_overlap = subgroup_members & subgroup_set
+            if subgroup_overlap:
+                raise ValueError(
+                    f"{subgroup_location}: ordered subgroups overlap at "
+                    f"{sorted(subgroup_overlap)}."
+                )
+            subgroup_members.update(subgroup_set)
+            ordered_subgroups.append(subgroup)
+
+        precedence_raw = group_raw.get("required_precedence", [])
+        if not isinstance(precedence_raw, list):
+            raise ValueError(
+                f"{group_location}/required_precedence: expected an array."
+            )
+        required_precedence: list[dict[str, str]] = []
+        seen_precedence: set[tuple[str, str]] = set()
+        for precedence_index, precedence_item in enumerate(
+            precedence_raw, start=1
+        ):
+            precedence_location = (
+                f"{group_location}/required_precedence/{precedence_index}"
+            )
+            if not isinstance(precedence_item, dict) or set(
+                precedence_item
+            ) != {"before", "after"}:
+                raise ValueError(
+                    f"{precedence_location}: expected before and after identifiers."
+                )
+            earlier_raw = precedence_item["before"]
+            later_raw = precedence_item["after"]
+            if not isinstance(earlier_raw, str) or not earlier_raw.strip():
+                raise ValueError(
+                    f"{precedence_location}/before: identifier is required."
+                )
+            if not isinstance(later_raw, str) or not later_raw.strip():
+                raise ValueError(
+                    f"{precedence_location}/after: identifier is required."
+                )
+            earlier = normalized_text(earlier_raw)
+            later = normalized_text(later_raw)
+            if earlier == later or earlier not in member_set or later not in member_set:
+                raise ValueError(
+                    f"{precedence_location}: both different identifiers must be "
+                    "members of this unordered group."
+                )
+            pair = (earlier, later)
+            if pair in seen_precedence:
+                raise ValueError(f"{precedence_location}: duplicate constraint.")
+            seen_precedence.add(pair)
+            required_precedence.append({"before": earlier, "after": later})
+
+        all_group_members.update(member_set)
+        groups.append(
+            {
+                "after": after,
+                "before": before,
+                "members": members,
+                "ordered_subgroups": ordered_subgroups,
+                "required_precedence": required_precedence,
+            }
+        )
+
+    return {
+        "single_path_prediction": single_path,
+        "ignored_predicted_elements": ignored,
+        "optional_path_elements": optional,
+        "optional_path_element_types": optional_types,
+        "unordered_groups": groups,
+    }
+
+
+def path_views_for_policy(
+    answer: dict[str, Any], policy: PathPolicy, *, predicted: bool
+) -> list[PathView]:
+    """Build path views, optionally keeping one flat prediction as one route."""
+    if not predicted or not policy.get("single_path_prediction", False):
+        return path_views(answer)
+    roots = answer_results(answer)
+    if not roots:
+        return []
+    if any(
+        isinstance(root.get("related_elements"), list)
+        and any(isinstance(item, dict) for item in root["related_elements"])
+        for root in roots
+    ):
+        return path_views(answer)
+    return [
+        PathView(
+            steps=tuple(roots),
+            attributes=tuple(
+                scalar
+                for root in roots
+                for scalar in root_scalar_facts(root)
+            ),
+        )
+    ]
+
+
 def lcs_entity_pairs(
     gold: Sequence[Entity], predicted: Sequence[Entity], mode: str
 ) -> list[tuple[int, int]]:
@@ -869,14 +1740,285 @@ def lcs_entity_pairs(
     return pairs
 
 
+def matches_any_path_entity(
+    candidate: Entity, expected: Sequence[Entity], mode: str
+) -> bool:
+    return any(path_entity_matches(item, candidate, mode) for item in expected)
+
+
+def policy_filtered_steps(
+    steps: Sequence[Entity], policy: PathPolicy, *, gold: bool = False
+) -> tuple[Entity, ...]:
+    excluded = set(policy.get("optional_path_elements", []))
+    if not gold:
+        excluded.update(policy.get("ignored_predicted_elements", []))
+    return tuple(step for step in steps if identifier(step) not in excluded)
+
+
+def projected_path_policy(
+    gold_steps: Sequence[Entity], policy: PathPolicy
+) -> PathPolicy:
+    """Remove optional nodes from ordering rules while preserving task order."""
+    optional = set(policy.get("optional_path_elements", []))
+    if not optional:
+        return policy
+
+    gold_ids = [identifier(step) for step in gold_steps]
+    positions = {
+        step_id: index
+        for index, step_id in enumerate(gold_ids)
+        if step_id is not None
+    }
+    scored_ids = {
+        step_id
+        for step_id in gold_ids
+        if step_id is not None and step_id not in optional
+    }
+    projected_groups: list[dict[str, Any]] = []
+
+    for group in policy.get("unordered_groups", []):
+        original_members = group["members"]
+        members = [
+            step_id for step_id in original_members if step_id in scored_ids
+        ]
+        if len(members) < 2:
+            continue
+
+        first = min(positions[step_id] for step_id in original_members)
+        last = max(positions[step_id] for step_id in original_members)
+        previous = [
+            step_id
+            for step_id in gold_ids[:first]
+            if step_id is not None and step_id in scored_ids
+        ]
+        following = [
+            step_id
+            for step_id in gold_ids[last + 1 :]
+            if step_id is not None and step_id in scored_ids
+        ]
+
+        ordered_subgroups = []
+        for subgroup in group["ordered_subgroups"]:
+            projected = [step_id for step_id in subgroup if step_id in scored_ids]
+            if len(projected) >= 2:
+                ordered_subgroups.append(projected)
+
+        edges: dict[str, set[str]] = {
+            step_id: set() for step_id in original_members
+        }
+        for subgroup in group["ordered_subgroups"]:
+            for earlier, later in zip(subgroup, subgroup[1:]):
+                edges[earlier].add(later)
+        for precedence in group.get("required_precedence", []):
+            edges[precedence["before"]].add(precedence["after"])
+
+        reachable: dict[str, set[str]] = {}
+        for start in original_members:
+            seen: set[str] = set()
+            stack = list(edges[start])
+            while stack:
+                current = stack.pop()
+                if current in seen:
+                    continue
+                seen.add(current)
+                stack.extend(edges[current] - seen)
+            reachable[start] = seen
+
+        subgroup_order = {
+            (earlier, later)
+            for subgroup in ordered_subgroups
+            for earlier_index, earlier in enumerate(subgroup)
+            for later in subgroup[earlier_index + 1 :]
+        }
+        required_precedence = []
+        for earlier in members:
+            for later in members:
+                if later not in reachable[earlier] or (earlier, later) in subgroup_order:
+                    continue
+                has_scored_middle = any(
+                    middle not in {earlier, later}
+                    and middle in reachable[earlier]
+                    and later in reachable[middle]
+                    for middle in members
+                )
+                if not has_scored_middle:
+                    required_precedence.append(
+                        {"before": earlier, "after": later}
+                    )
+
+        projected_groups.append(
+            {
+                "after": previous[-1] if previous else None,
+                "before": following[0] if following else None,
+                "members": members,
+                "ordered_subgroups": ordered_subgroups,
+                "required_precedence": required_precedence,
+            }
+        )
+
+    return {
+        **policy,
+        "unordered_groups": projected_groups,
+    }
+
+
+def partial_order_step_score(
+    gold_steps: Sequence[Entity],
+    predicted_steps: Sequence[Entity],
+    mode: str,
+    policy: PathPolicy,
+) -> int:
+    """Match one path against its declared partial-order constraints."""
+    gold_by_id = {
+        step_id: step
+        for step in gold_steps
+        if (step_id := identifier(step)) is not None
+    }
+    relevant_groups = [
+        group
+        for group in policy.get("unordered_groups", [])
+        if set(group["members"]) <= set(gold_by_id)
+    ]
+    if not relevant_groups:
+        return len(lcs_entity_pairs(gold_steps, predicted_steps, mode))
+
+    group_entities = [
+        gold_by_id[step_id]
+        for group in relevant_groups
+        for step_id in group["members"]
+    ]
+    outside_gold = [
+        step
+        for step in gold_steps
+        if identifier(step)
+        not in {
+            step_id
+            for group in relevant_groups
+            for step_id in group["members"]
+        }
+    ]
+    outside_predicted = [
+        step
+        for step in predicted_steps
+        if not matches_any_path_entity(step, group_entities, mode)
+    ]
+    score = len(lcs_entity_pairs(outside_gold, outside_predicted, mode))
+
+    for group in relevant_groups:
+        members = [gold_by_id[step_id] for step_id in group["members"]]
+        after_id = group["after"]
+        after = gold_by_id[after_id] if after_id is not None else None
+        before_id = group["before"]
+        before = gold_by_id[before_id] if before_id is not None else None
+
+        after_index = (
+            next(
+                (
+                    index
+                    for index, step in enumerate(predicted_steps)
+                    if path_entity_matches(after, step, mode)
+                ),
+                -1,
+            )
+            if after is not None
+            else -1
+        )
+        before_index = (
+            next(
+                (
+                    index
+                    for index, step in enumerate(predicted_steps)
+                    if index > after_index
+                    and path_entity_matches(before, step, mode)
+                ),
+                len(predicted_steps),
+            )
+            if before is not None
+            else len(predicted_steps)
+        )
+        eligible = [
+            step
+            for index, step in enumerate(predicted_steps)
+            if after_index < index < before_index
+            and matches_any_path_entity(step, members, mode)
+        ]
+
+        ordered_ids = {
+            step_id
+            for subgroup in group["ordered_subgroups"]
+            for step_id in subgroup
+        }
+        ordered_entities = [gold_by_id[step_id] for step_id in ordered_ids]
+        group_score = 0
+        for subgroup in group["ordered_subgroups"]:
+            subgroup_gold = [gold_by_id[step_id] for step_id in subgroup]
+            subgroup_predicted = [
+                step
+                for step in eligible
+                if matches_any_path_entity(step, subgroup_gold, mode)
+            ]
+            group_score += len(
+                lcs_entity_pairs(subgroup_gold, subgroup_predicted, mode)
+            )
+
+        unordered_gold = [
+            gold_by_id[step_id]
+            for step_id in group["members"]
+            if step_id not in ordered_ids
+        ]
+        unordered_predicted = [
+            step
+            for step in eligible
+            if not matches_any_path_entity(step, ordered_entities, mode)
+        ]
+        group_score += len(
+            maximum_matching(
+                unordered_gold,
+                unordered_predicted,
+                lambda left, right: path_entity_matches(left, right, mode),
+            )
+        )
+        for precedence in group.get("required_precedence", []):
+            earlier = gold_by_id[precedence["before"]]
+            later = gold_by_id[precedence["after"]]
+            earlier_positions = [
+                index
+                for index, step in enumerate(eligible)
+                if path_entity_matches(earlier, step, mode)
+            ]
+            later_positions = [
+                index
+                for index, step in enumerate(eligible)
+                if path_entity_matches(later, step, mode)
+            ]
+            if (
+                earlier_positions
+                and later_positions
+                and not any(
+                    earlier_index < later_index
+                    for earlier_index in earlier_positions
+                    for later_index in later_positions
+                )
+            ):
+                group_score = max(0, group_score - 1)
+        score += group_score
+    return score
+
+
 def path_pair_score(
     gold: PathView,
     predicted: PathView,
     mode: str,
     tolerance: float,
     score_attributes: bool,
+    policy: PathPolicy,
 ) -> int:
-    step_matches = len(lcs_entity_pairs(gold.steps, predicted.steps, mode))
+    gold_steps = policy_filtered_steps(gold.steps, policy, gold=True)
+    predicted_steps = policy_filtered_steps(predicted.steps, policy)
+    effective_policy = projected_path_policy(gold.steps, policy)
+    step_matches = partial_order_step_score(
+        gold_steps, predicted_steps, mode, effective_policy
+    )
     if not score_attributes:
         return step_matches
     attribute_matches = maximum_matching(
@@ -892,17 +2034,20 @@ def score_path_answers(
     predicted: dict[str, Any],
     mode: str,
     tolerance: float,
+    policy: PathPolicy,
 ) -> Counts:
     """Score ordered routes and any route metric requested by the gold answer."""
-    gold_paths = path_views(gold)
-    predicted_paths = path_views(predicted)
+    gold_paths = path_views_for_policy(gold, policy, predicted=False)
+    predicted_paths = path_views_for_policy(predicted, policy, predicted=True)
     score_attributes = any(path.attributes for path in gold_paths)
     gold_total = sum(
-        len(path.steps) + (len(path.attributes) if score_attributes else 0)
+        len(policy_filtered_steps(path.steps, policy, gold=True))
+        + (len(path.attributes) if score_attributes else 0)
         for path in gold_paths
     )
     predicted_total = sum(
-        len(path.steps) + (len(path.attributes) if score_attributes else 0)
+        len(policy_filtered_steps(path.steps, policy))
+        + (len(path.attributes) if score_attributes else 0)
         for path in predicted_paths
     )
     pair_scores = [
@@ -913,6 +2058,7 @@ def score_path_answers(
                 mode,
                 tolerance,
                 score_attributes,
+                policy,
             )
             for right in predicted_paths
         ]
@@ -989,21 +2135,35 @@ def score_answer(
     mode: str,
     tolerance: float,
     schema_valid: bool,
+    score_root_entities: bool,
+    score_attributes: bool,
+    score_related_elements: bool,
+    score_related_relation_names: bool,
+    ignored_related_relations: frozenset[str],
+    allowed_related_associations: Sequence[dict[str, Any]],
+    attribute_values_as_related_labels: bool,
+    score_communication_flows_once: bool,
+    message_flow_endpoints_as_roots: bool,
+    path_policy: PathPolicy,
 ) -> dict[str, Any]:
     order_sensitive = answer_is_order_sensitive(gold)
     path_scoring = gold.get("answer_type") == "path"
     value_scoring = gold.get("answer_type") == "value"
+    attribute_fallback_count = 0
+    non_exact_attribute_label_count = 0
     if path_scoring:
-        gold_paths = path_views(gold)
-        predicted_paths = path_views(predicted)
+        gold_paths = path_views_for_policy(gold, path_policy, predicted=False)
+        predicted_paths = path_views_for_policy(
+            predicted, path_policy, predicted=True
+        )
         score_path_attributes = any(path.attributes for path in gold_paths)
         gold_fact_count = sum(
-            len(path.steps)
+            len(policy_filtered_steps(path.steps, path_policy, gold=True))
             + (len(path.attributes) if score_path_attributes else 0)
             for path in gold_paths
         )
         predicted_fact_count = sum(
-            len(path.steps)
+            len(policy_filtered_steps(path.steps, path_policy))
             + (len(path.attributes) if score_path_attributes else 0)
             for path in predicted_paths
         )
@@ -1013,10 +2173,71 @@ def score_answer(
         gold_fact_count = len(gold_value_facts)
         predicted_fact_count = len(predicted_value_facts)
     else:
-        gold_facts = answer_facts(gold, order_sensitive=order_sensitive)
-        predicted_facts = answer_facts(
-            predicted, order_sensitive=order_sensitive
-        )
+        if score_communication_flows_once:
+            gold_facts = communication_answer_facts(
+                gold,
+                mode,
+                tolerance,
+                include_root_entities=score_root_entities,
+            )
+            predicted_facts = communication_answer_facts(
+                predicted,
+                mode,
+                tolerance,
+                include_root_entities=score_root_entities,
+            )
+            allowed_facts = []
+        elif message_flow_endpoints_as_roots:
+            gold_facts = message_flow_endpoint_root_facts(
+                gold, order_sensitive=order_sensitive
+            )
+            predicted_facts = message_flow_endpoint_root_facts(
+                predicted, order_sensitive=order_sensitive
+            )
+            allowed_facts = []
+        else:
+            gold_facts = answer_facts(
+                gold,
+                order_sensitive=order_sensitive,
+                include_root_entities=score_root_entities,
+                include_attributes=score_attributes,
+                include_relations=score_related_elements,
+                score_relation_names=score_related_relation_names,
+                ignored_relations=ignored_related_relations,
+            )
+            predicted_facts = answer_facts(
+                predicted,
+                order_sensitive=order_sensitive,
+                include_root_entities=score_root_entities,
+                include_attributes=score_attributes,
+                include_relations=score_related_elements,
+                score_relation_names=score_related_relation_names,
+                ignored_relations=ignored_related_relations,
+            )
+            allowed_facts = allowed_relation_facts(
+                allowed_related_associations,
+                score_relation_names=score_related_relation_names,
+            )
+        if attribute_values_as_related_labels:
+            fallback_facts, non_exact_attribute_label_count = (
+                attribute_value_relation_facts(
+                    predicted,
+                    [
+                        fact
+                        for fact in gold_facts
+                        if isinstance(fact, RelationFact)
+                    ],
+                    [
+                        fact
+                        for fact in predicted_facts
+                        if isinstance(fact, RelationFact)
+                    ],
+                    mode,
+                    tolerance,
+                )
+            )
+            predicted_facts.extend(fallback_facts)
+            attribute_fallback_count = len(fallback_facts)
         gold_fact_count = len(gold_facts)
         predicted_fact_count = len(predicted_facts)
     answer_type_correct = gold.get("answer_type") == predicted.get("answer_type")
@@ -1024,17 +2245,31 @@ def score_answer(
 
     if schema_valid:
         if path_scoring:
-            counts = score_path_answers(gold, predicted, mode, tolerance)
+            counts = score_path_answers(
+                gold, predicted, mode, tolerance, path_policy
+            )
         elif value_scoring:
             counts = score_scalar_answers(gold, predicted, tolerance)
+            allowed_count = 0
         else:
-            counts = score_fact_sets(
-                gold_facts, predicted_facts, mode, tolerance
+            counts, allowed_count = score_fact_sets(
+                gold_facts,
+                predicted_facts,
+                mode,
+                tolerance,
+                allowed_facts,
             )
+        if path_scoring:
+            allowed_count = 0
         precision = counts.precision
         recall = counts.recall
         f1 = counts.f1
-        exact_answer = counts.exact and answer_type_correct and status_correct
+        exact_answer = (
+            counts.exact
+            and answer_type_correct
+            and status_correct
+            and non_exact_attribute_label_count == 0
+        )
     else:
         counts = Counts(
             tp=0,
@@ -1043,6 +2278,7 @@ def score_answer(
         )
         precision = recall = f1 = 0.0
         exact_answer = False
+        allowed_count = 0
 
     return {
         "fact_counts": {
@@ -1051,6 +2287,7 @@ def score_answer(
             "tp": counts.tp,
             "fp": counts.fp,
             "fn": counts.fn,
+            "allowed": allowed_count,
         },
         "precision": precision,
         "recall": recall,
@@ -1059,21 +2296,74 @@ def score_answer(
         "answer_type_correct": answer_type_correct,
         "status_correct": status_correct,
         "order_sensitive": order_sensitive,
+        "root_entities_scored": score_root_entities,
+        "attributes_scored": score_attributes,
+        "related_elements_scored": score_related_elements,
+        "related_relation_names_scored": (
+            score_related_elements and score_related_relation_names
+        ),
+        "ignored_related_relations": sorted(ignored_related_relations),
+        "allowed_related_associations": len(allowed_related_associations),
+        "attribute_value_label_fallbacks": attribute_fallback_count,
+        "non_exact_attribute_value_labels": non_exact_attribute_label_count,
         "path_serialization_normalized": path_scoring,
+        "partial_order_path_groups": len(
+            path_policy.get("unordered_groups", [])
+        ),
+        "required_path_precedence": sum(
+            len(group.get("required_precedence", []))
+            for group in path_policy.get("unordered_groups", [])
+        ),
+        "ignored_predicted_path_elements": len(
+            path_policy.get("ignored_predicted_elements", [])
+        ),
+        "optional_path_elements": len(
+            path_policy.get("optional_path_elements", [])
+        ),
         "value_serialization_normalized": value_scoring,
+        "communication_flows_scored_once": score_communication_flows_once,
+        "message_flow_endpoints_as_roots": message_flow_endpoints_as_roots,
     }
 
 
 def best_ground_truth(
     candidates: Sequence[dict[str, Any]],
+    path_policies: Sequence[PathPolicy],
     predicted: dict[str, Any],
     mode: str,
     tolerance: float,
     schema_valid: bool,
+    score_root_entities: bool,
+    score_attributes: bool,
+    score_related_elements: bool,
+    score_related_relation_names: bool,
+    ignored_related_relations: frozenset[str],
+    allowed_related_associations: Sequence[dict[str, Any]],
+    attribute_values_as_related_labels: bool,
+    score_communication_flows_once: bool,
+    message_flow_endpoints_as_roots: bool,
 ) -> tuple[int, dict[str, Any]]:
+    if len(path_policies) != len(candidates):
+        raise ValueError("Each gold candidate requires one path policy.")
     scores = [
-        score_answer(candidate, predicted, mode, tolerance, schema_valid)
-        for candidate in candidates
+        score_answer(
+            candidate,
+            predicted,
+            mode,
+            tolerance,
+            schema_valid,
+            score_root_entities,
+            score_attributes,
+            score_related_elements,
+            score_related_relation_names,
+            ignored_related_relations,
+            allowed_related_associations,
+            attribute_values_as_related_labels,
+            score_communication_flows_once,
+            message_flow_endpoints_as_roots,
+            path_policies[index],
+        )
+        for index, candidate in enumerate(candidates)
     ]
     index = max(
         range(len(scores)),
@@ -1087,7 +2377,7 @@ def best_ground_truth(
     return index, scores[index]
 
 
-AnswerFact = RootFact | RelationFact | AttributeFact
+AnswerFact = RootFact | RelationFact | AttributeFact | CommunicationFact
 
 
 FILENAME_PATTERN = re.compile(
@@ -1402,6 +2692,88 @@ def normalize_structured_gold(
     return answer
 
 
+def normalize_allowed_related_associations(
+    value: Any,
+    schema: dict[str, Any],
+    *,
+    location: str,
+) -> list[dict[str, Any]]:
+    """Validate optional root-to-target associations using the answer schema."""
+    if value is None:
+        return []
+    if not isinstance(value, list):
+        raise ValueError(f"{location}: must be an array.")
+
+    normalized: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for index, association in enumerate(value, start=1):
+        item_location = f"{location}/{index}"
+        if not isinstance(association, dict):
+            raise ValueError(f"{item_location}: must be an object.")
+        if set(association) - {"root", "relation", "target", "order"}:
+            raise ValueError(
+                f"{item_location}: only root, relation, target and order are allowed."
+            )
+        root = association.get("root")
+        target = association.get("target")
+        relation = association.get("relation")
+        order = association.get("order")
+        if not isinstance(root, dict) or not isinstance(target, dict):
+            raise ValueError(f"{item_location}: root and target must be objects.")
+        if set(root) != {"identifier", "label", "element_type"}:
+            raise ValueError(
+                f"{item_location}/root: identifier, label and element_type are required."
+            )
+        if set(target) != {"identifier", "label", "element_type"}:
+            raise ValueError(
+                f"{item_location}/target: identifier, label and element_type are required."
+            )
+
+        synthetic_answer = {
+            "answer_type": "list",
+            "status": "ok",
+            "results": [
+                {
+                    **root,
+                    "rank": None,
+                    "attributes": [],
+                    "related_elements": [
+                        {
+                            "relation": relation,
+                            **target,
+                            "order": order,
+                        }
+                    ],
+                }
+            ],
+        }
+        checked = normalize_structured_gold(
+            synthetic_answer, schema, location=item_location
+        )
+        checked_root = checked["results"][0]
+        checked_target = checked_root["related_elements"][0]
+        normalized_association = {
+            "root": {
+                "identifier": checked_root["identifier"],
+                "label": checked_root["label"],
+                "element_type": checked_root["element_type"],
+            },
+            "relation": checked_target["relation"],
+            "target": {
+                "identifier": checked_target["identifier"],
+                "label": checked_target["label"],
+                "element_type": checked_target["element_type"],
+            },
+            "order": checked_target["order"],
+        }
+        key = json.dumps(normalized_association, sort_keys=True)
+        if key in seen:
+            raise ValueError(f"{item_location}: duplicate allowed association.")
+        seen.add(key)
+        normalized.append(normalized_association)
+    return normalized
+
+
 def normalize_gold_records(
     records: Sequence[dict[str, Any]], schema: dict[str, Any]
 ) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
@@ -1418,6 +2790,89 @@ def normalize_gold_records(
         if not isinstance(question, str) or not question.strip():
             raise ValueError(f"{query_id}: question must be a non-empty string.")
 
+        score_root_entities = raw.get("score_root_entities", True)
+        if not isinstance(score_root_entities, bool):
+            raise ValueError(
+                f"{query_id}: score_root_entities must be true or false."
+            )
+        score_attributes = raw.get("score_attributes", True)
+        if not isinstance(score_attributes, bool):
+            raise ValueError(
+                f"{query_id}: score_attributes must be true or false."
+            )
+        score_communication_flows_once = raw.get(
+            "score_communication_flows_once", False
+        )
+        if not isinstance(score_communication_flows_once, bool):
+            raise ValueError(
+                f"{query_id}: score_communication_flows_once must be true or false."
+            )
+        message_flow_endpoints_as_roots = raw.get(
+            "message_flow_endpoints_as_roots", False
+        )
+        if not isinstance(message_flow_endpoints_as_roots, bool):
+            raise ValueError(
+                f"{query_id}: message_flow_endpoints_as_roots must be true or false."
+            )
+        attribute_values_as_related_labels = raw.get(
+            "attribute_values_as_related_labels", False
+        )
+        if not isinstance(attribute_values_as_related_labels, bool):
+            raise ValueError(
+                f"{query_id}: attribute_values_as_related_labels must be true or false."
+            )
+        score_related_elements = raw.get("score_related_elements", False)
+        if not isinstance(score_related_elements, bool):
+            raise ValueError(
+                f"{query_id}: score_related_elements must be true or false."
+            )
+        score_related_relation_names = raw.get(
+            "score_related_relation_names", True
+        )
+        if not isinstance(score_related_relation_names, bool):
+            raise ValueError(
+                f"{query_id}: score_related_relation_names must be true or false."
+            )
+        if not score_related_relation_names and not score_related_elements:
+            raise ValueError(
+                f"{query_id}: score_related_relation_names=false requires "
+                "score_related_elements=true."
+            )
+        ignored_related_relations_raw = raw.get("ignored_related_relations", [])
+        if not isinstance(ignored_related_relations_raw, list) or not all(
+            isinstance(item, str) and item for item in ignored_related_relations_raw
+        ):
+            raise ValueError(
+                f"{query_id}: ignored_related_relations must be an array of "
+                "non-empty relation names."
+            )
+        ignored_related_relations = sorted(set(ignored_related_relations_raw))
+        if ignored_related_relations and not score_related_elements:
+            raise ValueError(
+                f"{query_id}: ignored_related_relations requires "
+                "score_related_elements=true."
+            )
+        allowed_related_associations = normalize_allowed_related_associations(
+            raw.get("allowed_related_associations", []),
+            schema,
+            location=f"{query_id}/allowed_related_associations",
+        )
+        if allowed_related_associations and not score_related_elements:
+            raise ValueError(
+                f"{query_id}: allowed_related_associations requires "
+                "score_related_elements=true."
+            )
+        if attribute_values_as_related_labels and (
+            not score_related_elements
+            or score_related_relation_names
+            or score_attributes
+        ):
+            raise ValueError(
+                f"{query_id}: attribute_values_as_related_labels=true requires "
+                "score_related_elements=true, score_related_relation_names=false "
+                "and score_attributes=false."
+            )
+
         primary_raw = raw.get("ground_truth", raw.get("gold_answer"))
         mode = infer_response_mode(primary_raw)
         declared_mode = raw.get("response_mode")
@@ -1425,6 +2880,41 @@ def normalize_gold_records(
             raise ValueError(
                 f"{query_id}: declared response_mode {declared_mode!r} conflicts "
                 f"with the {mode} gold answer."
+            )
+        if score_related_elements and mode != "structured":
+            raise ValueError(
+                f"{query_id}: score_related_elements is only valid for "
+                "structured answers."
+            )
+        if score_communication_flows_once and (
+            mode != "structured"
+            or not score_attributes
+            or score_related_elements
+            or allowed_related_associations
+            or attribute_values_as_related_labels
+        ):
+            raise ValueError(
+                f"{query_id}: score_communication_flows_once=true requires a "
+                "structured answer with score_attributes=true and unscored "
+                "related elements."
+            )
+        if message_flow_endpoints_as_roots and (
+            mode != "structured"
+            or not score_root_entities
+            or score_attributes
+            or score_related_elements
+            or score_communication_flows_once
+        ):
+            raise ValueError(
+                f"{query_id}: message_flow_endpoints_as_roots=true requires a "
+                "structured answer that scores only root entities."
+            )
+        if mode != "structured" and (
+            not score_root_entities or not score_attributes
+        ):
+            raise ValueError(
+                f"{query_id}: score_root_entities and score_attributes are only "
+                "configurable for structured answers."
             )
 
         alternatives_raw = raw.get(
@@ -1437,6 +2927,17 @@ def normalize_gold_records(
             primary = normalize_binary_gold(primary_raw)
             alternatives = [normalize_binary_gold(item) for item in alternatives_raw]
             expected = "Yes" if primary else "No"
+            if raw.get("path_policy") not in (None, {}) or raw.get(
+                "acceptable_path_policies"
+            ) not in (None, []):
+                raise ValueError(
+                    f"{query_id}: path policies are only valid for structured "
+                    "path answers."
+                )
+            path_policy: PathPolicy = {}
+            acceptable_path_policies: list[PathPolicy] = [
+                {} for _ in alternatives
+            ]
         else:
             primary = normalize_structured_gold(
                 primary_raw, schema, location=f"{query_id}/primary"
@@ -1447,17 +2948,55 @@ def normalize_gold_records(
                 )
                 for index, item in enumerate(alternatives_raw, start=1)
             ]
+            path_policy = normalize_path_policy(
+                raw.get("path_policy"),
+                primary,
+                location=f"{query_id}/path_policy",
+            )
+            alternative_policies_raw = raw.get("acceptable_path_policies")
+            if alternative_policies_raw is None:
+                alternative_policies_raw = [{} for _ in alternatives]
+            if not isinstance(alternative_policies_raw, list) or len(
+                alternative_policies_raw
+            ) != len(alternatives):
+                raise ValueError(
+                    f"{query_id}: acceptable_path_policies must contain one "
+                    "entry for each acceptable_ground_truth."
+                )
+            acceptable_path_policies = [
+                normalize_path_policy(
+                    item,
+                    alternatives[index - 1],
+                    location=f"{query_id}/acceptable_path_policies/{index}",
+                )
+                for index, item in enumerate(
+                    alternative_policies_raw, start=1
+                )
+            ]
             expected = None
 
         record: dict[str, Any] = {
             "query_id": query_id,
             "question": question,
             "response_mode": mode,
+            "score_root_entities": score_root_entities,
+            "score_attributes": score_attributes,
+            "score_communication_flows_once": score_communication_flows_once,
+            "message_flow_endpoints_as_roots": message_flow_endpoints_as_roots,
+            "attribute_values_as_related_labels": (
+                attribute_values_as_related_labels
+            ),
+            "score_related_elements": score_related_elements,
+            "score_related_relation_names": score_related_relation_names,
+            "ignored_related_relations": ignored_related_relations,
+            "allowed_related_associations": allowed_related_associations,
+            "path_policy": path_policy,
             "ground_truth": primary,
         }
         if expected is not None:
             record["expected_answer"] = expected
         record["acceptable_ground_truths"] = alternatives
+        record["acceptable_path_policies"] = acceptable_path_policies
         normalized.append(record)
         by_query[query_id] = record
 
@@ -1706,16 +3245,40 @@ def score_binary(
 
 def score_structured(
     candidates: Sequence[dict[str, Any]],
+    path_policies: Sequence[PathPolicy],
     prediction: JSONValue,
     schema: dict[str, Any],
     match: str,
     tolerance: float,
+    score_root_entities: bool,
+    score_attributes: bool,
+    score_related_elements: bool,
+    score_related_relation_names: bool,
+    ignored_related_relations: frozenset[str],
+    allowed_related_associations: Sequence[dict[str, Any]],
+    attribute_values_as_related_labels: bool,
+    score_communication_flows_once: bool,
+    message_flow_endpoints_as_roots: bool,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     predicted, parse_errors = coerce_answer(prediction)
     format_errors = parse_errors + validate_instance(predicted, schema, schema)
     valid = not format_errors
     selected, score = best_ground_truth(
-        candidates, predicted, match, tolerance, valid
+        candidates,
+        path_policies,
+        predicted,
+        match,
+        tolerance,
+        valid,
+        score_root_entities,
+        score_attributes,
+        score_related_elements,
+        score_related_relation_names,
+        ignored_related_relations,
+        allowed_related_associations,
+        attribute_values_as_related_labels,
+        score_communication_flows_once,
+        message_flow_endpoints_as_roots,
     )
     public_score = {
         "format_valid": valid,
@@ -1731,11 +3294,37 @@ def score_structured(
         "answer_type_correct": score["answer_type_correct"],
         "status_correct": score["status_correct"],
         "order_sensitive": score["order_sensitive"],
+        "root_entities_scored": score["root_entities_scored"],
+        "attributes_scored": score["attributes_scored"],
+        "related_elements_scored": score["related_elements_scored"],
+        "related_relation_names_scored": score[
+            "related_relation_names_scored"
+        ],
+        "ignored_related_relations": score["ignored_related_relations"],
+        "allowed_related_associations": score["allowed_related_associations"],
+        "attribute_value_label_fallbacks": score[
+            "attribute_value_label_fallbacks"
+        ],
+        "non_exact_attribute_value_labels": score[
+            "non_exact_attribute_value_labels"
+        ],
         "path_serialization_normalized": score[
             "path_serialization_normalized"
         ],
+        "partial_order_path_groups": score["partial_order_path_groups"],
+        "required_path_precedence": score["required_path_precedence"],
+        "ignored_predicted_path_elements": score[
+            "ignored_predicted_path_elements"
+        ],
+        "optional_path_elements": score["optional_path_elements"],
         "value_serialization_normalized": score[
             "value_serialization_normalized"
+        ],
+        "communication_flows_scored_once": score[
+            "communication_flows_scored_once"
+        ],
+        "message_flow_endpoints_as_roots": score[
+            "message_flow_endpoints_as_roots"
         ],
     }
     return public_score, diagnostics
@@ -1757,12 +3346,25 @@ def evaluate(
         if mode == "binary":
             score, diagnostics = score_binary(candidates, prediction.get("answer"))
         else:
+            path_policies = [
+                gold["path_policy"], *gold["acceptable_path_policies"]
+            ]
             score, diagnostics = score_structured(
                 candidates,
+                path_policies,
                 prediction.get("answer"),
                 schema,
                 match,
                 tolerance,
+                gold["score_root_entities"],
+                gold["score_attributes"],
+                gold["score_related_elements"],
+                gold["score_related_relation_names"],
+                frozenset(gold["ignored_related_relations"]),
+                gold["allowed_related_associations"],
+                gold["attribute_values_as_related_labels"],
+                gold["score_communication_flows_once"],
+                gold["message_flow_endpoints_as_roots"],
             )
         rows.append(
             {
@@ -1902,8 +3504,42 @@ def main() -> int:
                 "structured. Question wording is not used for classification."
             ),
             "structured_scoring_unit": (
-                "requested root entities and requested attributes, with normalized "
-                "path/value handling; related_elements and relation strings ignored"
+                "requested root entities and attributes, plus related-element "
+                "relationships for explicitly marked questions; a gold record "
+                "may disable root-entity or attribute facts; paths and values use "
+                "their normalized scoring"
+            ),
+            "related_target_match_policy": (
+                "For scored process/subprocess relationships, matching labels may "
+                "bridge a subprocess object and its process-diagram identifier; "
+                "identifier-only mode remains strict."
+            ),
+            "ignored_related_relation_policy": (
+                "A gold record may list contextual relation names that are ignored "
+                "in both the gold and predicted answers."
+            ),
+            "related_relation_name_policy": (
+                "A gold record may disable relation-name scoring when only the "
+                "linked root and target entities are required by the question."
+            ),
+            "allowed_related_association_policy": (
+                "A gold record may list plausible but optional related-element "
+                "associations. Matched allowed associations are excluded from "
+                "false positives and are not required for recall."
+            ),
+            "attribute_value_related_label_policy": (
+                "An explicitly marked gold record may use a string attribute "
+                "value as a fallback for a required related target that was not "
+                "already returned in related_elements. The value must equal the "
+                "target label or begin with that label before an explanation; "
+                "the latter receives ordinary credit but is not an exact label."
+            ),
+            "default_path_condition_policy": (
+                "Condition values beginning with 'default path' and the value "
+                "'default process path' are normalized to 'default path'. A "
+                "Boolean default_path attribute is ignored when the same result "
+                "already supplies a condition; other unexpected attributes remain "
+                "scored."
             ),
             "binary_scoring_unit": "one Yes/No fact per run",
             "missing_run_policy": (
