@@ -6,12 +6,10 @@ structured-answer runs. Binary answers are deliberately excluded because they
 are evaluated by accuracy rather than by set-based precision and recall.
 """
 
-from __future__ import annotations
-
 import argparse
 import csv
-import math
 import statistics
+import tempfile
 from collections import defaultdict
 from pathlib import Path
 
@@ -19,6 +17,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
 from matplotlib.ticker import FuncFormatter
 
 
@@ -31,23 +30,19 @@ REQUIRED_COLUMNS = {
     "precision",
     "recall",
     "f1",
-    "exact_answer",
 }
 
 COLORS = {
-    "Precision": "#4C78A8",
-    "Recall": "#16858C",
-    "F1": "#D59A2A",
-    "Exact answers": "#D66A5E",
+        "Precision": "#B85042",
+        "Recall": "#6F8F78",
+        "F1": "#C6A85E",
 }
 
 MARKERS = {
     "Precision": "o",
     "Recall": "s",
     "F1": "D",
-    "Exact answers": "^",
 }
-
 
 def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -80,17 +75,6 @@ def parse_arguments() -> argparse.Namespace:
         help="PNG resolution in dots per inch (default: 320).",
     )
     return parser.parse_args()
-
-
-def parse_boolean(value: str, *, field: str, row_number: int) -> bool:
-    normalized = value.strip().lower()
-    if normalized in {"true", "1", "yes"}:
-        return True
-    if normalized in {"false", "0", "no"}:
-        return False
-    raise ValueError(
-        f"Invalid Boolean value {value!r} in column {field!r}, CSV row {row_number}."
-    )
 
 
 def read_structured_rows(csv_path: Path) -> list[dict[str, object]]:
@@ -141,11 +125,6 @@ def read_structured_rows(csv_path: Path) -> list[dict[str, object]]:
                     "precision": precision,
                     "recall": recall,
                     "f1": f1,
-                    "exact_answer": parse_boolean(
-                        row["exact_answer"],
-                        field="exact_answer",
-                        row_number=row_number,
-                    ),
                 }
             )
 
@@ -181,16 +160,12 @@ def calculate_run_metrics(rows: list[dict[str, object]]) -> list[dict[str, objec
     metrics: list[dict[str, object]] = []
     for run_id in run_ids:
         run_rows = list(by_run[run_id].values())
-        exact_count = sum(bool(row["exact_answer"]) for row in run_rows)
         metrics.append(
             {
                 "run_id": run_id,
-                "query_count": len(run_rows),
                 "precision": statistics.fmean(float(row["precision"]) for row in run_rows),
                 "recall": statistics.fmean(float(row["recall"]) for row in run_rows),
                 "f1": statistics.fmean(float(row["f1"]) for row in run_rows),
-                "exact_count": exact_count,
-                "exact_rate": exact_count / len(run_rows),
             }
         )
 
@@ -200,14 +175,12 @@ def calculate_run_metrics(rows: list[dict[str, object]]) -> list[dict[str, objec
 def configure_style() -> None:
     plt.rcParams.update(
         {
-            "font.family": "DejaVu Sans",
-            "font.size": 9,
-            "axes.titlesize": 12,
-            "axes.titleweight": "semibold",
-            "axes.labelsize": 9.5,
-            "legend.fontsize": 8.5,
-            "xtick.labelsize": 9,
-            "ytick.labelsize": 8.5,
+            "font.family": "Times New Roman",
+            "font.size": 8,
+            "axes.labelsize": 8,
+            "legend.fontsize": 8,
+            "xtick.labelsize": 8,
+            "ytick.labelsize": 8,
             "axes.edgecolor": "#9AA9B5",
             "axes.linewidth": 0.8,
             "figure.facecolor": "white",
@@ -216,20 +189,36 @@ def configure_style() -> None:
     )
 
 
+def save_replacing_existing_file(
+    figure: Figure, output_path: Path, **save_options: object
+) -> None:
+    with tempfile.NamedTemporaryFile(
+        dir=output_path.parent,
+        prefix=f".{output_path.stem}-",
+        suffix=output_path.suffix,
+        delete=False,
+    ) as temporary_file:
+        temporary_path = Path(temporary_file.name)
+
+    try:
+        figure.savefig(temporary_path, **save_options)
+        temporary_path.replace(output_path)
+    finally:
+        temporary_path.unlink(missing_ok=True)
+
+
 def label_offsets(series_name: str, run_count: int) -> list[float]:
     # Tuned for the three-run experiment; sensible defaults are used otherwise.
     if run_count == 3:
         return {
-            "Precision": [1.2, 1.1, 1.3],
-            "Recall": [0.9, 0.9, 0.6],
-            "F1": [-1.0, -1.0, -1.1],
-            "Exact answers": [-1.25, -1.25, -1.25],
+            "Precision": [0.25, 0.25, 0.25],
+            "Recall": [0.25, 0.25, 0.25],
+            "F1": [-0.35, -0.35, -0.35],
         }[series_name]
     default = {
-        "Precision": 1.2,
-        "Recall": 0.8,
-        "F1": -1.0,
-        "Exact answers": -1.25,
+        "Precision": 0.25,
+        "Recall": 0.25,
+        "F1": -0.35,
     }[series_name]
     return [default] * run_count
 
@@ -243,11 +232,7 @@ def create_figure(metrics: list[dict[str, object]], output_dir: Path, prefix: st
         "Precision": [100 * float(row["precision"]) for row in metrics],
         "Recall": [100 * float(row["recall"]) for row in metrics],
         "F1": [100 * float(row["f1"]) for row in metrics],
-        "Exact answers": [100 * float(row["exact_rate"]) for row in metrics],
     }
-
-    all_values = [value for values in series.values() for value in values]
-    lower_limit = max(0, 5 * math.floor((min(all_values) - 5) / 5))
 
     fig, ax = plt.subplots(figsize=(7.4, 4.45))
     for series_name, values in series.items():
@@ -262,15 +247,11 @@ def create_figure(metrics: list[dict[str, object]], output_dir: Path, prefix: st
         )
 
         offsets = label_offsets(series_name, len(metrics))
-        for index, (value, offset) in enumerate(zip(values, offsets)):
+        for x_value, value, offset in zip(x_values, values, offsets):
             vertical_alignment = "bottom" if offset > 0 else "top"
             point_label = f"{value:.1f}%"
-            if series_name == "Exact answers":
-                point_label += (
-                    f" ({metrics[index]['exact_count']}/{metrics[index]['query_count']})"
-                )
             ax.text(
-                index,
+                x_value,
                 value + offset,
                 point_label,
                 ha="center",
@@ -279,68 +260,44 @@ def create_figure(metrics: list[dict[str, object]], output_dir: Path, prefix: st
                 color=COLORS[series_name],
             )
 
-    run_count = len(metrics)
-    title = (
-        " "
-        if run_count == 3
-        else " "
-    )
-    query_count = int(metrics[0]["query_count"])
-    ax.set_title(title, loc="left", color="#17324D", pad=14)
-    ax.text(
-        0,
-        1.015,
-        f" ",
-        transform=ax.transAxes,
-        ha="left",
-        va="bottom",
-        fontsize=8.6,
-        color="#526170",
-    )
-    ax.set_xlabel("Run position")
+    ax.set_xlabel("Evaluation run")
     ax.set_ylabel("Mean score")
     ax.set_xticks(x_values, labels)
-    ax.set_xlim(-0.18, len(metrics) - 0.82)
-    ax.set_ylim(lower_limit, 100)
-    ax.set_yticks(list(range(int(lower_limit), 101, 5)))
-    ax.yaxis.set_major_formatter(FuncFormatter(lambda value, _: f"{value:.0f}%"))
+    ax.set_xlim(-0.22, len(metrics) - 0.78)
+    ax.set_ylim(92, 98.5)
+    ax.set_yticks([92 + 0.5 * step for step in range(14)])
+    ax.yaxis.set_major_formatter(FuncFormatter(lambda value, _: f"{value:.1f}%"))
     ax.grid(axis="y", color="#D7E0E7", linewidth=0.8, alpha=0.85)
     ax.set_axisbelow(True)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
-    ax.legend(ncol=4, frameon=False, loc="lower center", bbox_to_anchor=(0.5, -0.29))
-
-    fig.text(
-        0.99,
-        0.012,
-        " ",
-        ha="right",
-        va="bottom",
-        fontsize=7.6,
-        color="#64748B",
+    ax.legend(
+        ncol=3,
+        frameon=False,
+        loc="lower center",
+        bbox_to_anchor=(0.5, -0.29),
     )
-    fig.subplots_adjust(left=0.10, right=0.985, top=0.84, bottom=0.27)
+
+    fig.subplots_adjust(left=0.10, right=0.985, top=0.84, bottom=0.225)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     png_path = output_dir / f"{prefix}.png"
     pdf_path = output_dir / f"{prefix}.pdf"
-    fig.savefig(png_path, dpi=dpi, bbox_inches="tight")
-    fig.savefig(pdf_path, bbox_inches="tight")
+    save_replacing_existing_file(fig, png_path, dpi=dpi, bbox_inches="tight")
+    save_replacing_existing_file(fig, pdf_path, bbox_inches="tight")
     plt.close(fig)
     return png_path, pdf_path
 
 
 def print_summary(metrics: list[dict[str, object]]) -> None:
     print("\nRun-level structured-answer metrics")
-    print("Run  Precision  Recall  F1      Exact")
+    print("Run  Precision  Recall  F1")
     for row in metrics:
         print(
             f"{row['run_id']:>3}  "
             f"{100 * float(row['precision']):>8.1f}%  "
             f"{100 * float(row['recall']):>6.1f}%  "
-            f"{100 * float(row['f1']):>5.1f}%  "
-            f"{row['exact_count']}/{row['query_count']} "
-            f"({100 * float(row['exact_rate']):.1f}%)"
+            f"{100 * float(row['f1']):>5.1f}%"
         )
 
 
